@@ -1,3 +1,77 @@
-<p>
-  signup works!
-</p>
+<div class="example-container">
+  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div class="item item-1" fxFlex="80%"></div>
+    <div class="item item-2" fxFlex="80%" fxFlexOrder="8"></div>
+    <div class="item item-3" fxFlex></div>
+    <mat-card class="example">
+      <mat-card-header>
+        <mat-card-title>
+          <h3>Signup</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="example">
+        <form>
+          <table>
+            <tr>
+              <td>
+                <mat-form-field class="example-width">
+                  <input matInput placeholder="First Name" required>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <mat-form-field class="example-width">
+                  <input matInput placeholder="Last Name" required>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+                <td>
+                  <mat-form-field class="example-width">
+                    <input matInput placeholder="User Name" required>
+                  </mat-form-field>
+                </td>
+              </tr>
+
+            <tr>
+              <td>
+                <mat-form-field class="example-width">
+                  <input matInput placeholder="Mobile Number" type="number" required>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <mat-form-field class="example-width">
+                  <input matInput placeholder="Email id" required>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <mat-form-field class="example-width">
+                  <input matInput placeholder="Password" type="password" required>
+                </mat-form-field>
+              </td>
+            </tr>
+
+          </table>
+        </form>
+        <mat-card-actions>
+            <button mat-raised-button (click)="signup()" style="float:right" color="primary">Signup</button>
+          </mat-card-actions>
+      </mat-card-content>
+
+    
+
+      <!-- <mat-card-actions>
+    <button mat-raised-button (click)="login()" style="float:left" color="primary">Login</button>
+  </mat-card-actions> -->
+
+    </mat-card>
+  </div>
+</div>

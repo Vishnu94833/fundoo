@@ -1,0 +1,20 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    vertical-align: middle;
+  
+  }
+  
+  .example {
+    /* width: 100%; */
+    width: 400px;
+    height:450px;
+  
+  }
+  .example-width {
+    /* width: 100%; */
+    width: 400px;
+    /* height:450px; */
+  
+  }
