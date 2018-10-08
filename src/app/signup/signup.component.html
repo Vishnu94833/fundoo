@@ -1,12 +1,15 @@
-<div class="example-container">
-  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<!-- <div class="example-container"> -->
+<!-- <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
     <div class="item item-1" fxFlex="80%"></div>
     <div class="item item-2" fxFlex="80%" fxFlexOrder="8"></div>
-    <div class="item item-3" fxFlex></div>
-    <mat-card class="example">
+    <div class="item item-3" fxFlex></div> -->
+<!-- <mat-card class="example">
+        <span class="shadow"><h1>fundoo</h1></span>
+
       <mat-card-header>
-        <mat-card-title>
-          <h3>Signup</h3>
+        
+        <mat-card-title class="cet">
+          <h3 >Signup</h3>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="example">
@@ -64,14 +67,96 @@
         <mat-card-actions>
             <button mat-raised-button (click)="signup()" style="float:right" color="primary">Signup</button>
           </mat-card-actions>
-      </mat-card-content>
+      </mat-card-content> -->
 
-    
 
-      <!-- <mat-card-actions>
+
+<!-- <mat-card-actions>
     <button mat-raised-button (click)="login()" style="float:left" color="primary">Login</button>
   </mat-card-actions> -->
 
-    </mat-card>
-  </div>
+<!-- </mat-card> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
+
+<div class="example-container">
+
+  <mat-card class="example">
+    <span class="shadow"><h2>fundoo</h2></span>
+
+    <h4>Signup</h4>
+
+    <mat-card-content class="example">
+      <form>
+        <div>
+          <mat-form-field class="example-width">
+            <input matInput placeholder="First Name" required>
+          </mat-form-field>
+
+          &nbsp; &nbsp; &nbsp; &nbsp;
+
+          <mat-form-field class="example-width">
+            <input matInput placeholder="Last Name" required>
+          </mat-form-field>
+          &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+          <mat-form-field class="example-width">
+            <input matInput placeholder="User Name" required>
+          </mat-form-field>
+          &nbsp; &nbsp; &nbsp; &nbsp;
+
+          <mat-form-field class="example-width">
+            <input matInput placeholder="Mobile Number" type="number" required>
+          </mat-form-field>
+          &nbsp; &nbsp; &nbsp; &nbsp;
+
+        </div>
+        <div>
+          <mat-form-field class="example-width1">
+            <input matInput placeholder="Email id" required>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-width1">
+            <input matInput placeholder="Password" type="password" required>
+          </mat-form-field>
+        </div>
+
+
+        <div class="content1">
+
+          <div>
+              <mat-card class="plan">
+                  <button mat-button color="disabled">
+                <span style="font-size: 5px"><h1>basic</h1></span>
+              </button>
+              </mat-card>
+          </div>
+
+
+
+          <div>
+              <mat-card class="plan1">
+                  <button mat-button style="height:40%;width:50px" color="disabled">
+                <span style="font-size: 5px"><h1>premium</h1></span>
+              </button>
+              </mat-card>
+          </div>
+
+        </div>
+
+      </form>
+      <br>
+      <mat-card-actions class="example-width1">
+        <button mat-raised-button (click)="signup()" style="float:right" color="primary">Signup</button>
+      </mat-card-actions>
+    </mat-card-content>
+
+
+
+
+  </mat-card>
 </div>

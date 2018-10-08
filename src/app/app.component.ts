@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpService} from '../app/services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fundoo';
+  // coins=[];
+  constructor(private httpservice: HttpService)
+  {
+    // this.coins = httpservice.getMyItems();
+  }
 }
