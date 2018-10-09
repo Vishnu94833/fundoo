@@ -81,8 +81,14 @@
 
 
 
-<div class="example-container">
-
+<div class="example-container"
+  fxLayout =  "row"
+  fxLayout.xs="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0">
+  <div fxFlex = "20"></div> 
+  <div  fxFlex = "20" fxflex.sm = "30" fxflex.xs = "60" fxflex.md = "80" fxflex.lg = "70" fxflex.xl = "40" fxFlexOrder="3"></div>
   <mat-card class="example">
     <span class="shadow"><h2>fundoo</h2></span>
 

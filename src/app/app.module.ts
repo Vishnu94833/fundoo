@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 // import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -18,6 +18,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {HttpService} from '../app/services/http.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
 
 
 
@@ -27,7 +29,8 @@ import {HttpService} from '../app/services/http.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SlidePanelComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {HttpService} from '../app/services/http.service';
     MatListModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
     
   ],
   providers: [HttpService],

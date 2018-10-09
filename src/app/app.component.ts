@@ -8,9 +8,16 @@ import {HttpService} from '../app/services/http.service';
 })
 export class AppComponent {
   title = 'fundoo';
-  // coins=[];
+  isLeftVisible = true;
+
+  records={};
   constructor(private httpservice: HttpService)
   {
     // this.coins = httpservice.getMyItems();
+  }
+  ngOnInit() {
+    this.records=this.httpservice.getConfig().subscribe(
+      data =>{console.log('response',data)}
+    );
   }
 }
