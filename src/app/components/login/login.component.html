@@ -1,49 +1,3 @@
-<!-- 
-<div class="example-container">
- 
-    <mat-card class="example-height">
-        <br>
-        <span class="shadow"><h1>fundoo</h1></span>
-
-        <mat-card-header>
-            <mat-card-title>
-                <h3>Login</h3>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="example">
-            <form>
-                <table class="example-full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Username" name="username" required>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Password" type="password" name="password" [type]="hide ? 'password' : 'text'" required>
-                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </mat-card-content>
-        <mat-card-actions class="example-full-width">
-            <ul>
-                <li>
-                    <button mat-raised-button (click)="login()" style="float:right" color="primary">Login</button></li>
-                <li> <a href='signup'><button mat-button style="float:left" color="primary">Create account</button></a></li>
-            </ul>
-        </mat-card-actions>
-    </mat-card>
-</div> -->
-
-
-
-
 <div class="example-container"
   fxLayout =  "row"
   fxLayout.xs="row"
@@ -55,7 +9,7 @@
 <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
     <div leftPane>
         <div class="example-container">
-
+                <form  >
             <mat-card class="example-height">
                 <br>
                 <span class="shadow" style="float:none"><h1>fundoo</h1></span>
@@ -66,12 +20,12 @@
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="example">
-                    <form>
+                   
                         <table class="example-full-width" cellspacing="0">
                             <tr>
                                 <td>
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Username" name="username" required>
+                                        <input matInput placeholder="Username"   name="username" required>
                                     </mat-form-field>
                                 </td>
                             </tr>
@@ -84,7 +38,7 @@
                                 </td>
                             </tr> -->
                         </table>
-                    </form>
+                    
                 </mat-card-content>
                 <mat-card-actions class="example-full-width">
                   
@@ -93,6 +47,7 @@
              
                 </mat-card-actions>
             </mat-card>
+        </form>
         </div>
     </div>
 
@@ -123,9 +78,10 @@
                             <tr>
                                 <td>
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Password" type="password" name="password" [type]="hide ? 'password' : 'text'" required>
+                                        <input matInput placeholder="Password" type="password"  name="password" [type]="hide ? 'password' : 'text'" required>
                                         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                                     </mat-form-field>
+                                    <a href="">forgot password??</a>
                                 </td>
                             </tr>
                         </table>

@@ -20,6 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {HttpService} from '../app/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -47,7 +48,8 @@ import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.c
     MatButtonToggleModule,
     MatRadioModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
     
   ],
   providers: [HttpService],

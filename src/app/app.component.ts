@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {HttpService} from '../app/services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +9,11 @@ export class AppComponent {
   title = 'fundoo';
   isLeftVisible = true;
 
-  records={};
-  constructor(private httpservice: HttpService)
+  constructor()
   {
     // this.coins = httpservice.getMyItems();
   }
   ngOnInit() {
-    this.records=this.httpservice.getConfig().subscribe(
-      data =>{console.log('response',data)}
-    );
+    
   }
 }

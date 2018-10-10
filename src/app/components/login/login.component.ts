@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger,state,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,9 +26,12 @@ import { trigger,state,style,transition,animate,keyframes,query,stagger } from '
  
 export class LoginComponent implements OnInit {
 
+  
   constructor() { }
+hide = true;
+  
+    ngOnInit() {
 
-  ngOnInit() {
-  }
+    }
 
 }
