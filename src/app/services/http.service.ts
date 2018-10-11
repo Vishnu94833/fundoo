@@ -15,8 +15,7 @@ getConfig() {
 }
 addConfig(url,body)
 {
-  url=this.postUrl+url;
+  url = this.postUrl+url;
   return this.http.post(url,body);
 }
 }
-  

@@ -19,7 +19,7 @@ import { FormControl,Validators} from '@angular/forms';
         width: '300px',
         height: '300px'
       })),
-      transition('start => end', animate(1500)),
+      transition('start => end', animate(2000)),
       transition('end => start', animate('800ms 0.5s ease-out'))
     ])
   ]
