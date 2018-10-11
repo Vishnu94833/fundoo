@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger,state,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import { FormControl,Validators} from '@angular/forms';
 
 
 @Component({
@@ -25,8 +26,24 @@ import { trigger,state,style,transition,animate,keyframes,query,stagger } from '
 })   
  
 export class LoginComponent implements OnInit {
-
-  
+  email = new FormControl('', [Validators.required, Validators.email]);
+  getErrorEmail() {
+    return this.email.hasError('required') ? 'Enter a Valid email  ' :
+        this.email.hasError('email') ? 'Invalid email' :
+            '';
+  }
+  isLeftVisible:any;
+  register()
+  {
+    if(!this.email.invalid)
+    {
+      this.isLeftVisible = !this.isLeftVisible;
+    }
+    else
+    {
+      alert('enter email address');
+    }
+  }
   constructor() { }
 hide = true;
   

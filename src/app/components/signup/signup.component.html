@@ -1,173 +1,101 @@
-<!-- <div class="example-container"> -->
-<!-- <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-    <div class="item item-1" fxFlex="80%"></div>
-    <div class="item item-2" fxFlex="80%" fxFlexOrder="8"></div>
-    <div class="item item-3" fxFlex></div> -->
-<!-- <mat-card class="example">
-        <span class="shadow"><h1>fundoo</h1></span>
+<div class="example-container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="20"></div>
 
-      <mat-card-header>
-        
-        <mat-card-title class="cet">
-          <h3 >Signup</h3>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="example">
-        <form>
-          <table>
-            <tr>
-              <td>
-                <mat-form-field class="example-width">
-                  <input matInput placeholder="First Name" required>
-                </mat-form-field>
-              </td>
-            </tr>
+  <div fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" fxflex.lg="70" fxflex.xl="40" fxFlexOrder="3"></div>
+  <form>
+    <mat-card class="example">
+      <p style="text-align: center">
+      <span class="shadow0" style="float:none;color: rgb(3, 163, 255)">f</span>
+      <span class="shadow1" style="float:none;color:rgb(250, 2, 2)">u</span>
+      <span class="shadow2" style="float:none;color:rgb(250, 233, 4)">n</span>
+      <span class="shadow3" style="float:none;color:rgb(3, 163, 255)">d</span>
+      <span class="shadow4" style="float:none;color:rgb(43, 248, 2)">o</span>
+      <span class="shadow5" style="float:none;color:rgb(250, 2, 2)">o</span>
+    </p>
+      <span class="shadow" style="text-align: center"><h3>Signup</h3></span>
 
-            <tr>
-              <td>
-                <mat-form-field class="example-width">
-                  <input matInput placeholder="Last Name" required>
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-                <td>
-                  <mat-form-field class="example-width">
-                    <input matInput placeholder="User Name" required>
-                  </mat-form-field>
-                </td>
-              </tr>
-
-            <tr>
-              <td>
-                <mat-form-field class="example-width">
-                  <input matInput placeholder="Mobile Number" type="number" required>
-                </mat-form-field>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <mat-form-field class="example-width">
-                  <input matInput placeholder="Email id" required>
-                </mat-form-field>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <mat-form-field class="example-width">
-                  <input matInput placeholder="Password" type="password" required>
-                </mat-form-field>
-              </td>
-            </tr>
-
-          </table>
-        </form>
-        <mat-card-actions>
-            <button mat-raised-button (click)="signup()" style="float:right" color="primary">Signup</button>
-          </mat-card-actions>
-      </mat-card-content> -->
-
-
-
-<!-- <mat-card-actions>
-    <button mat-raised-button (click)="login()" style="float:left" color="primary">Login</button>
-  </mat-card-actions> -->
-
-<!-- </mat-card> -->
-<!-- </div> -->
-<!-- </div> -->
-
-
-
-<div class="example-container"
-  fxLayout =  "row"
-  fxLayout.xs="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="10px"
-  fxLayoutGap.xs="0">
-  <div fxFlex = "20"></div> 
-  <div  fxFlex = "20" fxflex.sm = "30" fxflex.xs = "60" fxflex.md = "80" fxflex.lg = "70" fxflex.xl = "40" fxFlexOrder="3"></div>
-  <mat-card class="example">
-    <span class="shadow"><h2>fundoo</h2></span>
-
-    <h4>Signup</h4>
-
-    <mat-card-content class="example">
-      <form>
+      <mat-card-content class="example1">
+        <!-- <form> -->
         <div>
           <mat-form-field class="example-width">
-            <input matInput placeholder="First Name" name="firstname"  [(ngModel)]="model.firstname"  #firstname="ngModel" required>
+            <input matInput placeholder="First Name" name="firstname" [formControl]="firstname" required>
+            <mat-error *ngIf="firstname.invalid">{{getErrorFirstName()}}</mat-error>
+
           </mat-form-field>
 
           &nbsp; &nbsp; &nbsp; &nbsp;
 
           <mat-form-field class="example-width">
-            <input matInput placeholder="Last Name" name="lastname" [(ngModel)]="model.lastname"  #lastname="ngModel" required>
+            <input matInput placeholder="Last Name" name="lastname" [formControl]="lastname" required>
+
+            <mat-error *ngIf="lastname.invalid">{{getErrorLastName()}}</mat-error>
+
           </mat-form-field>
           &nbsp; &nbsp; &nbsp; &nbsp;
 
 
-          <mat-form-field class="example-width">
-            <input matInput placeholder="User Name" name="username" [(ngModel)]="model.username"  #username="ngModel" required>
-          </mat-form-field>
-          &nbsp; &nbsp; &nbsp; &nbsp;
+          <!-- <mat-form-field class="example-width">
+          <input matInput placeholder="User Name" name="username" [formControl]="username" required>
+          <mat-error *ngIf="username.invalid">{{getErrorUserName()}}</mat-error>
 
-          <mat-form-field class="example-width">
-            <input matInput placeholder="Phone Number" name="phonenumber" [(ngModel)]="model.phonenumber"  #phonenumber="ngModel" type="number" required>
-          </mat-form-field>
-          &nbsp; &nbsp; &nbsp; &nbsp;
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp; &nbsp; -->
 
+          <!-- <mat-form-field class="example-width">
+          <input matInput placeholder="Phone Number" name="phonenumber" [formControl]="phonenumber" type="number" required>
+          <mat-error *ngIf="phonenumber.invalid">{{getErrorMobileNumber()}}</mat-error>
+
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp; &nbsp; -->
         </div>
         <div>
           <mat-form-field class="example-width1">
-            <input matInput placeholder="Email id" name="email" [(ngModel)]="model.email"  #email="ngModel" required>
+            <input matInput placeholder="Email id" name="email" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error>
+
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="example-width1">
-            <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password"  #password="ngModel" [type]="hide ? 'password' : 'text'" required>
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <input matInput placeholder="Password" type="password" [formControl]="password" name="password" [type]="hide ? 'password' : 'text'" required>
+            <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
         </div>
 
-
+<br>
         <div class="content1" fxLayout="row" fxLayoutAlign="space-between">
 
           <div>
-              <mat-card [@basicani] = "set1 ? 'open' : 'closed'" class="plan" (click)= "basic()">
-          
-                <span style="font-size: 5px"><h1>basic</h1></span>
-                <h4>Ability to add only title and description</h4>
-                <!-- <h4>{{basicVal}}</h4> -->
+            <mat-card [@basicani]="set1 ? 'open' : 'closed'" class="plan" (click)="basic()">
+
+              <span style="font-size: 7px"><h1>basic</h1> </span>
+              <h4>Ability to add only title and description</h4>
+              <!-- <h4>{{basicVal}}</h4> -->
               <!-- </button> -->
-              </mat-card>
+            </mat-card>
           </div>
 
 
 
           <div>
-              <mat-card [@advanceani] = "set ? 'open' : 'closed'" class="plan1"  (click)= "advance()">
-                  <!-- <button mat-button style="height:40%;width:50px" color="disabled"> -->
-                <span style="font-size: 5px"><h1>advance</h1></span>
-                <h4>Ability to add title, description, images, labels, checklist and colors</h4>
-                <!-- <h4>{{advanceVal}}</h4> -->
+            <mat-card [@advanceani]="set ? 'open' : 'closed'" class="plan1" (click)="advance()">
+              <!-- <button mat-button style="height:40%;width:50px" color="disabled"> -->
+              <span style="font-size: 7px"><h1>advance</h1></span>
+              <h4>Ability to add title, description, images, labels, checklist and colors</h4>
+              <!-- <h4>{{advanceVal}}</h4> -->
               <!-- </button> -->
-              </mat-card>
+            </mat-card>
+            <br>
+            <mat-card-actions class="example-width2">
+              <button mat-raised-button (click)="sendData()" style="float:right" color="primary">Submit</button>
+            </mat-card-actions>
+
           </div>
 
+
         </div>
-
-      </form>
-      <br>
-      <mat-card-actions class="example-width1">
-        <button mat-raised-button (click)="sendData()" style="float:right" color="primary">Submit</button>
-      </mat-card-actions>
-    </mat-card-content>
-
-
-
-
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </form>
 </div>

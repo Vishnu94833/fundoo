@@ -8,13 +8,49 @@
   }
   .shadow {
     font-size: 110%;
-    text-shadow: 1px 2px 2px blueviolet;
-    text-align: center;
+    text-shadow: 4px 2px 4px rgb(59, 15, 218);
+    /* text-align: center; */
+  }
+  .shadow0 {
+    font-size: 250%;
+    text-shadow: 5px 5px 5px black;
+    /* text-align: center; */
+  }
+  .shadow1 {
+    font-size: 250%;
+    text-shadow: 5px 5px 5px blue;
+    /* text-align: center; */
+  }
+  .shadow2 {
+    font-size: 250%;
+    text-shadow: 5px 5px 5px orange;
+    /* text-align: center; */
+  }.shadow3{
+    font-size: 250%;
+    text-shadow: 5px 5px 5px brown;
+    /* text-align: center; */
+  }.shadow4 {
+    font-size: 250%;
+    text-shadow: 5px 5px 5px cyan;
+    /* text-align: center; */
+  }
+  .shadow5 {
+    font-size: 250%;
+    text-shadow: 5px 5px 5px magenta;
+    /* text-align: center; */
   }
   .example {
     /* width: 100%; */
     width: 400px;
-    height:550px;
+    height:500px;
+    /* box-shadow: 33px 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); */
+  
+  }
+  .example1 {
+    /* width: 100%; */
+    width: 400px;
+    height:500px;
+     
   
   }
   .example-width {
@@ -29,11 +65,17 @@
     /* height:450px; */
   
   }
+  .example-width2 {
+    /* width: 100%; */
+    width: 105%;
+    /* height:450px; */
+  
+  }
   
   .plan{
     width:110px;
     height: 100px;
-    background-color: blueviolet;
+    background-color: rgb(247, 243, 6);
     margin-right:5em;
     
   
@@ -41,7 +83,7 @@
   .plan1{
     width: 110px;
     height: 100px;
-    background-color: lightblue;
+    background-color: rgb(94, 223, 20);
     margin-left:2em;
     
     

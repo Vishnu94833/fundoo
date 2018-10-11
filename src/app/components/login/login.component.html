@@ -1,109 +1,118 @@
-<div class="example-container"
-  fxLayout =  "row"
-  fxLayout.xs="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="20px"
-  fxLayoutGap.xs="0">
-  <div fxFlex = "20"></div>
-  <div  fxFlex = "20" fxflex.sm = "30" fxflex.xs = "60" fxflex.md = "80" fxflex.lg = "70" fxflex.xl = "40" fxFlexOrder="3"></div>
-<my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
-    <div leftPane>
-        <div class="example-container">
-                <form  >
-            <mat-card class="example-height">
-                <br>
-                <span class="shadow" style="float:none"><h1>fundoo</h1></span>
-
-                <mat-card-header>
-                    <mat-card-title>
-                        <h3>Login</h3>
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="example">
-                   
-                        <table class="example-full-width" cellspacing="0">
-                            <tr>
-                                <td>
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Username"   name="username" required>
-                                    </mat-form-field>
-                                </td>
-                            </tr>
-                            <!-- <tr>
-                                <td>
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Password" type="password" name="password" [type]="hide ? 'password' : 'text'" required>
-                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                                    </mat-form-field>
-                                </td>
-                            </tr> -->
-                        </table>
-                    
-                </mat-card-content>
-                <mat-card-actions class="example-full-width">
-                  
-                            <button mat-raised-button style="float:right" color="primary" (click)="isLeftVisible = !isLeftVisible">next</button>
-                        <!-- <li> <a href='signup'><button mat-button style="float:left" color="primary">Create account</button></a></li> -->
-             
-                </mat-card-actions>
-            </mat-card>
-        </form>
-        </div>
-    </div>
-
-
-
-    <div rightPane>
-        <div class="example-container">
-
-            <mat-card class="example-height">
-                <br>
-                <span class="shadow"><h1>fundoo</h1></span>
-
-                <mat-card-header>
-                    <mat-card-title>
-                        <h3>Login</h3>
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="example">
-                    <form>
-                        <table class="example-full-width" cellspacing="0">
-                            <!-- <tr>
-                                <td>
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Username" name="username" required>
-                                    </mat-form-field>
-                                </td>
-                            </tr> -->
-                            <tr>
-                                <td>
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Password" type="password"  name="password" [type]="hide ? 'password' : 'text'" required>
-                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                                    </mat-form-field>
-                                    <a href="">forgot password??</a>
-                                </td>
-                            </tr>
-                        </table>
+<div class="example-container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+    <div fxFlex="20"></div>
+    <div fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" fxflex.lg="70" fxflex.xl="40" fxFlexOrder="3"></div>
+    <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+        <div leftPane>
+            <div class="example-container">
+                <form>
+                    <mat-card class="example-height">
                         <br>
-                        <button mat-raised-button (click)="login()" style="float:right" color="primary">Login</button>
-                          
-                        <a href='login'><button mat-raised-button style="float:center"  (click)="isLeftVisible = !isLeftVisible" color="primary">back</button></a>
-                    </form>
-                    <br>
-                    <div><a href='signup' style="float:left"  color="primary">Create account</a></div>
+                        <p style="text-align: center">
+                            <span class="shadow0" style="float:none;color: rgb(3, 163, 255)">f</span>
+                            <span class="shadow1" style="float:none;color:rgb(250, 2, 2)">u</span>
+                            <span class="shadow2" style="float:none;color:rgb(250, 233, 4)">n</span>
+                            <span class="shadow3" style="float:none;color:rgb(3, 163, 255)">d</span>
+                            <span class="shadow4" style="float:none;color:rgb(43, 248, 2)">o</span>
+                            <span class="shadow5" style="float:none;color:rgb(250, 2, 2)">o</span>
+                        </p>
+                        <!-- <span class="shadow" style="float:none"><h1>fundoo</h1></span> -->
 
-                </mat-card-content>
-                <mat-card-actions class="example-full-width">
-                    
-                           
+                        <mat-card-header>
+                            <mat-card-title>
+                                <span class="shadow" style="text-align: center"><h3>Login</h3></span>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content class="example">
+                            <form>
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Email id" name="email" [formControl]="email" required>
+                                                <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error>
+
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+
+                            <div><a href='signup' style="float:left" color="primary">Create account</a></div>
+                        </mat-card-content>
+                        <br>
+                        <br>
+                        <br>
+
+                        <mat-card-actions class="example-full-width">
+
+                            <button mat-raised-button style="float:right" color="primary" ng-disabled="myForm.$invalid" (click)="register()">next</button>
+
+                        </mat-card-actions>
+                        <!-- <a href='signup'>Create account</a> -->
+
+                    </mat-card>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div rightPane>
+            <div class="example-container">
+
+                <mat-card class="example-height">
+                    <br>
+                    <p style="text-align: center">
+                        <span class="shadow0" style="float:none;color: rgb(3, 163, 255)">f</span>
+                        <span class="shadow1" style="float:none;color:rgb(250, 2, 2)">u</span>
+                        <span class="shadow2" style="float:none;color:rgb(250, 233, 4)">n</span>
+                        <span class="shadow3" style="float:none;color:rgb(3, 163, 255)">d</span>
+                        <span class="shadow4" style="float:none;color:rgb(43, 248, 2)">o</span>
+                        <span class="shadow5" style="float:none;color:rgb(250, 2, 2)">o</span>
+                    </p>
+                    <mat-card-header>
+                        <mat-card-title>
+                            <span class="shadow" style="text-align: center"><h3>Login</h3></span>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="example">
+                        <form>
+                            <table class="example-full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Password" type="password" name="password" [type]="hide ? 'password' : 'text'" required>
+                                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </mat-form-field>
+                                        <a href="">forgot password??</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br> <br>
+                            <br>
+                            <br>
+
+                            <button mat-raised-button (click)="login()" style="float:right" color="primary">Login</button>
+
+                            <a href='login'><button mat-raised-button style="float:center" (click)="isLeftVisible = !isLeftVisible"
+                                    color="primary">back</button></a>
+                        </form>
+                        <br>
+                        <!-- <div><a href='signup' style="float:left"  color="primary">Create account</a></div> -->
+
+                    </mat-card-content>
+                    <mat-card-actions class="example-full-width">
+
+
 
                         <!-- <div><a href='signup'><button mat-button style="float:left" color="primary">Create account</button></a></div> -->
-                  
-                </mat-card-actions>
-            </mat-card>
-        </div>
-    </div>
-</my-slide-panel>
 
-<!-- <button (click)="isLeftVisible = !isLeftVisible">Toggle panes</button> -->
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </my-slide-panel>

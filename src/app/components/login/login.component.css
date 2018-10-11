@@ -10,10 +10,38 @@
   width: 100%; 
 
 }
+.shadow0 {
+  font-size: 250%;
+  text-shadow: 5px 5px 5px black;
+  text-align: center;
+}
+.shadow1 {
+  font-size: 250%;
+  text-shadow: 5px 5px 5px blue;
+  text-align: center;
+}
+.shadow2 {
+  font-size: 250%;
+  text-shadow: 5px 5px 5px orange;
+  text-align: center;
+}.shadow3{
+  font-size: 250%;
+  text-shadow: 5px 5px 5px brown;
+  text-align: center;
+}.shadow4 {
+  font-size: 250%;
+  text-shadow: 5px 5px 5px cyan;
+  text-align: center;
+}
+.shadow5 {
+  font-size: 250%;
+  text-shadow: 5px 5px 5px magenta;
+  text-align: center;
+}
 .shadow {
   font-size: 110%;
-  text-shadow: 2px 2px 4px #000;
-  text-align: center;
+  text-shadow: 4px 2px 4px rgb(59, 15, 218);
+  /* text-align: center; */
 }
 .example {
     /* width: 100%; */
