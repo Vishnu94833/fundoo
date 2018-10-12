@@ -21,6 +21,9 @@ import {HttpService} from '../app/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
 import { FormsModule,ReactiveFormsModule ,FormControl} from '@angular/forms';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component'
 
 
 
@@ -31,7 +34,9 @@ import { FormsModule,ReactiveFormsModule ,FormControl} from '@angular/forms';
     AppComponent,
     LoginComponent,
     SignupComponent,
-    SlidePanelComponent
+    SlidePanelComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import { FormsModule,ReactiveFormsModule ,FormControl} from '@angular/forms';
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
     // FormControl
     
   ],

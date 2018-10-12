@@ -9,47 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  animations: [
-    trigger('basicani', [state('open', style({
-      // "height": "90px",
-      // "width": "150px",
-      background: "lightblue",
-      "word-wrap": "break-word"
-    })),
-    state('closed', style({
-      // "height": "90px",
-      // "width": "150px",
-      background: "aquamarine",
-      "word-wrap": "break-word"
-    })),
-    transition('open => closed', [
-      animate('1s')
-    ]),
-      // transition('closed => open', [
-      //   animate('0.5s')
-      // ]),
-    ]),
-    trigger('advanceani', [
-      state('open', style({
-        // "height": "90px",
-        // "width": "150px",
-        "background": "skyblue",
-        "word-wrap": "break-word"
-      })),
-      state('closed', style({
-        // "height": "90px",
-        // "width": "150px",
-        "background": "cyan",
-        "word-wrap": "break-word"
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ]),
-      // transition('closed => open', [
-      //   animate('1s')
-      // ]),
-    ]),
-  ]
+ 
 })
 export class SignupComponent implements OnInit {
   firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
@@ -77,16 +37,7 @@ export class SignupComponent implements OnInit {
       this.password.hasError('pattern') ? 'Password can be only number,alphabets and characters(* and @)' :
         '';
   }
-  // getErrorMobileNumber() {
-  //   return this.phonenumber.hasError('required') ? 'enter a 10 digit phone number' :
-  //       this.phonenumber.hasError('phonenumber') ? 'invalid phone number' :
-  //           '';
-  // }
-  // getErrorMessage() {
-  //   return this.email.hasError('required') ? 'You must enter a value' :
-  //       this.email.hasError('email') ? 'Not a valid email' :
-  //           '';
-  // }
+
   constructor(private router: Router, private httpservice: HttpService) { }
   records = {};
   advanceVal: any;
@@ -94,27 +45,19 @@ export class SignupComponent implements OnInit {
   set = true;
   set1 = true;
   hide = true;
+  cards=[];
 
-  advance() {
-    this.set = !this.set;
-    // this.router.navigateByUrl('/login');
-    this.records = this.httpservice.getConfig().subscribe(data => {
-      console.log('response', data);
-      this.advanceVal = data["data"].data[1].description;
-    })
-  }
-
-  basic() {
-    this.set1 = !this.set1;
-    this.records = this.httpservice.getConfig().subscribe(data => {
-      console.log('response', data);
-      this.basicVal = data["data"].data[0].description;
-    })
-  }
   ngOnInit() {
-    // this.records=this.httpservice.getConfig().subscribe(
-    //   data =>{console.log('response',data)}
-    // );
+    this.records = this.httpservice.getConfig().subscribe(data => {
+      console.log('response', data);
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.cards.push(data["data"].data[i]);
+      }
+     var value = data["data"].data.name;
+      console.log("cards are", this.cards);
+    })
+
   }
 
   model: any = {};
@@ -135,8 +78,8 @@ export class SignupComponent implements OnInit {
         "emailVerified": true,
         "password": this.model.password,
         "username": this.model.email,
-        "createdDate": "2018-10-09T06:35:12.617Z",
-        "modifiedDate": "2018-10-09T06:35:12.617Z",
+        // "createdDate": "2018-10-09T06:35:12.617Z",
+        // "modifiedDate": "2018-10-09T06:35:12.617Z",
 
       })
       .subscribe(
@@ -149,8 +92,21 @@ export class SignupComponent implements OnInit {
 
       );
 
+      
+
 
   }
+  selectCards(card) {
+    this.service = card.name;
+    card.select = true;
+    for (var i = 0; i < this.cards.length; i++) {
+      if (card.name == this.cards[i].name) {
+        continue;
+      }
+      this.cards[i].select = false;
+    }
+  }
+
 
 }
 

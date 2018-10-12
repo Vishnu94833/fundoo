@@ -18,4 +18,9 @@ addConfig(url,body)
   url = this.postUrl+url;
   return this.http.post(url,body);
 }
+postPassword(url,body)
+{
+  url = this.postUrl+url;
+  return this.http.post(url,body);
+}
 }
