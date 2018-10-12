@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger,state,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 import { FormControl,Validators} from '@angular/forms';
+import { HttpService } from '../../services/http.service';
 
 
 @Component({
@@ -27,6 +28,12 @@ import { FormControl,Validators} from '@angular/forms';
  
 export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
+  constructor( private httpservice: HttpService) { }
+  hide = true;
+    
+      ngOnInit() {
+  
+      }
   getErrorEmail() {
     return this.email.hasError('required') ? 'Enter a Valid email  ' :
         this.email.hasError('email') ? 'Invalid email' :
@@ -44,11 +51,38 @@ export class LoginComponent implements OnInit {
       alert('enter email address');
     }
   }
-  constructor() { }
-hide = true;
-  
-    ngOnInit() {
+  model:any = {};
 
-    }
+  loginpost() 
+  {
+
+    console.log(this.model.email);
+    console.log(this.model.password);
+    this.httpservice
+      .logPost('user/login', {
+        
+        "email": this.model.email,
+        
+        "password": this.model.password,
+        
+        // "createdDate": "2018-10-09T06:35:12.617Z",
+        // "modifiedDate": "2018-10-09T06:35:12.617Z",
+
+      })
+      .subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+        },
+        error => {
+          console.log("Error", error);
+        }
+
+      );
+
+      
+
+
+  }
+
 
 }

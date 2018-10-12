@@ -28,7 +28,7 @@
                                     <tr>
                                         <td>
                                             <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Email id" name="email" [formControl]="email" required>
+                                                <input matInput placeholder="Email id" name="email" [(ngModel)]="model.email" [formControl]="email" required>
                                                 <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error>
 
                                             </mat-form-field>
@@ -85,7 +85,7 @@
                                 <tr>
                                     <td>
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Password" type="password" name="password" [type]="hide ? 'password' : 'text'" required>
+                                            <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'" required>
                                             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                         </mat-form-field>
                                         <a href="forgotpassword">forgot password??</a>
@@ -96,7 +96,7 @@
                             <br>
                             <br>
 
-                            <button mat-raised-button (click)="login()" style="float:right" color="primary">Login</button>
+                            <button mat-raised-button (click)="loginpost() " style="float:right" color="primary">Login</button>
 
                             <a href='login'><button mat-raised-button style="float:center" (click)="isLeftVisible = !isLeftVisible"
                                     color="primary">back</button></a>

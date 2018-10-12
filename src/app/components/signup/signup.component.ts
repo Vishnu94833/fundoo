@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
         "firstName": this.model.firstname,
         "lastName": this.model.lastname,
         "phoneNumber": this.model.phonenumber,
-        "service": "string",
+        "service": this.service,
         "email": this.model.email,
         "emailVerified": true,
         "password": this.model.password,

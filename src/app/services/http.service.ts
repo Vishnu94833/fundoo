@@ -23,4 +23,14 @@ postPassword(url,body)
   url = this.postUrl+url;
   return this.http.post(url,body);
 }
+logPost(url,body)
+{
+  url = this.postUrl+url;
+  return this.http.post(url,body);
+}
+resPass(url,body)
+{
+  url = this.postUrl+url;
+  return this.http.post(url,body);
+}
 }
