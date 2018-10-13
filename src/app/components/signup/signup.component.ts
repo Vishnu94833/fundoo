@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+
 
 
 @Component({
@@ -38,13 +40,14 @@ export class SignupComponent implements OnInit {
         '';
   }
 
-  constructor(private router: Router, private httpservice: HttpService) { }
+  constructor(private router: Router, private httpservice: HttpService, public snackBar: MatSnackBar) { }
   records = {};
   advanceVal: any;
   basicVal: any;
   set = true;
   set1 = true;
   hide = true;
+  hide1 = true;
   cards=[];
 
   ngOnInit() {
@@ -62,8 +65,31 @@ export class SignupComponent implements OnInit {
 
   model: any = {};
   service: any;
-
+check = false;
   sendData() {
+    if(this.model.firstname.valid && this.model.lastname.valid)
+    {
+    if(!this.model.password ==this.model.confirmPassword){
+      console.log("give same password to confirm");
+      this.check=true;
+      this.snackBar.open("Password doesnot match", "signup failed", {
+        duration: 2000
+      })
+         return;
+    }
+    else{
+      this.snackBar.open("Registration Successfull", "signup success", {
+        duration: 2000
+      })
+    }
+  }
+  else 
+  {
+    this.snackBar.open("Firstname or Lastname invalid", "signup failed", {
+      duration: 2000
+    })
+       return;
+  }
 
     console.log(this.model.firstname);
     console.log(this.model.lastname);

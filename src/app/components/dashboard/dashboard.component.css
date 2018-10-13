@@ -1,0 +1,43 @@
+/* .sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+.tool{
+  background-color:  rgb(255, 202, 2)
+}
+.exm
+{
+  background-color: rgba(206, 209, 211, 0.87)
+} */
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  /* background-color:pink */
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+.mat-drawer.mat-drawer-side {
+  top:0;
+  height:100%;
+  margin-top:65px;
+  /* position: relative; */
+}
+.mat-toolbar.mat-primary {
+  background:#fb0 ;
+  color: #fff;
+}

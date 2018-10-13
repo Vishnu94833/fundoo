@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger,state,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 import { FormControl,Validators} from '@angular/forms';
 import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { HttpService } from '../../services/http.service';
  
 export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
-  constructor( private httpservice: HttpService) { }
+  constructor( private httpservice: HttpService,private router:Router) { }
   hide = true;
     
       ngOnInit() {
@@ -56,8 +57,8 @@ export class LoginComponent implements OnInit {
   loginpost() 
   {
 
-    console.log(this.model.email);
-    console.log(this.model.password);
+    // console.log(this.model.email);
+    // console.log(this.model.password);
     this.httpservice
       .logPost('user/login', {
         
@@ -72,6 +73,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
+          this.router.navigateByUrl('/dashboard');
         },
         error => {
           console.log("Error", error);

@@ -45,12 +45,11 @@
 
           </mat-form-field>
         </div>
-        <div>
           <mat-form-field class="example-width">
             <input matInput placeholder="Password" type="password" [formControl]="password" [(ngModel)]="model.password "
-              name="password" [type]="hide ? 'password' : 'text'" required>
+              name="password" [type]="hide1 ? 'password' : 'text'" required>
             <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error>
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
 
           &nbsp; &nbsp; &nbsp; &nbsp;
@@ -60,7 +59,6 @@
             <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
-        </div>
 
         <br>
         <div fxLayout="row" fxLayoutAlign="space-between">
