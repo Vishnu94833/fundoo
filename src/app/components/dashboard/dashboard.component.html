@@ -1,73 +1,26 @@
-<!-- <mat-sidenav-container class="sidenav-container">
-
-
-  <mat-sidenav-content>
-
-      <mat-toolbar color="primary">
-          <mat-toolbar color="primary">
-              <button
-                type="button"
-                aria-label="Toggle sidenav"
-                mat-icon-button
-                (click)="drawer.toggle()"
-                >
-                <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
-              </button>
-              <span style="color:black;font-family:Bookman, URW Bookman L, serif">fundoo Notes</span>
-            </mat-toolbar>
-
-          <mat-sidenav
-          #drawer
-          class="sidenav"
-          fixedInViewport="true"
-          [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-          [mode]="(isHandset$ | async) ? 'over' : 'side'"
-          [opened]="!(isHandset$ | async)">
-          
-            <mat-nav-list>
-              <a mat-list-item href="#">Notes</a>
-              <a mat-list-item href="#">Reminders</a>
-            </mat-nav-list>
-          </mat-sidenav>
-
-
-
-        
-      </mat-toolbar>
-    </mat-sidenav-content>
-
-
-</mat-sidenav-container> -->
-
-
 <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar class="tool">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item >Notes</a>
+      <a mat-list-item >Reminders</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
 
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary">
-      <mat-toolbar color="primary">
+    <mat-toolbar class="tool">
+      <mat-toolbar class="tool">
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-          <!-- *ngIf="isHandset$ | async" -->
           <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span style="color:black;font-family:Bookman, URW Bookman L, serif">fundoo Notes</span>
-        <SearchBar hint="Search hint" [text]="searchPhrase" (textChange)="onTextChanged($event)" (submit)="onSubmit($event)" 
-        color="white" textFieldBackgroundColor="red" textFieldHintColor="white"></SearchBar>
       </mat-toolbar>
-
-      <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-
-        <mat-nav-list>
-          <a mat-list-item href="#">Notes</a>
-          <a mat-list-item href="#">Reminders</a>
-        </mat-nav-list>
-      </mat-sidenav>
-
-
-
-
     </mat-toolbar>
+
   </mat-sidenav-content>
+
+
 </mat-sidenav-container>
