@@ -6,7 +6,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component'
 import { DashboardComponent } from './components/dashboard/dashboard.component'
-
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { NotesComponent } from './components/notes/notes.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
 
 
 const routes: Routes = [
@@ -16,7 +20,24 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'resetpassword/:forgotToken', component: ResetpasswordComponent },
+  { path:'homepage',component:HomepageComponent,
+  children:[
+    {
+      path:'notes',component:NotesComponent
+    },
+    {
+      path:'reminder',component:ReminderComponent
+    },
+    {
+      path:'archive',component:ArchiveComponent
+    },
+    {
+      path:'trash',component:TrashComponent
+    }
+  ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
+
+  
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

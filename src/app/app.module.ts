@@ -28,6 +28,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
+import { NotesComponent } from './components/notes/notes.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+
 
 
 
@@ -41,7 +49,12 @@ import { MatSidenavModule } from '@angular/material';
     SlidePanelComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    NotesComponent,
+    ReminderComponent,
+    ArchiveComponent,
+    TrashComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +77,9 @@ import { MatSidenavModule } from '@angular/material';
     MatSnackBarModule,
     MatToolbarModule,
     LayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule,
+    MatMenuModule
     // FormControl
     
   ],

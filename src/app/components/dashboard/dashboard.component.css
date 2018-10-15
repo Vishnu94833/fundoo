@@ -22,8 +22,21 @@
 .right {
   float: right
 }
+.label
+{
+ padding: 20px;
+}
+.signout
+{
+  height: 100px;
+  width:200px;
+  
+}
 
 
+
+
+/* 
 
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
@@ -38,14 +51,14 @@ input{
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
   border-radius: 10em;
-  /* -webkit-transition: all .5s;
+  -webkit-transition: all .5s;
   -moz-transition: all .5s;
-  transition: all .5s; */
-  /* -webkit-box-sizing: content-box;
-  -webkit-appearance: textfield; */
+  transition: all .5s;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: textfield;
   outline: none;
   cursor: pointer;
-  /* z-index: 5; */
+  z-index: 5;
 }
 #search input[type=search].filled
 {
@@ -53,7 +66,7 @@ input{
   padding-left: 32px;
   color: #4a83c0;
   background-color: #fff;
-  /* cursor: auto; */
+  cursor: auto;
 
 }
 
@@ -68,9 +81,9 @@ input[type=search]:focus {
   box-shadow: 0 0 5px rgba(109, 207, 246, .5);
 }
 
-/* #search input[type=search]:hover {
+#search input[type=search]:hover {
   background-color: #fff;
-} */
+}
 
 #search input:-moz-placeholder {
   color: transparent;
@@ -91,4 +104,4 @@ input[type=search]:focus {
   z-index:10;
   margin-left:-3rem;
   margin-right:1rem;
-}
+} */
