@@ -14,24 +14,20 @@
   <div fxFlex fxLayoutAlign="end">
     <button mat-icon-button><mat-icon>view_stream</mat-icon></button>
     <button mat-icon-button><mat-icon>notifications_none</mat-icon></button>
-    <button mat-icon-button (click)="openDialog()"><mat-icon>account_circle</mat-icon>
-
-    <div *ngIf = "buttonclick == true">
-    <mat-card class="signout" >
-      <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item>Sign In</button>
-    <button mat-menu-item>Sign Out</button>
-  </mat-menu>
-    </mat-card>
+    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">V</button>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item>Add Account</button>
+            <button mat-menu-item>Sign Out</button>
+          </mat-menu>
   </div>
-</button> 
+<!-- </button>  -->
     <!-- <mat-menu #menu="matMenu"> -->
         <!-- <button mat-menu-item><mat-icon>account_circle</mat-icon></button> -->
 
         <!-- <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button> -->
       <!-- </ mat-menu> -->
-  </div>
+  <!-- </div> -->
 
 </mat-toolbar>
 
