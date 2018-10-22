@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
   service: any;
 check = false;
   sendData() {
-    if(this.model.firstname.valid && this.model.lastname.valid)
+    if(!this.model.firstname.invalid && !this.model.lastname.invalid)
     {
     if(!this.model.password ==this.model.confirmPassword){
       console.log("give same password to confirm");

@@ -7,8 +7,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule  } from '@angular/material/form-field';
-import { MatSelectModule  } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from '../app/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
-import { FormsModule,ReactiveFormsModule ,FormControl} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
@@ -29,12 +29,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { RemindComponent } from './components/remind/remind.component';
+import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+import { ChangecolorComponent } from './components/changecolor/changecolor.component';
+import { AddimageComponent } from './components/addimage/addimage.component';
+import { MoreComponent } from './components/more/more.component';
+import { ArchivesComponent } from './components/archives/archives.component';
+
 
 
 
@@ -54,7 +63,14 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     ReminderComponent,
     ArchiveComponent,
     TrashComponent,
-    HomepageComponent
+    HomepageComponent,
+    ToolbarComponent,
+    RemindComponent,
+    CollaboratorComponent,
+    ChangecolorComponent,
+    AddimageComponent,
+    MoreComponent,
+    ArchivesComponent
   ],
   imports: [
     BrowserModule,
@@ -79,9 +95,11 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     LayoutModule,
     MatSidenavModule,
     MatDialogModule,
-    MatMenuModule
-    // FormControl
-    
+    MatMenuModule,
+    MatTooltipModule,
+    FormsModule
+    // FormControl  
+
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

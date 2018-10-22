@@ -1,0 +1,27 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+<span matTooltip="Remind me" class="space"> <i class="material-icons">touch_app</i></span>
+</button>
+<!-- <div>
+  <mat-card class="wid">
+    <div>Reminder :</div>
+    
+    <button mat-button><span>Later today</span></button>
+    <button mat-button><span>Tomorrow</span></button>
+    <button mat-button><span>Next week</span></button>
+    <button mat-button><span><i class="material-icons">access_time</i>Pick date and time</span></button>
+    <button mat-button><span><i class="material-icons">location_on</i>Pick place</span></button>
+
+  </mat-card>
+</div> -->
+<!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
+<mat-menu #menu="matMenu">
+
+  <div>Reminder :</div>
+  <!-- <mat-card> -->
+  <button mat-button><span>Later today</span></button>
+  <button mat-button><span>Tomorrow</span></button>
+  <button mat-button><span>Next week</span></button>
+  <button mat-button><span><i class="material-icons">access_time</i>Pick date and time</span></button>
+  <button mat-button><span><i class="material-icons">location_on</i>Pick place</span></button>
+<!-- </mat-card> -->
+</mat-menu>
