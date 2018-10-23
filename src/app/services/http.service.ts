@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private myRoute:Router,private http: HttpClient) { }
   configUrl = 'http://34.213.106.173/api/user/service';
   postUrl='http://34.213.106.173/api/';
 
@@ -47,5 +49,36 @@ getFormUrlEncoded(toConvert) {
     formBody.push(encodedKey + '=' + encodedValue);
   }
   return formBody.join('&');
+}
+// token = localStorage.getItem('token');
+logoutPost(url,token)
+{
+  console.log(token);
+  
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,{},httpOptions);
+  // localStorage.removeItem("LoggedInUser");
+    // this.myRoute.navigate(["login"]);
+}
+addnotes(url,body,token)
+{
+  console.log(token);
+  
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,this.getFormUrlEncoded(body),httpOptions);
+  // localStorage.removeItem("LoggedInUser");
+    // this.myRoute.navigate(["login"]);
 }
 }

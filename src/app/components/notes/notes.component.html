@@ -1,38 +1,49 @@
-<div>
-  <!-- <mat-card *ngIf="open" class="expand" aria-placeholder="Take a Note">
-      <div class="left">Take a note...</div>
-    <div (click)="function()" class="list">
-      <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
-      <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon>
-        </b> &nbsp;
-      <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon>
-        </b>
-    </div>
+<app-notes1></app-notes1>
 
-  </mat-card> -->
-  <div>
-      <div *ngIf='open'>
-        <mat-card class="expand" aria-placeholder="Take a Note" (click)="function()">
-          Take a note...
-          <div class="list">
-            <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
-            <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
-            <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
-          </div>
-        </mat-card>
-      </div>
-  <div  class="title">
-    <mat-card *ngIf="!open" aria-placeholder="Title">
-      
-       <div contenteditable="true" class="content" data-text="Title"></div>
-       <div class="space"></div>
-       <div contenteditable="true" class="content" data-text="Take a note..."></div>
-       <div fxLayout="row" fxLayoutAlign="space-around center" >
-       <div class="bot">
-       <app-toolbar></app-toolbar>
-      </div>
-       <span (click)="close()" class="space1"> <button mat-button >close</button></span>
-      </div>
-    </mat-card>
-  </div>
+
+
+
+<div fxLayout="row wrap" xLayout="row" fxLayoutAlign="space-around center"  class="mar"  >
+<div class="spa">
+<mat-card class="car">
+ <div>
+   <p><b>A</b>astha</p>
+ </div>
+</mat-card>
 </div>
+
+<div class="spa">
+    <mat-card class="car">
+     <div>
+       <p><b>A</b>astha</p>
+     </div>
+    </mat-card>
+    </div>
+    
+   <!-- </div>     -->
+   <div class="spa">
+      <mat-card class="car">
+       <div>
+         <p><b>A</b>astha</p>
+       </div>
+      </mat-card>
+      </div>
+      
+       <div class="spa">
+        <mat-card class="car">
+         <div>
+           <p><b>A</b>astha</p>
+         </div>
+        </mat-card>
+        </div>
+        
+          <div class="spa">
+          <mat-card class="car">
+           <div>
+             <p><b>A</b>astha</p>
+           </div>
+          </mat-card>
+          </div>
+          
+         </div>    
+  <!-- </div> -->

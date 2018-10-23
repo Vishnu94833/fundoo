@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Router } from '@angular/router';
+import { HttpService } from '../../services/http.service';
 
 
 
@@ -18,7 +20,7 @@ export class DashboardComponent {
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {}
+  constructor(private router:Router,private httpservice: HttpService,private myRoute: Router,private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {}
 
   buttonclick: any =false;
   openDialog(): void {
@@ -32,4 +34,37 @@ export class DashboardComponent {
       this.buttonclick = true;
     // });
   }
+
+  model:any = {};
+  token=localStorage.getItem('token');
+  logout() {
+    console.log(this.token);
+    
+    // localStorage.removeItem("LoggedInUser");
+    // this.myRoute.navigate(["login"]);
+      this.httpservice.logoutPost('user/logout', this.token).subscribe(
+          (data) => {
+            console.log("POST Request is successful ", data);
+            localStorage.removeItem("token");
+            this.router.navigateByUrl('/login');
+          },
+          error => {
+            console.log("Error", error);
+          }
+  
+        );
+  
+    
+  }
+    firstname : any;
+    lastname : any;
+    email: any;
+
+    ngOnInit()
+    {
+      this.firstname = localStorage.getItem('firstname');
+      this.lastname =localStorage.getItem('lastname');
+      this.email = localStorage.getItem('email');
+    }
+   
   }

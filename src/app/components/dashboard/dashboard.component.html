@@ -13,12 +13,35 @@
   </div>
   <div fxFlex fxLayoutAlign="end">
     <button matTooltip="List View" mat-icon-button><mat-icon>view_stream</mat-icon></button>
-    <button matTooltip="Notifications" mat-icon-button><mat-icon>notifications_none</mat-icon></button>
+    <!-- <button matTooltip="Notifications" mat-icon-button><mat-icon>notifications_none</mat-icon></button> -->
     <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">V</button>
-    <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item>Add Account</button>
-      <button mat-menu-item>Sign Out</button>
-    </mat-menu>
+    <div>
+
+      <mat-menu class="sig1" #menu="matMenu" [overlapTrigger]="false">
+        <div style="padding: 20px">
+            
+            <div style = "float : right;">
+                <div>{{firstname}} {{lastname}}</div>
+                <div>{{email}}</div>
+              </div>
+              
+          <div>
+            <button class="n" mat-mini-fab [matMenuTriggerFor]="menu" style="margin-right: 20px; background-color: darkgreen; color: white;">V</button>
+          </div>
+          
+          
+
+          <hr>
+
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <a href="login"><button mat-stroked-button>Add Account</button></a>
+
+            <a (click)="logout()"><button mat-stroked-button>Sign Out</button></a>
+          </div>
+        </div>
+      </mat-menu>
+    </div>
   </div>
 
 

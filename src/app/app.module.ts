@@ -43,6 +43,11 @@ import { ChangecolorComponent } from './components/changecolor/changecolor.compo
 import { AddimageComponent } from './components/addimage/addimage.component';
 import { MoreComponent } from './components/more/more.component';
 import { ArchivesComponent } from './components/archives/archives.component';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './services/auth.service';
+import { AddnotesComponent } from './components/addnotes/addnotes.component';
+import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
+import { Notes1Component } from './components/notes1/notes1.component';
 
 
 
@@ -70,7 +75,10 @@ import { ArchivesComponent } from './components/archives/archives.component';
     ChangecolorComponent,
     AddimageComponent,
     MoreComponent,
-    ArchivesComponent
+    ArchivesComponent,
+    AddnotesComponent,
+    CollectionnotesComponent,
+    Notes1Component
   ],
   imports: [
     BrowserModule,
@@ -101,7 +109,7 @@ import { ArchivesComponent } from './components/archives/archives.component';
     // FormControl  
 
   ],
-  providers: [HttpService],
+  providers: [HttpService,AuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

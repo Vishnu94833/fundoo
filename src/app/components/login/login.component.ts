@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   hide = true;
     
       ngOnInit() {
+        
   
       }
   getErrorEmail() {
@@ -73,7 +74,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
-          this.router.navigateByUrl('/dashboard');
+          localStorage.setItem("token",data['id']);
+          localStorage.setItem('firstname',data['firstName']);
+          localStorage.setItem('lastname',data['lastName']);
+          localStorage.setItem('email',data['email']);
+          localStorage.setItem('userid',data['userid']);
+          this.router.navigateByUrl('/homepage');
         },
         error => {
           console.log("Error", error);
@@ -82,9 +88,12 @@ export class LoginComponent implements OnInit {
       );
 
       
+     
+      
 
 
   }
+  
 
 
 }

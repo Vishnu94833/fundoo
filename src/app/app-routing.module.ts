@@ -11,6 +11,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
@@ -18,10 +19,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'resetpassword/:forgotToken', component: ResetpasswordComponent },
-  { path:'homepage',component:HomepageComponent,
+  { path:'homepage',component:HomepageComponent,canActivate: [AuthGuard],
   children:[
+    {
+      path: '', redirectTo: 'notes', pathMatch: 'full'
+    },
     {
       path:'notes',component:NotesComponent
     },
@@ -35,7 +38,7 @@ const routes: Routes = [
       path:'trash',component:TrashComponent
     }
   ]},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full'}
 
   
 ];

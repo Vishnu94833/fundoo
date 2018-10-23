@@ -1,0 +1,26 @@
+    <!-- <div class="high"> -->
+        <div *ngIf='open'>
+          <mat-card class="expand" aria-placeholder="Take a Note" (click)="function()">
+            Take a note...
+            <div fxLayout="row" fxLayoutAlign="space-evenly center"  class="list">
+              <span > <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </span> &nbsp;
+              <span > <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </span> &nbsp;
+              <span > <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </span>
+            </div>
+          </mat-card>
+        </div>
+    <div  class="title">
+      <mat-card *ngIf="!open" aria-placeholder="Title">
+        
+         <div contenteditable="true" id="title" class="content" data-text="Title"></div>
+         <div class="space"></div>
+         <div contenteditable="true" id="description" class="content" data-text="Take a note..."></div>
+         <div fxLayout="row" fxLayoutAlign="space-around center" >
+         <div class="bot">
+         <app-toolbar></app-toolbar>
+        </div>
+         <span (click)="close();exit()" class="space1"> <button mat-button >close</button></span>
+        </div>
+      </mat-card>
+    </div>
+  <!-- </div> -->
