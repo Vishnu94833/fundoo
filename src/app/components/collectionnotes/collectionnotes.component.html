@@ -1,3 +1,35 @@
-<p>
-  collectionnotes works!
-</p>
+<div fxLayout='row wrap' fxLayoutAlign='space-between' fxLayoutGap="10px" style='margin-top: 8%;'>
+  <mat-card class="expand" fxFlex=30 *ngFor='let x of cardadded'>
+    <mat-card-title>{{x.title}}</mat-card-title>
+    <mat-card-content>{{x.description}}</mat-card-content>
+    <app-remind></app-remind>
+    <app-collaborator></app-collaborator>
+    <app-changecolor></app-changecolor>
+    <app-addimage></app-addimage>
+    <app-archives></app-archives>
+    <app-more></app-more>
+  </mat-card>
+
+</div>
+
+
+<!-- <div  fxLayout= "row wrap" fxLayoutGap= "10px" fxLayoutAlign="space-between" style = "margin-top: 20px; ">
+    <div *ngFor = 'let x of array'>
+    <mat-card align = "center" style="margin-top : 20px; width: fit-content; margin-left: 3%; font-size: 5px; margin-bottom: 3%; word-wrap: break-word;">
+      <div align = "left">
+      <mat-card-title style="font-size: 20px;"><b>{{x.title}}</b></mat-card-title>
+      <mat-card-title style="font-size: 15px;">{{x.description}}</mat-card-title>
+    </div>
+      <div>
+          <div class = "tool" fxLayout="row" fxLayoutAlign="space-between">
+       <app-remind></app-remind>
+       <app-collaborator></app-collaborator>
+       <app-changecolor></app-changecolor>
+       <app-addimage></app-addimage>
+       <app-archives></app-archives>
+       <app-more></app-more>
+      </div>
+      </div>
+    </mat-card>
+    </div>
+  </div> -->

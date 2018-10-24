@@ -1,3 +1,9 @@
-<button mat-icon-button>
+<button mat-icon-button [matMenuTriggerFor]="menu">
 <span matTooltip="More" class="space"> <i class="material-icons">more_vert</i></span>
 </button>
+
+<!-- <button mat-button  *ngIf="!open"  [matMenuTriggerFor]="menu">Menu</button> -->
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>delete</button>
+</mat-menu>

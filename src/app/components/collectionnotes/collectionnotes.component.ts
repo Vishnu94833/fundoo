@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collectionnotes',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollectionnotesComponent implements OnInit {
 
+
   constructor() { }
+  
+  @Input() cardadded;
+
 
   ngOnInit() {
+     
   }
-
 }

@@ -3,6 +3,8 @@
 }
 
 .sidenav {
+  height: 600px;
+  scroll-behavior: auto;
   width: 200px;
   margin: 64px 0px 0px 0px;
 }
