@@ -1,3 +1,3 @@
 <app-addnotes (message)="receive($event)"></app-addnotes>
 
-<app-collectionnotes [cardadded]="array"></app-collectionnotes>
+<app-collectionnotes [cardadded]="array"  (addnotes)="receive($event)"></app-collectionnotes>

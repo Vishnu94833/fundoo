@@ -1,3 +1,22 @@
-<p>
-  trash works!
-</p>
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%;'>
+    <mat-card class="expand" fxFlex=30 *ngFor='let x of array'>
+  
+      <mat-card-title>
+        <div [innerHtml]="x.title"></div>
+      </mat-card-title>
+      <mat-card-content>
+        <div [innerHtml]="x.description"></div>
+      </mat-card-content>
+      <div>
+  
+        <app-remind></app-remind>
+        <app-collaborator></app-collaborator>
+        <app-changecolor></app-changecolor>
+        <app-addimage></app-addimage>
+        <app-archives></app-archives>
+        <app-more ></app-more>
+  
+      </div>
+    </mat-card>
+  
+  </div>

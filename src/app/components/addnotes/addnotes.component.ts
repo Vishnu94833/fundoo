@@ -29,8 +29,8 @@ export class AddnotesComponent implements OnInit {
   {
     this.httpservice.addnotes('notes/addNotes', 
     {
-      'title': document.getElementById('title').textContent,
-      'description':document.getElementById('description').textContent,
+      'title': document.getElementById('title').innerHTML,
+      'description':document.getElementById('description').innerHTML,
       'labelIdList':'',
       'checklist':'',
       'isPined':'false'

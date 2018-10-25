@@ -17,31 +17,23 @@ export class NotesComponent implements OnInit {
 this.cardslist();
 
   }
-  receive() {
-    console.log("event is here....")
-    if (event) {
-      this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
 
-          this.array = data['data'].data
-          console.log("array", this.array);
 
-        }
-        // ,
-        // error => {
-        //   console.log("Error", error);
-        // }
-      );
-    }
-  }
+
+  
 
   cardslist() {
+    this.array =[];
     this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
-
-        this.array = data['data'].data
+        for(var i = data['data'].data.length-1; i>=0;i--)
+        {
+          if(data['data']['data'][i].isDeleted==false && data['data']['data'][i].isArchived==false)
+          {
+            this.array.push(data['data']['data'][i]);
+          }
+        }
         console.log("array", this.array);
 
       },
@@ -52,6 +44,13 @@ this.cardslist();
 
 }
 
+receive() {
+  console.log("event is here....")
+
+  if (event) {
+    this.cardslist();
+  }
+}
 
 }
 

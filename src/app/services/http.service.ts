@@ -94,4 +94,70 @@ getnotes(url,token)
   return this.http.get(url,httpOptions);
 }
 
+deletecard(url,body,token)
+{
+  url = this.postUrl+url;
+
+  console.log(token);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,body,httpOptions);
+}
+
+gettrash(url,token)
+{
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.get(url,httpOptions);
+}
+
+changecolor(url,body,token)
+{
+  url = this.postUrl+url;
+
+  console.log(token);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,body,httpOptions);
+}
+
+postarchive(url,body,token)
+{
+  url = this.postUrl+url;
+
+  console.log(token);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,body,httpOptions);
+}
+
+getarchive(url,token)
+{
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.get(url,httpOptions);
+}
+
 }

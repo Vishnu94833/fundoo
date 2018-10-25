@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-changecolor',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangecolorComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private httpservice:HttpService) { }
+  token=localStorage.getItem('token');
   ngOnInit() {
+  }
+
+  change()
+  {
+    console.log("successfully changed color........")
+    this.httpservice.changecolor('notes/changesColorNotes', 
+    {
+      "color": "string"
+    }, this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
+     
+console.log();
+      },
+      error => {
+        console.log("Error", error);
+      })
   }
 
 }

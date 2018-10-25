@@ -47,7 +47,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './services/auth.service';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
-import { Notes1Component } from './components/notes1/notes1.component';
+// import { Notes1Component } from './components/notes1/notes1.component';
 
 
 
@@ -78,7 +78,7 @@ import { Notes1Component } from './components/notes1/notes1.component';
     ArchivesComponent,
     AddnotesComponent,
     CollectionnotesComponent,
-    Notes1Component
+    // Notes1Component
   ],
   imports: [
     BrowserModule,
