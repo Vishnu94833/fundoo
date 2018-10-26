@@ -175,4 +175,19 @@ addUpdatedNotes(url,body,token)
 
 }
 
+labelAdd(url,body,token)
+{
+  url = this.postUrl+url;
+
+  console.log(token);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,body,httpOptions);
+}
+
+
 }
