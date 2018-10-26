@@ -1,0 +1,29 @@
+.marg
+{
+    margin-top: 60%;
+}
+.marg1
+{
+    margin-top: 5%;
+}
+.marg2
+{
+    margin-top: 8%;
+}
+.flot
+{
+    float: right;
+}[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+
+.content
+{
+
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}

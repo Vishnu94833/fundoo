@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
+import { LabelComponent } from '../label/label.component';
 
 
 
@@ -22,8 +23,11 @@ export class DashboardComponent {
     
   constructor(private router:Router,private httpservice: HttpService,private myRoute: Router,private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {}
 
+
+  animal: string;
+  name: string;
   buttonclick: any =false;
-  openDialog(): void {
+  // openDialog(): void {
     // const dialogRef = this.dialog.open(, {
     //   width: '250px',
     //   // data: {name: this.name, animal: this.animal}
@@ -31,9 +35,9 @@ export class DashboardComponent {
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
-      this.buttonclick = true;
+      // this.buttonclick = true;
     // });
-  }
+  // }
 
   model:any = {};
   token=localStorage.getItem('token');
@@ -66,6 +70,11 @@ export class DashboardComponent {
       this.lastname =localStorage.getItem('lastname');
       this.email = localStorage.getItem('email');
     }
-   
-    
+    openDialog():void {
+      const dialogRef = this.dialog.open(LabelComponent, {
+        width: '300px',
+        data: {name: this.name, animal: this.animal}
+      });
+  
+    }
   }
