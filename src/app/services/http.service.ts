@@ -160,4 +160,19 @@ getarchive(url,token)
   return this.http.get(url,httpOptions);
 }
 
+addUpdatedNotes(url,body,token)
+{
+  console.log(token);
+  
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,this.getFormUrlEncoded(body),httpOptions);
+
+}
+
 }

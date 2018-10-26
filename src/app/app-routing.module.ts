@@ -12,6 +12,7 @@ import { ReminderComponent } from './components/reminder/reminder.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { AuthGuard } from './auth.guard';
+import { LabelComponent } from './components/label/label.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetpasswordComponent },
+
+  
   { path:'homepage',component:HomepageComponent,canActivate: [AuthGuard],
   children:[
     {
@@ -31,6 +34,7 @@ const routes: Routes = [
     {
       path:'reminder',component:ReminderComponent
     },
+    { path: 'label', component: LabelComponent },
     {
       path:'archive',component:ArchiveComponent
     },

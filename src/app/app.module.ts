@@ -47,11 +47,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './services/auth.service';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
-// import { Notes1Component } from './components/notes1/notes1.component';
-
-
-
-
+import { UpdatenotesComponent } from './components/updatenotes/updatenotes.component';
+import { LabelComponent } from './components/label/label.component';
 
 
 
@@ -78,6 +75,9 @@ import { CollectionnotesComponent } from './components/collectionnotes/collectio
     ArchivesComponent,
     AddnotesComponent,
     CollectionnotesComponent,
+    UpdatenotesComponent,
+    LabelComponent,
+    
     // Notes1Component
   ],
   imports: [
@@ -105,11 +105,13 @@ import { CollectionnotesComponent } from './components/collectionnotes/collectio
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
     // FormControl  
 
   ],
   providers: [HttpService,AuthGuard,AuthService],
+  entryComponents:[UpdatenotesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,25 @@
+<div [style.backgroundColor]="data.color">
+<h1 mat-dialog-title >           
+  <div class="content" contenteditable="true" id="title1" class="content" data-text="Title">
+      <div [innerHtml]="data.title"></div>
+  </div>
+ </h1>
+<div mat-dialog-content>
+    <div class="content" contenteditable="true" id="description1" class="content" data-text="Take a note...">
+
+        <div [innerHtml]="data.description"></div>
+
+    </div>
+
+    
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center" >
+    <app-remind></app-remind>
+    <app-collaborator></app-collaborator>
+    <app-changecolor [color]="data" (colorEvent)=new($event) ></app-changecolor>
+    <app-addimage></app-addimage>
+    <app-archives></app-archives>
+    <app-more></app-more>
+  <button mat-button  (click)="onNoClick(data.id) "  >Close</button>
+</div>
+</div>

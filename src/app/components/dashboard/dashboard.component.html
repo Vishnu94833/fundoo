@@ -55,10 +55,11 @@
       <a mat-list-item routerLink="/homepage/notes"><img src="../../../assets/images/notes.svg">Notes</a>
       <a mat-list-item routerLink="/homepage/reminder"><img src="../../../assets/images/reminders.svg">Reminders</a>
       <hr>
-      <div fxLayout="row" fxLayoutAlign="space-between center"> <a class="label"> Labels</a><a
-          mat-button matTooltip="Edit"> Edit</a>
+      <div fxLayout="row" fxLayoutAlign="space-between center"> <a class="label"> Labels</a>
+        <!-- <a
+          mat-button routerLink="/homepage/label" matTooltip="Edit"> Edit</a> -->
       </div>
-      <div fxLayoutAlign="center center"><a matTooltip="Create New Label" mat-list-item> <img
+      <div fxLayoutAlign="center center"  routerLink="/homepage/label"><a matTooltip="Create New Label" mat-list-item> <img
             src="../../../assets/images/create.svg"> Create new label</a></div>
 
       <hr>

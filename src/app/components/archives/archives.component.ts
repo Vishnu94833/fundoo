@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+// import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-archives',
@@ -10,6 +11,7 @@ export class ArchivesComponent implements OnInit {
   token=localStorage.getItem('token');
   constructor(private httpservice: HttpService) { }
   @Input() archive;
+  @Output() archiveEvent=new EventEmitter();
   ngOnInit() {
   }
 
@@ -22,6 +24,7 @@ export class ArchivesComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
+        this.archiveEvent.emit({});
 
 console.log();
       },

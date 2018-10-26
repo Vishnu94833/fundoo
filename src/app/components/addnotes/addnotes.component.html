@@ -3,14 +3,14 @@
             <mat-card *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
               Take a note...
               <div fxLayout="row" fxLayoutAlign="space-evenly center"  class="list">
-                <span > <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </span> &nbsp;
-                <span > <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </span> &nbsp;
+                <span > <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </span> 
+                <span > <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </span>
                 <span > <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </span>
               </div>
             </mat-card>
          
   
-        <mat-card *ngIf="!open" aria-placeholder="Title">
+        <mat-card *ngIf="!open" aria-placeholder="Title" >
           
            <div contenteditable="true" id="title" class="content" data-text="Title"></div>
            <div class="space"></div>

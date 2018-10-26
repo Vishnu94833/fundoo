@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 // import { EventEmitter } from 'protractor';
+import {MatDialog} from '@angular/material';
+import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
+
 
 @Component({
   selector: 'app-collectionnotes',
@@ -8,11 +11,15 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 })
 export class CollectionnotesComponent implements OnInit {
 
+ 
+  
 
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
   
   @Input() cardadded;
   @Output() addnotes= new EventEmitter();
+  // @Output() colorEvent=new EventEmitter();
 
 
   ngOnInit() {
@@ -22,4 +29,21 @@ export class CollectionnotesComponent implements OnInit {
   {
 this.addnotes.emit({})
   }
+
+  openDialog(x): void {
+    const dialogRef = this.dialog.open(UpdatenotesComponent, {
+      width: '500px',
+      data: x
+    });
+
+  
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.addnotes.emit()
+
+  });
+}
+
+  
+
 }

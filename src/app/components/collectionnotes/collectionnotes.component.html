@@ -1,22 +1,24 @@
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%;'>
-  <mat-card class="expand" fxFlex=30 *ngFor='let x of cardadded'>
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%; margin-left: 5%;'>
 
-    <mat-card-title>
+  <mat-card  (updateEmit)="new($event)" class="expand" fxFlex=30 *ngFor='let x of cardadded' [style.backgroundColor]="x.color">
+
+    <mat-card-title (click)="openDialog(x)" >
       <div [innerHtml]="x.title"></div>
     </mat-card-title>
-    <mat-card-content>
-      <div [innerHtml]="x.description"></div>
+    <mat-card-content  (click)="openDialog(x)">
+        <div [innerHtml]="x.description"></div>
     </mat-card-content>
     <div>
 
       <app-remind></app-remind>
       <app-collaborator></app-collaborator>
-      <app-changecolor></app-changecolor>
+      <app-changecolor [color]="x" (colorEvent)=new($event)></app-changecolor>
       <app-addimage></app-addimage>
-      <app-archives [archive]="x"></app-archives>
-      <app-more [carddel]="x"  (deleteevent)=new($event)></app-more>
+      <app-archives [archive]="x" (archiveEvent)=new($event)></app-archives>
+      <app-more [carddel]="x" (deleteevent)=new($event)></app-more>
 
-    </div>
-  </mat-card>
+    </div >
+  </mat-card >
+
 
 </div>

@@ -67,4 +67,5 @@ export class DashboardComponent {
       this.email = localStorage.getItem('email');
     }
    
+    
   }
