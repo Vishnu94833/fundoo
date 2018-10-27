@@ -28,7 +28,7 @@ export class MoreComponent implements OnInit {
   }
   delete() {
 console.log("delete 0 is successful")
-    this.httpservice.deletecard('notes/trashNotes', 
+    this.httpservice.postarchive('notes/trashNotes', 
     {
       "isDeleted": true,
       "noteIdList":[this.carddel.id]

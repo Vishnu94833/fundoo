@@ -19,7 +19,7 @@ export class ChangecolorComponent implements OnInit {
   colors(id)
   {
     console.log("successfully changed color........")
-    this.httpservice.changecolor('notes/changesColorNotes', 
+    this.httpservice.postarchive('notes/changesColorNotes', 
     {
       "color": id,
       "noteIdList":[this.color.id]

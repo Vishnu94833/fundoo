@@ -9,27 +9,28 @@ import { HttpService } from '../../services/http.service';
 })
 export class LabelComponent implements OnInit {
 
-  token=localStorage.getItem('token');
-  constructor(private httpservice: HttpService) {}
+  token = localStorage.getItem('token');
+ 
+
+  constructor(private httpservice: HttpService) { }
   ngOnInit() {
   }
-
-  addLabel()
-  {
-    this.httpservice.labelAdd('noteLabels', 
-    {
-      "label": "string",
-      "isDeleted": true,
-      "userId": "string"
-    }, this.token).subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        // this.message.emit({});
-console.log();
-      },
-      error => {
-        console.log("Error", error);
-      })
+  id = localStorage.getItem('userId');
+  addLabel() {
+    console.log(this.id);
+    this.httpservice.postarchive('noteLabels',
+      {
+        "label": document.getElementById('label1').innerHTML,
+        "isDeleted": false,
+        "userId": this.id
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          // this.message.emit({});
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
 
 }

@@ -95,7 +95,7 @@ check = false;
     console.log(this.model.lastname);
     console.log(this.model.email);
     this.httpservice
-      .addConfig('user/userSignUp', {
+      .logPost('user/userSignUp', {
         "firstName": this.model.firstname,
         "lastName": this.model.lastname,
         "phoneNumber": this.model.phonenumber,

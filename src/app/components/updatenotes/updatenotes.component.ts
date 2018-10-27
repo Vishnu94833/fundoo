@@ -28,7 +28,7 @@ export class UpdatenotesComponent implements OnInit {
   @Output() updateEmit= new EventEmitter();
 
     onNoClick(): void {
-      this.httpservice.addUpdatedNotes('notes/updateNotes', 
+      this.httpservice.addnotes('notes/updateNotes', 
       {
         'noteId':[this.data.id],
         'title': document.getElementById('title1').innerHTML,

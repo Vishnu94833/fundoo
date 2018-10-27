@@ -24,7 +24,7 @@ export class ForgotpasswordComponent implements OnInit {
 {
   console.log(this.model.email)
   if(!this.email.invalid){
-  this.httpservice.postPassword('user/reset',{
+  this.httpservice.logPost('user/reset',{
     "email": this.model.email,
 
   })

@@ -77,4 +77,22 @@ export class DashboardComponent {
       });
   
     }
+
+    labelList() {
+      
+
+      this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+        (data) => {
+          console.log("Get Request is successful ", data);
+          
+          
+  
+        },
+        error => {
+          console.log("Error", error);
+        });
+    
+  
+  }
+
   }
