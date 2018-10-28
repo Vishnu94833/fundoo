@@ -1,6 +1,6 @@
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%; margin-left: 5%;'>
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%; margin-left: 5%;'>
 
-  <mat-card  (updateEmit)="new($event)" class="expand" fxFlex=30 *ngFor='let x of cardadded' [style.backgroundColor]="x.color">
+  <mat-card  (updateEmit)="new($event)" fxFlex="0 1 calc(30% - 32px)" style='margin-top: 30px;'  *ngFor='let x of cardadded' [style.backgroundColor]="x.color">
 
     <mat-card-title (click)="openDialog(x)" >
       <div [innerHtml]="x.title"></div>

@@ -1,6 +1,6 @@
 .marg
 {
-    margin-top: 60%;
+    margin-top: 20%;
 }
 .marg1
 {
@@ -9,6 +9,10 @@
 .marg2
 {
     margin-top: 8%;
+}
+.marg4
+{
+    margin-bottom: 5%;
 }
 .flot
 {
@@ -28,4 +32,8 @@
     word-wrap: break-word;
     width: 100%;
     min-height: 20px;
+}
+.spac
+{
+  margin-left: 10%;
 }

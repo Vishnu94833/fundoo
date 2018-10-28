@@ -5,13 +5,19 @@
 
     <mat-icon>close</mat-icon>
     <!-- <input contenteditable="true" data-text="Create new Label" class="content" id="label1" placeholder="Create new Label"> -->
-    <div contenteditable="true" id="label1" class="content" data-text="Create new Label"></div>
+    <div contenteditable="true" name="label"  id="label"  class="content" data-text="Create new Label"></div>
 
     <mat-icon>check</mat-icon>
     <hr>
 
 
   </div>
+  <div *ngFor=" let labels of temp1">
+      <a mat-list-item>
+      <mat-icon class="marg4">label_outline</mat-icon>
+      <span class="spac">{{labels.label}}</span>
+    </a>
+  </div>
   <div class="marg"></div>
-  <button class="flot" (click)="addLabel()" mat-stroked-button>Done</button>
+  <button class="flot" (click)="addLabel()" [mat-dialog-close]="labelName" (labelList)="list($event)" mat-stroked-button>Done</button>
 </div>

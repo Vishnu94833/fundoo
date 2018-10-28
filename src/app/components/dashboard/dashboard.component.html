@@ -58,9 +58,14 @@
       <div fxLayout="row" fxLayoutAlign="space-between center">
 
        
-       <a (click)="labelList()" class="label"> Labels</a>
+       <h5  class="label"> Labels</h5>
       </div>
-      <p>labels</p>
+      <div *ngFor=" let labels of temp">
+        <a mat-list-item>
+        <mat-icon class="ma1">label_outline</mat-icon>
+        <span class="spac">{{labels.label}}</span>
+      </a>
+    </div>
       <div fxLayoutAlign="center center"><a matTooltip="Create New Label" (click)="openDialog()"
           mat-list-item> <img src="../../../assets/images/create.svg"> Create new label</a></div>
 

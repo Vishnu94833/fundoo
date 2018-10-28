@@ -22,9 +22,6 @@ export class UpdatenotesComponent implements OnInit {
     public dialogRef: MatDialogRef<UpdatenotesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-    // @Input() archive;
-  // @Output() archiveEvent=new EventEmitter();
-  // @Input() update;
   @Output() updateEmit= new EventEmitter();
 
     onNoClick(): void {

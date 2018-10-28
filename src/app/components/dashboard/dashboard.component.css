@@ -24,10 +24,6 @@
 .right {
   float: right
 }
-.label
-{
- padding: 20px;
-}
 .signout
 {
   height: 100px;
@@ -53,4 +49,8 @@ padding: 10%;
 mat-menu-content:not(:empty) {
   padding-top: -200px;
   padding-bottom: -20000px;
+}
+.spac
+{
+  margin-left: 10%;
 }

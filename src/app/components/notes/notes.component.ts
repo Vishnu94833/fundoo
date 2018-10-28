@@ -14,23 +14,21 @@ export class NotesComponent implements OnInit {
   constructor(private httpservice: HttpService, private auth: AuthService) { }
 
   ngOnInit() {
-this.cardslist();
+    this.cardslist();
 
   }
 
 
 
-  
+
 
   cardslist() {
-    this.array =[];
+    this.array = [];
     this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
-        for(var i = data['data'].data.length-1; i>=0;i--)
-        {
-          if(data['data']['data'][i].isDeleted==false && data['data']['data'][i].isArchived==false)
-          {
+        console.log("GET Request is successful ", data);
+        for (var i = data['data'].data.length - 1; i >= 0; i--) {
+          if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
             this.array.push(data['data']['data'][i]);
           }
         }
@@ -40,17 +38,17 @@ this.cardslist();
       error => {
         console.log("Error", error);
       });
-  
 
-}
 
-receive() {
-  console.log("event is here....")
-
-  if (event) {
-    this.cardslist();
   }
-}
+
+  receive() {
+    console.log("event is here....")
+
+    if (event) {
+      this.cardslist();
+    }
+  }
 
 }
 
