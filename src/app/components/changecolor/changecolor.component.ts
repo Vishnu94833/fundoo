@@ -12,12 +12,19 @@ export class ChangecolorComponent implements OnInit {
   constructor(private httpservice:HttpService) { }
   @Input() color;
   @Output() colorEvent=new EventEmitter();
+  @Output() colorEmit=new EventEmitter();
+
   token=localStorage.getItem('token');
   ngOnInit() {
   }
 
   colors(id)
   {
+    this.colorEmit.emit(id)
+    if(this.color!=undefined)
+    {
+
+   
     console.log("successfully changed color........")
     this.httpservice.postarchive('notes/changesColorNotes', 
     {
@@ -26,6 +33,9 @@ export class ChangecolorComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
+        console.log(id)
+        console.log(this.color.id);
+        localStorage.setItem('colorId',this.color.id)
         this.colorEvent.emit({});
      
 console.log();
@@ -34,6 +44,7 @@ console.log();
         console.log("Error", error);
       })
   }
+}
 
 
 

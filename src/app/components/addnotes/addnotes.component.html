@@ -10,7 +10,7 @@
             </mat-card>
          
   
-        <mat-card *ngIf="!open" aria-placeholder="Title" >
+        <mat-card *ngIf="!open" [style.backgroundColor]="color" aria-placeholder="Title" >
           
            <div contenteditable="true" id="title" class="content" data-text="Title"></div>
            <div class="space"></div>
@@ -19,7 +19,7 @@
            
               <app-remind></app-remind>
               <app-collaborator></app-collaborator>
-              <app-changecolor></app-changecolor>
+              <app-changecolor (colorEmit)=colour($event)></app-changecolor>
               <app-addimage></app-addimage>
               <app-archives></app-archives>
               <app-more></app-more>

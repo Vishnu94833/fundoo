@@ -24,8 +24,7 @@ export class DashboardComponent {
   constructor(private router: Router, private httpservice: HttpService, private myRoute: Router, private breakpointObserver: BreakpointObserver, public dialog: MatDialog) { }
 
 
-  animal: string;
-  name: string;
+  hoverItem: string;
   buttonclick: any = false;
   // openDialog(): void {
   // const dialogRef = this.dialog.open(, {
@@ -65,7 +64,7 @@ export class DashboardComponent {
   firstname: any;
   lastname: any;
   email: any;
-  label:any;
+  label: any;
 
   temp;
   ngOnInit() {
@@ -73,17 +72,17 @@ export class DashboardComponent {
     this.lastname = localStorage.getItem('lastname');
     this.email = localStorage.getItem('email');
     this.label = localStorage.getItem('label');
-this.labelList();
+    this.labelList();
   }
   openDialog(): void {
-   
+
     const dialogRef = this.dialog.open(LabelComponent, {
-      width: '300px',
-      data: {array:this.temp}
+      width: '350px',
+      data: { array: this.temp }
     });
     dialogRef.afterClosed().subscribe(result => {
-      
-  
+
+
     });
   }
 
@@ -93,9 +92,17 @@ this.labelList();
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("Get Request is successful ", data);
-        
-this.temp = data['data'].details;
+        this.temp = [];
+        this.temp = data['data'].details;
+        for (let index = 0; index < data['data'].details.length; index++) {
+          if (data['data'].details.isDeleted === false) {
+
+
+            this.temp.push(data['data'].details[index])
+          }
+        }
         console.log(data['data'].details)
+        console.log(this.temp)
 
       },
       error => {

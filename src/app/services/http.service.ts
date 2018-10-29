@@ -201,5 +201,10 @@ getLabels(url,token)
   return this.http.get(url,httpOptions);
 }
 
+labelDelete(url,body)
+{
+  url = this.postUrl+url;
+  return this.http.delete(url,body);
+}
 
 }

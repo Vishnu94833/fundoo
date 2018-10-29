@@ -61,9 +61,10 @@
        <h5  class="label"> Labels</h5>
       </div>
       <div *ngFor=" let labels of temp">
-        <a mat-list-item>
+        <a  mat-list-item>
         <mat-icon class="ma1">label_outline</mat-icon>
         <span class="spac">{{labels.label}}</span>
+        <!-- <mat-icon>create</mat-icon> -->
       </a>
     </div>
       <div fxLayoutAlign="center center"><a matTooltip="Create New Label" (click)="openDialog()"

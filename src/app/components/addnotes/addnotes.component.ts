@@ -11,7 +11,7 @@ export class AddnotesComponent implements OnInit {
   token=localStorage.getItem('token');
   @Output() message = new EventEmitter();
   public open:boolean=true;
-
+color:any;
   constructor(private httpservice: HttpService) {}
 
   ngOnInit() {
@@ -33,18 +33,27 @@ export class AddnotesComponent implements OnInit {
       'description':document.getElementById('description').innerHTML,
       'labelIdList':'',
       'checklist':'',
-      'isPined':'false'
+      'isPined':'false',
+      'color':this.color
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
         this.message.emit({
 
         });
+        this.color="#fafafa";
 console.log();
       },
       error => {
         console.log("Error", error);
+        this.color="#fafafa"
       })
+  }
+
+  colour(event)
+  {
+    console.log(event);
+    this.color=event;
   }
   
 }

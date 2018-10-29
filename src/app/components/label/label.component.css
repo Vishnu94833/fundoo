@@ -35,5 +35,10 @@
 }
 .spac
 {
-  margin-left: 10%;
+margin-right: 30px;
+  
+}
+.spec
+{
+    float: right;
 }
