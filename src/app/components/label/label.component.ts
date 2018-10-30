@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-// import {  } from 'events';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Component({
@@ -10,15 +10,20 @@ import { HttpService } from '../../services/http.service';
 })
 export class LabelComponent implements OnInit {
 
+
+
   token = localStorage.getItem('token');
   label = localStorage.getItem('label')
 
-  constructor(private httpservice: HttpService) { }
+  constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  @Input() labels;
+  @ViewChild('myLabel') myLabel: ElementRef;
+  @ViewChild('Label1') Label1: ElementRef;
+
   @Output() labelList = new EventEmitter();
   ngOnInit() {
-    this.labelList1();
+
   }
   array: any = {};
   temp: any = {};
@@ -26,77 +31,76 @@ export class LabelComponent implements OnInit {
   hoverItem: string;
   labelName: string;
   changeText: string;
-  temp1;
-
+  temp1: any = {};
+  temp2: any = {};
+  show;
+  res: string;
   id = localStorage.getItem('userId');
-  addLabel() {
-    console.log(this.id);
-    this.httpservice.postarchive('noteLabels',
-      {
-        "label": document.getElementById('label').innerHTML,
-        "isDeleted": true,
-        "userId": this.id
-      }, this.token).subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
-          console.log(data);
-          localStorage.setItem("label", data['label']);
-          localStorage.getItem('label')
-          this.labelList.emit({})
-
-
-
-        },
-        error => {
-          console.log("Error", error);
-        })
-  }
+  // addLabel() {
+  //   console.log(this.id);
+  //   this.httpservice.postarchive('noteLabels',
+  //     {
+  //       "label": document.getElementById('Label').innerHTML,
+  //       "isDeleted": false,
+  //       "userId": this.id
+  //     }, this.token).subscribe(
+  //       (data) => {
+  //         console.log("POST Request is successful ", data);
+  //         localStorage.setItem("label", data['label']);
+  //         localStorage.getItem('label')
+         
+  //       },
+  //       error => {
+  //         console.log("Error", error);
+  //       })
+  // }
 
   list(event) {
     this.labelList.emit({})
   }
 
-  labelList1() {
+  deleteLabel(id) {
 
-
-    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
-      (data) => {
-        console.log("Get Request is successful ", data);
-
-        // this.temp1 = data['data'].details;
-            for (let index = 0; index < data['data'].details.length; index++) {
-            if (data['data'].details.isDeleted===false) {
-              
-           
-             this.temp1.push(data['data'].details[index])
-           }
-           }
-        console.log(data['data'].details)
-
-      },
-      error => {
-        console.log("Error", error);
-      });
-
-
-  }
-
-  deleteLabel() {
-    
-    this.httpservice.labelDelete('noteLabels/{id}/deleteNoteLabel',
+    this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
       {
         "label": document.getElementById('label').innerHTML
-    
+
       }).subscribe(
         (data) => {
           console.log("DELETE Request is successful ", data);
-          
+
         },
         error => {
           console.log("Error", error);
         })
   }
 
+
+  editLabel(id) {
+    console.log(this.id);
+    this.httpservice.postarchive('noteLabels/' + id + '/updateNoteLabel',
+      {
+        "label": this.myLabel.nativeElement.innerHTML,
+        "isDeleted": false,
+        "userId": this.id,
+        "id": id
+      }
+      , this.token).subscribe(
+        (data) => {
+          console.log("UPDATE Request is successful ", data);
+          // this.temp2 = data['data']['details'];
+
+          console.log(data);
+
+        },
+        error => {
+          console.log("Error", error);
+        })
+
+  }
+  edit(id) {
+    this.show = id;
+  }
 
 
 }

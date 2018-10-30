@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Inject,Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 // import { EventEmitter } from 'events';
+// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Component({
   selector: 'app-more',

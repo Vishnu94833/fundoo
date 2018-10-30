@@ -4,9 +4,22 @@
 
 <mat-menu #menu="matMenu">
   <button (click)="delete()" mat-menu-item>delete</button>
-  <button  mat-menu-item>Add label</button>
+  <button [matMenuTriggerFor]="menu1" mat-menu-item>Add label</button>
   <button mat-menu-item>Add drawing</button>
   <button mat-menu-item>Make a copy</button>
   <button mat-menu-item>Show checkboxes</button>
   <button mat-menu-item>Copy to Google Docs</button>
 </mat-menu>
+
+
+<mat-menu #menu1="matMenu">
+    <!-- <button (click)="delete()" mat-menu-item>delete</button> -->
+    <!-- <button  mat-menu-item>Add label</button>
+    <button mat-menu-item>Add drawing</button>
+    <button mat-menu-item>Make a copy</button>
+    <button mat-menu-item>Show checkboxes</button>
+    <button mat-menu-item>Copy to Google Docs</button> -->
+    
+    <mat-checkbox >check box...</mat-checkbox>
+ 
+  </mat-menu>

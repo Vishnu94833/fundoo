@@ -65,8 +65,11 @@ export class DashboardComponent {
   lastname: any;
   email: any;
   label: any;
+  temp: any;
 
-  temp;
+
+
+
   ngOnInit() {
     this.firstname = localStorage.getItem('firstname');
     this.lastname = localStorage.getItem('lastname');
@@ -74,6 +77,9 @@ export class DashboardComponent {
     this.label = localStorage.getItem('label');
     this.labelList();
   }
+
+
+  
   openDialog(): void {
 
     const dialogRef = this.dialog.open(LabelComponent, {
@@ -81,6 +87,26 @@ export class DashboardComponent {
       data: { array: this.temp }
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+
+
+      this.httpservice.postarchive('noteLabels',
+        {
+          "label": result,
+          "isDeleted": false,
+          "userId": this.userId
+        }, this.token).subscribe(
+          (data) => {
+            console.log("POST Request is successful ", data);
+            localStorage.setItem("label", data['label']);
+            localStorage.getItem('label')
+            this.labelList();
+
+          },
+          error => {
+            console.log("Error", error);
+          })
+
 
 
     });
@@ -92,15 +118,15 @@ export class DashboardComponent {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("Get Request is successful ", data);
-        this.temp = [];
+        // this.temp = [];
         this.temp = data['data'].details;
-        for (let index = 0; index < data['data'].details.length; index++) {
-          if (data['data'].details.isDeleted === false) {
+        // for (let index = 0; index < data['data'].details.length; index++) {
+        //   if (data['data'].details[index].isDeleted == false) {
 
 
-            this.temp.push(data['data'].details[index])
-          }
-        }
+        //     this.temp.push(data['data'].details[index])
+        //   }
+        // }
         console.log(data['data'].details)
         console.log(this.temp)
 
@@ -111,5 +137,6 @@ export class DashboardComponent {
 
 
   }
-
 }
+
+

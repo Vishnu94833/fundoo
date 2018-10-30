@@ -1,47 +1,43 @@
-<!-- <div>
-  <div class="marg1">Edit labels</div>
-  <div class="marg2" fxLayout="row" fxLayoutAlign="space-evenly start">
-
-    <mat-icon>close</mat-icon>
-    <div contenteditable="true" name="label" id="label" class="content" data-text="Create new Label"></div>
-
-    <mat-icon (click)="addLabel()">check</mat-icon>
-    <hr>
-
-
-  </div>
-  <div *ngFor=" let labels of temp1">
-      <a (mouseover)="changeText=true" (mouseout)="changeText=false"  mat-list-item>
-          <i *ngIf="changeText"(click)="deleteLabel()" class="material-icons">delete</i>
-          <mat-icon *ngIf="!changeText">label_outline</mat-icon>
-      <span class="spac">{{labels.label}}</span>
-      <span class="spec"><i class="material-icons" >create</i></span>
-    </a>
-  </div>
-  <div class="marg"></div>
-  <button class="flot" (click)="addLabel()" [mat-dialog-close]="labelName" (labelList)="list($event)"
-    mat-stroked-button>Done</button>
-</div> -->
-
-
-
 <div style="padding:10px ">
   <div class="marg2">Edit labels</div>
   <div class="marg2" fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxFlex="15"><mat-icon>close</mat-icon></div> 
-  <div fxFlex="70" contenteditable="true" placeholder="Create new Label" class="content" id="label" placeholder="Create new Label"></div>
-  <div fxFlex="15"><mat-icon (click)="addLabel()" >check</mat-icon> </div> 
+    <div fxFlex="15">
+      <mat-icon>close</mat-icon>
+    </div>
+    <div fxFlex="70" contenteditable="true" placeholder="Create new Label" class="content" id="Label"
+      (input)="res=$event.target.innerText" placeholder="Create new Label"></div>
+    <div fxFlex="15">
+      <mat-icon>check</mat-icon>
+    </div>
   </div>
+  <!-- <hr>  -->
   <div fxayout="column" class="labelList">
-  <a mat-list-item>
-  <div *ngFor = "let labels of temp1">
-  <div fxFlex="15"><i class="material-icons" (click)="deleteLabel()">delete</i></div>
-  <div fxFlex="70"><span contenteditable="true" class = "name">{{labels.label}}</span></div>
-  
-  <div fxFlex="15"><mat-icon class = "create">create</mat-icon></div>
+    <a mat-list-item>
+      <div *ngFor="let labels of data.array">
+
+        <div *ngIf="show !=labels.id">
+          <div fxFlex="15"><i class="material-icons" (click)="deleteLabel(labels.id)" id="label">delete</i></div>
+          <div fxFlex="70"><span contenteditable="false" id="label8" [innerHTML]="labels.label"
+              class="name"></span></div>
+
+          <div fxFlex="15">
+            <mat-icon (click)="edit(labels.id)" class="create">create</mat-icon>
+          </div>
+        </div>
+
+        <div *ngIf="show ==labels.id">
+          <div fxFlex="15"><i class="material-icons" (click)="deleteLabel(labels.id)" id="label">delete</i></div>
+          <div fxFlex="70"><span contenteditable="true" #myLabel [innerHTML]="labels.label"
+              class="name"></span></div>
+
+          <div fxFlex="15">
+            <mat-icon (click)="editLabel(labels.id)" class="create">done</mat-icon>
+          </div>
+        </div>
+
+      </div>
+    </a>
   </div>
-  </a>
-  </div>
-  <hr> 
-  <button class="flot" (click)="addLabel()" mat-button>Done</button>
-  </div>
+
+  <button class="flot" [mat-dialog-close]="res" id="Label" mat-button>Done</button>
+</div>

@@ -49,6 +49,7 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
 import { UpdatenotesComponent } from './components/updatenotes/updatenotes.component';
 import { LabelComponent } from './components/label/label.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -106,7 +107,8 @@ import { LabelComponent } from './components/label/label.component';
     MatMenuModule,
     MatTooltipModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
     // FormControl  
 
   ],
