@@ -5,3 +5,7 @@
  word-wrap: break-word;
 
 }
+.pin
+{
+    float: right;
+}

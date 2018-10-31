@@ -15,16 +15,7 @@ export class HttpService {
 getConfig() {
   return this.http.get(this.configUrl);
 }
-// addConfig(url,body)
-// {
-//   url = this.postUrl+url;
-//   return this.http.post(url,body);
-// }
-// postPassword(url,body)
-// {
-//   url = this.postUrl+url;
-//   return this.http.post(url,body);
-// }
+
 logPost(url,body)
 {
   url = this.postUrl+url;
@@ -50,7 +41,7 @@ getFormUrlEncoded(toConvert) {
   }
   return formBody.join('&');
 }
-// token = localStorage.getItem('token');
+
 logoutPost(url,token)
 {
   console.log(token);
@@ -63,8 +54,7 @@ logoutPost(url,token)
     }) 
   };
   return this.http.post(url,{},httpOptions);
-  // localStorage.removeItem("LoggedInUser");
-    // this.myRoute.navigate(["login"]);
+
 }
 addnotes(url,body,token)
 {
@@ -94,20 +84,6 @@ getnotes(url,token)
   return this.http.get(url,httpOptions);
 }
 
-// deletecard(url,body,token)
-// {
-//   url = this.postUrl+url;
-
-//   console.log(token);
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json',
-//       'Authorization': token
-//     }) 
-//   };
-//   return this.http.post(url,body,httpOptions);
-// }
-
 gettrash(url,token)
 {
   url = this.postUrl+url;
@@ -119,20 +95,6 @@ gettrash(url,token)
   };
   return this.http.get(url,httpOptions);
 }
-
-// changecolor(url,body,token)
-// {
-//   url = this.postUrl+url;
-
-//   console.log(token);
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json',
-//       'Authorization': token
-//     }) 
-//   };
-//   return this.http.post(url,body,httpOptions);
-// }
 
 postarchive(url,body,token)
 {
@@ -159,35 +121,6 @@ getarchive(url,token)
   };
   return this.http.get(url,httpOptions);
 }
-
-// addUpdatedNotes(url,body,token)
-// {
-//   console.log(token);
-  
-//   url = this.postUrl+url;
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//       'Authorization': token
-//     }) 
-//   };
-//   return this.http.post(url,this.getFormUrlEncoded(body),httpOptions);
-
-// }
-
-// labelAdd(url,body,token)
-// {
-//   url = this.postUrl+url;
-
-//   console.log(token);
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json',
-//       'Authorization': token
-//     }) 
-//   };
-//   return this.http.post(url,body,httpOptions);
-// }
 
 getLabels(url,token)
 {

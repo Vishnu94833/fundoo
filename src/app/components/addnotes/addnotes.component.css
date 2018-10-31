@@ -92,3 +92,7 @@ mat-card
 {
     width: 50%;
 }
+.pin
+{
+    float: right;
+}

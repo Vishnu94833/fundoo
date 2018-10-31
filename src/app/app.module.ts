@@ -50,6 +50,7 @@ import { CollectionnotesComponent } from './components/collectionnotes/collectio
 import { UpdatenotesComponent } from './components/updatenotes/updatenotes.component';
 import { LabelComponent } from './components/label/label.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -108,7 +109,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTooltipModule,
     FormsModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
     // FormControl  
 
   ],

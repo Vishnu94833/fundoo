@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject,Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 // import { EventEmitter } from 'events';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -13,13 +13,28 @@ export class MoreComponent implements OnInit {
 
   public open: boolean = true;
   token = localStorage.getItem('token');
+  id = localStorage.getItem('userId');
 
+  arr: any;
   constructor(private httpservice: HttpService) { }
-@Input() carddel;
-@Output() deleteevent=new EventEmitter();
+  @Input() carddel;
+  @Output() deleteevent = new EventEmitter();
 
 
   ngOnInit() {
+    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+      (data) => {
+        console.log("Get Request is successful ", data);
+        this.arr = data['data'].details;
+
+        console.log(data['data'].details)
+      },
+      error => {
+        console.log("Error", error);
+      });
+
+
+
   }
 
   function() {
@@ -29,25 +44,51 @@ export class MoreComponent implements OnInit {
     this.open = !this.open;
   }
   delete() {
-console.log("delete 0 is successful")
-    this.httpservice.postarchive('notes/trashNotes', 
-    {
-      "isDeleted": true,
-      "noteIdList":[this.carddel.id]
-    }, this.token).subscribe(
-      (data) => {
-        console.log("delete 1 is succesful")
-        console.log("POST Request is successful ", data);
-        this.deleteevent.emit({
 
-        })
-      },
-      error => {
-        
-        console.log("errorrrrrrrrrrrrrrrrrrrrrr")
-        console.log("Error", error);
-      }
-    )
+    this.httpservice.postarchive('notes/trashNotes',
+      {
+        "isDeleted": true,
+        "noteIdList": [this.carddel.id]
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.deleteevent.emit({
+          })
+        },
+        error => {
+          console.log("Error", error);
+        }
+      )
 
   }
+
+
+  addLabel(labelId) {
+
+    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/add', {
+      "noteId": this.carddel.id,
+      "lableId": labelId
+    }, this.token).subscribe(result => {
+      console.log(result);
+    }, error => {
+      console.log(this.arr.id)
+      console.log(error);
+    })
+  }
+
+  // removeLabel(labelId) {
+
+  //   this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/remove',
+  //     {
+  //       "noteId": this.arr.id,
+  //       "lableId": labelId
+  //     }, this.token).subscribe(result => {
+  //       console.log(result);
+  //     }, error => {
+
+  //       console.log(error);
+  //     })
+  // }
+
 }
+

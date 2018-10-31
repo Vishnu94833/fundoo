@@ -128,7 +128,7 @@ export class DashboardComponent {
         //   }
         // }
         console.log(data['data'].details)
-        console.log(this.temp)
+        // console.log(this.temp)
 
       },
       error => {
