@@ -19,6 +19,7 @@ export class CollectionnotesComponent implements OnInit {
   constructor(public dialog: MatDialog,private httpservice: HttpService) { }
   
   @Input() cardadded;
+  @Input() inputData;
   @Output() addnotes= new EventEmitter();
   token = localStorage.getItem('token');
 
@@ -32,7 +33,8 @@ this.addnotes.emit({})
 
   openDialog(x): void {
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
-      width: '500px',
+      // width: '500px',
+      // height: '150px',
       data: x
     });
 

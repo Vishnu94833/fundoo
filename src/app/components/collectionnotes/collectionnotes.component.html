@@ -1,4 +1,4 @@
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%; margin-left: 5%;'>
+<!-- <div class="expand" fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%; margin-left: 5%;'>
 
   <mat-card  (updateEmit)="new($event)"  style='margin-top: 30px;'  *ngFor='let x of cardadded' [style.backgroundColor]="x.color">
     <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
@@ -33,4 +33,41 @@
   </mat-card >
 
 
-</div>
+</div> -->
+
+
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 20px; margin-bottom: 20px;  ">
+    <div *ngFor='let x of cardadded | LockFilter:inputData' fxFlex="0 1 calc(30% - 32px)">
+      <mat-card  style="margin-top: 20px; width:auto;" [style.backgroundColor]="x.color">
+          <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" style="float : right;">
+        <mat-card-title (click)="openDialog(x)" >
+            <div [innerHtml]="x.title"></div>
+          </mat-card-title>
+          <mat-card-content  (click)="openDialog(x)">
+              <div [innerHtml]="x.description"></div>
+          </mat-card-content>
+        <div fxLayout="row">
+            <div *ngFor="let items of x.noteLabels">
+            <mat-chip-list selected>
+            <mat-chip>{{items.label}}
+              <mat-icon matChipRemove (click)="removeLabel(items.id, x.id)">cancel</mat-icon>
+            </mat-chip>
+            </mat-chip-list>
+          </div>
+          </div>
+        <div fxLayout="row">
+          
+            <app-remind style="padding: 5px;"></app-remind>
+            <app-collaborator style="padding: 5px;"></app-collaborator>
+            <app-changecolor style="padding: 5px;" [color]="x" (colorEvent)=new($event)></app-changecolor>
+            <app-addimage style="padding: 5px;"></app-addimage>
+            <app-archives style="padding: 5px;" [archive]="x" (archiveEvent)=new($event)></app-archives>
+            <app-more style="padding: 5px;" [carddel]="x" (deleteevent)=new($event)></app-more>
+        
+          </div>
+
+      </mat-card>
+    </div>
+
+
+  

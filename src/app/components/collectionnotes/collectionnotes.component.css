@@ -1,4 +1,4 @@
-.expand 
+/* .expand 
 {
 
   margin-top: 2%;
@@ -8,4 +8,13 @@
 .pin
 {
     float: right;
+} */
+
+.mat-dialog-container{
+    padding: 0px !important;
+}
+.cancel
+{
+    margin-bottom: 10px;
+    margin-left: 3px;
 }

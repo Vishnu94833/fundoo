@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { AuthService } from '../../services/auth.service';
+import { SearchsharingService } from '../../../app/services/searchsharing.service';
+
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class NotesComponent implements OnInit {
-  array: any = [];
-  token = localStorage.getItem('token');
-  message: boolean;
-  constructor(private httpservice: HttpService, private auth: AuthService) { }
+export class SearchComponent implements OnInit {
+
+  array:any;
+  inputData:any;
+token=localStorage.getItem('token');
+  constructor(public httpservice:HttpService,public data:SearchsharingService) { }
 
   ngOnInit() {
+    this.data.currentMessage.subscribe(message=>{
+      this.inputData= message;
+    })
     this.cardslist();
-
   }
+
 
   cardslist() {
     this.array = [];
@@ -38,15 +43,4 @@ export class NotesComponent implements OnInit {
 
   }
 
-  receive() {
-    console.log("event is here....")
-
-    if (event) {
-      this.cardslist();
-    }
-  }
-
 }
-
-
-

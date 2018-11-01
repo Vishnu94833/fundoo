@@ -59,9 +59,8 @@ export class AddnotesComponent implements OnInit {
   }
 
   onKeydown(event) {
-    if (event.key === "Enter" && event.key === "letters") {
+    if (event.key === "Enter" || event.key === "letters") {
       console.log(event);
     }
   }
-
 }

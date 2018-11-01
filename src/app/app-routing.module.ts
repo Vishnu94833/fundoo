@@ -13,6 +13,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { AuthGuard } from './auth.guard';
 import { LabelComponent } from './components/label/label.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,9 @@ const routes: Routes = [
     },
     {
       path:'trash',component:TrashComponent
+    },
+    {
+      path:'search',component:SearchComponent
     }
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full'}

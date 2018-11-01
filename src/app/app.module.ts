@@ -51,6 +51,8 @@ import { UpdatenotesComponent } from './components/updatenotes/updatenotes.compo
 import { LabelComponent } from './components/label/label.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
+import { LabelpipePipe } from './pipe/labelpipe.pipe';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -79,6 +81,8 @@ import {MatChipsModule} from '@angular/material/chips';
     CollectionnotesComponent,
     UpdatenotesComponent,
     LabelComponent,
+    LabelpipePipe,
+    SearchComponent,
     
     // Notes1Component
   ],

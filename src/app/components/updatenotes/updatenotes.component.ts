@@ -16,7 +16,7 @@ export interface DialogData {
 export class UpdatenotesComponent implements OnInit {
 
   token=localStorage.getItem('token');
-
+  
 
   constructor(private httpservice: HttpService,
     public dialogRef: MatDialogRef<UpdatenotesComponent>,
@@ -43,6 +43,19 @@ export class UpdatenotesComponent implements OnInit {
           console.log("Error", error);
         })
       this.dialogRef.close();
+    }
+    removeLabel(labelId) {
+
+      this.httpservice.postarchive('notes/' +this.data.id+ '/addLabelToNotes/' + labelId + '/remove',
+        {
+          "noteId": this.data.id,
+          "lableId": labelId
+        }, this.token).subscribe(result => {
+          console.log(result);
+        }, error => {
+    
+          console.log(error);
+        })
     }
 
     

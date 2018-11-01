@@ -14,11 +14,13 @@ export class MoreComponent implements OnInit {
   public open: boolean = true;
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
-
+search:any;
   arr: any;
   constructor(private httpservice: HttpService) { }
   @Input() carddel;
   @Output() deleteevent = new EventEmitter();
+  @Output() labelList = new EventEmitter();
+
 
 
   ngOnInit() {
@@ -52,6 +54,7 @@ export class MoreComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
+          
           this.deleteevent.emit({
           })
         },
@@ -63,7 +66,7 @@ export class MoreComponent implements OnInit {
   }
 
 
-  addLabel(labelId) {
+  addChips(labelId) {
 
     this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/add', {
       "noteId": this.carddel.id,
@@ -76,19 +79,19 @@ export class MoreComponent implements OnInit {
     })
   }
 
-  // removeLabel(labelId) {
+  removeLabel(labelId) {
 
-  //   this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/remove',
-  //     {
-  //       "noteId": this.arr.id,
-  //       "lableId": labelId
-  //     }, this.token).subscribe(result => {
-  //       console.log(result);
-  //     }, error => {
+    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/remove',
+      {
+        "noteId": this.arr.id,
+        "lableId": labelId
+      }, this.token).subscribe(result => {
+        console.log(result);
+      }, error => {
 
-  //       console.log(error);
-  //     })
-  // }
+        console.log(error);
+      })
+  }
 
 }
 

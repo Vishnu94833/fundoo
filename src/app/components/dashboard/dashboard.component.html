@@ -6,7 +6,7 @@
   <div class="right">
     <form id="search">
 
-      <input type="search" [class.has-value]="searchValue" placeholder="Search" style="opacity:0.3;width:600px;height: 45px;border-radius: 0px;margin-left: 20px">
+      <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" (click)="navigateSearch()" (keydown)="down()" placeholder="Search" style="opacity:0.3;width:600px;height: 45px;border-radius: 0px;margin-left: 20px">
       <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
 
     </form>

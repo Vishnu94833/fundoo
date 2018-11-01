@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { LabelComponent } from '../label/label.component';
+import { SearchsharingService } from '../../services/searchsharing.service';
 
 
 
@@ -21,32 +22,21 @@ export class DashboardComponent {
       map(result => result.matches)
     );
 
-  constructor(private router: Router, private httpservice: HttpService, private myRoute: Router, private breakpointObserver: BreakpointObserver, public dialog: MatDialog) { }
+  constructor(private router: Router, private httpservice: HttpService, private myRoute: Router,
+    private breakpointObserver: BreakpointObserver, public dialog: MatDialog, public data: SearchsharingService) { }
 
 
   hoverItem: string;
   buttonclick: any = false;
-  // openDialog(): void {
-  // const dialogRef = this.dialog.open(, {
-  //   width: '250px',
-  //   // data: {name: this.name, animal: this.animal}
-  // });
 
-  // dialogRef.afterClosed().subscribe(result => {
-  //   console.log('The dialog was closed');
-  // this.buttonclick = true;
-  // });
-  // }
 
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
-  // label = localStorage.getItem('label');
   logout() {
     console.log(this.token);
 
-    // localStorage.removeItem("LoggedInUser");
-    // this.myRoute.navigate(["login"]);
+
     this.httpservice.logoutPost('user/logout', this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
@@ -66,7 +56,7 @@ export class DashboardComponent {
   email: any;
   label: any;
   temp: any;
-
+  inputData: any;
 
 
 
@@ -79,7 +69,7 @@ export class DashboardComponent {
   }
 
 
-  
+
   openDialog(): void {
 
     const dialogRef = this.dialog.open(LabelComponent, {
@@ -118,17 +108,10 @@ export class DashboardComponent {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("Get Request is successful ", data);
-        // this.temp = [];
+
         this.temp = data['data'].details;
-        // for (let index = 0; index < data['data'].details.length; index++) {
-        //   if (data['data'].details[index].isDeleted == false) {
 
-
-        //     this.temp.push(data['data'].details[index])
-        //   }
-        // }
         console.log(data['data'].details)
-        // console.log(this.temp)
 
       },
       error => {
@@ -137,6 +120,16 @@ export class DashboardComponent {
 
 
   }
+
+  navigateSearch() {
+    this.router.navigate(['homepage/search']);
+  }
+
+  down() {
+    this.data.changeMessage(this.inputData);
+
+  }
+
 }
 
 

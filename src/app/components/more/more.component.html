@@ -7,8 +7,15 @@
 </mat-menu>
 
 <mat-menu #labelMenu="matMenu">
-  <div *ngFor="let labels of arr " fxLayoutAlign="space-between center">
-    <mat-checkbox (click)="$event.stopPropagation(); addLabel(labels.id)">{{labels.label}}
+  <div>
+    <input type="text" placeholder="search" [(ngModel)]="search" (click)="$event.stopPropagation()" >
+  </div>
+  <div *ngFor="let labels of arr | LockFilter: search " fxLayoutAlign="space-between center">
+    <mat-checkbox (click)="$event.stopPropagation(); addChips(labels.id)">{{labels.label}}
     </mat-checkbox>
   </div>
 </mat-menu>
+
+
+
+
