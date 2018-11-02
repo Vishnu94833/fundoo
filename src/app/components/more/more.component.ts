@@ -62,10 +62,12 @@ export class MoreComponent implements OnInit {
 
 
   addChips(labelId) {
+console.log(labelId.label)
+    this.labelList.emit(labelId);
 
-    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/add', {
+    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId.id + '/add', {
       "noteId": this.carddel.id,
-      "lableId": labelId
+      "lableId": labelId.id
     }, this.token).subscribe(result => {
       console.log(result);
       this.deleteevent.emit({});

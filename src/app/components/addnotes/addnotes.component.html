@@ -23,11 +23,20 @@
       <div contenteditable="true" id="description" class="content" data-text="Take a note..."></div>
     </div>
 
+    <div fxLayout="row">
+      <div *ngFor="let items of name">
+        <mat-chip-list selected>
+          <mat-chip>{{items.label}}
+            <mat-icon matChipRemove >cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
     <div *ngIf="open1 == 1">
       <hr>
       <div fxFlexLayout="row" fxLayoutAlign="center center">
       <mat-icon>add</mat-icon>
-      <!-- <span contenteditable="true" id="description" class="content" data-text="list"></span> -->
       <input (keydown)="onKeydown($event)" id="description" class="content" placeholder="list">
     </div>
       <hr>
@@ -40,7 +49,7 @@
       <app-changecolor (colorEmit)=colour($event)></app-changecolor>
       <app-addimage></app-addimage>
       <app-archives></app-archives>
-      <app-more></app-more>
+      <app-more (labelList)=labelList($event)></app-more>
 
       <div (click)="close();exit()" class="space1"> <button mat-button>close</button></div>
     </div>
