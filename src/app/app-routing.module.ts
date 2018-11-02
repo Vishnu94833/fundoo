@@ -14,6 +14,7 @@ import { TrashComponent } from './components/trash/trash.component';
 import { AuthGuard } from './auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { SearchComponent } from './components/search/search.component';
+import { LabelslistComponent } from './components/labelslist/labelslist.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
     },
     {
       path:'search',component:SearchComponent
+    },
+
+    {
+      path:'labelslist',component:LabelslistComponent
     }
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full'}

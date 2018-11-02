@@ -14,7 +14,7 @@ export class MoreComponent implements OnInit {
   public open: boolean = true;
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
-search:any;
+  search: any;
   arr: any;
   constructor(private httpservice: HttpService) { }
   @Input() carddel;
@@ -26,17 +26,12 @@ search:any;
   ngOnInit() {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
-        console.log("Get Request is successful ", data);
+        // console.log("Get Request is successful ", data);
         this.arr = data['data'].details;
-
-        console.log(data['data'].details)
       },
       error => {
         console.log("Error", error);
       });
-
-
-
   }
 
   function() {
@@ -54,7 +49,7 @@ search:any;
       }, this.token).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
-          
+
           this.deleteevent.emit({
           })
         },
@@ -73,6 +68,7 @@ search:any;
       "lableId": labelId
     }, this.token).subscribe(result => {
       console.log(result);
+      this.deleteevent.emit({});
     }, error => {
       console.log(this.arr.id)
       console.log(error);
@@ -87,6 +83,7 @@ search:any;
         "lableId": labelId
       }, this.token).subscribe(result => {
         console.log(result);
+        this.deleteevent.emit({});
       }, error => {
 
         console.log(error);

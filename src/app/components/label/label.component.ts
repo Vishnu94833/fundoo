@@ -48,7 +48,7 @@ export class LabelComponent implements OnInit {
   //         console.log("POST Request is successful ", data);
   //         localStorage.setItem("label", data['label']);
   //         localStorage.getItem('label')
-         
+
   //       },
   //       error => {
   //         console.log("Error", error);
@@ -68,6 +68,8 @@ export class LabelComponent implements OnInit {
       }).subscribe(
         (data) => {
           console.log("DELETE Request is successful ", data);
+          this.labelList.emit({});
+          console.log(this.labelList)
 
         },
         error => {

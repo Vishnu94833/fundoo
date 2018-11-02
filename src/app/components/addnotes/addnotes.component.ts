@@ -17,6 +17,7 @@ export class AddnotesComponent implements OnInit {
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
+    
   }
 
   function() {

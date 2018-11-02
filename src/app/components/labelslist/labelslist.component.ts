@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: 'app-labelslist',
+  templateUrl: './labelslist.component.html',
+  styleUrls: ['./labelslist.component.css']
 })
-export class NotesComponent implements OnInit {
-  array: any = [];
-  token = localStorage.getItem('token');
-  message: boolean;
-  constructor(private httpservice: HttpService, private auth: AuthService) { }
+export class LabelslistComponent implements OnInit {
+  
+  array: any[];
+
+  constructor(private httpservice:HttpService) { }
 
   ngOnInit() {
     this.cardslist();
-
   }
+
 
   cardslist() {
     
@@ -38,16 +37,8 @@ export class NotesComponent implements OnInit {
 
 
   }
-
-  receive() {
-    console.log("event is here....")
-
-    if (event) {
-      this.cardslist();
-    }
+  token(arg0: string, token: any): any {
+    throw new Error("Method not implemented.");
   }
 
 }
-
-
-

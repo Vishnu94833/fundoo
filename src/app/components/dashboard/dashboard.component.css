@@ -1,20 +1,29 @@
 .sidenav-container {
-  height: 90%;
+  height: 100%;
 }
 
 .sidenav {
-  height: 600px;
-  scroll-behavior: auto;
+  /* height: 600px; */
+  /* scroll-behavior: auto; */
+  overflow-y: auto;
   width: 200px;
-  margin: 64px 0px 0px 0px;
+  /* margin: 64px 0px 0px 0px;
+   */
+   margin-top: 65px;
+   position: fixed;
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
+  position: fixed;
   top: 0;
 }
 .tool{
-  background-color:  rgb(255, 202, 2)
+  background-color:  rgb(255, 202, 2);
+  position: fixed;
+  z-index:2;
+  display: flex;
+
+  
 }
 .exm
 {

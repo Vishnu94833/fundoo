@@ -53,6 +53,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import { LabelpipePipe } from './pipe/labelpipe.pipe';
 import { SearchComponent } from './components/search/search.component';
+import { LabelslistComponent } from './components/labelslist/labelslist.component';
 
 
 
@@ -83,6 +84,7 @@ import { SearchComponent } from './components/search/search.component';
     LabelComponent,
     LabelpipePipe,
     SearchComponent,
+    LabelslistComponent,
     
     // Notes1Component
   ],

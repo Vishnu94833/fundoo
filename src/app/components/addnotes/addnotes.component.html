@@ -1,6 +1,6 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top: 40px;">
+<div fxLayout='column' fxLayoutAlign="center center" style="margin-top: 100px;">
 
-  <mat-card *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
+  <mat-card *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note"  (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" matTooltipPosition="above">list</mat-icon>

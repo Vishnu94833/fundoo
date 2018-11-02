@@ -54,8 +54,8 @@ logoutPost(url,token)
     }) 
   };
   return this.http.post(url,{},httpOptions);
-
 }
+
 addnotes(url,body,token)
 {
   console.log(token);
@@ -138,6 +138,21 @@ labelDelete(url,body)
 {
   url = this.postUrl+url;
   return this.http.delete(url,body);
+}
+
+
+List(url,token)
+{
+  console.log(token);
+  
+  url = this.postUrl+url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }) 
+  };
+  return this.http.post(url,{},httpOptions);
 }
 
 }

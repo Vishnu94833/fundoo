@@ -33,10 +33,9 @@ export class DashboardComponent {
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
+
   logout() {
     console.log(this.token);
-
-
     this.httpservice.logoutPost('user/logout', this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
@@ -48,9 +47,8 @@ export class DashboardComponent {
       }
 
     );
-
-
   }
+
   firstname: any;
   lastname: any;
   email: any;
@@ -78,8 +76,6 @@ export class DashboardComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
-
-
       this.httpservice.postarchive('noteLabels',
         {
           "label": result,
@@ -91,34 +87,25 @@ export class DashboardComponent {
             localStorage.setItem("label", data['label']);
             localStorage.getItem('label')
             this.labelList();
-
           },
           error => {
             console.log("Error", error);
           })
-
-
-
     });
   }
 
   labelList() {
-
-
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
+        // let temp1=[];
         console.log("Get Request is successful ", data);
-
         this.temp = data['data'].details;
-
+        // temp1= this.temp
         console.log(data['data'].details)
-
       },
       error => {
         console.log("Error", error);
       });
-
-
   }
 
   navigateSearch() {
@@ -128,6 +115,22 @@ export class DashboardComponent {
   down() {
     this.data.changeMessage(this.inputData);
 
+  }
+
+  labelsPage() {
+    this.router.navigate(['homepage/labelslist']);
+  }
+
+  listLabels() {
+    this.httpservice.List('notes/getNotesListByLabel/{labelName}',
+      this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.labelList();
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
 
 }

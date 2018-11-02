@@ -24,6 +24,7 @@ export class CollectionnotesComponent implements OnInit {
   token = localStorage.getItem('token');
 
   ngOnInit() {
+    
      
   }
   new(event)
@@ -54,6 +55,7 @@ removeLabel(labelId, noteId) {
       "lableId": labelId
     }, this.token).subscribe(result => {
       console.log(result);
+      this.addnotes.emit({})
     }, error => {
 
       console.log(error);
