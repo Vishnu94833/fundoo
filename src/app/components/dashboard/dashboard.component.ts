@@ -117,21 +117,22 @@ export class DashboardComponent {
 
   }
 
-  labelsPage() {
-    this.router.navigate(['homepage/labelslist']);
+  labelsPage(labelName) {
+    var labelname=labelName;
+    this.router.navigate(['homepage/labelslist/'+labelname]);
   }
 
-  listLabels() {
-    this.httpservice.List('notes/getNotesListByLabel/{labelName}',
-      this.token).subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
-          this.labelList();
-        },
-        error => {
-          console.log("Error", error);
-        })
-  }
+  // listLabels() {
+  //   this.httpservice.List('notes/getNotesListByLabel/'+,
+  //     this.token).subscribe(
+  //       (data) => {
+  //         console.log("POST Request is successful ", data);
+  //         this.labelList();
+  //       },
+  //       error => {
+  //         console.log("Error", error);
+  //       })
+  // }
 
 }
 

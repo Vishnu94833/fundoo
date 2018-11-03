@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { Params,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-labelslist',
@@ -7,38 +8,36 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./labelslist.component.css']
 })
 export class LabelslistComponent implements OnInit {
-  
+  params:any;
   array: any[];
-
-  constructor(private httpservice:HttpService) { }
+  labelName:any;
+token=localStorage.getItem('token');
+  constructor(private httpservice:HttpService,private router:ActivatedRoute) { }
 
   ngOnInit() {
-    this.cardslist();
-  }
+    this.router.params.subscribe(
+      (params:Params)=>{
+        this.labelName=params['labelName']
+        this.listLabels(this.labelName);
 
+      }
 
-  cardslist() {
+    )
     
-    this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
-      (data) => {
-        this.array = [];
-        console.log("GET Request is successful ", data);
-        for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
-            this.array.push(data['data']['data'][i]);
-          }
-        }
-        console.log("array", this.array);
-
-      },
-      error => {
-        console.log("Error", error);
-      });
-
-
   }
-  token(arg0: string, token: any): any {
-    throw new Error("Method not implemented.");
+
+  listLabels(labelName) {
+    this.httpservice.List('notes/getNotesListByLabel/'+labelName,{},this.token)
+    .subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.array=data['data'].data;
+          // this.labelList();
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
+
 
 }

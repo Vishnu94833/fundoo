@@ -14,7 +14,7 @@
   <div fxFlex fxLayoutAlign="end">
     <button matTooltip="List View" mat-icon-button><mat-icon>view_stream</mat-icon></button>
     <!-- <button matTooltip="Notifications" mat-icon-button><mat-icon>notifications_none</mat-icon></button> -->
-    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">V</button>
+    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">{{firstname | slice:0:1}}</button>
     <div>
 
       <mat-menu class="sig1" #menu="matMenu" [overlapTrigger]="false">
@@ -26,7 +26,7 @@
           </div>
 
           <div>
-            <button class="n" mat-mini-fab [matMenuTriggerFor]="menu" style="margin-right: 20px; background-color: darkgreen; color: white;">V</button>
+            <button class="n" mat-mini-fab [matMenuTriggerFor]="menu" style="margin-right: 20px; background-color: darkgreen; color: white;">{{firstname | slice:0:1}}</button>
           </div>
 
 
@@ -63,7 +63,7 @@
       <div (click)="labelsPage()" *ngFor=" let labels of temp ">
         <a  mat-list-item>
         <mat-icon class="ma1">label_outline</mat-icon>
-        <span (click)="listLabels()" class="spac">{{labels.label}}</span>
+        <span class="spac">{{labels.label}}</span>
         <!-- <mat-icon>create</mat-icon> -->
       </a>
     </div>

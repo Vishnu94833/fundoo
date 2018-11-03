@@ -44,6 +44,7 @@ export class AddnotesComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
+          this.name=null;
           this.message.emit({
 
           });
@@ -52,6 +53,7 @@ export class AddnotesComponent implements OnInit {
         },
         error => {
           console.log("Error", error);
+          this.name=null;
           this.color = "#fafafa"
         })
   }
