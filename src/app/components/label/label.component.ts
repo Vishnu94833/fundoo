@@ -18,12 +18,14 @@ export class LabelComponent implements OnInit {
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  @ViewChild('myLabel') myLabel: ElementRef;
+  @ViewChild('Label') Label: ElementRef;
   @ViewChild('Label1') Label1: ElementRef;
+  @ViewChild('myLabel') myLabel: ElementRef;
+
 
   @Output() labelList = new EventEmitter();
   ngOnInit() {
-
+this.labelsList();
   }
   array: any = {};
   temp: any = {};
@@ -35,25 +37,38 @@ export class LabelComponent implements OnInit {
   temp2: any = {};
   show;
   res: string;
+  // value1:[];
   id = localStorage.getItem('userId');
-  // addLabel() {
-  //   console.log(this.id);
-  //   this.httpservice.postarchive('noteLabels',
-  //     {
-  //       "label": document.getElementById('Label').innerHTML,
-  //       "isDeleted": false,
-  //       "userId": this.id
-  //     }, this.token).subscribe(
-  //       (data) => {
-  //         console.log("POST Request is successful ", data);
-  //         localStorage.setItem("label", data['label']);
-  //         localStorage.getItem('label')
+  addLabel() {
+    console.log(this.id);
 
-  //       },
-  //       error => {
-  //         console.log("Error", error);
-  //       })
-  // }
+    var Label = this.Label.nativeElement.innerHTML;
+    console.log(Label);
+    for(var i =0; i<this.temp.length; i++)
+   {
+    if(this.temp[i].label == Label)
+    {
+      console.log(this.temp[i]);
+      alert('duplicate data');
+      return false;
+    }
+  }
+    this.httpservice.postarchive('noteLabels',
+      {  
+        "label": document.getElementById('Label').innerHTML,
+        "isDeleted": false,
+        "userId": this.id
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          localStorage.setItem("label", data['label']);
+          localStorage.getItem('label')
+
+        },
+        error => {
+          console.log("Error", error);
+        })
+  }
 
   list(event) {
     this.labelList.emit({})
@@ -103,6 +118,22 @@ export class LabelComponent implements OnInit {
   edit(id) {
     this.show = id;
   }
+
+
+  labelsList() {
+    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+      (data) => {
+        // let temp1=[];
+        console.log("Get Request is successful ", data);
+        this.temp = data['data'].details;
+        // temp1= this.temp
+        console.log(data['data'].details)
+      },
+      error => {
+        console.log("Error", error);
+      });
+  }
+
 
 
 }

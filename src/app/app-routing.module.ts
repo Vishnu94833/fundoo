@@ -48,7 +48,7 @@ const routes: Routes = [
     },
 
     {
-      path:'labelslist',component:LabelslistComponent
+      path:'labelslist/:labelName',component:LabelslistComponent
     }
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full'}

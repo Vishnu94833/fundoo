@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
- 
+
 })
 export class SignupComponent implements OnInit {
   firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
   set1 = true;
   hide = true;
   hide1 = true;
-  cards=[];
+  cards = [];
 
   ngOnInit() {
     this.records = this.httpservice.getConfig().subscribe(data => {
@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
       }
-     var value = data["data"].data.name;
+      var value = data["data"].data.name;
       console.log("cards are", this.cards);
     })
 
@@ -65,31 +65,29 @@ export class SignupComponent implements OnInit {
 
   model: any = {};
   service: any;
-check = false;
+  check = false;
   sendData() {
-    if(!this.model.firstname.invalid && !this.model.lastname.invalid)
-    {
-    if(!this.model.password ==this.model.confirmPassword){
-      console.log("give same password to confirm");
-      this.check=true;
-      this.snackBar.open("Password doesnot match", "signup failed", {
+    if (!this.model.firstname.invalid && !this.model.lastname.invalid) {
+      if (!this.model.password == this.model.confirmPassword) {
+        console.log("give same password to confirm");
+        this.check = true;
+        this.snackBar.open("Password doesnot match", "signup failed", {
+          duration: 2000
+        })
+        return;
+      }
+      else {
+        this.snackBar.open("Registration Successfull", "signup success", {
+          duration: 2000
+        })
+      }
+    }
+    else {
+      this.snackBar.open("Firstname or Lastname invalid", "signup failed", {
         duration: 2000
       })
-         return;
+      return;
     }
-    else{
-      this.snackBar.open("Registration Successfull", "signup success", {
-        duration: 2000
-      })
-    }
-  }
-  else 
-  {
-    this.snackBar.open("Firstname or Lastname invalid", "signup failed", {
-      duration: 2000
-    })
-       return;
-  }
 
     console.log(this.model.firstname);
     console.log(this.model.lastname);
@@ -118,7 +116,7 @@ check = false;
 
       );
 
-      
+
 
 
   }

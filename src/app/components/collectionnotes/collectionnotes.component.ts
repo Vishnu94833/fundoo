@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
 import { HttpService } from '../../services/http.service';
+import { SearchsharingService } from '../../services/searchsharing.service';
 
 
 @Component({
@@ -16,16 +17,18 @@ export class CollectionnotesComponent implements OnInit {
   
 
 
-  constructor(public dialog: MatDialog,private httpservice: HttpService) { }
+  constructor(public dialog: MatDialog,private httpservice: HttpService, private data : SearchsharingService) { }
   
   @Input() cardadded;
   @Input() inputData;
+  @Input() notesOption;
   @Output() addnotes= new EventEmitter();
+  toggle = false;
   token = localStorage.getItem('token');
 
   ngOnInit() {
     
-     
+     this.getGrid();
   }
   new(event)
   {
@@ -61,5 +64,11 @@ removeLabel(labelId, noteId) {
       console.log(error);
     })
 }
-
+getGrid()
+{
+  this.data.currentGridEvent.subscribe(message =>
+  {
+    this.toggle = message;
+  })
+}
 }

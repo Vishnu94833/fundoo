@@ -99,8 +99,6 @@ gettrash(url,token)
 postarchive(url,body,token)
 {
   url = this.postUrl+url;
-
-  console.log(token);
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

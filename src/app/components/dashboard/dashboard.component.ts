@@ -75,22 +75,23 @@ export class DashboardComponent {
       data: { array: this.temp }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      this.httpservice.postarchive('noteLabels',
-        {
-          "label": result,
-          "isDeleted": false,
-          "userId": this.userId
-        }, this.token).subscribe(
-          (data) => {
-            console.log("POST Request is successful ", data);
-            localStorage.setItem("label", data['label']);
-            localStorage.getItem('label')
+      // console.log(result)
+
+      // this.httpservice.postarchive('noteLabels',
+      //   {
+      //     "label": result,
+      //     "isDeleted": false,
+      //     "userId": this.userId
+      //   }, this.token).subscribe(
+      //     (data) => {
+      //       console.log("POST Request is successful ", data);
+      //       localStorage.setItem("label", data['label']);
+      //       localStorage.getItem('label')
             this.labelList();
-          },
-          error => {
-            console.log("Error", error);
-          })
+          // },
+          // error => {
+          //   console.log("Error", error);
+          // })
     });
   }
 
@@ -118,7 +119,8 @@ export class DashboardComponent {
   }
 
   labelsPage(labelName) {
-    var labelname=labelName;
+    var labelname=labelName.label;
+    console.log(labelname)
     this.router.navigate(['homepage/labelslist/'+labelname]);
   }
 
@@ -133,7 +135,17 @@ export class DashboardComponent {
   //         console.log("Error", error);
   //       })
   // }
-
+  list = 0;
+  gridView()
+  {
+    this.data.changeGridEvent(true);
+    this.list = 1;
+  }
+  grid()
+  {
+    this.data.changeGridEvent(false);
+    this.list = 0;
+  }
 }
 
 

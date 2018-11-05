@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { TrashComponent } from '../trash/trash.component';
+import { CollectionnotesComponent } from '../collectionnotes/collectionnotes.component';
 // import { EventEmitter } from 'events';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -62,7 +64,7 @@ export class MoreComponent implements OnInit {
 
 
   addChips(labelId) {
-console.log(labelId.label)
+    console.log(labelId.label)
     this.labelList.emit(labelId);
 
     this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId.id + '/add', {

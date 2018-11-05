@@ -14,12 +14,12 @@ export class AddnotesComponent implements OnInit {
   open1 = 0;
   checkArray = [];
   color: any;
-  name=[];
-  rollId=[];
+  name = [];
+  rollId = [];
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
-    
+
   }
 
   function() {
@@ -28,10 +28,10 @@ export class AddnotesComponent implements OnInit {
   functionCheckbox() {
     this.open1 = 1;
   }
-  close() {
-    this.open = !this.open;
-    this.open1 = 0;
-  }
+  // close() {
+  //   this.open = !this.open;
+  //   this.open1 = 0;
+  // }
   exit() {
     this.httpservice.addnotes('notes/addNotes',
       {
@@ -44,17 +44,21 @@ export class AddnotesComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
-          this.name=null;
+          this.name = null;
           this.message.emit({
 
           });
+          this.open = !this.open;
           this.color = "#fafafa";
+          this.open1 = 0;
           console.log();
         },
         error => {
           console.log("Error", error);
-          this.name=null;
+          this.name = null;
+          this.open = !this.open;
           this.color = "#fafafa"
+          this.open1 = 0;
         })
   }
 
@@ -68,19 +72,17 @@ export class AddnotesComponent implements OnInit {
       console.log(event);
     }
   }
-  labelList(event)
-  {
-    if(this.name.indexOf(event)<0)
-    {
-this.rollId.push(event.id);
-this.name.push(event);
-console.log(this.rollId);
-console.log(this.name);
+  labelList(event) {
+    if (this.name.indexOf(event) < 0) {
+      this.rollId.push(event.id);
+      this.name.push(event);
+      console.log(this.rollId);
+      console.log(this.name);
     }
 
-    else{
-      this.rollId.splice(this.rollId.indexOf(event),1)
-      this.name.splice(this.name.indexOf(event),1)
+    else {
+      this.rollId.splice(this.rollId.indexOf(event), 1)
+      this.name.splice(this.name.indexOf(event), 1)
 
     }
   }

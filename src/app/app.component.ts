@@ -11,7 +11,6 @@ export class AppComponent {
 
   constructor()
   {
-    // this.coins = httpservice.getMyItems();
   }
   ngOnInit() {
     

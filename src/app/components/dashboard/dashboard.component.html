@@ -12,8 +12,8 @@
     </form>
   </div>
   <div fxFlex fxLayoutAlign="end">
-    <button matTooltip="List View" mat-icon-button><mat-icon>view_stream</mat-icon></button>
-    <!-- <button matTooltip="Notifications" mat-icon-button><mat-icon>notifications_none</mat-icon></button> -->
+    <button matTooltip="Grid View" (click) = "gridView()" *ngIf = "list == 0" mat-icon-button><mat-icon>view_stream</mat-icon></button>
+    <button matTooltip="List View" (click) = "grid()" *ngIf = "list == 1" mat-icon-button><mat-icon>view_module</mat-icon></button>
     <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">{{firstname | slice:0:1}}</button>
     <div>
 
@@ -60,11 +60,10 @@
        
        <h5  class="label"> Labels</h5>
       </div>
-      <div (click)="labelsPage()" *ngFor=" let labels of temp ">
+      <div (click)="labelsPage(labels)" *ngFor=" let labels of temp ">
         <a  mat-list-item>
         <mat-icon class="ma1">label_outline</mat-icon>
         <span class="spac">{{labels.label}}</span>
-        <!-- <mat-icon>create</mat-icon> -->
       </a>
     </div>
       <div fxLayoutAlign="center center"><a matTooltip="Create New Label" (click)="openDialog()"
