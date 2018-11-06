@@ -17,8 +17,8 @@ export class CollectionnotesComponent implements OnInit {
 
 
 
-  constructor(public dialog: MatDialog, private httpservice: HttpService, 
-                private data: SearchsharingService) { }
+  constructor(public dialog: MatDialog, private httpservice: HttpService,
+    private data: SearchsharingService) { }
 
   @Input() cardadded;
   @Input() inputData;
@@ -30,6 +30,7 @@ export class CollectionnotesComponent implements OnInit {
   ngOnInit() {
 
     this.getGrid();
+    this.reminderList();
   }
   new(event) {
     this.addnotes.emit({})
@@ -37,8 +38,6 @@ export class CollectionnotesComponent implements OnInit {
 
   openDialog(x): void {
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
-      // width: '500px',
-      // height: '150px',
       data: x
     });
 
@@ -53,21 +52,32 @@ export class CollectionnotesComponent implements OnInit {
   removeLabel(labelId, noteId) {
 
     this.httpservice.
-    postarchive('notes/' + noteId + '/addLabelToNotes/' + labelId + '/remove',
-      {
-        "noteId": noteId,
-        "lableId": labelId
-      }, this.token).subscribe(result => {
-        console.log(result);
-        this.addnotes.emit({})
-      }, error => {
+      postarchive('notes/' + noteId + '/addLabelToNotes/' + labelId + '/remove',
+        {
+          "noteId": noteId,
+          "lableId": labelId
+        }, this.token).subscribe(result => {
+          // console.log(result);
+          this.addnotes.emit({})
+        }, error => {
 
-        console.log(error);
-      })
+          // console.log(error);
+        })
   }
   getGrid() {
     this.data.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
+  }
+
+  reminderList() {
+    
+    this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
+      (data) => { 
+        console.log("GET Request is successful ", data);
+      },
+      error => {
+        console.log("Error", error);
+      });
   }
 }

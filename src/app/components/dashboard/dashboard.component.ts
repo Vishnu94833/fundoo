@@ -116,6 +116,35 @@ export class DashboardComponent {
     this.data.changeGridEvent(false);
     this.list = 0;
   }
+  ProfilePath:any;
+  selectedFile = null;
+ onFileSelected(event){
+this.selectedFile=event.path[0].files[0];
+console.log(event.target.value);
+this.ProfilePath=event.target.value;
+console.log(this.selectedFile.name);
+ }
+ image={};
+ public image2=localStorage.getItem('imageUrl');
+ img="http://34.213.106.173/"+this.image2;
+ onUpload(){
+  var token=localStorage.getItem('token');
+  
+  const uploadData = new FormData();
+  uploadData.append('file', this.selectedFile, this.selectedFile.name);
+   this.httpservice.httpAddImage('user/uploadProfileImage',uploadData,token).subscribe(res=>{
+     console.log("url: ", res['status'].imageUrl )
+     
+     
+    
+     console.log(this.ProfilePath);
+   },error=>{
+     console.log(error);
+     
+   })
+
+ }
+
 }
 
 

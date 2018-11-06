@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('lastname', data['lastName']);
           localStorage.setItem('email', data['email']);
           localStorage.setItem('userId', data['userId']);
+          localStorage.setItem('imageUrl',data['imageUrl']);
           this.router.navigateByUrl('/homepage');
         },
         error => {

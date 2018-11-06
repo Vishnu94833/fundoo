@@ -21,7 +21,7 @@ export class RemindComponent implements OnInit {
     this.httpservice.postarchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDay(), date.getDate())
+        "reminder": new Date(date.getFullYear(), date.getMonth(),date.getDate()+1)
       }, this.token).subscribe(
         (data) => {
 
