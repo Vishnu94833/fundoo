@@ -5,7 +5,8 @@
         </div>
     </h1>
     <div mat-dialog-content>
-        <div class="content" contenteditable="true" id="description1" class="content" data-text="Take a note...">
+        <div class="content" contenteditable="true" id="description1" class="content" 
+            data-text="Take a note...">
 
             <div [innerHtml]="data.description"></div>
 
@@ -18,7 +19,9 @@
         <div *ngFor="let items of data.noteLabels">
             <mat-chip-list selected>
                 <mat-chip>{{items.label}}
-                    <mat-icon matChipRemove (click)="removeLabel(items.id)">cancel</mat-icon>
+                    <mat-icon matChipRemove (click)="removeLabel(items.id)">
+                        cancel
+                    </mat-icon>
                 </mat-chip>
             </mat-chip-list>
         </div>

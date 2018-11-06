@@ -17,13 +17,11 @@ export class RemindComponent implements OnInit {
 
 
   remindMe() {
-    this.httpservice.postarchive('notes/' + this.reminder.id + '/addUpdateReminderNotes',
+    let date = new Date();
+    this.httpservice.postarchive('notes/addUpdateReminderNotes',
       {
-        "title": "string",
-        "description": "string",
-        "reminder": [
-          "2018-11-06T04:47:17.235Z"
-        ]
+        "noteIdList": [this.reminder.id],
+        "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDay(), date.getDate())
       }, this.token).subscribe(
         (data) => {
 

@@ -1,7 +1,7 @@
-<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 80px; margin-bottom: 20px;  ">
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="layout">
   <div *ngFor='let x of cardadded | LockFilter:inputData' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
-      <mat-card style="margin-top: 20px; width:auto;" [style.backgroundColor]="x.color">
+      <mat-card class="cardsize" [style.backgroundColor]="x.color">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <mat-card-title (click)="openDialog(x)">
           <div [innerHtml]="x.title"></div>
@@ -13,19 +13,23 @@
           <div *ngFor="let items of x.noteLabels">
             <mat-chip-list selected>
               <mat-chip>{{items.label}}
-                <mat-icon matChipRemove (click)="removeLabel(items.id, x.id)">cancel</mat-icon>
+                <mat-icon matChipRemove (click)="removeLabel(items.id, x.id)">
+                    cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
           </div>
         </div>
         <div fxLayout="row">
 
-          <app-remind style="padding: 5px;" [reminder]="x"></app-remind>
-          <app-collaborator style="padding: 5px;"></app-collaborator>
-          <app-changecolor style="padding: 5px;" [color]="x" (colorEvent)=new($event)></app-changecolor>
-          <app-addimage style="padding: 5px;"></app-addimage>
-          <app-archives style="padding: 5px;" [archive]="x" (archiveEvent)=new($event)></app-archives>
-          <app-more style="padding: 5px;" [carddel]="x" (deleteevent)=new($event)></app-more>
+          <app-remind class="space" [reminder]="x"></app-remind>
+          <app-collaborator class="space"></app-collaborator>
+          <app-changecolor class="space" [color]="x" (colorEvent)=new($event)>
+          </app-changecolor>
+          <app-addimage class="space"></app-addimage>
+          <app-archives class="space" [archive]="x" (archiveEvent)=new($event)>
+          </app-archives>
+          <app-more class="space" [carddel]="x" (deleteevent)=new($event)>
+          </app-more>
 
         </div>
 

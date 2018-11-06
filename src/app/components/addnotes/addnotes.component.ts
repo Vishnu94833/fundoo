@@ -28,10 +28,7 @@ export class AddnotesComponent implements OnInit {
   functionCheckbox() {
     this.open1 = 1;
   }
-  // close() {
-  //   this.open = !this.open;
-  //   this.open1 = 0;
-  // }
+
   exit() {
     this.httpservice.addnotes('notes/addNotes',
       {
@@ -45,9 +42,7 @@ export class AddnotesComponent implements OnInit {
         (data) => {
           console.log("POST Request is successful ", data);
           this.name = null;
-          this.message.emit({
-
-          });
+          this.message.emit({});
           this.open = !this.open;
           this.color = "#fafafa";
           this.open1 = 0;

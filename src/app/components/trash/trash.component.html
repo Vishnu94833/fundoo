@@ -1,4 +1,5 @@
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%;'>
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" 
+    style='margin-top: 8%;'>
   <mat-card class="expand" fxFlex=30 *ngFor='let x of array '>
 
     <mat-card-title>
@@ -8,7 +9,8 @@
       <div [innerHtml]="x.description"></div>
     </mat-card-content>
     <mat-card-actions>
-      <mat-icon style="cursor: pointer;float:right" matTooltip="More" aria-label="more" [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
+      <mat-icon style="cursor: pointer;float:right" matTooltip="More" aria-label="more" 
+          [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
       <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
         <div style="padding:10px" fxLayout="column">
           <button mat-button (click)="deleteforever(x.id)">Delete Forever</button>

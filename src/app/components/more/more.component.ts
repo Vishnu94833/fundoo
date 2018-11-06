@@ -32,7 +32,7 @@ export class MoreComponent implements OnInit {
         this.arr = data['data'].details;
       },
       error => {
-        console.log("Error", error);
+        // console.log("Error", error);
       });
   }
 
@@ -50,13 +50,13 @@ export class MoreComponent implements OnInit {
         "noteIdList": [this.carddel.id]
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
 
           this.deleteevent.emit({
           })
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         }
       )
 
@@ -64,18 +64,18 @@ export class MoreComponent implements OnInit {
 
 
   addChips(labelId) {
-    console.log(labelId.label)
+    // console.log(labelId.label)
     this.labelList.emit(labelId);
 
     this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId.id + '/add', {
       "noteId": this.carddel.id,
       "lableId": labelId.id
     }, this.token).subscribe(result => {
-      console.log(result);
+      // console.log(result);
       this.deleteevent.emit({});
     }, error => {
-      console.log(this.arr.id)
-      console.log(error);
+      // console.log(this.arr.id)
+      // console.log(error);
     })
   }
 
@@ -86,11 +86,11 @@ export class MoreComponent implements OnInit {
         "noteId": this.arr.id,
         "lableId": labelId
       }, this.token).subscribe(result => {
-        console.log(result);
+        // console.log(result);
         this.deleteevent.emit({});
       }, error => {
 
-        console.log(error);
+        // console.log(error);
       })
   }
 

@@ -28,11 +28,11 @@ export class TrashComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           this.getTrashList();
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
 
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         }
       )
 
@@ -42,7 +42,7 @@ export class TrashComponent implements OnInit {
   getTrashList() {
     this.httpservice.gettrash('notes/getTrashNotesList', this.token).subscribe(
       (data) => {
-        console.log("GET Request is successful ", data);
+        // console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['data'].length; i++) {
           if (data['data']['data'][i].isDeleted == true) {
             this.array = (data['data']['data']);
@@ -50,7 +50,7 @@ export class TrashComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error", error);
+        // console.log("Error", error);
       });
   }
 
@@ -62,11 +62,11 @@ export class TrashComponent implements OnInit {
         "noteIdList": [notes]
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           this.getTrashList();
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         }
       )
 

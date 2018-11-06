@@ -22,8 +22,9 @@ export class DashboardComponent {
       map(result => result.matches)
     );
 
-  constructor(private router: Router, private httpservice: HttpService, private myRoute: Router,
-    private breakpointObserver: BreakpointObserver, public dialog: MatDialog, public data: SearchsharingService) { }
+  constructor(private router: Router, private httpservice: HttpService, 
+    private myRoute: Router,private breakpointObserver: BreakpointObserver,
+    public dialog: MatDialog, public data: SearchsharingService) { }
 
 
   hoverItem: string;
@@ -75,37 +76,19 @@ export class DashboardComponent {
       data: { array: this.temp }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result)
-
-      // this.httpservice.postarchive('noteLabels',
-      //   {
-      //     "label": result,
-      //     "isDeleted": false,
-      //     "userId": this.userId
-      //   }, this.token).subscribe(
-      //     (data) => {
-      //       console.log("POST Request is successful ", data);
-      //       localStorage.setItem("label", data['label']);
-      //       localStorage.getItem('label')
-      this.labelList();
-      // },
-      // error => {
-      //   console.log("Error", error);
-      // })
+            this.labelList();
     });
   }
 
   labelList() {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
-        // let temp1=[];
-        console.log("Get Request is successful ", data);
+        // console.log("Get Request is successful ", data);
         this.temp = data['data'].details;
-        // temp1= this.temp
-        console.log(data['data'].details)
+        // console.log(data['data'].details)
       },
       error => {
-        console.log("Error", error);
+        // console.log("Error", error);
       });
   }
 
@@ -120,21 +103,10 @@ export class DashboardComponent {
 
   labelsPage(labelName) {
     var labelname = labelName.label;
-    console.log(labelname)
+    // console.log(labelname)
     this.router.navigate(['homepage/labelslist/' + labelname]);
   }
 
-  // listLabels() {
-  //   this.httpservice.List('notes/getNotesListByLabel/'+,
-  //     this.token).subscribe(
-  //       (data) => {
-  //         console.log("POST Request is successful ", data);
-  //         this.labelList();
-  //       },
-  //       error => {
-  //         console.log("Error", error);
-  //       })
-  // }
   list = 0;
   gridView() {
     this.data.changeGridEvent(true);

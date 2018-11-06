@@ -24,24 +24,23 @@ export class ResetpasswordComponent implements OnInit {
   }
   info:any={}
   public input = new FormData();
-  // Add your values in here 
-  resetPassword(){
   
+  resetPassword(){
       var body={
         "newPassword": this.info.password
       }
       if(this.info.password.length==0){
-        console.log("please enter the password");
+        // console.log("please enter the password");
         return;
       }
       this.input.append('newPassword', this.info.password);
-      console.log(this.input)
+      // console.log(this.input)
       this.httpservice.postReset("user/reset-password",body,this.accessToken).subscribe(response=>{
-        console.log("successfull",response);
+        // console.log("successfull",response);
       },error=>{
-        console.log("failed",error)
+        // console.log("failed",error)
       })
-      console.log("accessToken",this.accessToken)
+      // console.log("accessToken",this.accessToken)
     }
 
       

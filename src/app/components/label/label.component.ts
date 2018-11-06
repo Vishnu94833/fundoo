@@ -33,20 +33,18 @@ export class LabelComponent implements OnInit {
   hoverItem: string;
   labelName: string;
   changeText: string;
-  temp1: any = {};
-  temp2: any = {};
   show;
   res: string;
   // value1:[];
   id = localStorage.getItem('userId');
   addLabel() {
-    console.log(this.id);
+    // console.log(this.id);
 
     var Label = this.Label.nativeElement.innerHTML;
-    console.log(Label);
+    // console.log(Label);
     for (var i = 0; i < this.temp.length; i++) {
       if (this.temp[i].label == Label) {
-        console.log(this.temp[i]);
+        // console.log(this.temp[i]);
         alert('duplicate data');
         return false;
       }
@@ -58,13 +56,13 @@ export class LabelComponent implements OnInit {
         "userId": this.id
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           localStorage.setItem("label", data['label']);
           localStorage.getItem('label')
 
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
   }
 
@@ -80,13 +78,13 @@ export class LabelComponent implements OnInit {
 
       }).subscribe(
         (data) => {
-          console.log("DELETE Request is successful ", data);
+          // console.log("DELETE Request is successful ", data);
           this.labelList.emit({});
-          console.log(this.labelList)
+          // console.log(this.labelList)
 
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
   }
 
@@ -102,14 +100,12 @@ export class LabelComponent implements OnInit {
       }
       , this.token).subscribe(
         (data) => {
-          console.log("UPDATE Request is successful ", data);
-          // this.temp2 = data['data']['details'];
-
-          console.log(data);
+          // console.log("UPDATE Request is successful ", data);
+          // console.log(data);
 
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
 
   }
@@ -121,14 +117,12 @@ export class LabelComponent implements OnInit {
   labelsList() {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
-        // let temp1=[];
-        console.log("Get Request is successful ", data);
+        // console.log("Get Request is successful ", data);
         this.temp = data['data'].details;
-        // temp1= this.temp
-        console.log(data['data'].details)
+        // console.log(data['data'].details)
       },
       error => {
-        console.log("Error", error);
+        // console.log("Error", error);
       });
   }
 

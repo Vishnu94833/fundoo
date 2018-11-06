@@ -17,7 +17,8 @@ export class CollectionnotesComponent implements OnInit {
 
 
 
-  constructor(public dialog: MatDialog, private httpservice: HttpService, private data: SearchsharingService) { }
+  constructor(public dialog: MatDialog, private httpservice: HttpService, 
+                private data: SearchsharingService) { }
 
   @Input() cardadded;
   @Input() inputData;
@@ -51,7 +52,8 @@ export class CollectionnotesComponent implements OnInit {
 
   removeLabel(labelId, noteId) {
 
-    this.httpservice.postarchive('notes/' + noteId + '/addLabelToNotes/' + labelId + '/remove',
+    this.httpservice.
+    postarchive('notes/' + noteId + '/addLabelToNotes/' + labelId + '/remove',
       {
         "noteId": noteId,
         "lableId": labelId

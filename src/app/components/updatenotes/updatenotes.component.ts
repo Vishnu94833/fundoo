@@ -33,14 +33,12 @@ export class UpdatenotesComponent implements OnInit {
 
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           this.dialogRef.close();
           this.updateEmit.emit({});
-
-          console.log();
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
     this.dialogRef.close();
   }
@@ -51,10 +49,10 @@ export class UpdatenotesComponent implements OnInit {
         "noteId": this.data.id,
         "lableId": labelId
       }, this.token).subscribe(result => {
-        console.log(result);
+        // console.log(result);
       }, error => {
 
-        console.log(error);
+        // console.log(error);
       })
   }
 

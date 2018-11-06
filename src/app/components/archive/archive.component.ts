@@ -13,23 +13,6 @@ export class ArchiveComponent implements OnInit {
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
-
-
-    // this.array = [];
-    // this.httpservice.getarchive('notes/getArchiveNotesList', this.token).subscribe(
-    //   (data) => {
-    //     console.log("GET Request is successful ", data);
-    //     for (var i = data['data'].data.length - 1; i >= 0; i--) {
-
-    //       this.array.push(data['data']['data'][i]);
-
-    //     }
-    //     console.log("array", this.array);
-
-    //   },
-    //   error => {
-    //     console.log("Error", error);
-    //   });
     this.getArchiveList();
   }
 
@@ -40,37 +23,34 @@ export class ArchiveComponent implements OnInit {
         "noteIdList": [archive]
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
-          // this.archiveEvent.emit({});
+          // console.log("POST Request is successful ", data);
           this.getArchiveList();
-
-          console.log();
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
   }
   getArchiveList() {
 
-
     this.array = [];
     this.httpservice.getarchive('notes/getArchiveNotesList', this.token).subscribe(
       (data) => {
-        console.log("GET Request is successful ", data);
+        // console.log("GET Request is successful ", data);
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
-
           this.array.push(data['data']['data'][i]);
-
         }
-        console.log("array", this.array);
-
+        // console.log("array", this.array);
       },
       error => {
-        console.log("Error", error);
+        // console.log("Error", error);
       });
+
   }
+
   new(event) {
+
     this.getArchiveList();
+
   }
 
 

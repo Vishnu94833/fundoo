@@ -1,5 +1,7 @@
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%;margin-left: 20px;'>
-  <mat-card class="expand" fxFlex=30 *ngFor='let x of array' [style.backgroundColor]="x.color">
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" 
+  style='margin-top: 8%;margin-left: 20px;'>
+  <mat-card class="expand" fxFlex=30 *ngFor='let x of array' 
+    [style.backgroundColor]="x.color">
 
     <mat-card-title>
       <div [innerHtml]="x.title"></div>
@@ -10,10 +12,18 @@
     <div fxLayout="row">
 
       <app-remind style="padding: 5px;"></app-remind>
+      
       <app-collaborator style="padding: 5px;"></app-collaborator>
-      <app-changecolor style="padding: 5px;" [color]="x" (colorEvent)=new($event)></app-changecolor>
+      
+      <app-changecolor style="padding: 5px;" [color]="x" (colorEvent)=new($event)>
+      </app-changecolor>
+      
       <app-addimage style="padding: 5px;"></app-addimage>
-      <mat-icon style="padding: 5px;" class="point"><i class="material-icons" (click)="unArchive(x.id)">unarchive</i></mat-icon>
+      
+      <mat-icon style="padding: 5px;" class="point">
+        <i class="material-icons" (click)="unArchive(x.id)">unarchive</i>
+      </mat-icon>
+      
       <app-more style="padding: 5px;"></app-more>
 
     </div>

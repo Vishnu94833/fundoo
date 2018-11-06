@@ -22,13 +22,11 @@ export class ArchivesComponent implements OnInit {
         "noteIdList": [this.archive.id]
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           this.archiveEvent.emit({});
-
-          console.log();
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
   }
 }

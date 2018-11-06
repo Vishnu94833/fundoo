@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit {
       this.password.hasError('pattern') ? 'Password can be only number,alphabets and characters(* and @)' :
         '';
   }
+  
 
   constructor(private router: Router, private httpservice: HttpService, public snackBar: MatSnackBar) { }
   records = {};
@@ -89,9 +90,9 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    console.log(this.model.firstname);
-    console.log(this.model.lastname);
-    console.log(this.model.email);
+    // console.log(this.model.firstname);
+    // console.log(this.model.lastname);
+    // console.log(this.model.email);
     this.httpservice
       .logPost('user/userSignUp', {
         "firstName": this.model.firstname,
@@ -102,9 +103,6 @@ export class SignupComponent implements OnInit {
         "emailVerified": true,
         "password": this.model.password,
         "username": this.model.email,
-        // "createdDate": "2018-10-09T06:35:12.617Z",
-        // "modifiedDate": "2018-10-09T06:35:12.617Z",
-
       })
       .subscribe(
         (data) => {

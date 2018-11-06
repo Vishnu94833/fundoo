@@ -21,25 +21,22 @@ export class ChangecolorComponent implements OnInit {
   colors(id) {
     this.colorEmit.emit(id)
     if (this.color != undefined) {
-
-
-      console.log("successfully changed color........")
       this.httpservice.postarchive('notes/changesColorNotes',
         {
           "color": id,
           "noteIdList": [this.color.id]
         }, this.token).subscribe(
           (data) => {
-            console.log("POST Request is successful ", data);
-            console.log(id)
-            console.log(this.color.id);
+            // console.log("POST Request is successful ", data);
+            // console.log(id)
+            // console.log(this.color.id);
             localStorage.setItem('colorId', this.color.id)
             this.colorEvent.emit({});
 
             console.log();
           },
           error => {
-            console.log("Error", error);
+            // console.log("Error", error);
           })
     }
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
+import { trigger, state, style, transition, animate} from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
@@ -54,8 +54,6 @@ export class LoginComponent implements OnInit {
 
   loginpost() {
 
-    // console.log(this.model.email);
-    // console.log(this.model.password);
     this.httpservice
       .logPost('user/login', {
 
@@ -63,13 +61,10 @@ export class LoginComponent implements OnInit {
 
         "password": this.model.password,
 
-        // "createdDate": "2018-10-09T06:35:12.617Z",
-        // "modifiedDate": "2018-10-09T06:35:12.617Z",
-
       })
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           localStorage.setItem("token", data['id']);
           localStorage.setItem('firstname', data['firstName']);
           localStorage.setItem('lastname', data['lastName']);
@@ -78,7 +73,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/homepage');
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         }
 
       );

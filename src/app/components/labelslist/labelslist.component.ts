@@ -30,11 +30,11 @@ export class LabelslistComponent implements OnInit {
     this.httpservice.List('notes/getNotesListByLabel/' + labelName, {}, this.token)
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
           this.array1 = data['data'].data;
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         })
   }
 

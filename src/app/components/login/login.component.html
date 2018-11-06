@@ -1,14 +1,14 @@
-<div class="example-container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center"
-    fxLayoutGap="20px" fxLayoutGap.xs="0">
+<div class="example-container" fxLayout="row" fxLayout.xs="row" 
+    fxLayoutAlign="center center" fxLayoutGap="20px" fxLayoutGap.xs="0">
     <div fxFlex="20"></div>
-    <div fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" fxflex.lg="70" fxflex.xl="40"
-        fxFlexOrder="3"></div>
+    <div fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" 
+            fxflex.lg="70" fxflex.xl="40" fxFlexOrder="3">
+        </div>
     <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
         <div leftPane>
             <div class="example-container">
                 <form>
                     <mat-card class="example-height">
-                        <!-- <br> -->
                         <p style="text-align: center">
                             <span class="shadow0">f</span>
                             <span class="shadow1">u</span>
@@ -17,11 +17,12 @@
                             <span class="shadow4">o</span>
                             <span class="shadow5">o</span>
                         </p>
-                        <!-- <span class="shadow" style="float:none"><h1>fundoo</h1></span> -->
 
                         <mat-card-header>
                             <mat-card-title>
-                                <span class="shadow" style="text-align: center"><h3>Login</h3></span>
+                                <span class="shadow" style="text-align: center">
+                                    <h3>Login</h3>
+                                </span>
                             </mat-card-title>
                         </mat-card-header>
                         <mat-card-content class="example">
@@ -30,7 +31,8 @@
                                     <tr>
                                         <td>
                                             <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Email id" name="email" [(ngModel)]="model.email" [formControl]="email"
+                                                <input matInput placeholder="Email id" name="email" 
+                                                [(ngModel)]="model.email" [formControl]="email"
                                                     required>
                                                 <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error>
 
@@ -86,10 +88,11 @@
                                 <tr>
                                     <td>
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password"
-                                                [type]="hide ? 'password' : 'text'" required>
-                                            <mat-icon matSuffix (click)="hide = !hide">{{hide
-                                                ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            <input matInput placeholder="Password" type="password" name="password"
+                                             [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'" required>
+                                            <mat-icon matSuffix (click)="hide = !hide">
+                                                {{hide ? 'visibility_off' : 'visibility'}}
+                                            </mat-icon>
                                         </mat-form-field>
                                         <a href="forgotpassword">forgot password??</a>
                                     </td>
@@ -97,7 +100,9 @@
                             </table>
                             <div class="break"></div>
 
-                            <button mat-raised-button (click)="loginpost() " style="float:right" color="primary">Login</button>
+                            <button mat-raised-button (click)="loginpost() " style="float:right" color="primary">
+                                Login
+                            </button>
 
                             <a href='login'><button mat-raised-button style="float:center"
                                     (click)="isLeftVisible = !isLeftVisible" color="primary">back</button></a>
