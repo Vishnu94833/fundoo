@@ -25,7 +25,7 @@ export class LabelComponent implements OnInit {
 
   @Output() labelList = new EventEmitter();
   ngOnInit() {
-this.labelsList();
+    this.labelsList();
   }
   array: any = {};
   temp: any = {};
@@ -44,17 +44,15 @@ this.labelsList();
 
     var Label = this.Label.nativeElement.innerHTML;
     console.log(Label);
-    for(var i =0; i<this.temp.length; i++)
-   {
-    if(this.temp[i].label == Label)
-    {
-      console.log(this.temp[i]);
-      alert('duplicate data');
-      return false;
+    for (var i = 0; i < this.temp.length; i++) {
+      if (this.temp[i].label == Label) {
+        console.log(this.temp[i]);
+        alert('duplicate data');
+        return false;
+      }
     }
-  }
     this.httpservice.postarchive('noteLabels',
-      {  
+      {
         "label": document.getElementById('Label').innerHTML,
         "isDeleted": false,
         "userId": this.id

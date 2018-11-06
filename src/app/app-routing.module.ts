@@ -18,45 +18,47 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
 
 
 const routes: Routes = [
-  
+
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetpasswordComponent },
 
-  
-  { path:'homepage',component:HomepageComponent,canActivate: [AuthGuard],
-  children:[
-    {
-      path: '', redirectTo: 'notes', pathMatch: 'full'
-    },
-    {
-      path:'notes',component:NotesComponent
-    },
-    {
-      path:'reminder',component:ReminderComponent
-    },
-    { path: 'label', component: LabelComponent },
-    {
-      path:'archive',component:ArchiveComponent
-    },
-    {
-      path:'trash',component:TrashComponent
-    },
-    {
-      path:'search',component:SearchComponent
-    },
 
-    {
-      path:'labelslist/:labelName',component:LabelslistComponent
-    }
-  ]},
-  { path: '', redirectTo: '/login', pathMatch: 'full'}
+  {
+    path: 'homepage', component: HomepageComponent, canActivate: [AuthGuard],
+    children: [
+      {
+        path: '', redirectTo: 'notes', pathMatch: 'full'
+      },
+      {
+        path: 'notes', component: NotesComponent
+      },
+      {
+        path: 'reminder', component: ReminderComponent
+      },
+      { path: 'label', component: LabelComponent },
+      {
+        path: 'archive', component: ArchiveComponent
+      },
+      {
+        path: 'trash', component: TrashComponent
+      },
+      {
+        path: 'search', component: SearchComponent
+      },
 
-  
+      {
+        path: 'labelslist/:labelName', component: LabelslistComponent
+      }
+    ]
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
+
+
 ];
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

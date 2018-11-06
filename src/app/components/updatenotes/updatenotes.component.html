@@ -1,37 +1,36 @@
-<div style="overflow:hidden"  class="update" [style.backgroundColor]="data.color">
-<h1 mat-dialog-title >           
-  <div class="content" contenteditable="true" id="title1" class="content" data-text="Title">
-      <div [innerHtml]="data.title"></div>
-  </div>
- </h1>
-<div mat-dialog-content>
-    <div class="content" contenteditable="true" id="description1" class="content" data-text="Take a note...">
+<div style="overflow:hidden" class="update" [style.backgroundColor]="data.color">
+    <h1 mat-dialog-title>
+        <div class="content" contenteditable="true" id="title1" class="content" data-text="Title">
+            <div [innerHtml]="data.title"></div>
+        </div>
+    </h1>
+    <div mat-dialog-content>
+        <div class="content" contenteditable="true" id="description1" class="content" data-text="Take a note...">
 
-        <div [innerHtml]="data.description"></div>
+            <div [innerHtml]="data.description"></div>
+
+        </div>
+
 
     </div>
 
-    
-</div>
-
-<div fxLayout="row">
+    <div fxLayout="row">
         <div *ngFor="let items of data.noteLabels">
-        <mat-chip-list selected>
-        <mat-chip>{{items.label}}
-          <mat-icon matChipRemove (click) = "removeLabel(items.id)">cancel</mat-icon>
-        </mat-chip>
-        </mat-chip-list>
-      </div>
-      </div>
+            <mat-chip-list selected>
+                <mat-chip>{{items.label}}
+                    <mat-icon matChipRemove (click)="removeLabel(items.id)">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
 
-<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center" >
-    <app-remind></app-remind>
-    <app-collaborator></app-collaborator>
-    <app-changecolor [color]="data" (colorEvent)=new($event) ></app-changecolor>
-    <app-addimage></app-addimage>
-    <app-archives></app-archives>
-    <app-more [carddel]=""></app-more>
-  <button mat-button  (click)="onNoClick(data.id) "  >Close</button>
-</div>   
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+        <app-remind></app-remind>
+        <app-collaborator></app-collaborator>
+        <app-changecolor [color]="data" (colorEvent)=new($event)></app-changecolor>
+        <app-addimage></app-addimage>
+        <app-archives></app-archives>
+        <app-more [carddel]=""></app-more>
+        <button mat-button (click)="onNoClick(data.id) ">Close</button>
+    </div>
 </div>
- 

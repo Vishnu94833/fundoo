@@ -87,11 +87,11 @@ export class DashboardComponent {
       //       console.log("POST Request is successful ", data);
       //       localStorage.setItem("label", data['label']);
       //       localStorage.getItem('label')
-            this.labelList();
-          // },
-          // error => {
-          //   console.log("Error", error);
-          // })
+      this.labelList();
+      // },
+      // error => {
+      //   console.log("Error", error);
+      // })
     });
   }
 
@@ -119,9 +119,9 @@ export class DashboardComponent {
   }
 
   labelsPage(labelName) {
-    var labelname=labelName.label;
+    var labelname = labelName.label;
     console.log(labelname)
-    this.router.navigate(['homepage/labelslist/'+labelname]);
+    this.router.navigate(['homepage/labelslist/' + labelname]);
   }
 
   // listLabels() {
@@ -136,13 +136,11 @@ export class DashboardComponent {
   //       })
   // }
   list = 0;
-  gridView()
-  {
+  gridView() {
     this.data.changeGridEvent(true);
     this.list = 1;
   }
-  grid()
-  {
+  grid() {
     this.data.changeGridEvent(false);
     this.list = 0;
   }

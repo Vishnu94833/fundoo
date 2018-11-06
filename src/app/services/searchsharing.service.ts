@@ -13,7 +13,7 @@ export class SearchsharingService {
   private gridEvent = new Subject<boolean>();
   currentGridEvent = this.gridEvent.asObservable();
 
-  constructor() {}
+  constructor() { }
 
   changeMessage(message: string) {
     this.messageSource.next(message)

@@ -1,6 +1,6 @@
 <div fxLayout='column' fxLayoutAlign="center center" style="margin-top: 100px;">
 
-  <mat-card *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note"  (click)="function()">
+  <mat-card *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note" (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" matTooltipPosition="above">list</mat-icon>
@@ -9,9 +9,9 @@
       </span>
       <span> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon>
       </span>
-    </div>  
+    </div>
   </mat-card>
-   
+
 
   <mat-card *ngIf="!open" [style.backgroundColor]="color" aria-placeholder="Title">
 
@@ -27,7 +27,7 @@
       <div *ngFor="let items of name">
         <mat-chip-list selected>
           <mat-chip>{{items.label}}
-            <mat-icon matChipRemove >cancel</mat-icon>
+            <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </div>
@@ -36,9 +36,9 @@
     <div *ngIf="open1 == 1">
       <hr>
       <div fxFlexLayout="row" fxLayoutAlign="center center">
-      <mat-icon>add</mat-icon>
-      <input (keydown)="onKeydown($event)" id="description" class="content" placeholder="list">
-    </div>
+        <mat-icon>add</mat-icon>
+        <input (keydown)="onKeydown($event)" id="description" class="content" placeholder="list">
+      </div>
       <hr>
     </div>
 

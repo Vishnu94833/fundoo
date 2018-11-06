@@ -18,8 +18,8 @@ type PaneType = 'right' | 'left';
     ])
   ]
 })
-export class SlidePanelComponent  {
-  @Input() activePane: PaneType = 'right'; 
+export class SlidePanelComponent {
+  @Input() activePane: PaneType = 'right';
 
 
 }

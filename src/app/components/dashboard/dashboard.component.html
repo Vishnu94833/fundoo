@@ -6,15 +6,17 @@
   <div class="right">
     <form id="search">
 
-      <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" (click)="navigateSearch()" (keydown)="down()" placeholder="Search" style="opacity:0.3;width:600px;height: 45px;border-radius: 0px;margin-left: 20px">
+      <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData"
+        (click)="navigateSearch()" (keydown)="down()" placeholder="Search" style="opacity:0.3;width:600px;height: 45px;border-radius: 0px;margin-left: 20px">
       <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
 
     </form>
   </div>
   <div fxFlex fxLayoutAlign="end">
-    <button matTooltip="Grid View" (click) = "gridView()" *ngIf = "list == 0" mat-icon-button><mat-icon>view_stream</mat-icon></button>
-    <button matTooltip="List View" (click) = "grid()" *ngIf = "list == 1" mat-icon-button><mat-icon>view_module</mat-icon></button>
-    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">{{firstname | slice:0:1}}</button>
+    <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button><mat-icon>view_stream</mat-icon></button>
+    <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button><mat-icon>view_module</mat-icon></button>
+    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: darkgreen; color: white;">{{firstname
+      | slice:0:1}}</button>
     <div>
 
       <mat-menu class="sig1" #menu="matMenu" [overlapTrigger]="false">
@@ -26,7 +28,8 @@
           </div>
 
           <div>
-            <button class="n" mat-mini-fab [matMenuTriggerFor]="menu" style="margin-right: 20px; background-color: darkgreen; color: white;">{{firstname | slice:0:1}}</button>
+            <button class="n" mat-mini-fab [matMenuTriggerFor]="menu" style="margin-right: 20px; background-color: darkgreen; color: white;">{{firstname
+              | slice:0:1}}</button>
           </div>
 
 
@@ -57,15 +60,15 @@
       <hr>
       <div fxLayout="row" fxLayoutAlign="space-between center">
 
-       
-       <h5  class="label"> Labels</h5>
+
+        <h5 class="label"> Labels</h5>
       </div>
       <div (click)="labelsPage(labels)" *ngFor=" let labels of temp ">
-        <a  mat-list-item>
-        <mat-icon class="ma1">label_outline</mat-icon>
-        <span class="spac">{{labels.label}}</span>
-      </a>
-    </div>
+        <a mat-list-item>
+          <mat-icon class="ma1">label_outline</mat-icon>
+          <span class="spac">{{labels.label}}</span>
+        </a>
+      </div>
       <div fxLayoutAlign="center center"><a matTooltip="Create New Label" (click)="openDialog()"
           mat-list-item> <img src="../../../assets/images/create.svg"> Create new label</a></div>
 

@@ -1,25 +1,22 @@
-<!-- <p>
-  archive works!
-</p> -->
-<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="10px" style='margin-top: 8%;'>
-    <mat-card class="expand" fxFlex=30 *ngFor='let x of array'   [style.backgroundColor]="x.color">
-  
-      <mat-card-title>
-        <div [innerHtml]="x.title"></div>
-      </mat-card-title>
-      <mat-card-content>
-        <div [innerHtml]="x.description"></div>
-      </mat-card-content>
-      <div>
-  
-        <app-remind></app-remind>
-        <app-collaborator></app-collaborator>
-        <app-changecolor></app-changecolor>
-        <app-addimage></app-addimage>
-        <app-archives></app-archives>
-        <app-more ></app-more>
-  
-      </div>
-    </mat-card>
-  
-  </div>
+<div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%;margin-left: 20px;'>
+  <mat-card class="expand" fxFlex=30 *ngFor='let x of array' [style.backgroundColor]="x.color">
+
+    <mat-card-title>
+      <div [innerHtml]="x.title"></div>
+    </mat-card-title>
+    <mat-card-content>
+      <div [innerHtml]="x.description"></div>
+    </mat-card-content>
+    <div fxLayout="row">
+
+      <app-remind style="padding: 5px;"></app-remind>
+      <app-collaborator style="padding: 5px;"></app-collaborator>
+      <app-changecolor style="padding: 5px;" [color]="x" (colorEvent)=new($event)></app-changecolor>
+      <app-addimage style="padding: 5px;"></app-addimage>
+      <mat-icon style="padding: 5px;" class="point"><i class="material-icons" (click)="unArchive(x.id)">unarchive</i></mat-icon>
+      <app-more style="padding: 5px;"></app-more>
+
+    </div>
+  </mat-card>
+
+</div>

@@ -10,14 +10,14 @@ import { SearchsharingService } from '../../../app/services/searchsharing.servic
 })
 export class SearchComponent implements OnInit {
 
-  array:any;
-  inputData:any;
-token=localStorage.getItem('token');
-  constructor(public httpservice:HttpService,public data:SearchsharingService) { }
+  array: any;
+  inputData: any;
+  token = localStorage.getItem('token');
+  constructor(public httpservice: HttpService, public data: SearchsharingService) { }
 
   ngOnInit() {
-    this.data.currentMessage.subscribe(message=>{
-      this.inputData= message;
+    this.data.currentMessage.subscribe(message => {
+      this.inputData = message;
     })
     this.cardslist();
   }

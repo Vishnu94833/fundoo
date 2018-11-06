@@ -9,10 +9,9 @@ export class AppComponent {
   title = 'fundoo';
   isLeftVisible = true;
 
-  constructor()
-  {
+  constructor() {
   }
   ngOnInit() {
-    
+
   }
 }

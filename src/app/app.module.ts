@@ -49,8 +49,8 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
 import { UpdatenotesComponent } from './components/updatenotes/updatenotes.component';
 import { LabelComponent } from './components/label/label.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 import { LabelpipePipe } from './pipe/labelpipe.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';
@@ -85,7 +85,7 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
     LabelpipePipe,
     SearchComponent,
     LabelslistComponent,
-    
+
     // Notes1Component
   ],
   imports: [
@@ -120,8 +120,8 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
     // FormControl  
 
   ],
-  providers: [HttpService,AuthGuard,AuthService],
-  entryComponents:[UpdatenotesComponent],
+  providers: [HttpService, AuthGuard, AuthService],
+  entryComponents: [UpdatenotesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
