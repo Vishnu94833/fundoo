@@ -79,7 +79,7 @@ export class CollectionnotesComponent implements OnInit {
         LoggerService.log("GET Request is successful ",data)
       },
       error => {
-        LoggerService.log("Error ",error)
+        LoggerService.error("Error ",error)
       });
   }
 }

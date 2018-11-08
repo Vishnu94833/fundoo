@@ -10,7 +10,7 @@ import { HttpService } from '../../core/services/http/http.service';
 export class AddnotesComponent implements OnInit {
   token = localStorage.getItem('token');
   @Output() message = new EventEmitter();
-  public open: boolean = true;
+  public open = true;
   open1 = 0;
   checkArray = [];
   color: any;
@@ -31,7 +31,7 @@ export class AddnotesComponent implements OnInit {
   }
 
   exit() {
-    // this.open = this.open;
+    // this.open = !this.open;
     this.httpservice.addnotes('notes/addNotes',
       {
         'title': document.getElementById('title').innerHTML,
@@ -121,7 +121,7 @@ export class AddnotesComponent implements OnInit {
 
   editing(event, edited) {
 
-    if (event.code == "Enter") {
+    if (event.code == ("Enter")) {
       console.log("enter pressed");
       for (var i = 0; i < this.dataarray.length; i++) {
         if (edited.index == this.dataarray[i].index) {

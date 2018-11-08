@@ -33,14 +33,8 @@
     float:right;
     cursor: pointer;  
     width: 10%;
-    display: flex;
+    // display: flex;
 }
-/* .title 
-{
-    margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 2%;
-} */
 .box {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -87,7 +81,7 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 .bot
 {
     margin-top: 8%;
-    /* margin-left: 20%; */
+
 }
 mat-card
 {
@@ -101,8 +95,4 @@ mat-card
 .response
 {
     display: flex;
-}
-.addcard
-{
-    width: 60%;
 }
