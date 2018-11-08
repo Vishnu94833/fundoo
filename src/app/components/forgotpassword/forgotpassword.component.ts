@@ -6,7 +6,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',
-  styleUrls: ['./forgotpassword.component.css']
+  styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);

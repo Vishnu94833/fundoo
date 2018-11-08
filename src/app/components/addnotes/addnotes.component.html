@@ -1,6 +1,6 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top: 100px;">
+<div class="response" fxLayout='column' fxLayoutAlign="center center" style="margin-top: 100px;">
 
-  <mat-card *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note"
+  <mat-card class="addcard" *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note"
    (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
@@ -38,15 +38,22 @@
       </div>
     </div>
 
-    <div *ngIf="open1 == 1">
-      <hr>
-      <div fxFlexLayout="row" fxLayoutAlign="center center">
-        <mat-icon>add</mat-icon>
-        <input (keydown)="onKeydown($event)" id="description" class="content"
-         placeholder="list">
-      </div>
-      <hr>
-    </div>
+    <div *ngIf="open1 == 1"  id="title"  autofocus #description>
+      <div class="check" *ngFor="let data of dataarray" id="note" fxLayout="row">
+
+      <mat-checkbox fxFlex="5%"></mat-checkbox>
+      <input fxFlex="90" *ngIf="open1 == 1" class="inputNote1"  id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
+<mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">cancel</mat-icon>
+  </div>
+  <mat-divider></mat-divider>
+
+<div class="check" fxLayout="row" id="title" id="note" autofocus id = "description">
+  <mat-icon fxFlex="5%">add</mat-icon>
+  <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
+</div>
+<mat-divider></mat-divider>
+
+</div>
 
     <div class="bot " fxLayout="row" fxLayoutAlign="space-around center">
 

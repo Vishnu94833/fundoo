@@ -20,59 +20,34 @@
     <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
       <mat-icon>view_module</mat-icon></button>
     
-      <button class="profilebutton">
-        <img src="{{img}}" style="float:left ;width:10px;height:10px;border-radius: 100%">
+      <button class="profilepic">
+        <img src="{{img}}" [matMenuTriggerFor]="appMenu" class="photo">
       </button>
 
     <div>
 
-      <!-- <mat-menu class="sig1" #menu="matMenu" [overlapTrigger]="false">
-        <div style="padding: 20px">
-
-          <div style="float : right;">
-            <div>{{firstname}} {{lastname}}</div>
-            <div>{{email}}</div>
-          </div>
-
-          <div>
-            <button mat-mini-fab [matMenuTriggerFor]="menu" class="userdetails">
-              {{firstname | slice:0:1}}</button>
-          </div>
-
-
-
-          <hr>
-
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-
-            <a href="login"><button mat-stroked-button>Add Account</button></a>
-
-            <a (click)="logout()"><button mat-stroked-button>Sign Out</button></a>
-          </div>
-        </div>
-      </mat-menu> -->
       <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
         <div class="signout">
           <!--             profile-pic upload                   -->
           <span fxLayout="row" fxLayoutGap="15px">
 
-            <button class="profilebutton">
-              <img src="{{img}}" style="float:left ;width:100px;height:100px;border-radius: 50%">
+            <button class="profilepic1">
+              <img src="{{img}}" class="photo">
             </button>
-            <p class="name_onscreen">{{firstName }}&nbsp;{{lastName}} </p>
+            <p >{{firstname }}  {{lastname}} </p>
           </span>
-          <p class="mail"> {{email}}</p>
+          <p class="movright"> {{email}}</p>
         </div>
         <hr>
 
         <h4>upload pic</h4>
-        <input type="file" (change)=onFileSelected($event)>
-        <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button>
+        <input class="gap" type="file" (change)=onFileSelected($event)>
+        <button type="button" class="gap" (click)="onUpload()" mat-raised-button color="disabled"> upload</button>
 
 
 
 
-        <button class="signup_button" mat-raised-button color="primary" style="float:right" 
+        <button class="gap" mat-raised-button color="disabled" style="float:right" 
                 (click)="logout()">Logout</button>
          <!--           profile-pic upload   ends                -->
       </mat-menu>

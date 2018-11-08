@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -20,15 +19,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from '../app/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule ,MatDialogModule} from '@angular/material';
+// import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';

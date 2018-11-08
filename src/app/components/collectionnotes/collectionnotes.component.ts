@@ -9,7 +9,7 @@ import { SearchsharingService } from '../../services/searchsharing.service';
 @Component({
   selector: 'app-collectionnotes',
   templateUrl: './collectionnotes.component.html',
-  styleUrls: ['./collectionnotes.component.css']
+  styleUrls: ['./collectionnotes.component.scss']
 })
 export class CollectionnotesComponent implements OnInit {
 

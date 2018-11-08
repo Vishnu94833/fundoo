@@ -68,12 +68,21 @@ mat-menu-content:not(:empty) {
   background-color: darkgreen; 
   color: white;
 }
-.profilebutton{
-  width:100px; 
-  height:100px; 
+.profilepic{
+  width:50px; 
+  height:50px; 
   border: none;
- border-radius: 50%;
+ border-radius: 100%;
+ background:rgb(255, 202, 2);
+ 
+}
+.profilepic1{
+  width:50px; 
+  height:50px; 
+  border: none;
+ border-radius: 100%;
  background:white;
+ padding-right: 50%;
  
 }
 .profilebutton2{
@@ -84,4 +93,19 @@ mat-menu-content:not(:empty) {
  background: transparent;
  outline:none;
  
+}
+.gap
+{
+margin-top: 5%;
+}
+.movright
+{
+  padding-right: 20%;
+}
+.photo
+{
+  float:left ;
+  width:50px;
+  height:50px;
+  border-radius: 50% ;
 }

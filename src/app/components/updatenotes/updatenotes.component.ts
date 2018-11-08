@@ -11,7 +11,7 @@ export interface DialogData {
 @Component({
   selector: 'app-updatenotes',
   templateUrl: './updatenotes.component.html',
-  styleUrls: ['./updatenotes.component.css']
+  styleUrls: ['./updatenotes.component.scss']
 })
 export class UpdatenotesComponent implements OnInit {
 

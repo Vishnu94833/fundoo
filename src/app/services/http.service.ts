@@ -154,7 +154,7 @@ export class HttpService {
     return this.http.post(url, body, httpOptions);
   }
 
-  httpAddImage(url,body,token){
+  addImage(url,body,token){
     console.log(token);
     url = this.postUrl + url;
     var httpOptions={
@@ -163,7 +163,7 @@ export class HttpService {
        'Authorization':token
       })
     };
-    return this.http.post(url+"/"+url,body,httpOptions)
+    return this.http.post(url,body,httpOptions)
   }
 
 }

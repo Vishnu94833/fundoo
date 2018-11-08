@@ -4,16 +4,22 @@
   </span>
 </button>
 
-<mat-menu #menu="matMenu">
+<mat-menu class="menu" #menu="matMenu">
 
   <div>Reminder :</div>
   <div fxLayout='column ' fxLayoutAlign="center center">
     <button mat-button (click)="remindMe()">
-      <span style="float:left;">
+      <span >
         Later today
+    </span>
+    <span >
+      8:00 PM
     </span>
   </button>
     <button mat-button>
+      <span>
+        Tomorrow
+      </span>
       <span>
         Tomorrow
       </span>

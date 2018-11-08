@@ -33,6 +33,7 @@
     float:right;
     cursor: pointer;  
     width: 10%;
+    display: flex;
 }
 /* .title 
 {
@@ -96,4 +97,12 @@ mat-card
 {
     float: right;
     cursor: pointer;
+}
+.response
+{
+    display: flex;
+}
+.addcard
+{
+    width: 60%;
 }

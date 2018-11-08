@@ -5,7 +5,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-labelslist',
   templateUrl: './labelslist.component.html',
-  styleUrls: ['./labelslist.component.css']
+  styleUrls: ['./labelslist.component.scss']
 })
 export class LabelslistComponent implements OnInit {
   params: any;

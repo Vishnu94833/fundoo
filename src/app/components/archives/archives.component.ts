@@ -5,7 +5,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-archives',
   templateUrl: './archives.component.html',
-  styleUrls: ['./archives.component.css']
+  styleUrls: ['./archives.component.scss']
 })
 export class ArchivesComponent implements OnInit {
   token = localStorage.getItem('token');

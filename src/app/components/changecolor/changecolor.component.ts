@@ -5,7 +5,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-changecolor',
   templateUrl: './changecolor.component.html',
-  styleUrls: ['./changecolor.component.css']
+  styleUrls: ['./changecolor.component.scss']
 })
 export class ChangecolorComponent implements OnInit {
 

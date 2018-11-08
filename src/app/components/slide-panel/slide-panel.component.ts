@@ -8,7 +8,7 @@ type PaneType = 'right' | 'left';
 @Component({
   selector: 'my-slide-panel',
   templateUrl: './slide-panel.component.html',
-  styleUrls: ['./slide-panel.component.css'],
+  styleUrls: ['./slide-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [

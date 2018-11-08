@@ -5,7 +5,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-addnotes',
   templateUrl: './addnotes.component.html',
-  styleUrls: ['./addnotes.component.css']
+  styleUrls: ['./addnotes.component.scss']
 })
 export class AddnotesComponent implements OnInit {
   token = localStorage.getItem('token');
@@ -16,6 +16,7 @@ export class AddnotesComponent implements OnInit {
   color: any;
   name = [];
   rollId = [];
+  boxClicked = true;
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class AddnotesComponent implements OnInit {
   }
 
   exit() {
+    // this.open = this.open;
     this.httpservice.addnotes('notes/addNotes',
       {
         'title': document.getElementById('title').innerHTML,
@@ -81,4 +83,57 @@ export class AddnotesComponent implements OnInit {
 
     }
   }
+  expression = true;
+  finish(){
+    if(!this.expression){
+      this.expression = !this.expression;
+    }
+
+    this.boxClicked = true;
+  }
+
+  public i = 0;
+  data;
+  dataarray = [];
+  enter() {
+    this.i++;
+    if (this.data != null) {
+      console.log(event, "keydown");
+      var obj = {
+        "index": this.i,
+        "data": this.data
+      }
+      this.dataarray.push(obj);
+      this.data = null
+
+    }
+  }
+  ondelete(deletedObj) {
+    console.log("ondelete function runnig");
+    for (var i = 0; i < this.dataarray.length; i++) {
+      if (deletedObj.index == this.dataarray[i].index) {
+        this.dataarray.splice(i, 1);
+        break;
+      }
+    }
+    console.log(this.dataarray);
+  }
+
+  editing(event, edited) {
+
+    if (event.code == "Enter") {
+      console.log("enter pressed");
+      for (var i = 0; i < this.dataarray.length; i++) {
+        if (edited.index == this.dataarray[i].index) {
+          this.dataarray[i].data == edited.data
+        }
+      }
+      console.log(this.dataarray);
+
+    }
+  }
+
+
+
+
 }
