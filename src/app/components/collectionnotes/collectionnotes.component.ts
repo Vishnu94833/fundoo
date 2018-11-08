@@ -2,8 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 // import { EventEmitter } from 'protractor';
 import { MatDialog } from '@angular/material';
 import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
-import { HttpService } from '../../services/http.service';
-import { SearchsharingService } from '../../services/searchsharing.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
@@ -74,10 +75,11 @@ export class CollectionnotesComponent implements OnInit {
     
     this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
       (data) => { 
-        console.log("GET Request is successful ", data);
+        // console.log("GET Request is successful ", data);
+        LoggerService.log("GET Request is successful ",data)
       },
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error ",error)
       });
   }
 }

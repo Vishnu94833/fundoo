@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { SearchsharingService } from '../../../app/services/searchsharing.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 
 
 @Component({

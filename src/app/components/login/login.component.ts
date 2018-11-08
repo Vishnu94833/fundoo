@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { Router } from '@angular/router';
 
 

@@ -11,7 +11,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './core/services/authgaurd/auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';

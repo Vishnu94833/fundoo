@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 // import { EventEmitter } from 'protractor';
 
 export interface DialogData {
@@ -16,7 +17,7 @@ export interface DialogData {
 export class UpdatenotesComponent implements OnInit {
 
   token = localStorage.getItem('token');
-
+  
 
   constructor(private httpservice: HttpService,
     public dialogRef: MatDialogRef<UpdatenotesComponent>,
@@ -33,12 +34,13 @@ export class UpdatenotesComponent implements OnInit {
 
       }, this.token).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          LoggerService.log("Post Request is successful ",data)
           this.dialogRef.close();
           this.updateEmit.emit({});
         },
         error => {
-          // console.log("Error", error);
+          LoggerService.log("Error",error)
+
         })
     this.dialogRef.close();
   }

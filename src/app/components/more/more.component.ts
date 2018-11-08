@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { TrashComponent } from '../trash/trash.component';
 import { CollectionnotesComponent } from '../collectionnotes/collectionnotes.component';
 // import { EventEmitter } from 'events';

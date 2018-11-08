@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { AuthService } from '../../services/auth.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { AuthService } from '../../core/services/authgaurd/auth.service';
 
 @Component({
   selector: 'app-notes',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';

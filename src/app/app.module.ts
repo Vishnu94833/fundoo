@@ -16,7 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpService } from '../app/services/http.service';
+import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -42,17 +42,18 @@ import { ChangecolorComponent } from './components/changecolor/changecolor.compo
 import { AddimageComponent } from './components/addimage/addimage.component';
 import { MoreComponent } from './components/more/more.component';
 import { ArchivesComponent } from './components/archives/archives.component';
-import { AuthGuard } from './auth.guard';
-import { AuthService } from './services/auth.service';
+import { AuthGuard } from './core/services/authgaurd/auth.guard';
+import { AuthService } from './core/services/authgaurd/auth.service';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { CollectionnotesComponent } from './components/collectionnotes/collectionnotes.component';
 import { UpdatenotesComponent } from './components/updatenotes/updatenotes.component';
 import { LabelComponent } from './components/label/label.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { LabelpipePipe } from './pipe/labelpipe.pipe';
+import { LabelpipePipe } from '../app/core/pipe/labelpipe.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';
+import { LoggerService } from './core/services/logger/logger.service';
 
 
 
@@ -119,7 +120,7 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
     // FormControl  
 
   ],
-  providers: [HttpService, AuthGuard, AuthService],
+  providers: [HttpService, AuthGuard, AuthService,LoggerService],
   entryComponents: [UpdatenotesComponent],
   bootstrap: [AppComponent]
 })
