@@ -23,15 +23,14 @@ export class LoggerService {
 
 static log(msg: string, obj = {}): void {
 
-console.log(msg, obj);
+// console.log(msg, obj);
 
 }
 
 
 static error(msg: string, obj = {}): void {
 
-console.error(msg, obj);
-
+// console.error(msg, obj);
 }
 
 }

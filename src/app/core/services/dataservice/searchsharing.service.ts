@@ -13,6 +13,10 @@ export class SearchsharingService {
   private gridEvent = new Subject<boolean>();
   currentGridEvent = this.gridEvent.asObservable();
 
+
+  private chipEvent = new Subject<boolean>();
+  currentChipEvent = this.chipEvent.asObservable();
+
   constructor() { }
 
   changeMessage(message: string) {
@@ -21,5 +25,10 @@ export class SearchsharingService {
 
   changeGridEvent(message: boolean) {
     this.gridEvent.next(message)
+  }
+
+
+  changeChipEvent(message: boolean) {
+    this.chipEvent.next(message)
   }
 }

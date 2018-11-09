@@ -8,7 +8,7 @@
 
   <div>Reminder :</div>
   <div fxLayout='column ' fxLayoutAlign="center center">
-    <button mat-button (click)="remindMe()">
+    <button mat-button (click)="$event.stopPropagation();remindMe()">
       <span >
         Later today
     </span>

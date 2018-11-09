@@ -12,7 +12,8 @@
 }
 .list
 {
-    width: 800px;
+    width: 700px;
+    
 }
 .pin
 {
@@ -26,9 +27,12 @@
 }
 .cardsize
 {
-    margin-top: 20px; width:auto;
+    margin-top: 20px; 
+    width:auto;
+    border-radius: 5%;
 }
 .space
 {
     padding: 5px;
+    flex-direction: row
 }

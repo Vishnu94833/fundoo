@@ -81,10 +81,20 @@ export class DashboardComponent {
   }
 
   labelList() {
+    var array = [];
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         // console.log("Get Request is successful ", data);
-        this.temp = data['data'].details;
+        for(var i=0;i<data['data']['details'].length;i++)
+        {
+          if(data['data']['details'][i].isDeleted == false)
+          { 
+              array.push (data['data']['details'][i]);
+          }
+        }
+            this.temp = array;
+
+        // this.temp = data['data'].details;
         // console.log(data['data'].details)
       },
       error => {

@@ -21,8 +21,8 @@ export class HttpService {
     return this.http.post(url, body);
   }
   postReset(name, input, access_token) {
-    console.log(input);
-    console.log(access_token)
+    // console.log(input);
+    // console.log(access_token)
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -42,7 +42,7 @@ export class HttpService {
   }
 
   logoutPost(url, token) {
-    console.log(token);
+    // console.log(token);
 
     url = this.postUrl + url;
     const httpOptions = {
@@ -55,7 +55,7 @@ export class HttpService {
   }
 
   addnotes(url, body, token) {
-    console.log(token);
+    // console.log(token);
 
     url = this.postUrl + url;
     const httpOptions = {
@@ -68,7 +68,7 @@ export class HttpService {
 
   }
   getnotes(url, token) {
-    console.log(token)
+    // console.log(token)
 
     url = this.postUrl + url;
     const httpOptions = {
@@ -131,7 +131,7 @@ export class HttpService {
 
 
   List(url, body, token) {
-    console.log(token);
+    // console.log(token);
 
     url = this.postUrl + url;
     const httpOptions = {
@@ -155,7 +155,7 @@ export class HttpService {
   }
 
   addImage(url,body,token){
-    console.log(token);
+    // console.log(token);
     url = this.postUrl + url;
     var httpOptions={
       headers:new HttpHeaders({

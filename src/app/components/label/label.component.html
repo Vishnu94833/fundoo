@@ -34,7 +34,7 @@
         </div>
 
 
-        <div *ngIf="show ==labels.id">
+        <div *ngIf="show == labels.id">
           <div fxFlex="15">
             <i class="material-icons" (click)="deleteLabel(labels.id)" id="label">
               delete
@@ -42,9 +42,11 @@
           </div>
           
           <div fxFlex="70">
+            <div *ngIf="labels.isDeleted == false">
             <span contenteditable="true" #myLabel [innerHTML]="labels.label"
               class="name">
             </span>
+          </div>
           </div>
 
           <div fxFlex="15">

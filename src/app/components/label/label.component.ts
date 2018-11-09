@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LabelComponent implements OnInit {
   label = localStorage.getItem('label')
 
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,public dataService: SearchsharingService) { }
 
   @ViewChild('Label') Label: ElementRef;
   @ViewChild('Label1') Label1: ElementRef;
@@ -40,7 +41,7 @@ export class LabelComponent implements OnInit {
   addLabel() {
     // console.log(this.id);
 
-    var Label = this.Label.nativeElement.innerHTML;
+    var Label= this.Label.nativeElement.innerHTML;
     // console.log(Label);
     for (var i = 0; i < this.temp.length; i++) {
       if (this.temp[i].label == Label) {
@@ -51,18 +52,19 @@ export class LabelComponent implements OnInit {
     }
     this.httpservice.postarchive('noteLabels',
       {
-        "label": document.getElementById('Label').innerHTML,
+        "label": this.Label.nativeElement.innerHTML,
         "isDeleted": false,
         "userId": this.id
       }, this.token).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          console.log("POST Request is successful ", data);
+          this.labelsList();
           localStorage.setItem("label", data['label']);
           localStorage.getItem('label')
 
         },
         error => {
-          // console.log("Error", error);
+          console.log("Error", error);
         })
   }
 
@@ -79,7 +81,8 @@ export class LabelComponent implements OnInit {
       }).subscribe(
         (data) => {
           // console.log("DELETE Request is successful ", data);
-          this.labelList.emit({});
+          this.labelsList();
+          this.dataService.changeChipEvent(true);
           // console.log(this.labelList)
 
         },
@@ -102,6 +105,7 @@ export class LabelComponent implements OnInit {
         (data) => {
           // console.log("UPDATE Request is successful ", data);
           // console.log(data);
+          
 
         },
         error => {
@@ -115,10 +119,20 @@ export class LabelComponent implements OnInit {
 
 
   labelsList() {
+    var array = [];
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         // console.log("Get Request is successful ", data);
-        this.temp = data['data'].details;
+        for(var i=0;i<data['data']['details'].length;i++)
+        {
+          if(data['data']['details'][i].isDeleted == false)
+          { 
+              array.push (data['data']['details'][i]);
+          }
+        }
+            this.temp = array;
+
+        // this.temp = data['data'].details;
         // console.log(data['data'].details)
       },
       error => {

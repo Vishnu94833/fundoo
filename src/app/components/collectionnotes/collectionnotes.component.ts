@@ -19,7 +19,15 @@ export class CollectionnotesComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private httpservice: HttpService,
-    private data: SearchsharingService) { }
+    private dataService: SearchsharingService) 
+    {
+      this.dataService.currentChipEvent.subscribe(
+        message=>{
+          if(message)
+          this.addnotes.emit({});
+        }
+      )
+    }
 
   @Input() cardadded;
   @Input() inputData;
@@ -66,7 +74,7 @@ export class CollectionnotesComponent implements OnInit {
         })
   }
   getGrid() {
-    this.data.currentGridEvent.subscribe(message => {
+    this.dataService.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
   }
@@ -82,4 +90,23 @@ export class CollectionnotesComponent implements OnInit {
         LoggerService.error("Error ",error)
       });
   }
+
+  removeReminder(id,reminderId)
+  {
+    this.httpservice.postarchive('notes/removeReminderNotes',
+    {
+      "noteId": id,
+      "reminder":reminderId
+    }
+    , this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ",data)
+        
+
+      },
+      error => {
+        LoggerService.error("Error ",error)
+      })
+  }
+
 }

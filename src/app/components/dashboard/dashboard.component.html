@@ -1,26 +1,36 @@
+
+<!--        Toolbar contains search,login details,refresh          -->
 <mat-toolbar class="tool">
+
+<!--         Toggle menu           -->
+
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span style="color:black;font-family:Bookman, URW Bookman L, serif">
     fundoo notes</span>
-  <div class="right">
-    <form id="search">
 
+    <!--          SearchBar          -->
+  <div class="right">
+    <form id="search" fxShow="true" fxHide.xs="true" fxHide.md="true" fxHide.sm="true" >
       <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData"
         (click)="navigateSearch()" (keydown)="down()" placeholder="Search" class="toolbar1">
       <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
-
     </form>
   </div>
+
+<!--          Grid View          -->
   <div fxFlex fxLayoutAlign="end">
-    <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button>
+    <button matTooltip="Grid View"  (click)="gridView()" *ngIf="list == 0" mat-icon-button>
       <mat-icon>view_stream</mat-icon></button>
 
-    <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
+
+<!--          List View          -->
+    <button matTooltip="List View"  (click)="grid()" *ngIf="list == 1" mat-icon-button>
       <mat-icon>view_module</mat-icon></button>
     
-      <button class="profilepic">
+      <!--          Profile pic,login details          -->
+      <button  class="profilepic">
         <img src="{{img}}" [matMenuTriggerFor]="appMenu" class="photo">
       </button>
 
@@ -56,6 +66,8 @@
 
 
 </mat-toolbar>
+
+<!--         contains notes,reminders,trash,labels,archive                -->
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"

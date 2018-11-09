@@ -1,31 +1,31 @@
-<div class="response" fxLayout='column' fxLayoutAlign="center center" style="margin-top: 100px;">
+<div class="response" fxLayout='column' fxLayoutAlign="center center"  >
 
-  <mat-card *ngIf='open' fxFlex="0 1 calc(30% - 32px)" aria-placeholder="Take a Note"
+  <mat-card class="border" *ngIf='open'aria-placeholder="Take a Note"
    (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" 
         matTooltipPosition="above">list</mat-icon>
       </span>
-      <span> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">
+      <!-- <span> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">
           insert_photo</mat-icon>
       </span>
       <span> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">
           create</mat-icon>
-      </span>
+      </span> -->
     </div>
   </mat-card>
 
 
-  <mat-card *ngIf="!open" [style.backgroundColor]="color" aria-placeholder="Title">
+  <mat-card class="border" fxFlexLayout="60"  *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
 
 
     <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
-    <div contenteditable="true" id="title" class="content" data-text="Title"></div>
+    <mat-card-title contenteditable="true" id="title" class="content" data-text="Title"></mat-card-title>
     <div class="space"></div>
     <div *ngIf="open1 == 0">
-      <div contenteditable="true" id="description" class="content" 
-      data-text="Take a note..."></div>
+      <mat-card-content contenteditable="true" id="description" class="content" 
+      data-text="Take a note..."></mat-card-content>
     </div>
 
     <div fxLayout="row">
@@ -55,16 +55,14 @@
 
 </div>
 
-    <div class="bot " fxLayout="row" fxLayoutAlign="space-around center">
-
-      <app-remind></app-remind>
-      <app-collaborator></app-collaborator>
-      <app-changecolor (colorEmit)=colour($event)></app-changecolor>
-      <app-addimage></app-addimage>
-      <app-archives></app-archives>
-      <app-more (labelList)=labelList($event)></app-more>
-
-      <div (click)="exit()" class="space1"> <button mat-button>close</button></div>
+    <div class="bot "  fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="center center">
+      <app-remind class="space1"></app-remind>
+      <app-collaborator class="space1"></app-collaborator>
+      <app-changecolor class="space1" (colorEmit)=colour($event)></app-changecolor>
+      <app-addimage class="space1"></app-addimage>
+      <app-archives class="space1"></app-archives>
+      <app-more class="space1" (labelList)=labelList($event)></app-more>
+      <span fxFlex='2.5%' (click)="exit()" > <button mat-button>close</button></span>
     </div>
   </mat-card>
 

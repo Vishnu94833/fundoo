@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="layout">
-  <div *ngFor='let x of cardadded | LockFilter:inputData' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let x of cardadded | LockFilter:inputData ; trackBy:x?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
-      <mat-card class="cardsize" [style.backgroundColor]="x.color">
+      <mat-card  class="cardsize" [style.backgroundColor]="x.color">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <mat-card-title (click)="openDialog(x)">
           <div [innerHtml]="x.title"></div>
@@ -11,6 +11,7 @@
         </mat-card-content>
         <div fxLayout="row">
           <div *ngFor="let items of x.noteLabels">
+            <div *ngIf="items.isDeleted == false">
             <mat-chip-list selected>
               <mat-chip>{{items.label}}
                 <mat-icon matChipRemove (click)="removeLabel(items.id, x.id)">
@@ -19,13 +20,14 @@
             </mat-chip-list>
           </div>
         </div>
+        </div>
 
         <div class="space"></div>
 
         <div >
           <mat-chip-list selected>
             <mat-chip>{{x.reminder | date}}
-              <mat-icon matChipRemove>
+              <mat-icon matChipRemove (click)="removeReminder(x.id,x.reminder)">
                   cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
