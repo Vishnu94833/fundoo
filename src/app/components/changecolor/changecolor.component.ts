@@ -18,7 +18,23 @@ export class ChangecolorComponent implements OnInit {
   ngOnInit() {
   }
 
-  colors(id) {
+  colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
+  { 'color': '#f28b82', 'name': 'Red' },
+  { 'color': '#fbbc04', 'name': 'Orange' },
+  { 'color': '#fff475', 'name': 'Yellow' }],
+
+  [{ 'color': '#ccff90', 'name': 'Green' },
+  { 'color': '#a7ffeb', 'name': 'Teal' },
+  { 'color': '#cbf0f8', 'name': 'Blue' },
+  { 'color': '#aecbfa', 'name': 'Dark blue' }],
+
+  [{ 'color': '#d7aefb', 'name': 'Purple' },
+  { 'color': '#fdcfe8', 'name': 'Pink' },
+  { 'color': '#e6c9a8', 'name': 'Brown' },
+  { 'color': '#e8eaed', 'name': 'Gray' }]]
+
+
+  newColor(id) {
     this.colorEmit.emit(id)
     if (this.color != undefined) {
       this.httpservice.postarchive('notes/changesColorNotes',
@@ -27,16 +43,14 @@ export class ChangecolorComponent implements OnInit {
           "noteIdList": [this.color.id]
         }, this.token).subscribe(
           (data) => {
-            // console.log("POST Request is successful ", data);
-            // console.log(id)
-            // console.log(this.color.id);
+
             localStorage.setItem('colorId', this.color.id)
             this.colorEvent.emit({});
 
             console.log();
           },
           error => {
-            // console.log("Error", error);
+
           })
     }
   }

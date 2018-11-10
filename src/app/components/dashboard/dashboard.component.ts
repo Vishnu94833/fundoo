@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../core/services/http/http.service';
 import { LabelComponent } from '../label/label.component';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
+import { environment } from '../../../environments/environment';
+import { CropimageComponent } from '../cropimage/cropimage.component';
 
 
 
@@ -94,11 +96,9 @@ export class DashboardComponent {
         }
             this.temp = array;
 
-        // this.temp = data['data'].details;
-        // console.log(data['data'].details)
+
       },
       error => {
-        // console.log("Error", error);
       });
   }
 
@@ -128,33 +128,43 @@ export class DashboardComponent {
   }
   ProfilePath: any;
   selectedFile = null;
-  onFileSelected(event) {
-    this.selectedFile = event.path[0].files[0];
-    console.log(event.target.value);
-    this.ProfilePath = event.target.value;
-    console.log(this.selectedFile.name);
-  }
-  image = {};
+ 
+  public pic;
   public image2 = localStorage.getItem('imageUrl');
-  img = "http://34.213.106.173/" + this.image2;
-  onUpload() {
-    var token = localStorage.getItem('token');
+  img = environment.apiUrl + this.image2;
 
+  onFileUpload(event) {
+    var token = localStorage.getItem('token');
+    this.profileCropOpen(event);
+
+    this.selectedFile = event.path[0].files[0];
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    this.httpservice.addImage('user/uploadProfileImage/', uploadData, token)
-      .subscribe(res => {
-        console.log("url: ", res['status'].imageUrl)
-
-
-
-        console.log(this.ProfilePath);
-      }, error => {
-        console.log(error);
-
-      })
-
   }
+  image = {};
+
+  clickLabel(labelsList) {
+    var labelsList = labelsList.label;
+    this.router.navigate(['/home/label/' + labelsList])
+  }
+  profileCropOpen(data): void { //Function for the dialog box
+    const dialogRefPic = this.dialog.open(CropimageComponent, {
+      width: '450px',
+      data: data
+    });
+
+    dialogRefPic.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.data.currentMsg.subscribe(message => this.pic = message)
+      console.log("pic", this.pic);
+      if (this.pic == true) {
+        this.image2 = localStorage.getItem('imageUrl');
+        this.img = environment.apiUrl + this.image2;
+      }
+
+    });
+  }
+
 
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Input, Output, EventEmitter, ElementRef, Vie
 import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
+import { LabeldeleteComponent } from '../labeldelete/labeldelete.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class LabelComponent implements OnInit {
   label = localStorage.getItem('label')
 
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,public dataService: SearchsharingService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,public dataService: SearchsharingService,public dialog: MatDialog) { }
 
   @ViewChild('Label') Label: ElementRef;
   @ViewChild('Label1') Label1: ElementRef;
@@ -25,6 +26,37 @@ export class LabelComponent implements OnInit {
 
 
   @Output() labelList = new EventEmitter();
+
+  openDelete(id): void {
+    const dialogRef = this.dialog.open(LabeldeleteComponent, {
+      width: 'fit-content',
+      height:'fit-content',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true)
+      {
+      this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
+      {
+        "label": document.getElementById('label').innerHTML
+
+      }).subscribe(
+        (data) => {
+          // console.log("DELETE Request is successful ", data);
+          this.labelsList();
+          this.dataService.changeChipEvent(true);
+          // console.log(this.labelList)
+
+        },
+        error => {
+          // console.log("Error", error);
+        })
+
+      }
+    });
+  }
+
+
   ngOnInit() {
     this.labelsList();
   }
@@ -74,21 +106,21 @@ export class LabelComponent implements OnInit {
 
   deleteLabel(id) {
 
-    this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
-      {
-        "label": document.getElementById('label').innerHTML
+    // this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
+    //   {
+    //     "label": document.getElementById('label').innerHTML
 
-      }).subscribe(
-        (data) => {
-          // console.log("DELETE Request is successful ", data);
-          this.labelsList();
-          this.dataService.changeChipEvent(true);
-          // console.log(this.labelList)
+    //   }).subscribe(
+    //     (data) => {
+    //       this.labelsList();
+    //       this.dataService.changeChipEvent(true);
 
-        },
-        error => {
-          // console.log("Error", error);
-        })
+    //     },
+    //     error => {
+    //     })
+
+    this.openDelete(id);
+
   }
 
 

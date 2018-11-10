@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
   MatSelectModule, MatInputModule, MatCardModule, MatButtonModule,
   MatDividerModule, MatListModule, MatFormFieldModule, MatButtonToggleModule,
   MatRadioModule, MatIconModule, MatSnackBarModule, MatToolbarModule,
   MatSidenavModule, MatDialogModule, MatMenuModule, MatChipsModule,
-  MatCheckboxModule
+  MatCheckboxModule,MatDatepickerModule,MatNativeDateModule
 } from '@angular/material'
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -45,7 +45,10 @@ import { LabelpipePipe } from '../app/core/pipe/labelpipe.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';
 import { LoggerService } from './core/services/logger/logger.service';
-
+import { CropimageComponent } from './components/cropimage/cropimage.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { LabeldeleteComponent } from './components/labeldelete/labeldelete.component';
+import { TrashdeleteComponent } from './components/trashdelete/trashdelete.component';
 
 
 @NgModule({
@@ -76,6 +79,9 @@ import { LoggerService } from './core/services/logger/logger.service';
     LabelpipePipe,
     SearchComponent,
     LabelslistComponent,
+    CropimageComponent,
+    LabeldeleteComponent,
+    TrashdeleteComponent,
 
     // Notes1Component
   ],
@@ -107,12 +113,16 @@ import { LoggerService } from './core/services/logger/logger.service';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    ImageCropperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     // FormControl  
 
   ],
   providers: [HttpService, AuthGuard, AuthService, LoggerService],
-  entryComponents: [UpdatenotesComponent],
-  bootstrap: [AppComponent]
+  entryComponents: [UpdatenotesComponent,CropimageComponent,ToolbarComponent,LabeldeleteComponent,TrashdeleteComponent],
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

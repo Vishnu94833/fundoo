@@ -17,7 +17,7 @@
   </mat-card>
 
 
-  <mat-card class="border" fxFlexLayout="60"  *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
+  <mat-card class="border" *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
 
 
     <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
@@ -55,14 +55,26 @@
 
 </div>
 
-    <div class="bot "  fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="center center">
-      <app-remind class="space1"></app-remind>
-      <app-collaborator class="space1"></app-collaborator>
-      <app-changecolor class="space1" (colorEmit)=colour($event)></app-changecolor>
-      <app-addimage class="space1"></app-addimage>
-      <app-archives class="space1"></app-archives>
-      <app-more class="space1" (labelList)=labelList($event)></app-more>
-      <span fxFlex='2.5%' (click)="exit()" > <button mat-button>close</button></span>
+    <div class="bot " fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="space-between">
+      <div  class="space1">
+        <app-remind ></app-remind>
+      </div>
+      <div  class="space1">
+        <app-collaborator ></app-collaborator>
+      </div>
+      <div  class="space1">
+        <app-changecolor  (colorEmit)=colour($event)></app-changecolor>
+      </div>
+      <div  class="space1">
+        <app-addimage ></app-addimage>
+      </div>
+      <div  class="space1">
+        <app-archives></app-archives>
+      </div>
+      <div  class="space1">
+        <app-more  (labelList)=labelList($event)></app-more>
+      </div>
+      <div  class="space2"><span  (click)="exit()"> <button mat-button>close</button></span></div>
     </div>
   </mat-card>
 

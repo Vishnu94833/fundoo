@@ -91,18 +91,16 @@ export class CollectionnotesComponent implements OnInit {
       });
   }
 
-  removeReminder(id,reminderId)
+  removeReminder(id)
   {
     this.httpservice.postarchive('notes/removeReminderNotes',
     {
-      "noteId": id,
-      "reminder":reminderId
+     "noteIdList":[id]
     }
     , this.token).subscribe(
       (data) => {
+        this.addnotes.emit({})
         console.log("POST Request is successful ",data)
-        
-
       },
       error => {
         LoggerService.error("Error ",error)

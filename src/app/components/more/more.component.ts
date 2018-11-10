@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
-import { TrashComponent } from '../trash/trash.component';
-import { CollectionnotesComponent } from '../collectionnotes/collectionnotes.component';
+// import { TrashComponent } from '../trash/trash.component';
+// import { CollectionnotesComponent } from '../collectionnotes/collectionnotes.component';
+import { MatSnackBar } from '@angular/material';
 // import { EventEmitter } from 'events';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -18,7 +19,7 @@ export class MoreComponent implements OnInit {
   id = localStorage.getItem('userId');
   search: any;
   arr: any;
-  constructor(private httpservice: HttpService) { }
+  constructor(private httpservice: HttpService, public snackBar: MatSnackBar) { }
   @Input() carddel;
   @Output() deleteevent = new EventEmitter();
   @Output() labelList = new EventEmitter();
@@ -51,6 +52,9 @@ export class MoreComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           // console.log("POST Request is successful ", data);
+          this.snackBar.open("Note Deleted Successfully", "", {
+            duration: 2000
+          })
 
           this.deleteevent.emit({
           })

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { TrashdeleteComponent } from '../trashdelete/trashdelete.component';
+
 
 @Component({
   selector: 'app-trash',
@@ -7,20 +11,35 @@ import { HttpService } from '../../core/services/http/http.service';
   styleUrls: ['./trash.component.scss']
 })
 export class TrashComponent implements OnInit {
-  constructor(private httpservice: HttpService) { }
-
-  array: any = [];
-  token = localStorage.getItem('token');
-  ngOnInit() {
-
-    this.getTrashList();
+  constructor(private httpservice: HttpService,public dialog: MatDialog) { }
 
 
+  openDialog(x): void {
+    const dialogRef = this.dialog.open(ToolbarComponent, {
+      width: 'fit-content',
+      height:'fit-content',
+      data: x
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getTrashList();
+    });
   }
 
-  deleteforever(notes) {
-    console.log(notes)
-    this.httpservice.postarchive('notes/deleteForeverNotes',
+
+
+
+  openDelete(notes): void {
+    const dialogRef = this.dialog.open(TrashdeleteComponent, {
+      width: 'fit-content',
+      height:'fit-content',
+      // data: x
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result==true)
+      {
+      this.httpservice.postarchive('notes/deleteForeverNotes',
       {
         "isDeleted": false,
         "noteIdList": [notes]
@@ -35,6 +54,38 @@ export class TrashComponent implements OnInit {
           // console.log("Error", error);
         }
       )
+    }
+    });
+  }
+
+
+
+
+  array: any = [];
+  token = localStorage.getItem('token');
+  ngOnInit() {
+
+    this.getTrashList();
+
+
+  }
+
+  deleteforever(notes) {
+    // console.log(notes)
+    // this.httpservice.postarchive('notes/deleteForeverNotes',
+    //   {
+    //     "isDeleted": false,
+    //     "noteIdList": [notes]
+
+    //   }, this.token).subscribe(
+    //     (data) => {
+    //       this.getTrashList();
+
+    //     },
+    //     error => {
+    //     }
+    //   )
+    this.openDelete(notes);
 
   }
 

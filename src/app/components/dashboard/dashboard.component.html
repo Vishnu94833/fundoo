@@ -12,7 +12,7 @@
 
     <!--          SearchBar          -->
   <div class="right">
-    <form id="search" fxShow="true" fxHide.xs="true" fxHide.md="true" fxHide.sm="true" >
+    <form id="search" fxShow="true" fxHide.xs="true"  fxHide.sm="true" >
       <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData"
         (click)="navigateSearch()" (keydown)="down()" placeholder="Search" class="toolbar1">
       <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
@@ -31,36 +31,30 @@
     
       <!--          Profile pic,login details          -->
       <button  class="profilepic">
-        <img src="{{img}}" [matMenuTriggerFor]="appMenu" class="photo">
+        <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo">
       </button>
 
     <div>
 
-      <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
-        <div class="signout">
-          <!--             profile-pic upload                   -->
-          <span fxLayout="row" fxLayoutGap="15px">
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
 
-            <button class="profilepic1">
-              <img src="{{img}}" class="photo">
-            </button>
-            <p >{{firstname }}  {{lastname}} </p>
-          </span>
-          <p class="movright"> {{email}}</p>
+        <div fxLayoutAlign="row wrap">
+        <div fxFlex=20>
+        <button (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+        (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
+        mat-mini-fab class="profile-pic">
+        </button>
+        <input style="display:none" (click) = "$event.stopPropagation()" class="image"
+        type="file" (change)="onFileUpload($event)" #selectFile>
         </div>
-        <hr>
-
-        <h4>upload pic</h4>
-        <input class="gap" type="file" (change)=onFileSelected($event)>
-        <button type="button" class="gap" (click)="onUpload()" mat-raised-button color="disabled"> upload</button>
-
-
-
-
-        <button class="gap" mat-raised-button color="disabled" style="float:right" 
-                (click)="logout()">Logout</button>
-         <!--           profile-pic upload   ends                -->
-      </mat-menu>
+        <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left" ><b>
+        {{firstname | titlecase}} {{lastname | titlecase}}</b> </mat-content>
+        </div><br>
+        <mat-content class="contentstyle">{{email}}</mat-content><hr>
+        <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
+        <button fxFlex class="addaccount" routerLink="/signup">Add account</button>
+        <button fxFlex class="logout" (click)="logout()">Log out </button></div>
+        </mat-menu>
     </div>
   </div>
 

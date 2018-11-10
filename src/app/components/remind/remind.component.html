@@ -8,7 +8,7 @@
 
   <div>Reminder :</div>
   <div fxLayout='column ' fxLayoutAlign="center center">
-    <button mat-button (click)="$event.stopPropagation();remindMe()">
+    <button mat-button (click)="remindMeToday()">
       <span >
         Later today
     </span>
@@ -16,7 +16,7 @@
       8:00 PM
     </span>
   </button>
-    <button mat-button>
+    <button mat-button  (click)="remindMeTommorow()" >
       <span>
         Tomorrow
       </span>
@@ -25,7 +25,7 @@
       </span>
     </button>
 
-    <button mat-button>
+    <button mat-button  (click)="remindMeNextWeek()">
       <span>Next week</span>
     </button>
     
@@ -42,4 +42,13 @@
       </span>
     </button>
   </div>
+  <div >
+ 
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+    </div>
 </mat-menu>

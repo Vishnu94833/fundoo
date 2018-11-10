@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -17,6 +17,12 @@ export class SearchsharingService {
   private chipEvent = new Subject<boolean>();
   currentChipEvent = this.chipEvent.asObservable();
 
+
+private msgSource = new BehaviorSubject(false);
+currentMsg = this.msgSource.asObservable();
+
+
+
   constructor() { }
 
   changeMessage(message: string) {
@@ -31,4 +37,8 @@ export class SearchsharingService {
   changeChipEvent(message: boolean) {
     this.chipEvent.next(message)
   }
+
+  changeMsg(message: boolean) {
+    this.msgSource.next(message);
+    }
 }

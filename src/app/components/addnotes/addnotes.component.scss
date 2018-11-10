@@ -89,17 +89,24 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 }
 .response
 {
-    // display: flex;
+
     margin-top: 100px;
     border-radius: 5%;
 }
 .border
 {
-    border-radius: 8%;
+    // border-radius: 8%;
+    // width: 800px ;
 }
 .bot
 {
     margin-top: 8%;
     width: fixed;
     float: left;
+    flex-wrap: wrap;
+    
+}
+.space2
+{
+   padding: 20px;
 }

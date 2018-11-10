@@ -24,18 +24,22 @@
 
         <div class="space"></div>
 
-        <div >
-          <mat-chip-list selected>
-            <mat-chip>{{x.reminder | date}}
-              <mat-icon matChipRemove (click)="removeReminder(x.id,x.reminder)">
-                  cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-        </div>
+        <!-- <div fxLayout="row"> -->
+            <div *ngFor="let item of x.reminder">
+              <!-- <div *ngIf="items.isDeleted == false"> -->
+              <mat-chip-list selected>
+                <mat-chip>{{item | date}}
+                  <mat-icon matChipRemove (click)="removeReminder(x.id)">
+                      cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            <!-- </div> -->
+          </div>
+          <!-- </div> -->
 
         <div fxLayout="row">
 
-          <app-remind class="space" [reminder]="x"></app-remind>
+          <app-remind (reminderEmit) = new($event) class="space" [reminder]="x"></app-remind>
           <app-collaborator class="space"></app-collaborator>
           <app-changecolor class="space" [color]="x" (colorEvent)=new($event)>
           </app-changecolor>
