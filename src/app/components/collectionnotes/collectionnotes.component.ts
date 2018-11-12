@@ -35,6 +35,7 @@ export class CollectionnotesComponent implements OnInit {
   @Output() addnotes = new EventEmitter();
   toggle = false;
   token = localStorage.getItem('token');
+  modifiedCheckList: any = [];
 
   ngOnInit() {
 
@@ -105,6 +106,35 @@ export class CollectionnotesComponent implements OnInit {
       error => {
         LoggerService.error("Error ",error)
       })
+  }
+
+  updateChecklist(id)
+  {
+    var apiData = {
+      "itemName": this.modifiedCheckList.itemName,
+      "status": this.modifiedCheckList.status
+    }
+    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
+      console.log(response);
+      // this.archiveEvent.emit();
+
+    })
+
+
+  }
+
+  checkBox(checkList,note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    this.modifiedCheckList = checkList;
+    this.updateChecklist(note.id);
   }
 
 }

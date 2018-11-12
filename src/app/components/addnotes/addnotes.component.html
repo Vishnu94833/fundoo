@@ -20,12 +20,12 @@
   <mat-card class="border" *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
 
 
-    <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+    <app-pin class="pin" (click)="pinned(id)"></app-pin>
     <mat-card-title contenteditable="true" id="title" class="content" data-text="Title"></mat-card-title>
     <div class="space"></div>
     <div *ngIf="open1 == 0">
       <mat-card-content contenteditable="true" id="description" class="content" 
-      data-text="Take a note..."></mat-card-content>
+      data-text="Take a note..."   (click)="checked=false"></mat-card-content>
     </div>
 
     <div fxLayout="row">
@@ -49,7 +49,7 @@
 
 <div class="check" fxLayout="row" id="title" id="note" autofocus id = "description">
   <mat-icon fxFlex="5%">add</mat-icon>
-  <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
+  <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (click)="checked=true" (keydown.enter)="enter()">
 </div>
 <mat-divider></mat-divider>
 

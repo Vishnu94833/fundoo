@@ -2,13 +2,35 @@
   <div *ngFor='let x of cardadded | LockFilter:inputData ; trackBy:x?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <mat-card  class="cardsize" [style.backgroundColor]="x.color">
-        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+        <app-pin class="pin"></app-pin>
         <mat-card-title (click)="openDialog(x)">
           <div [innerHtml]="x.title"></div>
         </mat-card-title>
         <mat-card-content (click)="openDialog(x)">
           <div [innerHtml]="x.description"></div>
         </mat-card-content>
+
+
+
+        <div  *ngFor="let checklist of x.noteCheckLists" fxLayout="row" > 
+          <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
+          (click)=checkBox(checklist,x)></mat-checkbox>
+          <input class="check" *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+          [(ngModel)]=checklist.itemName fxFlex="90%" 
+            (click)="open(x)" [style.backgroundColor]="x.color">
+         </div>
+        
+          <div  *ngFor="let checklist of x.noteCheckLists" fxLayout="row">
+          <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+           (click)=checkBox(checklist,x)></mat-checkbox>
+          <del  class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'"
+           (click)="open(x)">{{checklist.itemName}}</del>
+        </div>
+
+
+
+
+
         <div fxLayout="row">
           <div *ngFor="let items of x.noteLabels">
             <div *ngIf="items.isDeleted == false">

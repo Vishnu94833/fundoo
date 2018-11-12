@@ -49,6 +49,7 @@ import { CropimageComponent } from './components/cropimage/cropimage.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LabeldeleteComponent } from './components/labeldelete/labeldelete.component';
 import { TrashdeleteComponent } from './components/trashdelete/trashdelete.component';
+import { PinComponent } from './components/pin/pin.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { TrashdeleteComponent } from './components/trashdelete/trashdelete.compo
     CropimageComponent,
     LabeldeleteComponent,
     TrashdeleteComponent,
+    PinComponent,
 
     // Notes1Component
   ],

@@ -13,10 +13,13 @@ export class AddnotesComponent implements OnInit {
   public open = true;
   open1 = 0;
   checkArray = [];
-  color: any;
+  color: any="#fafafa";
   name = [];
   rollId = [];
   boxClicked = true;
+  checked=false;
+  status="open";
+  dataArrayCheck=[];
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
@@ -28,10 +31,14 @@ export class AddnotesComponent implements OnInit {
   }
   functionCheckbox() {
     this.open1 = 1;
+    // this.open=!this.open
   }
 
+  
   exit() {
-    // this.open = !this.open;
+  // this.open = !this.open;
+    if(this.checked==false)
+    {
     this.httpservice.addnotes('notes/addNotes',
       {
         'title': document.getElementById('title').innerHTML,
@@ -57,6 +64,49 @@ export class AddnotesComponent implements OnInit {
           this.color = "#fafafa"
           this.open1 = 0;
         })
+      }
+      else
+      {
+        for(var i=0;i<this.dataarray.length;i++){
+          if(this.dataarray[i].isChecked==true){
+           this.status="close"
+          }
+          var apiObj={
+            "itemName":this.dataarray[i].data,
+            "status":this.status
+          }
+          this.dataArrayCheck.push(apiObj)
+          this.status="open"
+        }
+        console.log(this.dataArrayCheck);
+        this.httpservice.addnotes('notes/addNotes',
+      {
+        'title': document.getElementById('title').innerHTML,
+        // 'description': document.getElementById('description').innerHTML,
+        'labelIdList': JSON.stringify(this.rollId),
+        'checklist': JSON.stringify(this.dataArrayCheck),
+        'isPined': 'false',
+        'color': this.color
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.name = null;
+          this.dataArrayCheck=[]
+          this.open = !this.open;
+          this.color = "#fafafa";
+          this.open1 = 0;
+          this.message.emit({});
+        },
+        error => {
+          console.log("Error", error);
+          this.dataArrayCheck=[]
+          this.name = null;
+          this.open = !this.open;
+          this.color = "#fafafa"
+          this.open1 = 0;
+        })
+  
+      }
   }
 
   colour(event) {
@@ -134,6 +184,23 @@ export class AddnotesComponent implements OnInit {
   }
 
 
+// Pin and Unpin function
 
+pinned(id)
+{
+  this.httpservice.addnotes('notes/addNotes',
+      {
+        "isPined": true,
+        "noteId":id
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+        
+        },
+        error => {
+          console.log("Error", error);
+     
+        })
+}
 
 }
