@@ -37,7 +37,7 @@ export class AddnotesComponent implements OnInit {
   
   exit() {
   // this.open = !this.open;
-    if(this.checked==false)
+    if(this.open1 == 0)
     {
     this.httpservice.addnotes('notes/addNotes',
       {
@@ -188,7 +188,7 @@ export class AddnotesComponent implements OnInit {
 
 pinned(id)
 {
-  this.httpservice.addnotes('notes/addNotes',
+  this.httpservice.addnotes('notes/pinUnpinNotes',
       {
         "isPined": true,
         "noteId":id

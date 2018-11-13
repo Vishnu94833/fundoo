@@ -137,4 +137,28 @@ export class CollectionnotesComponent implements OnInit {
     this.updateChecklist(note.id);
   }
 
+
+
+// Pin and Unpin function
+
+// pinned(pin)
+// {
+//   this.httpservice.postarchive('notes/pinUnpinNotes',
+//       {
+//         "isPined": true,
+//         "noteIdList":[pin]
+//       }, this.token).subscribe(
+//         (data) => {
+//           console.log("POST Request is successful ", data);
+        
+//         },
+//         error => {
+//           console.log("Error", error);
+     
+//         })
+// }
+
+
+
+
 }

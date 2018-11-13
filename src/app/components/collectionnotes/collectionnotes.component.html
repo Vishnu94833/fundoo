@@ -2,7 +2,7 @@
   <div *ngFor='let x of cardadded | LockFilter:inputData ; trackBy:x?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <mat-card  class="cardsize" [style.backgroundColor]="x.color">
-        <app-pin class="pin"></app-pin>
+        <app-pin class="pin" [pinArr] = "x" (pinEmit) = "new($event)"></app-pin>
         <mat-card-title (click)="openDialog(x)">
           <div [innerHtml]="x.title"></div>
         </mat-card-title>

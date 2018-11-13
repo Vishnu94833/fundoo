@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-pin',
@@ -8,23 +9,51 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class PinComponent implements OnInit {
 
-token=localStorage.getItem('token')
+token=localStorage.getItem('token');
+@Input() pinArr;
+@Output() pinEmit = new EventEmitter();
 
-  constructor(private httpservice:HttpService) { }
+  constructor(private httpservice:HttpService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     // this.pinned(id)
   }
 
-pinned(id)
+pinned()
 {
-  this.httpservice.addnotes('notes/addNotes',
+  this.httpservice.postarchive('notes/pinUnpinNotes',
       {
         "isPined": true,
-        "noteId":id
+        "noteIdList":[this.pinArr.id]
       }, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          console.log("POST pin Request is successful ", data);
+          this.snackBar.open("Note Pinned Successfully", "", {
+            duration: 2000
+          })
+          this.pinEmit.emit();
+        
+        },
+        error => {
+          console.log("Error", error);
+     
+        })
+}
+
+unPinned()
+{
+  this.httpservice.postarchive('notes/pinUnpinNotes',
+      {
+        "isPined": false,
+        "noteIdList":[this.pinArr.id]
+      }, this.token).subscribe(
+        (data) => {
+          console.log("POST unpin Request is successful ", data);
+          this.snackBar.open("Note UnPinned Successfully", "", {
+            duration: 2000
+          })
+
+          this.pinEmit.emit();
         
         },
         error => {

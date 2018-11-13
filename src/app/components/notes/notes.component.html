@@ -1,7 +1,18 @@
 <app-addnotes (message)="receive($event)">
 
 </app-addnotes>
+<!-- <div *ngIf="isPined"> -->
+    <div>pinned</div>
+    <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
+    </app-collectionnotes>
 
-<app-collectionnotes [cardadded]="array"  (addnotes)="receive($event)">
-    
-</app-collectionnotes>
+    <div>others</div>
+    <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
+    </app-collectionnotes>
+<!-- </div> -->
+
+<!-- <div *ngIf="!isPined">
+
+    <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
+    </app-collectionnotes>
+</div> -->

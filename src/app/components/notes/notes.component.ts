@@ -9,39 +9,60 @@ import { AuthService } from '../../core/services/authgaurd/auth.service';
 })
 export class NotesComponent implements OnInit {
   array: any = [];
+  pinArray: any = [];
   token = localStorage.getItem('token');
   message: boolean;
   constructor(private httpservice: HttpService, private auth: AuthService) { }
 
   ngOnInit() {
     this.cardslist();
+    this.pinnedList();
+
+    // this.cardslist();
 
   }
 
   cardslist() {
-    
+
     this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
       (data) => {
         this.array = [];
-        // console.log("GET Request is successful ", data);
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
+          if (data['data']['data'][i].isDeleted == false && 
+          data['data']['data'][i].isArchived == false && 
+          data['data']['data'][i].isPined == false) {
             this.array.push(data['data']['data'][i]);
           }
         }
-        // console.log("array", this.array);
-
       },
       error => {
-        // console.log("Error", error);
+
       });
 
 
   }
 
+  pinnedList() {
+    this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
+      (data) => {
+        this.pinArray = [];
+        for (var i = data['data'].data.length - 1; i >= 0; i--) {
+          if (data['data']['data'][i].isDeleted == false && 
+          data['data']['data'][i].isArchived == false && 
+          data['data']['data'][i].isPined == true) {
+            this.pinArray.push(data['data']['data'][i]);
+          }
+        }
+      },
+      error => {
+
+      });
+  }
+
   receive() {
     if (event) {
       this.cardslist();
+      this.pinnedList();
     }
   }
 

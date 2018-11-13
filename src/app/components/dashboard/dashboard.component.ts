@@ -32,7 +32,7 @@ export class DashboardComponent {
   hoverItem: string;
   buttonclick: any = false;
 
-
+    title;
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
@@ -69,7 +69,10 @@ export class DashboardComponent {
     this.labelList();
   }
 
-
+  changeTitle(title)
+  {
+    this.title=title;
+  }
 
   openDialog(): void {
 
