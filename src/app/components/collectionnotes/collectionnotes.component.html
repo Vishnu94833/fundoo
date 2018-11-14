@@ -46,18 +46,16 @@
 
         <div class="space"></div>
 
-        <!-- <div fxLayout="row"> -->
-            <div *ngFor="let item of x.reminder">
-              <!-- <div *ngIf="items.isDeleted == false"> -->
-              <mat-chip-list selected>
-                <mat-chip>{{item | date}}
-                  <mat-icon matChipRemove (click)="removeReminder(x.id)">
-                      cancel</mat-icon>
-                </mat-chip>
-              </mat-chip-list>
-            <!-- </div> -->
+          <div *ngIf="x.reminder.length!=0">
+            <mat-chip-list class="chip">
+              <mat-chip class="chip_color">
+                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{x.reminder | date:'medium'}}
+                <mat-icon (click)="$event.stopPropagation(); removeReminder(x.id)">
+                  cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
           </div>
-          <!-- </div> -->
+          
 
         <div fxLayout="row">
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment.prod';
 
 
 @Injectable({
@@ -164,6 +165,31 @@ export class HttpService {
       })
     };
     return this.http.post(url,body,httpOptions)
+  }
+
+
+  httpAddReminder(url,token,body){
+    console.log(token);
+    url = this.postUrl + url;
+    var httpOptions={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.post(url,body,httpOptions)
+  }
+  
+ public httpGetReminder(url,token){
+    console.log(token);
+    url = this.postUrl + url;
+    var httpOptions={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.get(url,httpOptions)
   }
 
 }

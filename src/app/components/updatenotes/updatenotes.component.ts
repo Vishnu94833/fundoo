@@ -67,6 +67,7 @@ export class UpdatenotesComponent implements OnInit {
       this.dialogRef.close();
       console.log(error);
     }
+    this.dialogRef.close();
 
   }
 

@@ -8,7 +8,7 @@
     <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span style="color:black;font-family:Bookman, URW Bookman L, serif">
-    {{title}}</span>
+    <b>{{title}}</b></span>
 
     <!--          SearchBar          -->
   <div class="right">
@@ -30,9 +30,20 @@
       <mat-icon>view_module</mat-icon></button>
     
       <!--          Profile pic,login details          -->
+      <div *ngIf="image2!=''">
       <button  class="profilepic">
         <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo">
       </button>
+    </div>
+    <div *ngIf="image2==''">
+      <button  mat-mini-fab color="disabled" class="profile-pic " [matMenuTriggerFor]="menu">
+        <!-- <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo"> -->
+       {{firstname | slice:0:1}}
+        
+        
+      </button>
+
+    </div>
 
     <div>
 
@@ -40,9 +51,13 @@
 
         <div fxLayoutAlign="row wrap">
         <div fxFlex=20>
-        <button (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+        <button color="disabled" *ngIf="image2!=''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
         (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
         mat-mini-fab class="profile-pic">
+        </button>
+        <button  *ngIf="image2==''" (click) = "$event.stopPropagation()" 
+        (click)="selectFile.click()" matTooltip="{{firstname | titlecase }}"
+        mat-mini-fab class="profile-pic">{{firstname | titlecase | slice:0:1}}
         </button>
         <input style="display:none" (click) = "$event.stopPropagation()" class="image"
         type="file" (change)="onFileUpload($event)" #selectFile>
@@ -68,7 +83,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
 
-      <a (click)='changeTitle("Fundoo notes")' mat-list-item routerLink="/homepage/notes">
+      <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes">
         <img  src="../../../assets/images/notes.svg">Notes
       </a>
       <a (click)='changeTitle("Reminders")' mat-list-item routerLink="/homepage/reminder">

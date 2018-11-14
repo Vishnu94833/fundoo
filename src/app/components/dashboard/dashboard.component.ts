@@ -32,7 +32,7 @@ export class DashboardComponent {
   hoverItem: string;
   buttonclick: any = false;
 
-    title;
+    title="Fundoo Notes";
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
