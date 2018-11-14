@@ -1,11 +1,10 @@
-<div class="response" fxLayout='column' fxLayoutAlign="center center"  >
+<div class="response" fxLayout='column' fxLayoutAlign="center center">
 
-  <mat-card class="border" *ngIf='open'aria-placeholder="Take a Note"
-   (click)="function()">
+  <!-- Add note starts -->
+  <mat-card class="border" *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
-      <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" 
-        matTooltipPosition="above">list</mat-icon>
+      <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" matTooltipPosition="above">list</mat-icon>
       </span>
       <!-- <span> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">
           insert_photo</mat-icon>
@@ -16,21 +15,19 @@
     </div>
   </mat-card>
 
-
+  <!-- creating notes dialog will be opened for editing notes -->
   <mat-card class="border" *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
-
-
-    <!-- <app-pin class="pin" ></app-pin> -->
-    <!-- <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" > -->
     <mat-icon>pin</mat-icon>
 
+    <!-- title goes here... -->
     <mat-card-title contenteditable="true" id="title" class="content" data-text="Title"></mat-card-title>
     <div class="space"></div>
     <div *ngIf="open1 == 0">
-      <mat-card-content contenteditable="true" id="description" class="content" 
-      data-text="Take a note..."   (click)="checked=false"></mat-card-content>
+      <!-- Description goes here -->
+      <mat-card-content contenteditable="true" id="description" class="content" data-text="Take a note..."
+        (click)="checked=false"></mat-card-content>
     </div>
-
+    <!-- Labels will be displayed using below div... -->
     <div fxLayout="row">
       <div *ngFor="let items of name">
         <mat-chip-list selected>
@@ -41,43 +38,46 @@
       </div>
     </div>
 
-    <div *ngIf="open1 == 1"  id="title"  autofocus #description>
+    <!-- code for checkbox  starts -->
+    <div *ngIf="open1 == 1" id="title" autofocus #description>
       <div class="check" *ngFor="let data of dataarray" id="note" fxLayout="row">
 
-      <mat-checkbox fxFlex="5%"></mat-checkbox>
-      <input fxFlex="90" *ngIf="open1 == 1" class="inputNote1"  id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
-<mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">cancel</mat-icon>
-  </div>
-  <mat-divider></mat-divider>
+        <mat-checkbox fxFlex="5%"></mat-checkbox>
+        <input fxFlex="90" *ngIf="open1 == 1" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
+        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">cancel</mat-icon>
+      </div>
+      <mat-divider></mat-divider>
 
-<div class="check" fxLayout="row" id="title" id="note" autofocus id = "description">
-  <mat-icon fxFlex="5%">add</mat-icon>
-  <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (click)="checked=true" (keydown.enter)="enter()">
-</div>
-<mat-divider></mat-divider>
+      <div class="check" fxLayout="row" id="title" id="note" autofocus id="description">
+        <mat-icon fxFlex="5%">add</mat-icon>
+        <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item"
+          (click)="checked=true" (keydown.enter)="enter()">
+      </div>
+      <mat-divider></mat-divider>
 
-</div>
+    </div>
 
+    <!-- icons  -->
     <div class="bot " fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="space-between">
-      <div  class="space1">
-        <app-remind ></app-remind>
+      <div class="space1">
+        <app-remind></app-remind>
       </div>
-      <div  class="space1">
-        <app-collaborator ></app-collaborator>
+      <div class="space1">
+        <app-collaborator></app-collaborator>
       </div>
-      <div  class="space1">
-        <app-changecolor  (colorEmit)=colour($event)></app-changecolor>
+      <div class="space1">
+        <app-changecolor (colorEmit)=colour($event)></app-changecolor>
       </div>
-      <div  class="space1">
-        <app-addimage ></app-addimage>
+      <div class="space1">
+        <app-addimage></app-addimage>
       </div>
-      <div  class="space1">
+      <div class="space1">
         <app-archives></app-archives>
       </div>
-      <div  class="space1">
-        <app-more  (labelList)=labelList($event)></app-more>
+      <div class="space1">
+        <app-more (labelList)=labelList($event)></app-more>
       </div>
-      <div  class="space2"><span  (click)="exit()"> <button mat-button>close</button></span></div>
+      <div class="space2"><span (click)="exit()"> <button mat-button>close</button></span></div>
     </div>
   </mat-card>
 
