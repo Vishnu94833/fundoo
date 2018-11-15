@@ -62,12 +62,7 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
-.space1
-{
-    // margin-bottom: 1%;
-    // margin-left: 13%;
 
-}
 .content
 {
 

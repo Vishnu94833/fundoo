@@ -90,7 +90,7 @@
         <hr>
 
 
-        <div fxLayoutAlign="row wrap"  class="add" fxLayoutGap=80px>
+        <div fxLayoutAlign="row wrap" fxLayoutAlign="space-between center" class="add" fxLayoutGap=80px>
           <button mat-raised-button color="primary" fxFlex class="addaccount" routerLink="/signup">
             Add account
           </button>
@@ -130,7 +130,7 @@
       <div (click)="labelsPage(labels)" *ngFor=" let labels of temp ">
         <a (click)='changeTitle(labels.label)' mat-list-item>
           <mat-icon class="ma1">label_outline</mat-icon>
-          <span class="spac">{{labels.label}}</span>
+          <span class="spac1">{{labels.label}}</span>
         </a>
       </div>
 

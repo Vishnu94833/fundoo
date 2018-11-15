@@ -1,30 +1,30 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="layout">
-  <div *ngFor='let x of cardadded | LockFilter:inputData ; trackBy:x?.noteId' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
-      <mat-card  class="cardsize" [style.backgroundColor]="x.color">
-        <app-pin class="pin" [pinArr] = "x" (pinEmit) = "new($event)"></app-pin>
-        <mat-card-title (click)="openDialog(x)">
-          <div [innerHtml]="x.title"></div>
+      <mat-card  class="cardsize" [style.backgroundColor]="index.color">
+        <app-pin class="pin" [pinArr] = "index" (pinEmit) = "new($event)"></app-pin>
+        <mat-card-title (click)="openDialog(index)">
+          <div [innerHtml]="index.title"></div>
         </mat-card-title>
-        <mat-card-content (click)="openDialog(x)">
-          <div [innerHtml]="x.description"></div>
+        <mat-card-content (click)="openDialog(index)">
+          <div [innerHtml]="index.description"></div>
         </mat-card-content>
 
 
 
-        <div  *ngFor="let checklist of x.noteCheckLists" fxLayout="row" > 
+        <div  *ngFor="let checklist of index.noteCheckLists" fxLayout="row" > 
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-          (click)=checkBox(checklist,x)></mat-checkbox>
+          (click)=checkBox(checklist,index)></mat-checkbox>
           <input class="check" *ngIf="!checklist.isDeleted && checklist.status=='open' " 
           [(ngModel)]=checklist.itemName fxFlex="90%" 
-            (click)="open(x)" [style.backgroundColor]="x.color">
+            (click)="open(index)" [style.backgroundColor]="index.color">
          </div>
         
-          <div  *ngFor="let checklist of x.noteCheckLists" fxLayout="row">
+          <div  *ngFor="let checklist of index.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
-           (click)=checkBox(checklist,x)></mat-checkbox>
+           (click)=checkBox(checklist,index)></mat-checkbox>
           <del  class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'"
-           (click)="open(x)">{{checklist.itemName}}</del>
+           (click)="open(index)">{{checklist.itemName}}</del>
         </div>
 
 
@@ -32,11 +32,11 @@
 
 
         <div fxLayout="row">
-          <div *ngFor="let items of x.noteLabels">
+          <div *ngFor="let items of index.noteLabels">
             <div *ngIf="items.isDeleted == false">
             <mat-chip-list selected>
               <mat-chip>{{items.label}}
-                <mat-icon matChipRemove (click)="removeLabel(items.id, x.id)">
+                <mat-icon matChipRemove (click)="removeLabel(items.id, index.id)">
                     cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
@@ -46,11 +46,11 @@
 
         <div class="space"></div>
 
-          <div *ngIf="x.reminder.length!=0">
+          <div *ngIf="index.reminder.length!=0">
             <mat-chip-list class="chip">
               <mat-chip class="chip_color">
-                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{x.reminder | date:'medium'}}
-                <mat-icon (click)="$event.stopPropagation(); removeReminder(x.id)">
+                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{index.reminder | date:'medium'}}
+                <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
                   cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
@@ -59,14 +59,14 @@
 
         <div fxLayout="row">
 
-          <app-remind (reminderEmit) = new($event) class="space" [reminder]="x"></app-remind>
+          <app-remind (reminderEmit) = new($event) class="space" [reminder]="index"></app-remind>
           <app-collaborator class="space"></app-collaborator>
-          <app-changecolor class="space" [color]="x" (colorEvent)=new($event)>
+          <app-changecolor class="space" [color]="index" (colorEvent)=new($event)>
           </app-changecolor>
           <app-addimage class="space"></app-addimage>
-          <app-archives class="space" [archive]="x" (archiveEvent)=new($event)>
+          <app-archives class="space" [archive]="index" (archiveEvent)=new($event)>
           </app-archives>
-          <app-more class="space" [carddel]="x" (deleteevent)=new($event)>
+          <app-more class="space" [carddel]="index" (deleteevent)=new($event)>
           </app-more>
 
         </div>

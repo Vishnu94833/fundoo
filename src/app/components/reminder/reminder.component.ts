@@ -21,6 +21,7 @@ export class ReminderComponent implements OnInit {
     this.httpservice.getnotes('notes/getReminderNotesList', this.token).subscribe(
       (data) => {
             this.remindarray=data['data'].data;
+            this.remindarray.sort();
       },
       error => {
 
