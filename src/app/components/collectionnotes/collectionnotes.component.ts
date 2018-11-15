@@ -19,15 +19,14 @@ export class CollectionnotesComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private httpservice: HttpService,
-    private dataService: SearchsharingService) 
-    {
-      this.dataService.currentChipEvent.subscribe(
-        message=>{
-          if(message)
+    private dataService: SearchsharingService) {
+    this.dataService.currentChipEvent.subscribe(
+      message => {
+        if (message)
           this.addnotes.emit({});
-        }
-      )
-    }
+      }
+    )
+  }
 
   @Input() cardadded;
   @Input() inputData;
@@ -36,6 +35,7 @@ export class CollectionnotesComponent implements OnInit {
   toggle = false;
   token = localStorage.getItem('token');
   modifiedCheckList: any = [];
+  reminddate = ["Today", "Tommorow"];
 
   ngOnInit() {
 
@@ -81,35 +81,33 @@ export class CollectionnotesComponent implements OnInit {
   }
 
   reminderList() {
-    
+
     this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
-      (data) => { 
+      (data) => {
         // console.log("GET Request is successful ", data);
-        LoggerService.log("GET Request is successful ",data)
+        LoggerService.log("GET Request is successful ", data)
       },
       error => {
-        LoggerService.error("Error ",error)
+        LoggerService.error("Error ", error)
       });
   }
 
-  removeReminder(id)
-  {
+  removeReminder(id) {
     this.httpservice.postarchive('notes/removeReminderNotes',
-    {
-     "noteIdList":[id]
-    }
-    , this.token).subscribe(
-      (data) => {
-        this.addnotes.emit({})
-        console.log("POST Request is successful ",data)
-      },
-      error => {
-        LoggerService.error("Error ",error)
-      })
+      {
+        "noteIdList": [id]
+      }
+      , this.token).subscribe(
+        (data) => {
+          this.addnotes.emit({})
+          console.log("POST Request is successful ", data)
+        },
+        error => {
+          LoggerService.error("Error ", error)
+        })
   }
 
-  updateChecklist(id)
-  {
+  updateChecklist(id) {
     var apiData = {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
@@ -124,7 +122,7 @@ export class CollectionnotesComponent implements OnInit {
 
   }
 
-  checkBox(checkList,note) {
+  checkBox(checkList, note) {
 
     if (checkList.status == "open") {
       checkList.status = "close"
@@ -136,27 +134,24 @@ export class CollectionnotesComponent implements OnInit {
     this.modifiedCheckList = checkList;
     this.updateChecklist(note.id);
   }
+  // Pin and Unpin function
 
+  // pinned(pin)
+  // {
+  //   this.httpservice.postarchive('notes/pinUnpinNotes',
+  //       {
+  //         "isPined": true,
+  //         "noteIdList":[pin]
+  //       }, this.token).subscribe(
+  //         (data) => {
+  //           console.log("POST Request is successful ", data);
 
+  //         },
+  //         error => {
+  //           console.log("Error", error);
 
-// Pin and Unpin function
-
-// pinned(pin)
-// {
-//   this.httpservice.postarchive('notes/pinUnpinNotes',
-//       {
-//         "isPined": true,
-//         "noteIdList":[pin]
-//       }, this.token).subscribe(
-//         (data) => {
-//           console.log("POST Request is successful ", data);
-        
-//         },
-//         error => {
-//           console.log("Error", error);
-     
-//         })
-// }
+  //         })
+  // }
 
 
 

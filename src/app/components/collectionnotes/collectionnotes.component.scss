@@ -14,7 +14,6 @@
 .list
 {
     width: 700px;
-    
 }
 .pin
 {
@@ -48,4 +47,7 @@
     outline: none;
     word-wrap: break-word;
     background:transparent;
+ }
+ mat-card{
+    width:45%;
  }

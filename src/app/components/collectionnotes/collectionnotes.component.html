@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="layout">
-  <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId' >
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <mat-card  class="cardsize" [style.backgroundColor]="index.color">
         <app-pin class="pin" [pinArr] = "index" (pinEmit) = "new($event)"></app-pin>
@@ -49,7 +49,7 @@
           <div *ngIf="index.reminder.length!=0">
             <mat-chip-list class="chip">
               <mat-chip class="chip_color">
-                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{index.reminder | date:'medium'}}
+                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{change}}{{index.reminder | date:'medium'}}
                 <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
                   cancel</mat-icon>
               </mat-chip>

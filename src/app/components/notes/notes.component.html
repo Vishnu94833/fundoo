@@ -2,13 +2,13 @@
 </app-addnotes>
 
 <div *ngIf="pinArray.length !=0">
-    <h3 class="pinned">Pinned</h3>
+    <h4 class="pinned">PINNED</h4>
     <div class="notestop">
         <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
         </app-collectionnotes>
     </div>
 
-    <h3 class="pinned">Others</h3>
+    <h4 class="pinned">OTHERS</h4>
     <div class="notestop">
         <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
         </app-collectionnotes>
