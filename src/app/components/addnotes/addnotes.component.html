@@ -1,7 +1,7 @@
 <div class="response" fxLayout='column' fxLayoutAlign="center center">
 
   <!-- Add note starts -->
-  <mat-card class="border" *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
+  <mat-card  *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span> <mat-icon matTooltip="New List" (click)="functionCheckbox()" matTooltipPosition="above">list</mat-icon>
@@ -16,7 +16,7 @@
   </mat-card>
 
   <!-- creating notes dialog will be opened for editing notes -->
-  <mat-card class="border" *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
+  <mat-card  *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
     <mat-icon>pin</mat-icon>
 
     <!-- title goes here... -->

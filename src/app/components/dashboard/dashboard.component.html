@@ -1,46 +1,45 @@
-
 <!--        Toolbar contains search,login details,refresh          -->
 <mat-toolbar class="tool">
 
-<!--         Toggle menu           -->
+  <!--         Toggle menu           -->
 
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span style="color:black;font-family:Bookman, URW Bookman L, serif">
-    <b>{{title}}</b></span>
+    <b>{{title | titlecase}}</b></span>
 
-    <!--          SearchBar          -->
+  <!--          SearchBar          -->
   <div class="right">
-    <form id="search" fxShow="true" fxHide.xs="true"  fxHide.sm="true" >
+    <form id="search" fxShow="true" fxHide.xs="true" fxHide.sm="true">
       <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData"
         (click)="navigateSearch()" (keydown)="down()" placeholder="Search" class="toolbar1">
       <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
     </form>
   </div>
 
-<!--          Grid View          -->
+  <!--          Grid View          -->
   <div fxFlex fxLayoutAlign="end">
-    <button matTooltip="Grid View"  (click)="gridView()" *ngIf="list == 0" mat-icon-button>
+    <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button>
       <mat-icon>view_stream</mat-icon></button>
 
 
-<!--          List View          -->
-    <button matTooltip="List View"  (click)="grid()" *ngIf="list == 1" mat-icon-button>
+    <!--          List View          -->
+    <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
       <mat-icon>view_module</mat-icon></button>
-    
-      <!--          Profile pic,login details          -->
-      <div *ngIf="image2!=''">
-      <button  class="profilepic">
+
+    <!--          Profile pic,login details          -->
+    <div *ngIf="image2!=''">
+      <button class="profilepic">
         <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo">
       </button>
     </div>
     <div *ngIf="image2==''">
-      <button  mat-mini-fab color="disabled" class="profile-pic " [matMenuTriggerFor]="menu">
+      <button mat-mini-fab color="disabled" class="profile-pic " [matMenuTriggerFor]="menu">
         <!-- <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo"> -->
-       {{firstname | slice:0:1}}
-        
-        
+        {{firstname | slice:0:1}}
+
+
       </button>
 
     </div>
@@ -48,28 +47,60 @@
     <div>
 
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
 
-        <div fxLayoutAlign="row wrap">
-        <div fxFlex=20>
-        <button color="disabled" *ngIf="image2!=''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-        (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
-        mat-mini-fab class="profile-pic">
-        </button>
-        <button  *ngIf="image2==''" (click) = "$event.stopPropagation()" 
-        (click)="selectFile.click()" matTooltip="{{firstname | titlecase }}"
-        mat-mini-fab class="profile-pic">{{firstname | titlecase | slice:0:1}}
-        </button>
-        <input style="display:none" (click) = "$event.stopPropagation()" class="image"
-        type="file" (change)="onFileUpload($event)" #selectFile>
+          <div fxLayoutAlign="row " fxLayoutAlign="space-between">
+
+            <div fxFlex=90>
+
+              <button color="disabled" *ngIf="image2!=''" (click)="$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
+                mat-mini-fab class="profile-pic photo1">
+                <!-- <div class="changepic">
+                  <h5 >change</h5>
+                </div> -->
+              </button>
+
+              <button *ngIf="image2==''" (click)="$event.stopPropagation()" (click)="selectFile.click()"
+                matTooltip="{{firstname | titlecase }}" mat-mini-fab class="profile-pic">{{firstname
+                | titlecase | slice:0:1}}
+              </button>
+
+              <input style="display:none" (click)="$event.stopPropagation()" class="image" type="file" (change)="onFileUpload($event)"
+                #selectFile>
+
+            </div>
+
+          </div>
+
+
+          <div fxLayout="column" fxLayoutAlign="space-around start">
+            <mat-content>
+              <b>
+                {{firstname | titlecase}} {{lastname | titlecase}}
+              </b>
+            </mat-content>
+            <div class="spac"></div>
+            <mat-content>{{email}}</mat-content>
+          </div>
+
         </div>
-        <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left" ><b>
-        {{firstname | titlecase}} {{lastname | titlecase}}</b> </mat-content>
-        </div><br>
-        <mat-content class="contentstyle">{{email}}</mat-content><hr>
-        <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
-        <button fxFlex class="addaccount" routerLink="/signup">Add account</button>
-        <button fxFlex class="logout" (click)="logout()">Log out </button></div>
-        </mat-menu>
+
+
+        <hr>
+
+
+        <div fxLayoutAlign="row wrap"  class="add" fxLayoutGap=80px>
+          <button mat-raised-button color="primary" fxFlex class="addaccount" routerLink="/signup">
+            Add account
+          </button>
+
+          <button mat-raised-button color="primary" class="logout" (click)="logout()">
+            Log out
+          </button>
+        </div>
+
+      </mat-menu>
     </div>
   </div>
 
@@ -84,27 +115,27 @@
     <mat-nav-list>
 
       <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes">
-        <img  src="../../../assets/images/notes.svg">Notes
+        <img src="../../../assets/images/notes.svg">Notes
       </a>
       <a (click)='changeTitle("Reminders")' mat-list-item routerLink="/homepage/reminder">
         <img src="../../../assets/images/reminders.svg">Reminders
       </a>
       <hr>
-      
-      
+
+
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <h5 class="label"> Labels</h5>
       </div>
-      
+
       <div (click)="labelsPage(labels)" *ngFor=" let labels of temp ">
         <a (click)='changeTitle(labels.label)' mat-list-item>
           <mat-icon class="ma1">label_outline</mat-icon>
           <span class="spac">{{labels.label}}</span>
         </a>
       </div>
-     
+
       <div fxLayoutAlign="center center">
-        <a matTooltip="Create New Label" (click)="openDialog()" mat-list-item> 
+        <a matTooltip="Create New Label" (click)="openDialog()" mat-list-item>
           <img src="../../../assets/images/create.svg"> Create new label
         </a>
       </div>
@@ -116,9 +147,9 @@
       <a (click)='changeTitle("Trash")' mat-list-item routerLink="/homepage/trash">
         <img src="../../../assets/images/trash.svg">Trash
       </a>
-   
+
     </mat-nav-list>
- 
+
   </mat-sidenav>
 
 
