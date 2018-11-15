@@ -107,53 +107,65 @@ export class CollectionnotesComponent implements OnInit {
         })
   }
 
-  updateChecklist(id) {
-    var apiData = {
-      "itemName": this.modifiedCheckList.itemName,
-      "status": this.modifiedCheckList.status
-    }
-    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-    this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
-      console.log(response);
-      // this.archiveEvent.emit();
 
-    })
-
-
-  }
-
-  checkBox(checkList, note) {
-
-    if (checkList.status == "open") {
-      checkList.status = "close"
+  remiderCutOff(cuttOff) {
+    var currentReminderTime = new Date().getTime();
+    var timeValue = new Date(cuttOff).getTime();
+    if (timeValue > currentReminderTime) {
+      return true;
     }
     else {
-      checkList.status = "open"
+      return false;
     }
-    console.log(checkList);
-    this.modifiedCheckList = checkList;
-    this.updateChecklist(note.id);
   }
-  // Pin and Unpin function
 
-  // pinned(pin)
-  // {
-  //   this.httpservice.postarchive('notes/pinUnpinNotes',
-  //       {
-  //         "isPined": true,
-  //         "noteIdList":[pin]
-  //       }, this.token).subscribe(
-  //         (data) => {
-  //           console.log("POST Request is successful ", data);
+    updateChecklist(id) {
+      var apiData = {
+        "itemName": this.modifiedCheckList.itemName,
+        "status": this.modifiedCheckList.status
+      }
+      var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+      this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
+        console.log(response);
+        // this.archiveEvent.emit();
 
-  //         },
-  //         error => {
-  //           console.log("Error", error);
-
-  //         })
-  // }
+      })
 
 
+    }
+
+    checkBox(checkList, note) {
+
+      if (checkList.status == "open") {
+        checkList.status = "close"
+      }
+      else {
+        checkList.status = "open"
+      }
+      console.log(checkList);
+      this.modifiedCheckList = checkList;
+      this.updateChecklist(note.id);
+    }
+    // Pin and Unpin function
+
+    // pinned(pin)
+    // {
+    //   this.httpservice.postarchive('notes/pinUnpinNotes',
+    //       {
+    //         "isPined": true,
+    //         "noteIdList":[pin]
+    //       }, this.token).subscribe(
+    //         (data) => {
+    //           console.log("POST Request is successful ", data);
+
+    //         },
+    //         error => {
+    //           console.log("Error", error);
+
+    //         })
+    // }
 
 
-}
+
+
+  }

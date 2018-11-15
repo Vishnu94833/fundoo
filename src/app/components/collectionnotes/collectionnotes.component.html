@@ -44,17 +44,31 @@
         </div>
         </div>
 
-        <div class="space"></div>
+        <div *ngIf="remiderCutOff(index.reminder[0])">
 
-          <div *ngIf="index.reminder.length!=0">
+          <div *ngFor="let remin  of index.reminder">
             <mat-chip-list class="chip">
               <mat-chip class="chip_color">
-                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{change}}{{index.reminder | date:'medium'}}
+                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{remin | date:'medium'}}
                 <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
                   cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
           </div>
+        </div>
+
+          <div  *ngIf="!remiderCutOff(index.reminder[0])">
+
+          <div *ngFor="let remin  of index.reminder">
+            <mat-chip-list class="chip">
+              <mat-chip class="chip_color">
+                <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{remin | date:'medium'}}
+                <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                  cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
           
 
         <div fxLayout="row">

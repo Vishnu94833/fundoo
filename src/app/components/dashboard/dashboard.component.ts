@@ -24,15 +24,15 @@ export class DashboardComponent {
       map(result => result.matches)
     );
 
-  constructor(private router: Router, private httpservice: HttpService, 
-    private myRoute: Router,private breakpointObserver: BreakpointObserver,
+  constructor(private router: Router, private httpservice: HttpService,
+    private myRoute: Router, private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog, public data: SearchsharingService) { }
 
 
   hoverItem: string;
   buttonclick: any = false;
 
-    title="Fundoo Notes";
+  title = "Fundoo Notes";
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
@@ -69,9 +69,8 @@ export class DashboardComponent {
     this.labelList();
   }
 
-  changeTitle(title)
-  {
-    this.title=title;
+  changeTitle(title) {
+    this.title = title;
   }
 
   openDialog(): void {
@@ -81,7 +80,7 @@ export class DashboardComponent {
       data: { array: this.temp }
     });
     dialogRef.afterClosed().subscribe(result => {
-            this.labelList();
+      this.labelList();
     });
   }
 
@@ -90,14 +89,12 @@ export class DashboardComponent {
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         // console.log("Get Request is successful ", data);
-        for(var i=0;i<data['data']['details'].length;i++)
-        {
-          if(data['data']['details'][i].isDeleted == false)
-          { 
-              array.push (data['data']['details'][i]);
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            array.push(data['data']['details'][i]);
           }
         }
-            this.temp = array;
+        this.temp = array;
 
 
       },
@@ -131,7 +128,7 @@ export class DashboardComponent {
   }
   ProfilePath: any;
   selectedFile = null;
- 
+
   public pic;
   public image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;

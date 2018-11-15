@@ -30,7 +30,7 @@ export class RemindComponent implements OnInit {
 
   remindMeToday() {
     let date = new Date();
-    var dateExample = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 8, 0, 0, 0)
+    var dateExample = new Date(date.getFullYear(), date.getMonth(), date.getDate() , 8, 0, 0, 0)
     this.dateEmit.emit(dateExample);
     this.httpservice.postarchive('notes/addUpdateReminderNotes', {
       "noteIdList": [this.reminder.id],

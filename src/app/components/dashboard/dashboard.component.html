@@ -56,9 +56,9 @@
               <button color="disabled" *ngIf="image2!=''" (click)="$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
                 (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
                 mat-mini-fab class="profile-pic photo1">
-                <!-- <div class="changepic">
+                <div class="changepic">
                   <h5 >change</h5>
-                </div> -->
+                </div>
               </button>
 
               <button *ngIf="image2==''" (click)="$event.stopPropagation()" (click)="selectFile.click()"
