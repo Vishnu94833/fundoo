@@ -79,7 +79,7 @@ export class MoreComponent implements OnInit {
       this.deleteevent.emit({});
     }, error => {
       // console.log(this.arr.id)
-      // console.log(error);
+      // console.log(error);  
     })
   }
 

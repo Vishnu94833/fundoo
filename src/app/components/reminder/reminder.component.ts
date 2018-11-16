@@ -7,8 +7,8 @@ import { HttpService } from '../../core/services/http/http.service';
   styleUrls: ['./reminder.component.scss']
 })
 export class ReminderComponent implements OnInit {
-  remindarray:any=[];
-  token=localStorage.getItem('token')
+  remindarray: any = [];
+  token = localStorage.getItem('token')
 
   constructor(private httpservice: HttpService) { }
 
@@ -17,11 +17,13 @@ export class ReminderComponent implements OnInit {
   }
 
   reminderList() {
-    
+
     this.httpservice.getnotes('notes/getReminderNotesList', this.token).subscribe(
       (data) => {
-            this.remindarray=data['data'].data;
-            this.remindarray.sort();
+        this.remindarray = data['data'].data;
+        this.remindarray.sort((a: any, b: any) =>
+          new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
+        );
       },
       error => {
 

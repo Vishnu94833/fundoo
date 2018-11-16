@@ -50,6 +50,12 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { LabeldeleteComponent } from './components/labeldelete/labeldelete.component';
 import { TrashdeleteComponent } from './components/trashdelete/trashdelete.component';
 import { PinComponent } from './components/pin/pin.component';
+import { MessagingService } from './core/services/messagingservice/messaging.service'
+import { AsyncPipe } from '../../node_modules/@angular/common'
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
 
 
 @NgModule({
@@ -118,11 +124,15 @@ import { PinComponent } from './components/pin/pin.component';
     MatChipsModule,
     ImageCropperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule
     // FormControl  
 
   ],
-  providers: [HttpService, AuthGuard, AuthService, LoggerService],
+  providers: [HttpService, AuthGuard, AuthService, LoggerService,MessagingService, AsyncPipe],
   entryComponents: [UpdatenotesComponent,CropimageComponent,ToolbarComponent,LabeldeleteComponent,TrashdeleteComponent],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

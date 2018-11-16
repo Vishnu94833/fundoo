@@ -5,6 +5,7 @@ import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
 import { HttpService } from '../../core/services/http/http.service';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class CollectionnotesComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private httpservice: HttpService,
-    private dataService: SearchsharingService) {
+    private dataService: SearchsharingService,
+    private router: Router) {
     this.dataService.currentChipEvent.subscribe(
       message => {
         if (message)
@@ -35,7 +37,8 @@ export class CollectionnotesComponent implements OnInit {
   toggle = false;
   token = localStorage.getItem('token');
   modifiedCheckList: any = [];
-  reminddate = ["Today", "Tommorow"];
+  today = new Date();
+  tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
 
   ngOnInit() {
 
@@ -74,6 +77,13 @@ export class CollectionnotesComponent implements OnInit {
           // console.log(error);
         })
   }
+
+  goToLabel(items)
+  {
+    let label=items.label;
+    this.router.navigate(['homepage/labelslist/' + label]);
+  }
+
   getGrid() {
     this.dataService.currentGridEvent.subscribe(message => {
       this.toggle = message;
@@ -100,7 +110,7 @@ export class CollectionnotesComponent implements OnInit {
       , this.token).subscribe(
         (data) => {
           this.addnotes.emit({})
-          console.log("POST Request is successful ", data)
+          LoggerService.log("POST Request is successful ", data)
         },
         error => {
           LoggerService.error("Error ", error)
@@ -119,53 +129,33 @@ export class CollectionnotesComponent implements OnInit {
     }
   }
 
-    updateChecklist(id) {
-      var apiData = {
-        "itemName": this.modifiedCheckList.itemName,
-        "status": this.modifiedCheckList.status
-      }
-      var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-      this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
-        console.log(response);
-        // this.archiveEvent.emit();
-
-      })
-
-
+  updateChecklist(id) {
+    var apiData = {
+      "itemName": this.modifiedCheckList.itemName,
+      "status": this.modifiedCheckList.status
     }
+    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
+      
 
-    checkBox(checkList, note) {
-
-      if (checkList.status == "open") {
-        checkList.status = "close"
-      }
-      else {
-        checkList.status = "open"
-      }
-      console.log(checkList);
-      this.modifiedCheckList = checkList;
-      this.updateChecklist(note.id);
-    }
-    // Pin and Unpin function
-
-    // pinned(pin)
-    // {
-    //   this.httpservice.postarchive('notes/pinUnpinNotes',
-    //       {
-    //         "isPined": true,
-    //         "noteIdList":[pin]
-    //       }, this.token).subscribe(
-    //         (data) => {
-    //           console.log("POST Request is successful ", data);
-
-    //         },
-    //         error => {
-    //           console.log("Error", error);
-
-    //         })
-    // }
-
-
+    })
 
 
   }
+
+  checkBox(checkList, note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    LoggerService.log(checkList);
+    this.modifiedCheckList = checkList;
+    this.updateChecklist(note.id);
+  }
+
+
+
+}

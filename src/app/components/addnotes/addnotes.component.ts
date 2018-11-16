@@ -21,8 +21,11 @@ export class AddnotesComponent implements OnInit {
   status = "open";
   dataArrayCheck = [];
   date;
+  dateChip;
   dateArray = [];
   index = { 'id': '' }
+  today = new Date();
+  nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
@@ -37,7 +40,20 @@ export class AddnotesComponent implements OnInit {
   }
 
 
+  cancelLabel() {
+    this.name = [];
+    this.rollId = [];
+  }
+  cancelReminder() {
+    this.date = '';
+    this.dateArray = [];
+  }
+
   exit() {
+    this.dateChip = '';
+    if (this.date != undefined) {
+      this.dateChip = this.date;
+    }
     if (this.open1 == 0) {
       this.httpservice.addnotes('notes/addNotes',
         {
@@ -47,23 +63,38 @@ export class AddnotesComponent implements OnInit {
           'checklist': '',
           'isPined': 'false',
           'color': this.color,
-          'reminder': this.date
+          'reminder': this.dateChip
         }, this.token).subscribe(
           (data) => {
             console.log("POST Request is successful ", data);
-            this.name = null;
             this.message.emit({});
+            this.name = [];
+            console.log(this.dateArray);
             this.open = !this.open;
             this.color = "#fafafa";
             this.open1 = 0;
-            console.log();
+            this.dateChip = '';
+            this.dateArray = [];
+            this.rollId = [];
+            this.date = '';
+
+
+            console.log(this.dateArray);
+
           },
           error => {
             console.log("Error", error);
-            this.name = null;
+            // this.message.emit({});
+            this.name = [];
+            console.log(this.dateArray);
             this.open = !this.open;
-            this.color = "#fafafa"
+            this.color = "#fafafa";
             this.open1 = 0;
+            this.dateChip = '';
+            this.dateArray = [];
+            this.rollId = [];
+            this.date = '';
+
           })
     }
     else {
@@ -85,24 +116,37 @@ export class AddnotesComponent implements OnInit {
           'labelIdList': JSON.stringify(this.rollId),
           'checklist': JSON.stringify(this.dataArrayCheck),
           'isPined': 'false',
-          'color': this.color
+          'color': this.color,
+          'reminder': this.dateChip
         }, this.token).subscribe(
           (data) => {
             console.log("POST Request is successful ", data);
-            this.name = null;
-            this.dataArrayCheck = []
+            this.message.emit({});
+            this.name = [];
+            console.log(this.dateArray);
             this.open = !this.open;
             this.color = "#fafafa";
             this.open1 = 0;
-            this.message.emit({});
+            this.dateChip = '';
+            this.dateArray = [];
+            this.dataarray=[];
+            this.rollId = [];
+            this.date = '';
+
           },
           error => {
             console.log("Error", error);
-            this.dataArrayCheck = []
-            this.name = null;
+            // this.message.emit({});
+            this.name = [];
+            console.log(this.dateArray);
             this.open = !this.open;
-            this.color = "#fafafa"
+            this.color = "#fafafa";
             this.open1 = 0;
+            this.dateChip = '';
+            this.dateArray = [];
+            this.rollId = [];
+            this.date = '';
+
           })
 
     }

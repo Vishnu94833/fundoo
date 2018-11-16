@@ -149,7 +149,8 @@ export class DashboardComponent {
   }
   profileCropOpen(data): void { //Function for the dialog box
     const dialogRefPic = this.dialog.open(CropimageComponent, {
-      width: '450px',
+      width: '900px',
+      height:'600px',
       data: data
     });
 

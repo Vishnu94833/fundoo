@@ -7,26 +7,34 @@
     <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span style="color:black;font-family:Bookman, URW Bookman L, serif">
-    <b>{{title | titlecase}}</b></span>
+    <b>{{title | titlecase}}</b>
+    <!-- <img class="gb_Xa gb_Ne" alt="" aria-hidden="true" src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
+      srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x "
+      style="width:40px;height:40px"> -->
+  </span>
 
   <!--          SearchBar          -->
   <div class="right">
     <form id="search" fxShow="true" fxHide.xs="true" fxHide.sm="true">
-      <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData"
-        (click)="navigateSearch()" (keydown)="down()" placeholder="Search" class="toolbar1">
-      <button matTooltip="Refresh" mat-icon-button><mat-icon>refresh</mat-icon></button>
+      <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" (click)="navigateSearch()"
+        (keydown)="down()" placeholder="Search" class="toolbar1">
+      <button matTooltip="Refresh" mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+      </button>
     </form>
   </div>
 
   <!--          Grid View          -->
   <div fxFlex fxLayoutAlign="end">
     <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button>
-      <mat-icon>view_stream</mat-icon></button>
+      <mat-icon>view_stream</mat-icon>
+    </button>
 
 
     <!--          List View          -->
     <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
-      <mat-icon>view_module</mat-icon></button>
+      <mat-icon>view_module</mat-icon>
+    </button>
 
     <!--          Profile pic,login details          -->
     <div *ngIf="image2!=''">
@@ -38,6 +46,7 @@
       <button mat-mini-fab color="disabled" class="profile-pic " [matMenuTriggerFor]="menu">
         <!-- <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo"> -->
         {{firstname | slice:0:1}}
+
 
 
       </button>
@@ -56,13 +65,11 @@
               <button color="disabled" *ngIf="image2!=''" (click)="$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
                 (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
                 mat-mini-fab class="profile-pic photo1">
-                <div class="changepic">
-                  <h5 >change</h5>
-                </div>
+                <h5 class="changepic">change</h5>
               </button>
 
-              <button *ngIf="image2==''" (click)="$event.stopPropagation()" (click)="selectFile.click()"
-                matTooltip="{{firstname | titlecase }}" mat-mini-fab class="profile-pic">{{firstname
+              <button *ngIf="image2==''" (click)="$event.stopPropagation()" (click)="selectFile.click()" matTooltip="{{firstname | titlecase }}"
+                mat-mini-fab class="profile-pic">{{firstname
                 | titlecase | slice:0:1}}
               </button>
 
@@ -91,11 +98,11 @@
 
 
         <div fxLayoutAlign="row wrap" fxLayoutAlign="space-between center" class="add" fxLayoutGap=80px>
-          <button mat-raised-button color="primary" fxFlex class="addaccount" routerLink="/signup">
+          <!-- <button mat-raised-button color="primary" fxFlex class="addaccount" routerLink="/signup">
             Add account
-          </button>
+          </button> -->
 
-          <button mat-raised-button color="primary" class="logout" (click)="logout()">
+          <button mat-stroked-button color="disabled" class="logout" (click)="logout()">
             Log out
           </button>
         </div>

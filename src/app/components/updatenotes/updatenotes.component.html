@@ -80,7 +80,7 @@
         <app-changecolor [color]="data" (colorEvent)=new($event)></app-changecolor>
         <app-addimage></app-addimage>
         <app-archives></app-archives>
-        <app-more [carddel]=""></app-more>
+        <app-more [carddel]="data" ></app-more>
         <button mat-button (click)="onNoClick(data.id) ">Close</button>
     </div>
 </div>
