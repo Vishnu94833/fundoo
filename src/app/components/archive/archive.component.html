@@ -1,5 +1,5 @@
 <div fxLayout='row wrap' fxLayoutAlign="start start" fxLayoutGap="20px" style='margin-top: 8%;margin-left: 20px;'>
-  <mat-card class="expand" fxFlex=30 *ngFor='let index of array' [style.backgroundColor]="index.color">
+  <mat-card class="expand" fxFlex=30 *ngFor='let index of archivearray' [style.backgroundColor]="index.color">
 
     <mat-card-title>
       <div [innerHtml]="index.title"></div>
@@ -77,4 +77,4 @@
   </mat-card>
 
 </div>
-<!-- <app-collectionnotes [cardadded]="archivearray"></app-collectionnotes> -->
+<!-- <app-collectionnotes [cardadded]="archivearray" ></app-collectionnotes> -->

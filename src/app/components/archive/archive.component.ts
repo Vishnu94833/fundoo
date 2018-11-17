@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 
 @Component({
@@ -8,8 +8,10 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  array: any = [];
+  archivearray: any = [];
   token = localStorage.getItem('token');
+  @Output() archiveEvent=new EventEmitter();
+
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
@@ -32,12 +34,13 @@ export class ArchiveComponent implements OnInit {
   }
   getArchiveList() {
 
-    this.array = [];
+    this.archivearray = [];
     this.httpservice.getarchive('notes/getArchiveNotesList', this.token).subscribe(
       (data) => {
-        // console.log("GET Request is successful ", data);
+        // console.log("GET Request is successful ", data); 
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          this.array.push(data['data']['data'][i]);
+          this.archivearray.push(data['data']['data'][i]);
+          this.archiveEvent.emit({});
         }
         // console.log("array", this.array);
       },

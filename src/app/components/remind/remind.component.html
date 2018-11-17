@@ -1,71 +1,7 @@
-<!-- <button mat-icon-button [matMenuTriggerFor]="menu">
-  <span matTooltip="Remind me" class="space"> 
-    <i class="material-icons">touch_app</i>
-  </span>
-</button>
-
-<mat-menu class="menu" #menu="matMenu">
-
-  <div>Reminder :</div>
-  <div fxLayout='column ' fxLayoutAlign="center center">
-    <button mat-button (click)="remindMeToday()">
-      <span >
-        Later today
-    </span>
-    <span >
-      8:00 PM
-    </span>
-  </button>
-    <button mat-button  (click)="remindMeTommorow()" >
-      <span>
-        Tomorrow
-      </span>
-      <span>
-        Tomorrow
-      </span>
-    </button>
-
-    <button mat-button  (click)="remindMeNextWeek()">
-      <span>Next week</span>
-    </button>
-    
-    <button mat-button>
-      <span>
-        <i class="material-icons">access_time</i>
-        Pick date and time
-      </span>
-    </button>
-
-    <button mat-button>
-      <span><i class="material-icons">location_on</i>
-        Pick place
-      </span>
-    </button>
-  </div>
-  <div >
- 
-        <input class="dateBorder" matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-
-    </div>
-
-    <div >
- 
-      <input class="dateBorder" matInput [matDatepicker]="picker" placeholder="Choose a Time">
-      <mat-datepicker-toggle matSuffix [for]="picker">
-        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-
-  </div>
-</mat-menu> -->
-
 <button mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon style="cursor:pointer" matTooltip="Remind Me " aria-label="Remind Me" class="icons">
-    touch_app</mat-icon>
+    <i class="material-icons">
+        add_alert
+        </i>
 </button>
 
 <mat-menu #menu="matMenu" yPosition="below" [overlapTrigger]="false" class="reminderMenu">

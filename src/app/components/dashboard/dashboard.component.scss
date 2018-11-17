@@ -4,17 +4,28 @@
 
 .sidenav {
   overflow-y: auto;
-  width: 200px;
+  width: 250px;
    margin-top: 65px;
    position: fixed;
 }
-
+.icon
+{
+  margin-bottom: -5%;
+}
+.title
+{
+  margin-bottom: -5%;
+}
 .mat-toolbar.mat-primary {
   position: fixed;
   top: 0;
 }
+.find
+{
+  margin-top: 5%;
+}
 .tool{
-  background-color:  rgb(255, 202, 2);
+  background-color:  white;
   position: fixed;
   z-index:2;
   display: flex;
@@ -73,7 +84,7 @@ mat-menu-content:not(:empty) {
   height:50px; 
   border: none;
  border-radius: 100%;
- background:rgb(255, 202, 2);
+ background:white;
  
 }
 // .profilepic1{

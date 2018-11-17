@@ -1,29 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireMessaging } from '@angular/fire/messaging';
 import * as firebase from 'firebase';
-import { mergeMapTo } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs'
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MessagingService {
 
-  messaging = firebase.messaging()
+  messaging ;
   currentMessage = new BehaviorSubject(null)
 
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) { }
-
-
-  updateToken(token) {
-    this.afAuth.authState.take(1).subscribe(user => {
-      if (!user) return;
-
-      const data = { [user.uid]: token }
-      this.db.object('fcmTokens/').update(data)
+  constructor() 
+  {
+    firebase.initializeApp({
+      'messagingSenderId': '263147610417'
     })
+    this.messaging=firebase.messaging();
   }
 
   getPermission() {
@@ -32,20 +25,14 @@ export class MessagingService {
         console.log('Notification permission granted.');
         return this.messaging.getToken()
       })
-      .then(token => {
-        console.log(token)
-        this.updateToken(token)
+      .then(pushToken => {
+        localStorage.setItem('pushToken',pushToken)
+        console.log(pushToken)
+     
       })
       .catch((err) => {
         console.log('Unable to get permission to notify.', err);
       });
     }
 
-    receiveMessage() {
-       this.messaging.onMessage((payload) => {
-        console.log("Message received. ", payload);
-        this.currentMessage.next(payload)
-      });
-
-    }
 }

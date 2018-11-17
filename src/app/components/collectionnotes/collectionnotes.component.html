@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="layout">
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start" class="layout">
   <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <mat-card class="cardsize" [style.backgroundColor]="index.color">
@@ -23,7 +23,7 @@
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" (click)="open(index)">{{checklist.itemName}}</del>
         </div>
 
-        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutGap="5px">
           <div *ngFor="let items of index.noteLabels">
             <div *ngIf="items.isDeleted == false">
               <mat-chip-list selected>
@@ -65,7 +65,7 @@
         </div>
 
 
-        <div fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="center center">
 
           <app-remind (reminderEmit)=new($event) class="space" [reminder]="index"></app-remind>
           <app-collaborator class="space"></app-collaborator>

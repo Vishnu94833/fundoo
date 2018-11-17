@@ -1,24 +1,20 @@
-import { Component } from '@angular/core';
-// import { MessagingService } from './core/services/messagingservice/messaging.service';
+import { Component, OnInit } from '@angular/core';
+import { MessagingService } from "./core/services/messagingservice/messaging.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'fundoo';
-  isLeftVisible = true;
-  // message;
+export class AppComponent implements OnInit {
 
-  constructor() {
-  }
+  message;
+
+  constructor(private msgService: MessagingService) {}
+
   ngOnInit() {
-    // const userId = 'user001';
-    // this.messagingService.requestPermission(userId)
-    // this.messagingService.receiveMessage()
-    // this.message = this.messagingService.currentMessage
-
+    this.msgService.getPermission()
+   
   }
-}
 
+}

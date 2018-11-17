@@ -43,6 +43,10 @@ export class DashboardComponent {
       (data) => {
         console.log("POST Request is successful ", data);
         localStorage.removeItem("token");
+        localStorage.removeItem('firstname');
+        localStorage.removeItem('lastname');
+        localStorage.removeItem('email');
+        localStorage.removeItem('userId');
         this.router.navigateByUrl('/login');
       },
       error => {
