@@ -39,40 +39,48 @@ export class RemindComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
 
-        console.log("POST Request is successful ", data);
+        LoggerService.log("POST Request is successful ", data);
         this.reminderEmit.emit({
         })
       },
       error => {
-        console.log("Error", error);
+        LoggerService.log("Error", error);
       })
   }
 
   remindMeTommorow() {
     let date = new Date();
     var dateExample1 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 8, 0, 0, 0)
+    this.dateEmit.emit(dateExample1);
     this.httpservice.postarchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample1
       }, this.token).subscribe(data => {
-        console.log('POST is successfull ', data);
+        LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
+      },
+      error => {
+        LoggerService.log("Error", error);
       })
   }
 
   remindMeNextWeek() {
     let date = new Date();
     var dateExample2 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7, 8, 0, 0, 0)
+    this.dateEmit.emit(dateExample2);
     this.httpservice.postarchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample2
       }, this.token).subscribe(data => {
-        console.log('POST is successfull ', data);
+        LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
+      },
+      error => {
+        LoggerService.log("Error", error);
       })
   }
 

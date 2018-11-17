@@ -29,7 +29,8 @@ export class AddnotesComponent implements OnInit {
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
-
+console.log(this.dateArray)
+ 
   }
 
   function() {
@@ -67,7 +68,7 @@ export class AddnotesComponent implements OnInit {
         }, this.token).subscribe(
           (data) => {
             console.log("POST Request is successful ", data);
-            this.message.emit({});
+          
             this.name = [];
             console.log(this.dateArray);
             this.open = !this.open;
@@ -77,8 +78,7 @@ export class AddnotesComponent implements OnInit {
             this.dateArray = [];
             this.rollId = [];
             this.date = '';
-
-
+            this.message.emit({});
             console.log(this.dateArray);
 
           },
@@ -249,5 +249,7 @@ export class AddnotesComponent implements OnInit {
     this.date = event;
     this.dateArray.push(this.date);
   }
+
+  
 
 }

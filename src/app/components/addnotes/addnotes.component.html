@@ -40,15 +40,16 @@
 
     <!-- <div fxLayout="row"> -->
     <div *ngFor="let items of dateArray">
+      
       <mat-chip-list>
         <div *ngIf="(today | date:shortDate)==(items | date:shortDate)">
-          <mat-chip>Today{{items | date:'shortTime'}}
+          <mat-chip>Today , {{items | date:'shortTime'}}
             <mat-icon matChipRemove (click)="cancelReminder()">cancel</mat-icon>
           </mat-chip>
         </div>
 
         <div *ngIf="(nextDay | date:shortDate)==(items | date:shortDate)">
-          <mat-chip>Tomorrow {{items | date:'shortTime'}}
+          <mat-chip>tomorrow, {{items | date:'shortTime'}}
             <mat-icon matChipRemove (click)="cancelReminder()">cancel</mat-icon>
           </mat-chip>
         </div>
@@ -84,7 +85,7 @@
     </div>
 
     <!-- icons  -->
-    <div class="bot" fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="space-between">
+    <div class="bot" fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="space-around center">
       <div>
         <app-remind (dateEmit)="emitted($event)" [reminder]="index"></app-remind>
       </div>

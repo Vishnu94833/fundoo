@@ -32,7 +32,7 @@ export class DashboardComponent {
   hoverItem: string;
   buttonclick: any = false;
 
-  title = "Fundoo Notes";
+  title = "Fundoo";
   model: any = {};
   token = localStorage.getItem('token');
   userId = localStorage.getItem('userId');
@@ -98,8 +98,15 @@ export class DashboardComponent {
             array.push(data['data']['details'][i]);
           }
         }
-        this.temp = array;
-
+        this.temp= array;
+        this.temp.sort(function(a, b){
+          var nameA=a.label.toLowerCase(), nameB=b.label.toLowerCase()
+          if (nameA < nameB)
+              return -1 
+          if (nameA > nameB)
+              return 1
+          return 0 
+      })
 
       },
       error => {
@@ -153,8 +160,8 @@ export class DashboardComponent {
   }
   profileCropOpen(data): void { //Function for the dialog box
     const dialogRefPic = this.dialog.open(CropimageComponent, {
-      width: '900px',
-      height:'600px',
+      width: '600px',
+      // height:'600px',
       data: data
     });
 

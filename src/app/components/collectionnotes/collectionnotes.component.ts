@@ -16,9 +16,6 @@ import { Router } from '@angular/router';
 export class CollectionnotesComponent implements OnInit {
 
 
-
-
-
   constructor(public dialog: MatDialog, private httpservice: HttpService,
     private dataService: SearchsharingService,
     private router: Router) {
@@ -41,7 +38,6 @@ export class CollectionnotesComponent implements OnInit {
   tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
 
   ngOnInit() {
-
     this.getGrid();
     this.reminderList();
   }
@@ -78,9 +74,8 @@ export class CollectionnotesComponent implements OnInit {
         })
   }
 
-  goToLabel(items)
-  {
-    let label=items.label;
+  goToLabel(items) {
+    let label = items.label;
     this.router.navigate(['homepage/labelslist/' + label]);
   }
 
@@ -136,7 +131,7 @@ export class CollectionnotesComponent implements OnInit {
     }
     var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
     this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
-      
+
 
     })
 

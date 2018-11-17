@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start" class="layout">
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign=" start" class="layout">
   <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <mat-card class="cardsize" [style.backgroundColor]="index.color">
@@ -35,22 +35,46 @@
             </div>
           </div>
         </div>
-
-        <div *ngIf="remiderCutOff(index.reminder[0])">
-          <div *ngIf="index.reminder.length!=0">
+ 
+        <!-- <div *ngIf="remiderCutOff(index.reminder[0])"> -->
+          <!-- <div *ngIf="index.reminder.length!=0"> -->
             <div *ngFor="let remin  of index.reminder">
               <mat-chip-list class="chip">
-                <mat-chip class="chip_color">
-                  <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{remin | date:'medium'}}
-                  <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
-                    cancel</mat-icon>
-                </mat-chip>
+                
+                <div *ngIf="(today | date:shortDate)==(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>
+                    Today , {{remin | date:'shortTime'}}
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
+
+                <div *ngIf="(tomorrow | date:shortDate)==(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>Tomorrow , {{remin |
+                    date:'shortTime'}}
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
+                <div  *ngIf="(tomorrow | date:shortDate)!=(remin | date:shortDate) 
+                          && (today | date:shortDate)!=(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{remin | date:'medium'}}
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
               </mat-chip-list>
             </div>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
 
-        <div *ngIf="!remiderCutOff(index.reminder[0])">
+        <!-- <div *ngIf="!remiderCutOff(index.reminder[0])">
           <div *ngIf="index.reminder.length!=0">
             <div *ngFor="let remin  of index.reminder">
               <mat-chip-list class="chip">
@@ -62,7 +86,7 @@
               </mat-chip-list>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
         <div fxLayout="row" fxLayoutAlign="center center">

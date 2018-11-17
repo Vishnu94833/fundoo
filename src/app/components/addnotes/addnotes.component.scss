@@ -1,53 +1,53 @@
-.notes
-{
-    width:50%;
-    height:10px;
-    margin-top: 3.5%;
-    margin-left: 25%;
-}
-.high
-{
-    height: -10%;
-}
-.exm
-{
+// .notes
+// {
+//     width:50%;
+//     height:10px;
+//     margin-top: 3.5%;
+//     margin-left: 25%;
+// }
+// .high
+// {
+//     height: -10%;
+// }
+// .exm
+// {
     
-    box-sizing: border-box;
-    font-family: 'Roboto Slab','Times New Roman',serif;
-    font-variant-ligatures: none;
-    outline: none;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-size: 14px;
-    line-height: 19px;
-    min-height: 46px;
-    padding: 12px 15px 15px 15px;
-}
+//     box-sizing: border-box;
+//     font-family: 'Roboto Slab','Times New Roman',serif;
+//     font-variant-ligatures: none;
+//     outline: none;
+//     white-space: pre-wrap;
+//     word-wrap: break-word;
+//     font-size: 14px;
+//     line-height: 19px;
+//     min-height: 46px;
+//     padding: 12px 15px 15px 15px;
+// }
 
-.ex
-{
-    padding: 20%;
-}
+// .ex
+// {
+//     padding: 20%;
+// }
 .list 
 {
     float:right;
     cursor: pointer;  
     width: 10%;
-    // display: flex;
+
 }
-.box {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-family: 'Roboto Slab','Times New Roman',serif;
-    font-variant-ligatures: none;
-    outline: none;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-.space
-{
-    padding-top: 20px;
-}
+// .box {
+//     -webkit-box-sizing: border-box;
+//     box-sizing: border-box;
+//     font-family: 'Roboto Slab','Times New Roman',serif;
+//     font-variant-ligatures: none;
+//     outline: none;
+//     white-space: pre-wrap;
+//     word-wrap: break-word;
+// }
+// .space
+// {
+//     padding-top: 20px;
+// }
 div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 
     content: attr(data-placeholder);
@@ -63,16 +63,16 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
     content:attr(data-text)
 }
 
-.content
-{
+// .content
+// {
 
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
-    min-height: 20px;
-}
+//     border: none;
+//     border-color: transparent;
+//     outline: none;
+//     word-wrap: break-word;
+//     width: 100%;
+//     min-height: 20px;
+// }
 .mat-card
 {
     width: 50%;
@@ -88,20 +88,21 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
     margin-top: 100px;
     border-radius: 5%;
 }
-.border
-{
+// .border
+// {
     // border-radius: 8%;
-    width: 800px ;
-}
+    // width: 800px ;
+// }
 .bot
 {
-    // margin-top: 8%;
-    // width: fixed;
-    // float: left;
+    margin-top: 8%;
+    width: fixed;
+    float: left;
     flex-wrap: wrap;
+    justify-content:left
     
 }
-.space2
-{
-   padding: 20px;
-}
+// .space2
+// {
+//    padding: 20px;
+// }

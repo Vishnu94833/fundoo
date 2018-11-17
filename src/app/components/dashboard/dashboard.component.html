@@ -33,7 +33,7 @@
   <div fxFlex fxLayoutAlign="end">
 
 
-    <div class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg>
+    <div class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-lg fxHide.lt-md fxHide.lt-sm fxHide.lt-xl fxHide.gt-lg>
       <i class="material-icons">
         search
       </i>
@@ -58,7 +58,6 @@
     </div>
     <div *ngIf="image2==''">
       <button mat-mini-fab color="disabled" class="profile-pic " [matMenuTriggerFor]="menu">
-        <!-- <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo"> -->
         {{firstname | slice:0:1}}
 
 
@@ -116,7 +115,7 @@
             Add account
           </button> -->
 
-          <button mat-stroked-button  class="logout" (click)="logout()">
+          <button mat-stroked-button class="logout" (click)="logout()">
             Log out
           </button>
         </div>
@@ -124,7 +123,7 @@
       </mat-menu>
     </div>
   </div>
- 
+
 
 </mat-toolbar>
 
@@ -136,11 +135,17 @@
     <mat-nav-list>
 
       <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes">
-        <img src="../../../assets/images/notes.svg">Notes
+        <img src="../../../assets/images/notes.svg">
+        <h4 class="spac1"> Notes</h4>
+
       </a>
+
       <a (click)='changeTitle("Reminders")' mat-list-item routerLink="/homepage/reminder">
-        <img src="../../../assets/images/reminders.svg">Reminders
+        <img src="../../../assets/images/reminders.svg">
+        <h4 class="spac1">Reminders</h4>
       </a>
+
+
       <hr>
 
 
@@ -155,18 +160,21 @@
         </a>
       </div>
 
-      <div fxLayoutAlign="center center">
+      <div class="spac1">
         <a matTooltip="Create New Label" (click)="openDialog()" mat-list-item>
-          <img src="../../../assets/images/create.svg"> Create new label
+          <img src="../../../assets/images/create.svg">
+          Edit label
         </a>
       </div>
 
       <hr>
       <a (click)='changeTitle("Archive")' mat-list-item routerLink="/homepage/archive">
-        <img src="../../../assets/images/archive.svg">Archive
+        <img src="../../../assets/images/archive.svg">
+        <h4 class="spac1">Archive</h4>
       </a>
       <a (click)='changeTitle("Trash")' mat-list-item routerLink="/homepage/trash">
-        <img src="../../../assets/images/trash.svg">Trash
+        <img src="../../../assets/images/trash.svg">
+        <h4 class="spac1">Trash</h4>
       </a>
 
     </mat-nav-list>
