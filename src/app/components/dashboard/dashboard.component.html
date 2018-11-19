@@ -1,23 +1,23 @@
-<!--        Toolbar contains search,login details,refresh          -->
+<!--**************************Toolbar contains search,login details,refresh ************* -->
 <mat-toolbar class="tool">
 
-  <!--         Toggle menu           -->
+  <!-- ************************ Toggle menu ******************************************** -->
 
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span style="color:black;font-family:Bookman, URW Bookman L, serif">
-    <b class="title">{{title | titlecase}}</b>
-    <img class="icon" alt="" aria-hidden="true" src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
+  <div style="color:black;font-family:Bookman, URW Bookman L, serif">
+    <!-- <img class="icon" alt="" aria-hidden="true" src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
       srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x "
-      style="width:40px;height:40px">
-  </span>
+      style="width:40px;height:40px"> -->
+      <span class="labelsOverTitle">{{title | titlecase}}</span>
+  </div>
 
-  <!--          SearchBar          -->
+  <!--**************************** SearchBar ****************************************** -->
   <div class="right">
     <form id="search" fxShow="true" fxHide.xs="true" fxHide.sm="true">
       <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" (click)="navigateSearch()"
-        (keydown)="down()" placeholder="Search" class="toolbar1">
+        (keydown)="down()" placeholder="Search" class="searchbar">
       <button matTooltip="Refresh" mat-icon-button>
         <mat-icon>refresh</mat-icon>
       </button>
@@ -29,13 +29,13 @@
 
   </div>
 
-  <!--          Grid View          -->
+  <!--********************************* Grid View ***********************************-->
   <div fxFlex fxLayoutAlign="end">
 
 
     <button mat-icon-button class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-lg fxHide.lt-md fxHide.lt-sm
       fxHide.lt-xl fxHide.gt-lg>
-      <mat-icon >search</mat-icon>
+      <mat-icon>search</mat-icon>
     </button>
 
 
@@ -44,12 +44,12 @@
     </button>
 
 
-    <!--          List View          -->
+    <!--*************************** List View ****************************************-->
     <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
       <mat-icon>view_module</mat-icon>
     </button>
 
-    <!--          Profile pic,login details          -->
+    <!--************************* Profile pic,login details ***************************-->
     <div *ngIf="image2!=''">
       <button class="profilepic">
         <img src="{{img}}" [matMenuTriggerFor]="menu" class="photo">
@@ -126,20 +126,20 @@
 
 </mat-toolbar>
 
-<!--         contains notes,reminders,trash,labels,archive                -->
+<!--************Side Menu  contains notes,reminders,trash,labels,archive ****************-->
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
 
-      <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes">
+      <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes" routerLinkActive="active">
         <img src="../../../assets/images/notes.svg">
         <h4 class="spac1"> Notes</h4>
 
       </a>
 
-      <a (click)='changeTitle("Reminders")' mat-list-item routerLink="/homepage/reminder">
+      <a (click)='changeTitle("Reminders")' mat-list-item routerLink="/homepage/reminder" routerLinkActive="active">
         <img src="../../../assets/images/reminders.svg">
         <h4 class="spac1">Reminders</h4>
       </a>
@@ -149,29 +149,30 @@
 
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <h5 class="label"> Labels</h5>
+        <p class="label"> Labels</p>
       </div>
 
       <div (click)="labelsPage(labels)" *ngFor=" let labels of temp ">
         <a (click)='changeTitle(labels.label)' mat-list-item>
           <mat-icon class="ma1">label_outline</mat-icon>
-          <span class="spac1">{{labels.label}}</span>
+          <span class="spac1 labelsOver">{{labels.label}}</span>
         </a>
       </div>
 
       <div class="spac1">
         <a matTooltip="Create New Label" (click)="openDialog()" mat-list-item>
           <img src="../../../assets/images/create.svg">
-          Edit label
+          <h4 class="spac1">Edit label</h4>
+
         </a>
       </div>
 
       <hr>
-      <a (click)='changeTitle("Archive")' mat-list-item routerLink="/homepage/archive">
+      <a (click)='changeTitle("Archive")' mat-list-item routerLink="/homepage/archive" routerLinkActive="active">
         <img src="../../../assets/images/archive.svg">
         <h4 class="spac1">Archive</h4>
       </a>
-      <a (click)='changeTitle("Trash")' mat-list-item routerLink="/homepage/trash">
+      <a (click)='changeTitle("Trash")' mat-list-item routerLink="/homepage/trash" routerLinkActive="active">
         <img src="../../../assets/images/trash.svg">
         <h4 class="spac1">Trash</h4>
       </a>

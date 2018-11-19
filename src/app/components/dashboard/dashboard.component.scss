@@ -1,21 +1,24 @@
-.sidenav-container {
-  // height: 100%;
-  // position: absolute;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-}
+$whitecolor:white;
+$whitesmoke:whitesmoke;
 
+.sidenav-container {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+  
 .sidenav {
   overflow-y: auto;
   width: 250px; 
-   margin-top: 65px;
+   margin-top: 56px;  
    position: fixed;
 }
 .sidecontent
 {
-  background-color: white;
+  background-color:$whitecolor;
 }
 .icon
 {
@@ -34,15 +37,16 @@
   margin-top: 5%;
 }
 .tool{
-  background-color:  white;
+  background-color: $whitecolor;
   position: fixed;
   z-index:2;
   display: flex;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20)
 }
-.exm
-{
-  background-color: rgba(206, 209, 211, 0.87)
-}
+// .exm
+// {
+//   background-color: rgba(206, 209, 211, 0.87)
+// }
 
 .right {
   float: right
@@ -74,46 +78,39 @@ mat-menu-content:not(:empty) {
 {
   margin-left: 10%;
 }
-.toolbar1
+.searchbar
 {
-  opacity:0.3;
+
   width:600px;
   height: 45px;
-  border-radius: 0px;
-  margin-left: 20px
+  border-radius: 8px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  background: transparent;
+  // border:none;
+  outline: none;
 }
 .userdetails
 {
   margin-left: 10px; 
   background-color: darkgreen; 
-  color: white;
+  color:$whitecolor;
 }
 .profilepic{
   width:50px; 
   height:50px; 
   border: none;
  border-radius: 100%;
- background:white;
+ background:$whitecolor;
  
 }
-// .profilepic1{
-//   width:50px; 
-//   height:50px; 
-//   border: none;
-//  border-radius: 100%;
-//  background:white;
-//  padding-right: 50%;
- 
-// }
-// .profilebutton2{
-//   width:50px; 
-//   height:50px; 
-//   border: none;
-//  border-radius: 50%;
-//  background: transparent;
-//  outline:none;
- 
-// }
+
+.mat-nav-list a.active {
+  background:#feefc3;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .gap
 {
 margin-top: 5%;
@@ -160,13 +157,42 @@ text-transform: uppercase;
 .spac1
 {
   margin-left:15%;
+  font-family: 'Google Sans',Roboto,Arial,sans-serif;
+  font-weight: 500;
+  font-size: .875rem;
+  
 }
 .changepic
 {
   // background-color: transparent;
-  color: white;
+  color: $whitecolor;
   opacity: 0.7;
   margin-left: -15%;
   padding: 35px
   
+}
+.labelsOver
+{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  width: 100px;
+}
+.labelsOverTitle
+{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  width: 0px!important;
+}
+.label{
+  color: #5f6368;
+  letter-spacing: .07272727em;
+  font-family: Roboto,Arial,sans-serif;
+  font-size: .6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  text-transform: uppercase;
+  margin-left: 7%;
+  display: flex;
 }

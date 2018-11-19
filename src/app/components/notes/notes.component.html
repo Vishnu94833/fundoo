@@ -1,6 +1,7 @@
-<app-addnotes (message)="receive($event)">
+<!-- <app-addnotes (message)="receive($event)">
+</app-addnotes> -->
+<app-addnotes (messageModel)="model($event)">
 </app-addnotes>
-
 <div class="carddown" *ngIf="pinArray.length !=0">
     <h4 class="pinned">PINNED</h4>
     <div >

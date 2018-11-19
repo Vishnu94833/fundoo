@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { AuthService } from '../../core/services/authgaurd/auth.service';
+import { Notedetails } from 'src/app/core/model/notedetails';
 
 @Component({
   selector: 'app-notes',
@@ -8,7 +9,7 @@ import { AuthService } from '../../core/services/authgaurd/auth.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  private  array: any = [];
+  private  array: Notedetails[] = [];
   private pinArray: any = [];
   private token = localStorage.getItem('token');
   private message: boolean;
@@ -27,13 +28,15 @@ export class NotesComponent implements OnInit {
     this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
       (data) => {
         this.array = [];
-        for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && 
-          data['data']['data'][i].isArchived == false && 
-          data['data']['data'][i].isPined == false) {
-            this.array.push(data['data']['data'][i]);
+        var dataModel : Notedetails[] = data['data']['data'];
+        for (var i = dataModel.length - 1; i >= 0; i--) {
+          if (dataModel[i].isDeleted == false && 
+            dataModel[i].isArchived == false && 
+            dataModel[i].isPined == false) {
+            this.array.push(dataModel[i]);
           }
         }
+        console.log(this.array)
       },
       error => {
 
@@ -64,6 +67,10 @@ export class NotesComponent implements OnInit {
       this.cardslist();
       this.pinnedList();
     }
+  }
+  model(modelList:Notedetails)
+  {
+    this.array.splice(0,0,modelList)
   }
 
 }

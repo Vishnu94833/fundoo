@@ -114,14 +114,14 @@ export class DashboardComponent {
           }
         }
         this.temp = array;
-        this.temp.sort(function (a, b) {
-          var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
-          if (nameA < nameB)
-            return -1
-          if (nameA > nameB)
-            return 1
-          return 0
-        })
+        // this.temp.sort(function (a, b) {
+        //   var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
+        //   if (nameA < nameB)
+        //     return -1
+        //   if (nameA > nameB)
+        //     return 1
+        //   return 0
+        // })
 
       },
       error => {

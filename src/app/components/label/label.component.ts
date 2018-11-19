@@ -70,14 +70,13 @@ export class LabelComponent implements OnInit {
   private res: string;
   // value1:[];
   private id = localStorage.getItem('userId');
-  addLabel() {
-    // console.log(this.id);
 
+
+
+  addLabel() {
     var Label= this.Label.nativeElement.innerHTML;
-    // console.log(Label);
     for (var i = 0; i < this.temp.length; i++) {
       if (this.temp[i].label == Label) {
-        // console.log(this.temp[i]);
         alert('duplicate data');
         return false;
       }

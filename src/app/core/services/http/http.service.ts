@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-
+ 
+  baseUrl = environment.baseUrl;
+ 
   constructor(private myRoute: Router, private http: HttpClient) { }
+ 
   configUrl = 'http://34.213.106.173/api/user/service';
   postUrl = 'http://34.213.106.173/api/';
 
@@ -55,19 +58,31 @@ export class HttpService {
     return this.http.post(url, {}, httpOptions);
   }
 
-  addnotes(url, body, token) {
-    // console.log(token);
-
-    url = this.postUrl + url;
+  postdata(url,body) {
+    
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
+        'Authorization': localStorage.getItem('token')
       })
     };
-    return this.http.post(url, this.getFormUrlEncoded(body), httpOptions);
+    return this.http.post(environment.baseUrl+url, body,httpOptions);
 
   }
+
+  // postdata(url,body){
+  //   url = this.postUrl + url;
+  //       const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Authorization': localStorage.getItem("token")
+  //     })
+  //   };
+  //   return this.http.post(url,body,httpOptions);
+  // }
+
+
   getnotes(url, token) {
     // console.log(token)
 
