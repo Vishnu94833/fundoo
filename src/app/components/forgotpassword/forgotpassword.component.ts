@@ -19,7 +19,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   ngOnInit() {
   }
-  model: any = {}
+  private model: any = {}
   goToPassword() {
     console.log(this.model.email)
     if (!this.email.invalid) {

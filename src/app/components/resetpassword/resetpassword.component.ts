@@ -22,7 +22,7 @@ export class ResetpasswordComponent implements OnInit {
       this.password.hasError('pattern') ? 'Password can be only number,alphabets and characters(* and @)' :
         '';
   }
-  info:any={}
+  private info:any={}
   public input = new FormData();
   
   resetPassword(){

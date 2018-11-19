@@ -8,12 +8,20 @@
 }
 .grid
 {
-    
+        .mat-card
+        {
+            width: 240px;
+
+        }
 }
  
 .list
 {
-    width: 700px;
+    .mat-card
+    {
+        width: 700px;
+    
+    }
 }
 .pin
 {
@@ -30,6 +38,8 @@
 {
     margin-top: 20px; 
     // width:150px;
+
+    position: relative;
     border-radius: 5%;
     word-wrap: break-word;
 }
@@ -43,13 +53,7 @@
 {
     word-wrap: break-word;
 }
-.check
-{
-    border:none;
-    outline: none;
-    word-wrap: break-word;
-    background:transparent;
- }
+
  
  .expand 
 {
@@ -61,10 +65,7 @@
 
 
 
-// .mat-card
-// {
-//     width: 18rem;
-// }
+
 .layout
 {
     justify-content: center;
@@ -88,5 +89,12 @@
 }
 
 .card {
-	flex: 0 1 24%;
+	justify-content: center
 }
+.check
+{
+    border:none;
+    outline: none;
+    word-wrap: break-word;
+    background:transparent;
+ }

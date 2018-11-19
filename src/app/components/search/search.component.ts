@@ -10,9 +10,9 @@ import { SearchsharingService } from '../../core/services/dataservice/searchshar
 })
 export class SearchComponent implements OnInit {
 
-  array: any;
-  inputData: any;
-  token = localStorage.getItem('token');
+  private array: any;
+  private inputData: any;
+  private token = localStorage.getItem('token');
   constructor(public httpservice: HttpService, public data: SearchsharingService) { }
 
   ngOnInit() {

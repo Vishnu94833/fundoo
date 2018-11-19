@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpService } from '../../core/services/http/http.service';
 
 @Component({
@@ -7,49 +6,69 @@ import { HttpService } from '../../core/services/http/http.service';
   templateUrl: './addnotes.component.html',
   styleUrls: ['./addnotes.component.scss']
 })
+
+
 export class AddnotesComponent implements OnInit {
+
+
   token = localStorage.getItem('token');
   @Output() message = new EventEmitter();
-  public open = true;
-  open1 = 0;
-  checkArray = [];
-  color: any = "#fafafa";
-  name = [];
-  rollId = [];
-  boxClicked = true;
-  checked = false;
-  status = "open";
-  dataArrayCheck = [];
-  date;
-  dateChip;
-  dateArray = [];
-  index = { 'id': '' }
-  today = new Date();
-  nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
+  private open = true;
+  private open1 = 0;
+  private checkArray = [];
+  private color: any = "#fafafa";
+  private name = [];
+  private rollId = [];
+  private boxClicked = true;
+  private checked = false;
+  private status = "open";
+  private dataArrayCheck = [];
+  private date;
+  private dateChip;
+  private dateArray = [];
+  private index = { 'id': '' }
+  private today = new Date();
+  private nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
   constructor(private httpservice: HttpService) { }
 
   ngOnInit() {
-console.log(this.dateArray)
- 
+    console.log(this.dateArray)
   }
 
+  /**
+   * @description Function to open take a note
+   */
   function() {
     this.open = !this.open;
   }
+
+  /**
+ * @description Function to open checklist
+ */
   functionCheckbox() {
     this.open1 = 1;
   }
 
-
+  /**
+ * @description Function to delete label in take a note
+ */
   cancelLabel() {
     this.name = [];
     this.rollId = [];
   }
+
+  /**
+ * @description Function to delete reminder in take note
+ */
   cancelReminder() {
     this.date = '';
     this.dateArray = [];
   }
 
+
+  /**
+   * @description Function to save note by post api
+   */
   exit() {
     this.dateChip = '';
     if (this.date != undefined) {
@@ -68,7 +87,7 @@ console.log(this.dateArray)
         }, this.token).subscribe(
           (data) => {
             console.log("POST Request is successful ", data);
-          
+
             this.name = [];
             console.log(this.dateArray);
             this.open = !this.open;
@@ -97,6 +116,10 @@ console.log(this.dateArray)
 
           })
     }
+
+    /**
+   * @description Function to open take checklist
+   */
     else {
       for (var i = 0; i < this.dataarray.length; i++) {
         if (this.dataarray[i].isChecked == true) {
@@ -129,7 +152,7 @@ console.log(this.dateArray)
             this.open1 = 0;
             this.dateChip = '';
             this.dateArray = [];
-            this.dataarray=[];
+            this.dataarray = [];
             this.rollId = [];
             this.date = '';
 
@@ -162,21 +185,24 @@ console.log(this.dateArray)
       console.log(event);
     }
   }
+
+  /**
+   * @description Event emitter for labels list
+   */
   labelList(event) {
     if (this.name.indexOf(event) < 0) {
       this.rollId.push(event.id);
       this.name.push(event);
-      console.log(this.rollId);
-      console.log(this.name);
     }
-
     else {
       this.rollId.splice(this.rollId.indexOf(event), 1)
       this.name.splice(this.name.indexOf(event), 1)
 
     }
   }
-  expression = true;
+
+
+  private expression = true;
   finish() {
     if (!this.expression) {
       this.expression = !this.expression;
@@ -186,8 +212,8 @@ console.log(this.dateArray)
   }
 
   public i = 0;
-  data;
-  dataarray = [];
+  private data;
+  private dataarray = [];
   enter() {
     this.i++;
     if (this.data != null) {
@@ -226,8 +252,10 @@ console.log(this.dateArray)
     }
   }
 
+  /**
+     * @description Pin and Unpin function
+     */
 
-  // Pin and Unpin function
 
   pinned(id) {
     this.httpservice.addnotes('notes/pinUnpinNotes',
@@ -250,6 +278,6 @@ console.log(this.dateArray)
     this.dateArray.push(this.date);
   }
 
-  
+
 
 }

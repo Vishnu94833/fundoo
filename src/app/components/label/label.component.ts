@@ -14,8 +14,8 @@ export class LabelComponent implements OnInit {
 
 
 
-  token = localStorage.getItem('token');
-  label = localStorage.getItem('label')
+  private token = localStorage.getItem('token');
+  private label = localStorage.getItem('label')
 
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,public dataService: SearchsharingService,public dialog: MatDialog) { }
@@ -60,16 +60,16 @@ export class LabelComponent implements OnInit {
   ngOnInit() {
     this.labelsList();
   }
-  array: any = {};
-  temp: any = {};
-  model: any = {};
-  hoverItem: string;
-  labelName: string;
-  changeText: string;
-  show;
-  res: string;
+  private array: any = {};
+  private temp: any = {};
+  private model: any = {};
+  private hoverItem: string;
+  private labelName: string;
+  private changeText: string;
+  private show;
+  private res: string;
   // value1:[];
-  id = localStorage.getItem('userId');
+  private id = localStorage.getItem('userId');
   addLabel() {
     // console.log(this.id);
 

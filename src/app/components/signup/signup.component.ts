@@ -14,10 +14,10 @@ import { MatSnackBar } from '@angular/material';
 
 })
 export class SignupComponent implements OnInit {
-  firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
-  lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9!@*]*')]);
+  private firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
+  private lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
+  private email = new FormControl('', [Validators.required, Validators.email]);
+  private password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9!@*]*')]);
 
   getErrorFirstName() {
     return this.firstname.hasError('required') ? 'Enter firstname' :

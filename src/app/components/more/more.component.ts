@@ -15,10 +15,10 @@ import { MatSnackBar } from '@angular/material';
 export class MoreComponent implements OnInit {
 
   public open: boolean = true;
-  token = localStorage.getItem('token');
-  id = localStorage.getItem('userId');
-  search: any;
-  arr: any;
+  private token = localStorage.getItem('token');
+  private id = localStorage.getItem('userId');
+  private search: any;
+  private arr: any;
   constructor(private httpservice: HttpService, public snackBar: MatSnackBar) { }
   @Input() carddel;
   @Output() deleteevent = new EventEmitter();

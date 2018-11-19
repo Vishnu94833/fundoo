@@ -7,8 +7,8 @@ import { HttpService } from '../../core/services/http/http.service';
   styleUrls: ['./reminder.component.scss']
 })
 export class ReminderComponent implements OnInit {
-  remindarray: any = [];
-  token = localStorage.getItem('token')
+  private remindarray: any = [];
+  private token = localStorage.getItem('token')
 
   constructor(private httpservice: HttpService) { }
 

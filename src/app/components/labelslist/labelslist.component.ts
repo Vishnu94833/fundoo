@@ -8,10 +8,10 @@ import { Params, ActivatedRoute } from '@angular/router';
   styleUrls: ['./labelslist.component.scss']
 })
 export class LabelslistComponent implements OnInit {
-  params: any;
-  array1: any[];
-  labelName: any;
-  token = localStorage.getItem('token');
+  private params: any;
+  private array1: any[];
+  private labelName: any;
+  private token = localStorage.getItem('token');
   constructor(private httpservice: HttpService, private router: ActivatedRoute) { }
 
   ngOnInit() {

@@ -33,11 +33,10 @@
   <div fxFlex fxLayoutAlign="end">
 
 
-    <div class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-lg fxHide.lt-md fxHide.lt-sm fxHide.lt-xl fxHide.gt-lg>
-      <i class="material-icons">
-        search
-      </i>
-    </div>
+    <button mat-icon-button class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-lg fxHide.lt-md fxHide.lt-sm
+      fxHide.lt-xl fxHide.gt-lg>
+      <mat-icon >search</mat-icon>
+    </button>
 
 
     <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button>
@@ -182,7 +181,7 @@
   </mat-sidenav>
 
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="sidecontent">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 

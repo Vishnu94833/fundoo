@@ -1,7 +1,7 @@
 <div class="response" fxLayout='column' fxLayoutAlign="center center">
 
   <!-- Add note starts -->
-  <mat-card *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
+  <mat-card fxFlex *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span>
@@ -20,14 +20,14 @@
   <mat-card *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
     <mat-icon>pin</mat-icon>
 
-    <!-- title goes here... -->
+    <!-- ******************** title goes here...****************************** -->
     <mat-card-title contenteditable="true" id="title" class="content" data-text="Title"></mat-card-title>
     <div class="space"></div>
     <div *ngIf="open1 == 0">
-      <!-- Description goes here -->
+      <!--********************* Description goes here **************************-->
       <mat-card-content contenteditable="true" id="description" class="content" data-text="Take a note..." (click)="checked=false"></mat-card-content>
     </div>
-    <!-- Labels will be displayed using below div... -->
+    <!--*********** Labels will be displayed using below div...**************** -->
     <div fxLayout="row">
       <div *ngFor="let items of name">
         <mat-chip-list selected>
@@ -56,7 +56,7 @@
 
         <div *ngIf="(today | date:shortDate)!=(items | date:shortDate) && 
           (nextDay | date:shortDate)!=(items | date:shortDate)">
-          <mat-chip>{{items | date:'shortTime'}}
+          <mat-chip>{{items | date:'medium'}}
             <mat-icon matChipRemove (click)="cancelReminder()">cancel</mat-icon>
           </mat-chip>
         </div>
@@ -99,7 +99,7 @@
         <app-addimage></app-addimage>
       </div>
       <div>
-        <app-archives></app-archives>
+        <mat-icon>archive</mat-icon>
       </div>
       <div>
         <app-more (labelList)=labelList($event)></app-more>

@@ -1,6 +1,8 @@
-<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign=" start" class="layout">
+<div fxFlex="7" fxFlex.gt-lg="2" fxFlex.gt-md="6" fxFlex.gt-sm="8"></div>
+<div fxFlex.gt-lg="93" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="start" class="container card">
   <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
+      <!-- prints collection of notes  -->
       <mat-card class="cardsize" [style.backgroundColor]="index.color">
         <app-pin class="pin" [pinArr]="index" (pinEmit)="new($event)"></app-pin>
         <mat-card-title (click)="openDialog(index)">
@@ -11,7 +13,7 @@
         </mat-card-content>
 
 
-
+        <!-- ui view for checklist -->
         <div *ngFor="let checklist of index.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" (click)=checkBox(checklist,index)></mat-checkbox>
           <input class="check" *ngIf="!checklist.isDeleted && checklist.status=='open' " [(ngModel)]=checklist.itemName
@@ -23,6 +25,8 @@
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" (click)="open(index)">{{checklist.itemName}}</del>
         </div>
 
+
+        <!-- to view labels in card collection -->
         <div fxLayout="row wrap" fxLayoutGap="5px">
           <div *ngFor="let items of index.noteLabels">
             <div *ngIf="items.isDeleted == false">
@@ -35,12 +39,13 @@
             </div>
           </div>
         </div>
- 
-        <!-- <div *ngIf="remiderCutOff(index.reminder[0])"> -->
-          <!-- <div *ngIf="index.reminder.length!=0"> -->
+
+        <!-- To view reminders in card collection -->
+        <div *ngIf="remiderCutOff(index.reminder[0])">
+          <div *ngIf="index.reminder.length!=0">
             <div *ngFor="let remin  of index.reminder">
               <mat-chip-list class="chip">
-                
+
                 <div *ngIf="(today | date:shortDate)==(remin | date:shortDate)">
                   <mat-chip class="chip_color">
                     <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>
@@ -60,7 +65,7 @@
                   </mat-chip>
                 </div>
 
-                <div  *ngIf="(tomorrow | date:shortDate)!=(remin | date:shortDate) 
+                <div *ngIf="(tomorrow | date:shortDate)!=(remin | date:shortDate) 
                           && (today | date:shortDate)!=(remin | date:shortDate)">
                   <mat-chip class="chip_color">
                     <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>{{remin | date:'medium'}}
@@ -71,34 +76,63 @@
 
               </mat-chip-list>
             </div>
-          <!-- </div> -->
-        <!-- </div> -->
+          </div>
+        </div>
 
-        <!-- <div *ngIf="!remiderCutOff(index.reminder[0])">
+        <!-- to cut off reminders once it is expired in card collection -->
+        <div *ngIf="!remiderCutOff(index.reminder[0])">
           <div *ngIf="index.reminder.length!=0">
             <div *ngFor="let remin  of index.reminder">
               <mat-chip-list class="chip">
-                <mat-chip class="chip_color">
-                  <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon><del>{{remin | date:'medium'}}</del>
-                  <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
-                    cancel</mat-icon>
-                </mat-chip>
+
+                <div *ngIf="(today | date:shortDate)==(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>
+                    <del>Today , {{remin | date:'shortTime'}}</del>
+
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
+
+                <div *ngIf="(tomorrow | date:shortDate)==(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>
+                    <del>Tomorrow , {{remin | date:'shortTime'}}</del>
+
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
+                <div *ngIf="(tomorrow | date:shortDate)!=(remin | date:shortDate) 
+                          && (today | date:shortDate)!=(remin | date:shortDate)">
+                  <mat-chip class="chip_color">
+                    <mat-icon (click)="removeReminder(notes.id)">query_builder</mat-icon>
+                    <del>{{remin | date:'medium'}}</del>
+
+                    <mat-icon (click)="$event.stopPropagation(); removeReminder(index.id)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </div>
+
               </mat-chip-list>
             </div>
           </div>
-        </div> -->
+        </div>
 
+        <!-- all icons are displayed here -->
+        <div fxLayout="row" >
 
-        <div fxLayout="row" fxLayoutAlign="center center">
-
-          <app-remind (reminderEmit)=new($event) class="space" [reminder]="index"></app-remind>
-          <app-collaborator class="space"></app-collaborator>
-          <app-changecolor class="space" [color]="index" (colorEvent)=new($event)>
+          <app-remind (reminderEmit)=new($event)  [reminder]="index"></app-remind>
+          <app-collaborator ></app-collaborator>
+          <app-changecolor  [color]="index" (colorEvent)=new($event)>
           </app-changecolor>
-          <app-addimage class="space"></app-addimage>
-          <app-archives class="space" [archive]="index" (archiveEvent)=new($event)>
+          <app-addimage ></app-addimage>
+          <app-archives [archive]="index" (archiveEvent)=new($event)>
           </app-archives>
-          <app-more class="space" [carddel]="index" (deleteevent)=new($event)>
+          <app-more  [carddel]="index" (deleteevent)=new($event)>
           </app-more>
 
         </div>
@@ -106,3 +140,4 @@
       </mat-card>
     </div>
   </div>
+  <div fxFlex="5" fxFlex.gt-lg="5" fxFlex.gt-md="6" fxFlex.gt-sm="9"></div>

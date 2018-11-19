@@ -21,11 +21,21 @@ export class CropimageComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  /**
+   * @description event emitting function for cropped image
+   */
   imageCropped(event: any) {
     this.croppedImage = event.file;
   }
+
+
   public image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
+
+  /**
+   * @description function to upload profile photo
+   */
   onUpload() {
     var token = localStorage.getItem('token');
     console.log(this.croppedImage);

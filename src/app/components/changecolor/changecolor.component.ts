@@ -14,11 +14,11 @@ export class ChangecolorComponent implements OnInit {
   @Output() colorEvent = new EventEmitter();
   @Output() colorEmit = new EventEmitter();
 
-  token = localStorage.getItem('token');
+  private token = localStorage.getItem('token');
   ngOnInit() {
   }
 
-  colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
+  private colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
   { 'color': '#fbbc04', 'name': 'Orange' },
   { 'color': '#fff475', 'name': 'Yellow' }],

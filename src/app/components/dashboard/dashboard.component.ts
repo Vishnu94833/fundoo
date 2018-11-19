@@ -24,19 +24,24 @@ export class DashboardComponent {
       map(result => result.matches)
     );
 
-  constructor(private router: Router, private httpservice: HttpService,
+    private hoverItem: string;
+    private  buttonclick: any = false;
+    private title = "Fundoo";
+    private model: any = {};
+    private token = localStorage.getItem('token');
+    private userId = localStorage.getItem('userId');
+
+
+  constructor(
+    private router: Router, private httpservice: HttpService,
     private myRoute: Router, private breakpointObserver: BreakpointObserver,
-    public dialog: MatDialog, public data: SearchsharingService) { }
+    public dialog: MatDialog, public data: SearchsharingService
+  ) { }
 
 
-  hoverItem: string;
-  buttonclick: any = false;
-
-  title = "Fundoo";
-  model: any = {};
-  token = localStorage.getItem('token');
-  userId = localStorage.getItem('userId');
-
+  /**
+   * @description function to logout of the fundoo notes homgepage
+   */
   logout() {
     console.log(this.token);
     this.httpservice.logoutPost('user/logout', this.token).subscribe(
@@ -56,12 +61,12 @@ export class DashboardComponent {
     );
   }
 
-  firstname: any;
-  lastname: any;
-  email: any;
-  label: any;
-  temp: any;
-  inputData: any;
+  private firstname: any;
+  private  lastname: any;
+  private email: any;
+  private label: any;
+  private temp: any;
+  private inputData: any;
 
 
 
@@ -73,10 +78,17 @@ export class DashboardComponent {
     this.labelList();
   }
 
+  /**
+   * @description function to change title 
+   * @param title 
+   */
   changeTitle(title) {
     this.title = title;
   }
 
+  /**
+   * @description open dialog box to create ,update,delete labels
+   */
   openDialog(): void {
 
     const dialogRef = this.dialog.open(LabelComponent, {
@@ -88,6 +100,9 @@ export class DashboardComponent {
     });
   }
 
+  /**
+   * @description function to get labels list after creating new labels
+   */
   labelList() {
     var array = [];
     this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
@@ -98,15 +113,15 @@ export class DashboardComponent {
             array.push(data['data']['details'][i]);
           }
         }
-        this.temp= array;
-        this.temp.sort(function(a, b){
-          var nameA=a.label.toLowerCase(), nameB=b.label.toLowerCase()
+        this.temp = array;
+        this.temp.sort(function (a, b) {
+          var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
           if (nameA < nameB)
-              return -1 
+            return -1
           if (nameA > nameB)
-              return 1
-          return 0 
-      })
+            return 1
+          return 0
+        })
 
       },
       error => {
@@ -122,13 +137,16 @@ export class DashboardComponent {
 
   }
 
+  /**
+   * @description function to navigate to the labels page by their respective labels
+   * @param labelName 
+   */
   labelsPage(labelName) {
     var labelname = labelName.label;
-    // console.log(labelname)
     this.router.navigate(['homepage/labelslist/' + labelname]);
   }
 
-  list = 0;
+  private list = 0;
   gridView() {
     this.data.changeGridEvent(true);
     this.list = 1;
@@ -152,7 +170,7 @@ export class DashboardComponent {
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
   }
-  image = {};
+  private image = {};
 
   clickLabel(labelsList) {
     var labelsList = labelsList.label;

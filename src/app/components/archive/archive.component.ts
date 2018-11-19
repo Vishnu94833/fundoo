@@ -8,8 +8,8 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  archivearray: any = [];
-  token = localStorage.getItem('token');
+  private archivearray: any = [];
+  private token = localStorage.getItem('token');
   @Output() archiveEvent=new EventEmitter();
 
   constructor(private httpservice: HttpService) { }
@@ -18,20 +18,7 @@ export class ArchiveComponent implements OnInit {
     this.getArchiveList();
   }
 
-  unArchive(archive) {
-    this.httpservice.postarchive('notes/archiveNotes',
-      {
-        "isArchived": false,
-        "noteIdList": [archive]
-      }, this.token).subscribe(
-        (data) => {
-          // console.log("POST Request is successful ", data);
-          this.getArchiveList();
-        },
-        error => {
-          // console.log("Error", error);
-        })
-  }
+ 
   getArchiveList() {
 
     this.archivearray = [];

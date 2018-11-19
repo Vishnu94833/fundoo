@@ -1,21 +1,21 @@
 <app-addnotes (message)="receive($event)">
 </app-addnotes>
 
-<div *ngIf="pinArray.length !=0">
+<div class="carddown" *ngIf="pinArray.length !=0">
     <h4 class="pinned">PINNED</h4>
-    <div class="notestop">
+    <div >
         <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
         </app-collectionnotes>
     </div>
 
     <h4 class="pinned">OTHERS</h4>
-    <div class="notestop">
+    <div >
         <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
         </app-collectionnotes>
     </div>
 </div>
 
-<div class="unpinednotes" *ngIf="pinArray.length ==0">
+<div *ngIf="pinArray.length ==0">
     <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
     </app-collectionnotes>
     <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">

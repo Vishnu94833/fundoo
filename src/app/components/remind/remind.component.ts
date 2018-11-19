@@ -13,9 +13,9 @@ export class RemindComponent implements OnInit {
   @Input() reminder;
   @Output() reminderEmit = new EventEmitter();
   @Output() dateEmit = new EventEmitter();
-  token = localStorage.getItem('token');
-  body = {};
-  public currentDate = new Date();
+  private token = localStorage.getItem('token');
+  private body = {};
+  private currentDate = new Date();
   reminders: any[] = [
     { value: 'morning', viewPeriod: 'Morning', viewTime: '08:00 AM' },
     { value: 'afternoon', viewPeriod: 'Afternoon', viewTime: '01:00 PM' },

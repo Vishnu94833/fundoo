@@ -31,11 +31,11 @@ export class CollectionnotesComponent implements OnInit {
   @Input() inputData;
   @Input() notesOption;
   @Output() addnotes = new EventEmitter();
-  toggle = false;
-  token = localStorage.getItem('token');
-  modifiedCheckList: any = [];
-  today = new Date();
-  tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
+  private toggle = false;
+  private token = localStorage.getItem('token');
+  private modifiedCheckList: any = [];
+  private today = new Date();
+  private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
 
   ngOnInit() {
     this.getGrid();
@@ -45,19 +45,29 @@ export class CollectionnotesComponent implements OnInit {
     this.addnotes.emit({})
   }
 
+  /**
+   * @description open dialog box to update notes
+   */
   openDialog(x): void {
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
       data: x
     });
 
 
-
+    /**
+     * @description once dialog box is closed notes will be updated
+     */
     dialogRef.afterClosed().subscribe(result => {
       this.addnotes.emit()
 
     });
   }
 
+  /**
+   * @description function to remove labels by hitting post api
+   * @param labelId 
+   * @param noteId 
+   */
   removeLabel(labelId, noteId) {
 
     this.httpservice.
@@ -74,17 +84,27 @@ export class CollectionnotesComponent implements OnInit {
         })
   }
 
+  /**
+   * @description function to go to the respective labels by clicking on labels in card collection
+   * @param items 
+   */
   goToLabel(items) {
     let label = items.label;
     this.router.navigate(['homepage/labelslist/' + label]);
   }
 
+  /**
+   *@description function to view the notes collection in grid view
+   */
   getGrid() {
     this.dataService.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
   }
 
+  /**
+ *@description function to get reminders list
+ */
   reminderList() {
 
     this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
@@ -97,6 +117,10 @@ export class CollectionnotesComponent implements OnInit {
       });
   }
 
+  /**
+   * @description function to remove reminder from notes collection
+   * @param id 
+   */
   removeReminder(id) {
     this.httpservice.postarchive('notes/removeReminderNotes',
       {
@@ -113,6 +137,10 @@ export class CollectionnotesComponent implements OnInit {
   }
 
 
+  /**
+   * @description function to strike expired reminder
+   * @param cuttOff 
+   */
   remiderCutOff(cuttOff) {
     var currentReminderTime = new Date().getTime();
     var timeValue = new Date(cuttOff).getTime();
@@ -124,6 +152,10 @@ export class CollectionnotesComponent implements OnInit {
     }
   }
 
+  /**
+   * @description function to update checklist after updating
+   * @param id 
+   */
   updateChecklist(id) {
     var apiData = {
       "itemName": this.modifiedCheckList.itemName,
@@ -138,6 +170,11 @@ export class CollectionnotesComponent implements OnInit {
 
   }
 
+  /**
+   * @description function to check and uncheck the status of check box
+   * @param checkList 
+   * @param note 
+   */
   checkBox(checkList, note) {
 
     if (checkList.status == "open") {

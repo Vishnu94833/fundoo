@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class PinComponent implements OnInit {
 
-token=localStorage.getItem('token');
+  private token=localStorage.getItem('token');
 @Input() pinArr;
 @Output() pinEmit = new EventEmitter();
 

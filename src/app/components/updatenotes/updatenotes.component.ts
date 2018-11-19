@@ -16,12 +16,12 @@ export interface DialogData {
 })
 export class UpdatenotesComponent implements OnInit {
 
-  token = localStorage.getItem('token');
-  modifiedCheckList: any = [];
-  tempArray: any = [];
-  public newList: any;
-  public newData: any;
-  public checklist=false;
+  private token = localStorage.getItem('token');
+  private modifiedCheckList: any = [];
+  private tempArray: any = [];
+  private  newList: any;
+  private newData: any;
+  private checklist=false;
 
   constructor(private httpservice: HttpService,
     public dialogRef: MatDialogRef<UpdatenotesComponent>,
@@ -114,9 +114,9 @@ export class UpdatenotesComponent implements OnInit {
       }
     })
   }
-  public adding = false;
-  public addCheck = false;
-  public status = "open"
+  private adding = false;
+  private addCheck = false;
+  private status = "open"
 
   addList(event) {
     if (this.newList != "") {

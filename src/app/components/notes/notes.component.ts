@@ -8,10 +8,10 @@ import { AuthService } from '../../core/services/authgaurd/auth.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  array: any = [];
-  pinArray: any = [];
-  token = localStorage.getItem('token');
-  message: boolean;
+  private  array: any = [];
+  private pinArray: any = [];
+  private token = localStorage.getItem('token');
+  private message: boolean;
   constructor(private httpservice: HttpService, private auth: AuthService) { }
 
   ngOnInit() {
