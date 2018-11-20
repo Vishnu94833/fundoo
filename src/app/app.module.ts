@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
   MatSelectModule, MatInputModule, MatCardModule, MatButtonModule,
   MatDividerModule, MatListModule, MatFormFieldModule, MatButtonToggleModule,
   MatRadioModule, MatIconModule, MatSnackBarModule, MatToolbarModule,
   MatSidenavModule, MatDialogModule, MatMenuModule, MatChipsModule,
-  MatCheckboxModule,MatDatepickerModule,MatNativeDateModule
+  MatCheckboxModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material'
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HttpService } from './core/services/http/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
@@ -56,6 +56,10 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
+import { InterceptService } from './core/services/interceptor/interceptor.service';
+
+
+
 
 
 @NgModule({
@@ -110,7 +114,7 @@ import { AngularFireModule } from '@angular/fire';
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     MatSnackBarModule,
     MatToolbarModule,
     LayoutModule,
@@ -132,9 +136,14 @@ import { AngularFireModule } from '@angular/fire';
     // FormControl  
 
   ],
-  providers: [HttpService, AuthGuard, AuthService, LoggerService,MessagingService, AsyncPipe],
-  entryComponents: [UpdatenotesComponent,CropimageComponent,ToolbarComponent,LabeldeleteComponent,TrashdeleteComponent],
+  providers: [InterceptService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptService,
+    multi: true
+  },
+    HttpService, AuthGuard, AuthService, LoggerService, MessagingService, AsyncPipe],
+  entryComponents: [UpdatenotesComponent, CropimageComponent, ToolbarComponent, LabeldeleteComponent, TrashdeleteComponent],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
-import { Component, OnInit ,Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogData } from '../updatenotes/updatenotes.component';
 
 
@@ -10,7 +10,7 @@ import { DialogData } from '../updatenotes/updatenotes.component';
 })
 export class TrashdeleteComponent implements OnInit {
 
-  constructor( public dialogRef: MatDialogRef<TrashdeleteComponent>,
+  constructor(public dialogRef: MatDialogRef<TrashdeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {

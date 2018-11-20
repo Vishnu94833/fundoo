@@ -1,14 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpService } from '../../core/services/http/http.service';
 import { LabelComponent } from '../label/label.component';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { environment } from '../../../environments/environment';
 import { CropimageComponent } from '../cropimage/cropimage.component';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 
@@ -24,18 +27,19 @@ export class DashboardComponent {
       map(result => result.matches)
     );
 
-    private hoverItem: string;
-    private  buttonclick: any = false;
-    private title = "Fundoo";
-    private model: any = {};
-    private token = localStorage.getItem('token');
-    private userId = localStorage.getItem('userId');
+  private hoverItem: string;
+  private buttonclick: any = false;
+  private title = "Fundoo";
+  private model: any = {};
+  private token = localStorage.getItem('token');
+  private userId = localStorage.getItem('userId');
 
 
   constructor(
     private router: Router, private httpservice: HttpService,
     private myRoute: Router, private breakpointObserver: BreakpointObserver,
-    public dialog: MatDialog, public data: SearchsharingService
+    public dialog: MatDialog, public data: SearchsharingService,
+    private notesService: NotesService, private userService: UserService
   ) { }
 
 
@@ -44,7 +48,7 @@ export class DashboardComponent {
    */
   logout() {
     console.log(this.token);
-    this.httpservice.logoutPost('user/logout', this.token).subscribe(
+    this.userService.logoutPost({}).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
         localStorage.removeItem("token");
@@ -62,7 +66,7 @@ export class DashboardComponent {
   }
 
   private firstname: any;
-  private  lastname: any;
+  private lastname: any;
   private email: any;
   private label: any;
   private temp: any;
@@ -74,7 +78,6 @@ export class DashboardComponent {
     this.firstname = localStorage.getItem('firstname');
     this.lastname = localStorage.getItem('lastname');
     this.email = localStorage.getItem('email');
-    this.label = localStorage.getItem('label');
     this.labelList();
   }
 
@@ -105,23 +108,23 @@ export class DashboardComponent {
    */
   labelList() {
     var array = [];
-    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+    this.notesService.getLabels().subscribe(
       (data) => {
-        // console.log("Get Request is successful ", data);
+        LoggerService.log("Get Request is successful yessssssssssssssssss ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             array.push(data['data']['details'][i]);
           }
         }
         this.temp = array;
-        // this.temp.sort(function (a, b) {
-        //   var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
-        //   if (nameA < nameB)
-        //     return -1
-        //   if (nameA > nameB)
-        //     return 1
-        //   return 0
-        // })
+        this.temp.sort(function (a, b) {
+          var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
+          if (nameA < nameB)
+            return -1
+          if (nameA > nameB)
+            return 1
+          return 0
+        })
 
       },
       error => {
@@ -176,10 +179,9 @@ export class DashboardComponent {
     var labelsList = labelsList.label;
     this.router.navigate(['/home/label/' + labelsList])
   }
-  profileCropOpen(data): void { //Function for the dialog box
+  profileCropOpen(data): void { 
     const dialogRefPic = this.dialog.open(CropimageComponent, {
       width: '600px',
-      // height:'600px',
       data: data
     });
 

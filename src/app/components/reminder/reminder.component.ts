@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 @Component({
   selector: 'app-reminder',
@@ -10,7 +10,7 @@ export class ReminderComponent implements OnInit {
   private remindarray: any = [];
   private token = localStorage.getItem('token')
 
-  constructor(private httpservice: HttpService) { }
+  constructor(private notesService: NotesService) { }
 
   ngOnInit() {
     this.reminderList();
@@ -18,7 +18,7 @@ export class ReminderComponent implements OnInit {
 
   reminderList() {
 
-    this.httpservice.getnotes('notes/getReminderNotesList', this.token).subscribe(
+    this.notesService.getReminderNotesList().subscribe(
       (data) => {
         this.remindarray = data['data'].data;
         this.remindarray.sort((a: any, b: any) =>

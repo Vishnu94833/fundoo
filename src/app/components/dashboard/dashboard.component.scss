@@ -43,10 +43,6 @@ $whitesmoke:whitesmoke;
   display: flex;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20)
 }
-// .exm
-// {
-//   background-color: rgba(206, 209, 211, 0.87)
-// }
 
 .right {
   float: right
@@ -87,7 +83,6 @@ mat-menu-content:not(:empty) {
   margin-left: 20px;
   box-sizing: border-box;
   background: transparent;
-  // border:none;
   outline: none;
 }
 .userdetails
@@ -128,11 +123,9 @@ margin-top: 5%;
 }
 .photo1
 {
-  // float:right ;
   width:90px;
   height:90px;
   border-radius: 60% ;
-  // padding: 50%;
 }
 
 .profile-pic 
@@ -164,7 +157,7 @@ text-transform: uppercase;
 }
 .changepic
 {
-  // background-color: transparent;
+
   color: $whitecolor;
   opacity: 0.7;
   margin-left: -15%;

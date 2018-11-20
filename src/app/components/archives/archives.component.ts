@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 // import { EventEmitter } from 'protractor';
 
 @Component({
@@ -9,39 +9,37 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class ArchivesComponent implements OnInit {
   private token = localStorage.getItem('token');
-  constructor(private httpservice: HttpService) { }
+  
+  constructor(private notesService: NotesService) { }
+  
   @Input() archive;
   @Output() archiveEvent = new EventEmitter();
   ngOnInit() {
   }
 
   archives() {
-    this.httpservice.postarchive('notes/archiveNotes',
+    this.notesService.archiveNotes(
       {
         "isArchived": true,
         "noteIdList": [this.archive.id]
-      }, this.token).subscribe(
+      }).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
           this.archiveEvent.emit({});
         },
         error => {
-          // console.log("Error", error);
         })
   }
 
    unArchive() {
-    this.httpservice.postarchive('notes/archiveNotes',
+    this.notesService.archiveNotes(
       {
         "isArchived": false,
         "noteIdList": [this.archive.id]
-      }, this.token).subscribe(
+      }).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
           this.archiveEvent.emit({});
         },
         error => {
-          // console.log("Error", error);
         })
   }
 }

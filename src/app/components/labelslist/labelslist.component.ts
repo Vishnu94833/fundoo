@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { Params, ActivatedRoute } from '@angular/router';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 @Component({
   selector: 'app-labelslist',
@@ -12,7 +13,9 @@ export class LabelslistComponent implements OnInit {
   private array1: any[];
   private labelName: any;
   private token = localStorage.getItem('token');
-  constructor(private httpservice: HttpService, private router: ActivatedRoute) { }
+  constructor(
+    private router: ActivatedRoute,
+    private notesService: NotesService) { }
 
   ngOnInit() {
     this.router.params.subscribe(
@@ -26,15 +29,20 @@ export class LabelslistComponent implements OnInit {
 
   }
 
+
+  /**
+   * @description function to get notes list by their respective labels
+   * @param labelName 
+   */
   listLabels(labelName) {
-    this.httpservice.List('notes/getNotesListByLabel/' + labelName, {}, this.token)
+    this.notesService.getNotesListByLabel(labelName)
       .subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          LoggerService.log("POST Request is successful ", data);
           this.array1 = data['data'].data;
         },
         error => {
-          // console.log("Error", error);
+          LoggerService.log("Error", error);
         })
   }
 

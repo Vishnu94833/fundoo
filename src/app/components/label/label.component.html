@@ -4,8 +4,8 @@
     <div fxFlex="15">
       <mat-icon>close</mat-icon>
     </div>
-    <div fxFlex="70" contenteditable="true" placeholder="Create new Label" class="content" #Label
-      (input)="res=$event.target.innerText" placeholder="Create new Label">
+    <div fxFlex="70" contenteditable="true" placeholder="Create new Label" class="content" #Label (input)="res=$event.target.innerText"
+      placeholder="Create new Label">
     </div>
     <div fxFlex="15">
       <mat-icon>check</mat-icon>
@@ -18,13 +18,12 @@
         <div *ngIf="show !=labels.id">
           <div fxFlex="15">
             <i class="material-icons" (click)="deleteLabel(labels.id)" id="label">
-            delete
-          </i>
+              delete
+            </i>
           </div>
 
           <div fxFlex="70">
-            <span contenteditable="false" id="label8" [innerHTML]="labels.label"
-              class="name">
+            <span contenteditable="false" id="label8" [innerHTML]="labels.label" class="name">
             </span>
           </div>
 
@@ -40,13 +39,12 @@
               delete
             </i>
           </div>
-          
+
           <div fxFlex="70">
             <div *ngIf="labels.isDeleted == false">
-            <span contenteditable="true" #myLabel [innerHTML]="labels.label"
-              class="name">
-            </span>
-          </div>
+              <span contenteditable="true" #myLabel [innerHTML]="labels.label" class="name">
+              </span>
+            </div>
           </div>
 
           <div fxFlex="15">

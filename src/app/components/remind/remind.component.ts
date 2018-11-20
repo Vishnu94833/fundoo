@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { FormControl } from '@angular/forms';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 @Component({
   selector: 'app-remind',
@@ -22,7 +22,7 @@ export class RemindComponent implements OnInit {
     { value: 'evening', viewPeriod: 'Evening', viewTime: '06:00 PM' },
     { value: 'night', viewPeriod: 'Night', viewTime: '09:00 PM' }];
   reminddate;
-  constructor(private httpservice: HttpService) { }
+  constructor(private notesService: NotesService) { }
 
   ngOnInit() {
   }
@@ -32,11 +32,11 @@ export class RemindComponent implements OnInit {
     let date = new Date();
     var dateExample = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 20, 0, 0, 0)
     this.dateEmit.emit(dateExample);
-    this.httpservice.postarchive('notes/addUpdateReminderNotes', {
+    this.notesService.addUpdateReminderNotes({
       "noteIdList": [this.reminder.id],
       "reminder": dateExample
 
-    }, this.token).subscribe(
+    }).subscribe(
       (data) => {
 
         LoggerService.log("POST Request is successful ", data);
@@ -52,43 +52,43 @@ export class RemindComponent implements OnInit {
     let date = new Date();
     var dateExample1 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 8, 0, 0, 0)
     this.dateEmit.emit(dateExample1);
-    this.httpservice.postarchive('notes/addUpdateReminderNotes',
+    this.notesService.addUpdateReminderNotes(
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample1
-      }, this.token).subscribe(data => {
+      }).subscribe(data => {
         LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
       },
-      error => {
-        LoggerService.log("Error", error);
-      })
+        error => {
+          LoggerService.log("Error", error);
+        })
   }
 
   remindMeNextWeek() {
     let date = new Date();
     var dateExample2 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7, 8, 0, 0, 0)
     this.dateEmit.emit(dateExample2);
-    this.httpservice.postarchive('notes/addUpdateReminderNotes',
+    this.notesService.addUpdateReminderNotes(
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample2
-      }, this.token).subscribe(data => {
+      }).subscribe(data => {
         LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
       },
-      error => {
-        LoggerService.log("Error", error);
-      })
+        error => {
+          LoggerService.log("Error", error);
+        })
   }
 
 
 
   reminderList() {
 
-    this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
+    this.notesService.getReminderNotesList().subscribe(
       (data) => {
         LoggerService.log("GET Request is successful ", data)
       },
@@ -118,7 +118,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
-      this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -128,7 +128,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
       }
-      this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -138,7 +138,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
       }
-      this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -148,13 +148,12 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
       }
-      this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
       })
     } else if (timing == this.reminderBody.time) {
-      // var x;
       var splitTime = this.reminderBody.time.split("", 8);
       var hour = Number(splitTime[0] + splitTime[1]);
       var minute = Number(splitTime[3] + splitTime[4]);
@@ -165,7 +164,7 @@ export class RemindComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
         }
-        this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+        this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
           this.reminderEmit.emit({
           })
@@ -175,7 +174,7 @@ export class RemindComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 12, minute, 0, 0)
         }
-        this.httpservice.postarchive('notes/addUpdateReminderNotes', this.body, localStorage.getItem('token')).subscribe((result) => {
+        this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
 
           this.reminderEmit.emit({
           })

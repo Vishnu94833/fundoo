@@ -1,10 +1,8 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
-// import { TrashComponent } from '../trash/trash.component';
-// import { CollectionnotesComponent } from '../collectionnotes/collectionnotes.component';
 import { MatSnackBar } from '@angular/material';
-// import { EventEmitter } from 'events';
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
+
 
 
 @Component({
@@ -19,7 +17,8 @@ export class MoreComponent implements OnInit {
   private id = localStorage.getItem('userId');
   private search: any;
   private arr: any;
-  constructor(private httpservice: HttpService, public snackBar: MatSnackBar) { }
+  constructor( public snackBar: MatSnackBar,
+                private notesService:NotesService) { }
   @Input() carddel;
   @Output() deleteevent = new EventEmitter();
   @Output() labelList = new EventEmitter();
@@ -27,13 +26,13 @@ export class MoreComponent implements OnInit {
 
 
   ngOnInit() {
-    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+    this.notesService.getLabels().subscribe(
       (data) => {
-        // console.log("Get Request is successful ", data);
+        LoggerService.log("Get Request is successful ", data);
         this.arr = data['data'].details;
       },
       error => {
-        // console.log("Error", error);
+        LoggerService.error("Error", error);
       });
   }
 
@@ -45,58 +44,41 @@ export class MoreComponent implements OnInit {
   }
   delete() {
 
-    this.httpservice.postarchive('notes/trashNotes',
+    this.notesService.deleteNote(
       {
         "isDeleted": true,
         "noteIdList": [this.carddel.id]
-      }, this.token).subscribe(
+      }).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          LoggerService.log("POST Request is successful ", data);
           this.snackBar.open("Note Deleted Successfully", "", {
             duration: 2000
           })
-
           this.deleteevent.emit({
           })
         },
         error => {
-          // console.log("Error", error);
+          LoggerService.log("Error", error);
         }
       )
 
   }
 
-
+/**
+ * @description function to add labels to notes 
+ * @param labelId 
+ */
   addChips(labelId) {
-    // console.log(labelId.label)
     this.labelList.emit(labelId);
 
-    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId.id + '/add', {
+    this.notesService.addLabelToNotes(this.carddel.id,labelId.id,{
       "noteId": this.carddel.id,
       "lableId": labelId.id
-    }, this.token).subscribe(result => {
-      // console.log(result);
+    }).subscribe(result => {
+      LoggerService.log("successfully added labels to notes.....",result);
       this.deleteevent.emit({});
     }, error => {
-      // console.log(this.arr.id)
-      // console.log(error);  
     })
   }
-
-  removeLabel(labelId) {
-
-    this.httpservice.postarchive('notes/' + this.carddel.id + '/addLabelToNotes/' + labelId + '/remove',
-      {
-        "noteId": this.arr.id,
-        "lableId": labelId
-      }, this.token).subscribe(result => {
-        // console.log(result);
-        this.deleteevent.emit({});
-      }, error => {
-
-        // console.log(error);
-      })
-  }
-
 }
 

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/http/http.service';
 import { Router } from '@angular/router';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
-
+import { UserService } from 'src/app/core/services/user/user.service';
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +30,12 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
   ]
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   email = new FormControl('', [Validators.required, Validators.email]);
-  constructor(private httpservice: HttpService, private router: Router) { }
+  constructor(private userService: UserService,private snackBar:MatSnackBar,
+    private router: Router) { }
   hide = true;
 
   ngOnInit() {
@@ -55,17 +60,17 @@ export class LoginComponent implements OnInit {
 
   loginpost() {
 
-    this.httpservice
-      .logPost('user/login', {
-
+    this.userService
+      .login({
         "email": this.model.email,
-
         "password": this.model.password,
-
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          this.snackBar.open("Login Successfull", "", {
+            duration: 2000
+          })
           localStorage.setItem("token", data['id']);
           localStorage.setItem('firstname', data['firstName']);
           localStorage.setItem('lastname', data['lastName']);
@@ -73,34 +78,32 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userId', data['userId']);
           localStorage.setItem('imageUrl', data['imageUrl']);
           var token = localStorage.getItem("token");
-
           var pushToken = localStorage.getItem('pushToken')
-          console.log('pushToken in Login', pushToken);
           var body = {
             "pushToken": pushToken
           }
-          this.httpservice.postarchive('user/registerPushToken', body, token).subscribe(
+          this.userService.registerPushToken(body).subscribe(
             data => {
               LoggerService.log("post of pushToken is successful", data)
             }),
             error => {
-              console.log(error, "error in pushToken");
             }
           this.router.navigateByUrl('/homepage');
         },
         error => {
-          // console.log("Error", error);
+          this.snackBar.open("Login Failed", "", {
+            duration: 2000
+          })
         }
 
       );
 
-
-
-
-
-
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }

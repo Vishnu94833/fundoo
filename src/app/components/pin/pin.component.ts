@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 @Component({
   selector: 'app-pin',
@@ -9,57 +10,60 @@ import { MatSnackBar } from '@angular/material';
 })
 export class PinComponent implements OnInit {
 
-  private token=localStorage.getItem('token');
-@Input() pinArr;
-@Output() pinEmit = new EventEmitter();
+  private token = localStorage.getItem('token');
+  @Input() pinArr;
+  @Output() pinEmit = new EventEmitter();
 
-  constructor(private httpservice:HttpService, public snackBar: MatSnackBar) { }
+  constructor(private notesService: NotesService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    // this.pinned(id)
   }
 
-pinned()
-{
-  this.httpservice.postarchive('notes/pinUnpinNotes',
+  /**
+   * @description Funtion to pin a note 
+   */
+  pinned() {
+    this.notesService.pinUnpinNotes(
       {
         "isPined": true,
-        "noteIdList":[this.pinArr.id]
-      }, this.token).subscribe(
+        "noteIdList": [this.pinArr.id]
+      }).subscribe(
         (data) => {
-          console.log("POST pin Request is successful ", data);
+          LoggerService.log("POST pin Request is successful ", data);
           this.snackBar.open("Note Pinned Successfully", "", {
             duration: 2000
           })
           this.pinEmit.emit();
-        
+
         },
         error => {
-          console.log("Error", error);
-     
-        })
-}
+          LoggerService.error("Error", error);
 
-unPinned()
-{
-  this.httpservice.postarchive('notes/pinUnpinNotes',
+        })
+  }
+
+  /**
+ * @description Funtion to Un-pin a note 
+ */
+  unPinned() {
+    this.notesService.pinUnpinNotes(
       {
         "isPined": false,
-        "noteIdList":[this.pinArr.id]
-      }, this.token).subscribe(
+        "noteIdList": [this.pinArr.id]
+      }).subscribe(
         (data) => {
-          console.log("POST unpin Request is successful ", data);
+          LoggerService.log("POST unpin Request is successful ", data);
           this.snackBar.open("Note UnPinned Successfully", "", {
             duration: 2000
           })
 
           this.pinEmit.emit();
-        
+
         },
         error => {
-          console.log("Error", error);
-     
+          LoggerService.error("Error", error);
+
         })
-}
+  }
 
 }

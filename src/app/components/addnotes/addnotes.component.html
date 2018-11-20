@@ -1,22 +1,16 @@
 <div class="response" fxLayout='column' fxLayoutAlign="center center">
 
-  <!-- Add note starts -->
+  <!-- ********************************Add note starts********************** -->
   <mat-card fxFlex *ngIf='open' aria-placeholder="Take a Note" (click)="function()">
     Take a note...
     <div fxLayout="row" fxLayoutAlign="space-evenly center" class="list">
       <span>
         <mat-icon matTooltip="New List" (click)="functionCheckbox()" matTooltipPosition="above">list</mat-icon>
       </span>
-      <!-- <span> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">
-          insert_photo</mat-icon>
-      </span>
-      <span> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">
-          create</mat-icon>
-      </span> -->
     </div>
   </mat-card>
 
-  <!-- creating notes dialog will be opened for editing notes -->
+  <!--****** creating notes dialog will be opened for editing notes ***********-->
   <mat-card *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
     <mat-icon>pin</mat-icon>
 
@@ -40,7 +34,7 @@
 
     <!-- <div fxLayout="row"> -->
     <div *ngFor="let items of dateArray">
-      
+
       <mat-chip-list>
         <div *ngIf="(today | date:shortDate)==(items | date:shortDate)">
           <mat-chip>Today , {{items | date:'shortTime'}}

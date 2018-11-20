@@ -1,5 +1,4 @@
-<mat-icon style="cursor: pointer;" matTooltip="More" aria-label="more" 
-  [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
+<mat-icon style="cursor: pointer;" matTooltip="More" aria-label="more" [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
 
 
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
@@ -11,11 +10,9 @@
 
 <mat-menu #labelMenu="matMenu">
   <div>
-    <input type="text" placeholder="search" [(ngModel)]="search" 
-      (click)="$event.stopPropagation()">
+    <input type="text" placeholder="search" [(ngModel)]="search" (click)="$event.stopPropagation()">
   </div>
-  <div *ngFor="let labels of arr | LockFilter: search " 
-    fxLayoutAlign="space-between center">
+  <div *ngFor="let labels of arr | LockFilter: search " fxLayoutAlign="space-between center">
     <mat-checkbox (click)="$event.stopPropagation(); addChips(labels)">
       {{labels.label}}
     </mat-checkbox>

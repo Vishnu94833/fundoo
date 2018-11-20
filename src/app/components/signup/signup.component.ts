@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../core/services/http/http.service';
-import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 
@@ -39,9 +38,9 @@ export class SignupComponent implements OnInit {
       this.password.hasError('pattern') ? 'Password can be only number,alphabets and characters(* and @)' :
         '';
   }
-  
 
-  constructor(private router: Router, private httpservice: HttpService, public snackBar: MatSnackBar) { }
+
+  constructor(private router: Router, private userService: UserService, public snackBar: MatSnackBar) { }
   records = {};
   advanceVal: any;
   basicVal: any;
@@ -52,14 +51,12 @@ export class SignupComponent implements OnInit {
   cards = [];
 
   ngOnInit() {
-    this.records = this.httpservice.getConfig().subscribe(data => {
-      console.log('response', data);
+    this.records = this.userService.getServiceOfUser().subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
       }
       var value = data["data"].data.name;
-      console.log("cards are", this.cards);
     })
 
   }
@@ -90,11 +87,8 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    // console.log(this.model.firstname);
-    // console.log(this.model.lastname);
-    // console.log(this.model.email);
-    this.httpservice
-      .logPost('user/userSignUp', {
+    this.userService
+      .userSignUp({
         "firstName": this.model.firstname,
         "lastName": this.model.lastname,
         "phoneNumber": this.model.phonenumber,
@@ -106,10 +100,14 @@ export class SignupComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          this.snackBar.open("Registration Successfull", "", {
+            duration: 2000
+          })
         },
         error => {
-          console.log("Error", error);
+          this.snackBar.open("Registration Unsuccessfull", "", {
+            duration: 2000
+          })
         }
 
       );

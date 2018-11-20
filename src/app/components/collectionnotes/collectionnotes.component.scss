@@ -37,7 +37,6 @@
 .cardsize
 {
     margin-top: 20px; 
-    // width:150px;
     border: 0px solid #dadce0;
     position: relative;
     border-radius: 5%;
@@ -63,24 +62,15 @@
 
 }
 
-
-
-
 .layout
 {
     justify-content: center;
     display: flex;
-    // flex-wrap: wrap;
-    // width: 20rem;
 }
 .card {
 	background: white;
 	margin-bottom: 2em;	
 }
-
-
-
-/* Flexbox stuff */
 
 .cards {
    display: flex;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { AuthService } from '../../core/services/authgaurd/auth.service';
 import { Notedetails } from 'src/app/core/model/notedetails';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,34 +9,32 @@ import { Notedetails } from 'src/app/core/model/notedetails';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  private  array: Notedetails[] = [];
+  private array: Notedetails[] = [];
   private pinArray: any = [];
   private token = localStorage.getItem('token');
   private message: boolean;
-  constructor(private httpservice: HttpService, private auth: AuthService) { }
+  constructor( private auth: AuthService,
+    private notesService: NotesService) { }
 
   ngOnInit() {
     this.cardslist();
     this.pinnedList();
 
-    // this.cardslist();
-
   }
 
   cardslist() {
 
-    this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
+    this.notesService.getNoteList().subscribe(
       (data) => {
         this.array = [];
-        var dataModel : Notedetails[] = data['data']['data'];
+        var dataModel: Notedetails[] = data['data']['data'];
         for (var i = dataModel.length - 1; i >= 0; i--) {
-          if (dataModel[i].isDeleted == false && 
-            dataModel[i].isArchived == false && 
+          if (dataModel[i].isDeleted == false &&
+            dataModel[i].isArchived == false &&
             dataModel[i].isPined == false) {
             this.array.push(dataModel[i]);
           }
         }
-        console.log(this.array)
       },
       error => {
 
@@ -46,13 +44,13 @@ export class NotesComponent implements OnInit {
   }
 
   pinnedList() {
-    this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
+    this.notesService.getNoteList().subscribe(
       (data) => {
         this.pinArray = [];
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && 
-          data['data']['data'][i].isArchived == false && 
-          data['data']['data'][i].isPined == true) {
+          if (data['data']['data'][i].isDeleted == false &&
+            data['data']['data'][i].isArchived == false &&
+            data['data']['data'][i].isPined == true) {
             this.pinArray.push(data['data']['data'][i]);
           }
         }
@@ -68,9 +66,8 @@ export class NotesComponent implements OnInit {
       this.pinnedList();
     }
   }
-  model(modelList:Notedetails)
-  {
-    this.array.splice(0,0,modelList)
+  model(modelList: Notedetails) {
+    this.array.splice(0, 0, modelList)
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { HttpService } from '../../core/services/http/http.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -15,7 +15,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.email.hasError('email') ? 'Invalid email' :
         '';
   }
-  constructor(private httpservice: HttpService, private snackBar: MatSnackBar) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -23,19 +23,17 @@ export class ForgotpasswordComponent implements OnInit {
   goToPassword() {
     console.log(this.model.email)
     if (!this.email.invalid) {
-      this.httpservice.logPost('user/reset', {
+      this.userService.newPassword({
         "email": this.model.email,
 
       })
         .subscribe(
           (data) => {
-            console.log("POST Request is successful ", data);
             this.snackBar.open("Valid", "Input", {
               duration: 1000
             })
           },
           error => {
-            console.log("Error", error);
             this.snackBar.open("Invalid", "input", {
               duration: 1000
             })

@@ -1,5 +1,6 @@
-import { Component, OnInit, Output,ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, ElementRef, EventEmitter } from '@angular/core';
 import { NotesService } from '../../core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 @Component({
   selector: 'app-addnotes',
@@ -30,10 +31,10 @@ export class AddnotesComponent implements OnInit {
   private index = { 'id': '' }
   private today = new Date();
   private nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
+
   constructor(private notesService: NotesService) { }
 
   ngOnInit() {
-    console.log(this.dateArray)
   }
 
   /**
@@ -76,22 +77,22 @@ export class AddnotesComponent implements OnInit {
       this.dateChip = this.date;
     }
     if (this.open1 == 0) {
-      var body={
-        'title': document.getElementById('title').innerHTML,
-        'description': document.getElementById('description').innerHTML,
-        'labelIdList': JSON.stringify(this.rollId),
-        'checklist': '',
-        'isPined': 'false',
-        'color': this.color,
-        'reminder': this.dateChip
-      }
-      this.notesService.addnotes(body)
-      .subscribe(
-          (data) => {
-            console.log("POST Request is successful ", data);
 
+      this.notesService.addnotes(
+        {
+          'title': document.getElementById('title').innerHTML,
+          'description': document.getElementById('description').innerHTML,
+          'labelIdList': JSON.stringify(this.rollId),
+          'checklist': '',
+          'isPined': 'false',
+          'color': this.color,
+          'reminder': this.dateChip
+        }
+      )
+        .subscribe(
+          (data) => {
+            LoggerService.log("POST Request is successful ", data);
             this.name = [];
-          
             this.open = !this.open;
             this.color = "#fafafa";
             this.open1 = 0;
@@ -100,16 +101,10 @@ export class AddnotesComponent implements OnInit {
             this.rollId = [];
             this.date = '';
             this.messageModel.emit(data['status'].details);
-            console.log(document.getElementById('title').innerHTML);
-
           },
           error => {
-            console.log("Error", error);
-           
+            LoggerService.error("Error", error);
             this.name = [];
-            console.log(this.dateArray);
-            console.log(document.getElementById('title').innerHTML);
-
             this.open = !this.open;
             this.color = "#fafafa";
             this.open1 = 0;
@@ -136,7 +131,6 @@ export class AddnotesComponent implements OnInit {
         this.dataArrayCheck.push(apiObj)
         this.status = "open"
       }
-      // console.log(this.dataArrayCheck);
       this.notesService.addnotes(
         {
           'title': document.getElementById('title').innerHTML,
@@ -251,27 +245,6 @@ export class AddnotesComponent implements OnInit {
 
     }
   }
-
-  /**
-     * @description Pin and Unpin function
-     */
-
-
-  // pinned(id) {
-  //   this.httpservice.addnotes('notes/pinUnpinNotes',
-  //     {
-  //       "isPined": true,
-  //       "noteId": id
-  //     }, this.token).subscribe(
-  //       (data) => {
-  //         console.log("POST Request is successful ", data);
-
-  //       },
-  //       error => {
-  //         console.log("Error", error);
-
-  //       })
-  // }
 
   emitted(event) {
     this.date = event;

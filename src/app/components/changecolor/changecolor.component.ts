@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
-// import { EventEmitter } from 'protractor';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 @Component({
-  selector: 'app-changecolor',
+  selector: 'app-changecolor',  
   templateUrl: './changecolor.component.html',
   styleUrls: ['./changecolor.component.scss']
 })
 export class ChangecolorComponent implements OnInit {
 
-  constructor(private httpservice: HttpService) { }
+  constructor(private notesService: NotesService) { }
   @Input() color;
   @Output() colorEvent = new EventEmitter();
   @Output() colorEmit = new EventEmitter();
@@ -33,21 +32,17 @@ export class ChangecolorComponent implements OnInit {
   { 'color': '#e6c9a8', 'name': 'Brown' },
   { 'color': '#e8eaed', 'name': 'Gray' }]]
 
-
   newColor(id) {
     this.colorEmit.emit(id)
     if (this.color != undefined) {
-      this.httpservice.postarchive('notes/changesColorNotes',
+      this.notesService.changesColorNotes(
         {
           "color": id,
           "noteIdList": [this.color.id]
-        }, this.token).subscribe(
+        }).subscribe(
           (data) => {
-
             localStorage.setItem('colorId', this.color.id)
             this.colorEvent.emit({});
-
-            console.log();
           },
           error => {
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class SearchComponent implements OnInit {
   private array: any;
   private inputData: any;
   private token = localStorage.getItem('token');
-  constructor(public httpservice: HttpService, public data: SearchsharingService) { }
+  constructor(public data: SearchsharingService,
+    private notesService: NotesService) { }
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => {
@@ -25,19 +27,17 @@ export class SearchComponent implements OnInit {
 
   cardslist() {
     this.array = [];
-    this.httpservice.getnotes('notes/getNotesList', this.token).subscribe(
+    this.notesService.getNoteList().subscribe(
       (data) => {
-        // console.log("GET Request is successful ", data);
+        LoggerService.log("GET Request is successful ", data);
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
             this.array.push(data['data']['data'][i]);
           }
         }
-        // console.log("array", this.array);
-
       },
       error => {
-        // console.log("Error", error);
+        LoggerService.error("Error", error);
       });
 
 

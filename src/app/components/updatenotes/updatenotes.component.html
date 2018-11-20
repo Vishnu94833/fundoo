@@ -5,60 +5,36 @@
         </div>
     </h1>
     <div mat-dialog-content>
-        <div class="content" contenteditable="true" id="description1" class="content" 
-            data-text="Take a note..." *ngIf = "!checklist">
+        <div class="content" contenteditable="true" id="description1" class="content" data-text="Take a note..." *ngIf="!checklist">
 
             <div [innerHtml]="data.description"></div>
 
         </div>
     </div>
 
+    <div class="note" *ngFor="let check of data.noteCheckLists" fxLayout="row">
 
-    <!-- <div *ngFor="let checklist of data.noteCheckLists" fxLayout="row" > 
-        <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-        (click)=checkBox(checklist,data)></mat-checkbox>
-        <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
-        [(ngModel)]=checklist.itemName fxFlex="90%" class="check"
-          (click)="open(data)" [style.backgroundColor]="data.color">
-       </div>
-      
-        <div class="note" *ngFor="let checklist of data.noteCheckLists" fxLayout="row">
-        <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
-         (click)=checkBox(checklist,data)></mat-checkbox>
-        <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'"
-         (click)="open(data)">{{checklist.itemName}}</del>
-      </div> -->
+        <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+        <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event) [ngStyle]="{'background-color':data.color}"
+            *ngIf="!check.isDeleted && check.status=='open'">
+        <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+    </div>
 
-
-
-<div class="note" *ngFor="let check of data.noteCheckLists" fxLayout="row">
-    
-    <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
-    (click)=checkBox(check)></mat-checkbox>
-    <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
-    [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
-    <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
-    *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
-  </div>
-  
     <mat-divider *ngIf="checklist"></mat-divider>
     <div fxLayout="row" *ngIf="checklist">
-      <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
-      <mat-checkbox class="iconCheck" *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
-      <input class="note"  fxFlex="95%" class="note" placeholder="List Item" 
-      [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
+        <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+        <mat-checkbox class="iconCheck" *ngIf="adding" [(ngModel)]=addCheck color="primary"></mat-checkbox>
+        <input class="note" fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.color}"
+            [(ngModel)]=newList (keydown)=addCheckList($event) />
     </div>
     <mat-divider *ngIf="checklist"></mat-divider>
-   
+
     <div class="note" *ngFor="let check of data.noteCheckLists" fxLayout="row">
-      <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
-       (click)=checkBox(check)></mat-checkbox>
-      <input class="note" [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
-       fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
-      [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
-      <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
-       *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
-  </div>
+        <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+        <input class="note" [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;" fxFlex="80%"
+            *ngIf="check.status=='close' && !check.isDeleted" [ngStyle]="{'background-color':data.color}" (keydown)=editing(check,$event)>
+        <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+    </div>
 
 
 
@@ -80,7 +56,7 @@
         <app-changecolor [color]="data" (colorEvent)=new($event)></app-changecolor>
         <app-addimage></app-addimage>
         <mat-icon>archive</mat-icon>
-        <app-more [carddel]="data" ></app-more>
+        <app-more [carddel]="data"></app-more>
         <button mat-button (click)="onNoClick(data.id) ">Close</button>
     </div>
 </div>

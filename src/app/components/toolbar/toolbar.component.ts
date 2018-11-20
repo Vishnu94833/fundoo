@@ -4,6 +4,7 @@ import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { TrashdeleteComponent } from '../trashdelete/trashdelete.component';
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { TrashdeleteComponent } from '../trashdelete/trashdelete.component';
 export class ToolbarComponent implements OnInit {
 
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<ToolbarComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog,
+    private notesService: NotesService) { }
 
   ngOnInit() {
   }
@@ -22,31 +24,25 @@ export class ToolbarComponent implements OnInit {
 
   openDialog(notes): void {
     const dialogRef = this.dialog.open(TrashdeleteComponent, {
-      width: 'fit-content',
-      height: 'fit-content',
+      width: '200px',
+      height: '50px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.httpservice.postarchive('notes/deleteForeverNotes',
-      {
-        "isDeleted": false,
-        "noteIdList": [notes]
-
-      }, this.token).subscribe(
-        (data) => {
-          this.getTrashList();
-
-          LoggerService.log("POST Request is successful ", data)
-
-        },
-        error => {
-
-        }
-      )
-
+        this.notesService.deleteForeverNotes(
+          {
+            "isDeleted": false,
+            "noteIdList": [notes]
+          }).subscribe(
+            (data) => {
+              this.getTrashList();
+              LoggerService.log("POST Request is successful ", data)
+            },
+            error => {
+            }
+          )
       }
-      // this.getTrashList();
     });
   }
 
@@ -61,29 +57,26 @@ export class ToolbarComponent implements OnInit {
   }
 
   restoreNotes(notes) {
-
-    this.httpservice.postarchive('notes/trashNotes',
+    this.notesService.deleteNote(
       {
         "isDeleted": false,
         "noteIdList": [notes]
-      }, this.token).subscribe(
+      }).subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
+          LoggerService.log("POST Request is successful ", data);
           this.getTrashList();
         },
         error => {
-          // console.log("Error", error);
+          LoggerService.error("Error", error);
         }
       )
 
   }
 
-
-
   getTrashList() {
-    this.httpservice.gettrash('notes/getTrashNotesList', this.token).subscribe(
+    this.notesService.trashNotesList().subscribe(
       (data) => {
-        // console.log("GET Request is successful ", data);
+        LoggerService.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['data'].length; i++) {
           if (data['data']['data'][i].isDeleted == true) {
             this.array = (data['data']['data']);
@@ -91,7 +84,7 @@ export class ToolbarComponent implements OnInit {
         }
       },
       error => {
-        // console.log("Error", error);
+        LoggerService.error("Error", error);
       });
   }
 

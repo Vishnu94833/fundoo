@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-// import { EventEmitter } from 'protractor';
 import { MatDialog } from '@angular/material';
 import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
-import { HttpService } from '../../core/services/http/http.service';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Router } from '@angular/router';
-
+import { NotesService } from 'src/app/core/services/notes/notes.service';
 
 @Component({
   selector: 'app-collectionnotes',
@@ -16,9 +14,10 @@ import { Router } from '@angular/router';
 export class CollectionnotesComponent implements OnInit {
 
 
-  constructor(public dialog: MatDialog, private httpservice: HttpService,
+  constructor(public dialog: MatDialog,
     private dataService: SearchsharingService,
-    private router: Router) {
+    private router: Router,
+    private notesService: NotesService) {
     this.dataService.currentChipEvent.subscribe(
       message => {
         if (message)
@@ -30,6 +29,7 @@ export class CollectionnotesComponent implements OnInit {
   @Input() cardadded;
   @Input() inputData;
   @Input() notesOption;
+  status = 'close';
   @Output() addnotes = new EventEmitter();
   private toggle = false;
   private token = localStorage.getItem('token');
@@ -41,6 +41,7 @@ export class CollectionnotesComponent implements OnInit {
     this.getGrid();
     this.reminderList();
   }
+
   new(event) {
     this.addnotes.emit({})
   }
@@ -68,19 +69,16 @@ export class CollectionnotesComponent implements OnInit {
    * @param labelId 
    * @param noteId 
    */
-  removeLabel(labelId, noteId) {
+  removeLabel(noteId, labelId) {
 
-    this.httpservice.
-      postarchive('notes/' + noteId + '/addLabelToNotes/' + labelId + '/remove',
+    this.notesService.
+      removeLabelsFromNotes(noteId, labelId,
         {
           "noteId": noteId,
           "lableId": labelId
-        }, this.token).subscribe(result => {
-          // console.log(result);
+        }).subscribe(result => {
           this.addnotes.emit({})
         }, error => {
-
-          // console.log(error);
         })
   }
 
@@ -107,9 +105,8 @@ export class CollectionnotesComponent implements OnInit {
  */
   reminderList() {
 
-    this.httpservice.gettrash('notes/getReminderNotesList', this.token).subscribe(
+    this.notesService.getReminderNotesList().subscribe(
       (data) => {
-        // console.log("GET Request is successful ", data);
         LoggerService.log("GET Request is successful ", data)
       },
       error => {
@@ -122,11 +119,10 @@ export class CollectionnotesComponent implements OnInit {
    * @param id 
    */
   removeReminder(id) {
-    this.httpservice.postarchive('notes/removeReminderNotes',
+    this.notesService.removeReminderNotes(
       {
         "noteIdList": [id]
-      }
-      , this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.addnotes.emit({})
           LoggerService.log("POST Request is successful ", data)
@@ -162,7 +158,7 @@ export class CollectionnotesComponent implements OnInit {
       "status": this.modifiedCheckList.status
     }
     var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-    this.httpservice.postarchive(url, JSON.stringify(apiData), this.token).subscribe(response => {
+    this.notesService.updateCheckList(id, this.modifiedCheckList.id, JSON.stringify(apiData)).subscribe(response => {
 
 
     })

@@ -1,10 +1,10 @@
-    <div *ngIf = "pinArr.isPined == false">
-            <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" (click) = "pinned()">
+<div *ngIf="pinArr.isPined == false">
+        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" (click)="pinned()">
 
-    </div>
+</div>
 
 
-    <div *ngIf = "pinArr.isPined == true">
-            <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" (click) = "unPinned()">
+<div *ngIf="pinArr.isPined == true">
+        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" (click)="unPinned()">
 
-    </div>
+</div>

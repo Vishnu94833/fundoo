@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesService } from '../../core/services/notes/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { LabeldeleteComponent } from '../labeldelete/labeldelete.component';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 
 @Component({
@@ -17,8 +18,8 @@ export class LabelComponent implements OnInit {
   private token = localStorage.getItem('token');
   private label = localStorage.getItem('label')
 
-  constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<LabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,public dataService: SearchsharingService,public dialog: MatDialog) { }
+  constructor(private notesService: NotesService, public dialogRef: MatDialogRef<LabelComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: SearchsharingService, public dialog: MatDialog) { }
 
   @ViewChild('Label') Label: ElementRef;
   @ViewChild('Label1') Label1: ElementRef;
@@ -30,27 +31,21 @@ export class LabelComponent implements OnInit {
   openDelete(id): void {
     const dialogRef = this.dialog.open(LabeldeleteComponent, {
       width: 'fit-content',
-      height:'fit-content',
+      height: 'fit-content',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true)
-      {
-      this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
-      {
-        "label": document.getElementById('label').innerHTML
-
-      }).subscribe(
-        (data) => {
-          // console.log("DELETE Request is successful ", data);
-          this.labelsList();
-          this.dataService.changeChipEvent(true);
-          // console.log(this.labelList)
-
-        },
-        error => {
-          // console.log("Error", error);
-        })
+      if (result == true) {
+        this.notesService.deleteLabel(id
+         ).subscribe(
+            (data) => {
+              LoggerService.log("DELETE Request is successful ", data);
+              this.labelsList();
+              this.dataService.changeChipEvent(true);
+            },
+            error => {
+              LoggerService.log("Error", error);
+            })
 
       }
     });
@@ -68,34 +63,32 @@ export class LabelComponent implements OnInit {
   private changeText: string;
   private show;
   private res: string;
-  // value1:[];
   private id = localStorage.getItem('userId');
 
 
-
+  /**
+   * @description function to create new Label
+   */
   addLabel() {
-    var Label= this.Label.nativeElement.innerHTML;
+    var Label = this.Label.nativeElement.innerHTML;
     for (var i = 0; i < this.temp.length; i++) {
       if (this.temp[i].label == Label) {
         alert('duplicate data');
         return false;
       }
     }
-    this.httpservice.postarchive('noteLabels',
+    this.notesService.addLabels(
       {
         "label": this.Label.nativeElement.innerHTML,
         "isDeleted": false,
         "userId": this.id
-      }, this.token).subscribe(
+      }).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          LoggerService.log("POST Request is successful ", data);
           this.labelsList();
-          localStorage.setItem("label", data['label']);
-          localStorage.getItem('label')
-
         },
         error => {
-          console.log("Error", error);
+          LoggerService.error("Error", error);
         })
   }
 
@@ -104,46 +97,28 @@ export class LabelComponent implements OnInit {
   }
 
   deleteLabel(id) {
-
-    // this.httpservice.labelDelete('noteLabels/' + id + '/deleteNoteLabel',
-    //   {
-    //     "label": document.getElementById('label').innerHTML
-
-    //   }).subscribe(
-    //     (data) => {
-    //       this.labelsList();
-    //       this.dataService.changeChipEvent(true);
-
-    //     },
-    //     error => {
-    //     })
-
     this.openDelete(id);
-
   }
 
-
+/**
+ * @description function to edit and update labels
+ * @param id 
+ */
   editLabel(id) {
-    console.log(this.id);
-    this.httpservice.postarchive('noteLabels/' + id + '/updateNoteLabel',
+    this.notesService.editLabels(id,
       {
-        "label": this.myLabel.nativeElement.innerHTML,
-        "isDeleted": false,
-        "userId": this.id,
-        "id": id
+        "label": this.myLabel.nativeElement.innerHTML
       }
-      , this.token).subscribe(
-        (data) => {
-          // console.log("UPDATE Request is successful ", data);
-          // console.log(data);
-          
-
-        },
-        error => {
-          // console.log("Error", error);
-        })
-
+    ).subscribe(
+      (data) => {
+        LoggerService.log("UPDATE Request is successful ", data);
+      },
+      error => {
+        LoggerService.log("Error", error);
+      })
   }
+
+
   edit(id) {
     this.show = id;
   }
@@ -151,23 +126,18 @@ export class LabelComponent implements OnInit {
 
   labelsList() {
     var array = [];
-    this.httpservice.getLabels('noteLabels/getNoteLabelList', this.token).subscribe(
+    this.notesService.getLabels().subscribe(
       (data) => {
-        // console.log("Get Request is successful ", data);
-        for(var i=0;i<data['data']['details'].length;i++)
-        {
-          if(data['data']['details'][i].isDeleted == false)
-          { 
-              array.push (data['data']['details'][i]);
+        LoggerService.log("Get Request is successful ", data);
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            array.push(data['data']['details'][i]);
           }
         }
-            this.temp = array;
-
-        // this.temp = data['data'].details;
-        // console.log(data['data'].details)
+        this.temp = array;
       },
       error => {
-        // console.log("Error", error);
+        LoggerService.log("Error", error);
       });
   }
 
