@@ -1,12 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+
 
 @Component({
   selector: 'app-changecolor',  
   templateUrl: './changecolor.component.html',
   styleUrls: ['./changecolor.component.scss']
 })
-export class ChangecolorComponent implements OnInit {
+export class ChangecolorComponent implements OnInit,  OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private notesService: NotesService) { }
   @Input() color;
@@ -39,7 +43,7 @@ export class ChangecolorComponent implements OnInit {
         {
           "color": id,
           "noteIdList": [this.color.id]
-        }).subscribe(
+        }).pipe(takeUntil(this.destroy$)).subscribe(
           (data) => {
             localStorage.setItem('colorId', this.color.id)
             this.colorEvent.emit({});
@@ -50,6 +54,10 @@ export class ChangecolorComponent implements OnInit {
     }
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }

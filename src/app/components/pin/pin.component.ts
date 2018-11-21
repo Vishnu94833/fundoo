@@ -1,14 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-pin',
   templateUrl: './pin.component.html',
   styleUrls: ['./pin.component.scss']
 })
-export class PinComponent implements OnInit {
+export class PinComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   private token = localStorage.getItem('token');
   @Input() pinArr;
@@ -27,7 +30,7 @@ export class PinComponent implements OnInit {
       {
         "isPined": true,
         "noteIdList": [this.pinArr.id]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           LoggerService.log("POST pin Request is successful ", data);
           this.snackBar.open("Note Pinned Successfully", "", {
@@ -50,7 +53,7 @@ export class PinComponent implements OnInit {
       {
         "isPined": false,
         "noteIdList": [this.pinArr.id]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           LoggerService.log("POST unpin Request is successful ", data);
           this.snackBar.open("Note UnPinned Successfully", "", {
@@ -65,5 +68,9 @@ export class PinComponent implements OnInit {
 
         })
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

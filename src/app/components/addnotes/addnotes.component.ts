@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-addnotes',
@@ -9,8 +11,8 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
 })
 
 
-export class AddnotesComponent implements OnInit {
-
+export class AddnotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   token = localStorage.getItem('token');
   @Output() message = new EventEmitter();
@@ -89,6 +91,7 @@ export class AddnotesComponent implements OnInit {
           'reminder': this.dateChip
         }
       )
+      .pipe(takeUntil(this.destroy$))
         .subscribe(
           (data) => {
             LoggerService.log("POST Request is successful ", data);
@@ -140,6 +143,7 @@ export class AddnotesComponent implements OnInit {
           'color': this.color,
           'reminder': this.dateChip
         })
+        .pipe(takeUntil(this.destroy$))
         .subscribe(
           (data) => {
             this.messageModel.emit(data['status'].details);
@@ -251,6 +255,10 @@ export class AddnotesComponent implements OnInit {
     this.dateArray.push(this.date);
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }

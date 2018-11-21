@@ -51,6 +51,10 @@ export class NotesService {
     return this.httpservice.postDataJsonType('/notes/pinUnpinNotes',body)
   }
 
+  addCollaboratorsNotes()
+  {
+    
+  }
   //*********************Reminders*****************************************/
 
 

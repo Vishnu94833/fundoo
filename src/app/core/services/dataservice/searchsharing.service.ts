@@ -13,15 +13,11 @@ export class SearchsharingService {
   private gridEvent = new Subject<boolean>();
   currentGridEvent = this.gridEvent.asObservable();
 
-
   private chipEvent = new Subject<boolean>();
   currentChipEvent = this.chipEvent.asObservable();
 
-
-private msgSource = new BehaviorSubject(false);
-currentMsg = this.msgSource.asObservable();
-
-
+  private msgSource = new BehaviorSubject(false);
+  currentMsg = this.msgSource.asObservable();
 
   constructor() { }
 
@@ -33,12 +29,11 @@ currentMsg = this.msgSource.asObservable();
     this.gridEvent.next(message)
   }
 
-
   changeChipEvent(message: boolean) {
     this.chipEvent.next(message)
   }
 
   changeMsg(message: boolean) {
     this.msgSource.next(message);
-    }
+  }
 }

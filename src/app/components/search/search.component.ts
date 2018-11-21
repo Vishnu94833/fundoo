@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 
 @Component({
@@ -9,8 +11,8 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
-
+export class SearchComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private array: any;
   private inputData: any;
   private token = localStorage.getItem('token');
@@ -27,7 +29,7 @@ export class SearchComponent implements OnInit {
 
   cardslist() {
     this.array = [];
-    this.notesService.getNoteList().subscribe(
+    this.notesService.getNoteList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         LoggerService.log("GET Request is successful ", data);
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
@@ -42,5 +44,9 @@ export class SearchComponent implements OnInit {
 
 
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

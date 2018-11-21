@@ -1,13 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+import { Notedetails } from 'src/app/core/model/notedetails';
 
 @Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
   styleUrls: ['./archive.component.scss']
 })
-export class ArchiveComponent implements OnInit {
-
+export class ArchiveComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private archivearray: any = [];
   private token = localStorage.getItem('token');
   @Output() archiveEvent = new EventEmitter();
@@ -22,10 +25,13 @@ export class ArchiveComponent implements OnInit {
   getArchiveList() {
 
     this.archivearray = [];
-    this.notesService.getArchiveNotesList().subscribe(
+    this.notesService.getArchiveNotesList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
-        for (var i = data['data'].data.length - 1; i >= 0; i--) {
-          this.archivearray.push(data['data']['data'][i]);
+        var myArchiveList : Notedetails[] = data['data'].data ;
+        for (var i = myArchiveList.length - 1; i >= 0; i--) {
+          this.archivearray.push(myArchiveList[i]);
           this.archiveEvent.emit({});
         }
       },
@@ -40,4 +46,9 @@ export class ArchiveComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

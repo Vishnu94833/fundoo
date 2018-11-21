@@ -72,7 +72,7 @@
 
           <div fxLayoutAlign="row " fxLayoutAlign="space-between">
 
-            <div fxFlex=90>
+            <div fxFlex=100>
 
               <button color="disabled" *ngIf="image2!=''" (click)="$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
                 (click)="selectFile.click()" matTooltip="{{firstname | titlecase}} {{lastname | titlecase}}"
@@ -104,12 +104,9 @@
           </div>
 
         </div>
-
-
         <hr>
 
-
-        <div fxLayoutAlign="row wrap" fxLayoutAlign="space-between center" class="add" fxLayoutGap=80px>
+        <div fxLayoutAlign="row wrap" fxLayoutAlign="center center" class="add" fxLayoutGap=80px>
           <button mat-stroked-button class="logout" (click)="logout()">
             Log out
           </button>

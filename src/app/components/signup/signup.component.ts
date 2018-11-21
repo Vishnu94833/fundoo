@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 
 
@@ -12,7 +14,9 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./signup.component.scss'],
 
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   private firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
   private lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
   private email = new FormControl('', [Validators.required, Validators.email]);
@@ -98,6 +102,7 @@ export class SignupComponent implements OnInit {
         "password": this.model.password,
         "username": this.model.email,
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
           this.snackBar.open("Registration Successfull", "", {
@@ -111,10 +116,6 @@ export class SignupComponent implements OnInit {
         }
 
       );
-
-
-
-
   }
   selectCards(card) {
     this.service = card.name;
@@ -127,6 +128,16 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  backToLogin(){
+    this.router.navigate(['/login'])
+  }
+  
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }
 

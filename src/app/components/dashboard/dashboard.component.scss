@@ -1,5 +1,6 @@
 $whitecolor:white;
 $whitesmoke:whitesmoke;
+$gray:#D5D8DC;
 
 .sidenav-container {
   height: 100%;
@@ -37,11 +38,11 @@ $whitesmoke:whitesmoke;
   margin-top: 5%;
 }
 .tool{
-  background-color: $whitecolor;
+  background-color:$whitecolor;
   position: fixed;
   z-index:2;
   display: flex;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20)
+  box-shadow: 0 1px 1px rgba(175, 147, 86, 0.2)
 }
 
 .right {
@@ -76,7 +77,6 @@ mat-menu-content:not(:empty) {
 }
 .searchbar
 {
-
   width:600px;
   height: 45px;
   border-radius: 8px;
@@ -95,13 +95,13 @@ mat-menu-content:not(:empty) {
   width:50px; 
   height:50px; 
   border: none;
- border-radius: 100%;
- background:$whitecolor;
+  border-radius: 100%;
+  background:$whitecolor;
  
 }
 
 .mat-nav-list a.active {
-  background:#feefc3;
+  background:$gray;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }

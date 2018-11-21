@@ -1,16 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DashboardComponent } from '../../components/dashboard/dashboard.component';
 import { HttpService } from '../../core/services/http/http.service';
 import { environment } from '../../../environments/environment';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-cropimage',
   templateUrl: './cropimage.component.html',
   styleUrls: ['./cropimage.component.scss']
 })
-export class CropimageComponent implements OnInit {
+export class CropimageComponent implements OnInit,  OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public croppedImage: any = '';
   imageChangedEvent: any = '';
   constructor(
@@ -41,7 +44,8 @@ export class CropimageComponent implements OnInit {
     console.log(this.croppedImage);
     const uploadData = new FormData();
     uploadData.append('file', this.croppedImage);
-    this.httpService.addImage('/user/uploadProfileImage', uploadData, token).subscribe(res => {
+    this.httpService.addImage('/user/uploadProfileImage', uploadData, token)
+    .pipe(takeUntil(this.destroy$)).subscribe(res => {
       this.img = environment.apiUrl + res['status'].imageUrl;
       localStorage.setItem("imageUrl", res['status'].imageUrl);
       this.dialogRefPic.close()
@@ -52,5 +56,9 @@ export class CropimageComponent implements OnInit {
     })
 
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

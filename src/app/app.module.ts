@@ -1,19 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
-import {
-  MatSelectModule, MatInputModule, MatCardModule, MatButtonModule,
-  MatDividerModule, MatListModule, MatFormFieldModule, MatButtonToggleModule,
-  MatRadioModule, MatIconModule, MatSnackBarModule, MatToolbarModule,
-  MatSidenavModule, MatDialogModule, MatMenuModule, MatChipsModule,
-  MatCheckboxModule, MatDatepickerModule, MatNativeDateModule
-} from '@angular/material'
+import { 
+  MatSelectModule,
+  MatInputModule, 
+  MatCardModule, 
+  MatButtonModule,
+  MatDividerModule,
+  MatListModule, 
+  MatFormFieldModule, 
+  MatButtonToggleModule,
+  MatRadioModule, 
+  MatIconModule,
+  MatSnackBarModule, 
+  MatToolbarModule,
+  MatSidenavModule, 
+  MatDialogModule, 
+  MatMenuModule, 
+  MatChipsModule,
+  MatCheckboxModule, 
+  MatDatepickerModule, 
+  MatNativeDateModule
+} from '@angular/material';
+
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SlidePanelComponent } from '../app/components/slide-panel/slide-panel.component';
@@ -57,6 +71,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { InterceptService } from './core/services/interceptor/interceptor.service';
+import { AddcollaboratorComponent } from './components/addcollaborator/addcollaborator.component';
+import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 
 
 
@@ -94,9 +110,10 @@ import { InterceptService } from './core/services/interceptor/interceptor.servic
     LabeldeleteComponent,
     TrashdeleteComponent,
     PinComponent,
-
-    // Notes1Component
+    AddcollaboratorComponent
   ],
+
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -114,7 +131,7 @@ import { InterceptService } from './core/services/interceptor/interceptor.servic
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    ReactiveFormsModule,
     MatSnackBarModule,
     MatToolbarModule,
     LayoutModule,
@@ -133,16 +150,18 @@ import { InterceptService } from './core/services/interceptor/interceptor.servic
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule
-    // FormControl  
 
   ],
-  providers: [InterceptService, {
+  providers: [{
+    provide: ErrorHandler,
+    useClass: ErrorsHandler,
+  },InterceptService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptService,
     multi: true
   },
     HttpService, AuthGuard, AuthService, LoggerService, MessagingService, AsyncPipe],
-  entryComponents: [UpdatenotesComponent, CropimageComponent, ToolbarComponent, LabeldeleteComponent, TrashdeleteComponent],
+  entryComponents: [AddcollaboratorComponent,UpdatenotesComponent, CropimageComponent, ToolbarComponent, LabeldeleteComponent, TrashdeleteComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

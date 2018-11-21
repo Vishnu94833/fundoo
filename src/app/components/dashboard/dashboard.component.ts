@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { CropimageComponent } from '../cropimage/cropimage.component';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+import { label } from 'src/app/core/model/labels';
 
 
 
@@ -20,14 +23,15 @@ import { UserService } from 'src/app/core/services/user/user.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  private hoverItem: string;
+  // private hoverItem: string;
   private buttonclick: any = false;
   private title = "Fundoo";
   private model: any = {};
@@ -36,7 +40,7 @@ export class DashboardComponent {
 
 
   constructor(
-    private router: Router, private httpservice: HttpService,
+    private router: Router,
     private myRoute: Router, private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog, public data: SearchsharingService,
     private notesService: NotesService, private userService: UserService
@@ -48,9 +52,9 @@ export class DashboardComponent {
    */
   logout() {
     console.log(this.token);
-    this.userService.logoutPost({}).subscribe(
+    this.userService.logoutPost({})
+    .pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
         localStorage.removeItem("token");
         localStorage.removeItem('firstname');
         localStorage.removeItem('lastname');
@@ -59,9 +63,7 @@ export class DashboardComponent {
         this.router.navigateByUrl('/login');
       },
       error => {
-        console.log("Error", error);
       }
-
     );
   }
 
@@ -71,7 +73,7 @@ export class DashboardComponent {
   private label: any;
   private temp: any;
   private inputData: any;
-
+  private array: label[] = [];
 
 
   ngOnInit() {
@@ -79,6 +81,7 @@ export class DashboardComponent {
     this.lastname = localStorage.getItem('lastname');
     this.email = localStorage.getItem('email');
     this.labelList();
+    this.title = localStorage.getItem('title');
   }
 
   /**
@@ -87,6 +90,7 @@ export class DashboardComponent {
    */
   changeTitle(title) {
     this.title = title;
+    localStorage.setItem('title',title)
   }
 
   /**
@@ -98,7 +102,7 @@ export class DashboardComponent {
       width: '350px',
       data: { array: this.temp }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
       this.labelList();
     });
   }
@@ -107,24 +111,27 @@ export class DashboardComponent {
    * @description function to get labels list after creating new labels
    */
   labelList() {
-    var array = [];
-    this.notesService.getLabels().subscribe(
+
+    debugger;
+    this.notesService.getLabels().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
-        LoggerService.log("Get Request is successful yessssssssssssssssss ", data);
+        this.array=[];
+        LoggerService.log(" Get Request is successful yes ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
-            array.push(data['data']['details'][i]);
+            this.array.push(data['data']['details'][i]);
           }
         }
-        this.temp = array;
-        this.temp.sort(function (a, b) {
-          var nameA = a.label.toLowerCase(), nameB = b.label.toLowerCase()
-          if (nameA < nameB)
+        this.array.sort(function (a, b) {
+          var labelA = a.label.toLowerCase(), labelB = b.label.toLowerCase()
+          if (labelA < labelB)
             return -1
-          if (nameA > nameB)
+          if (labelA > labelB)
             return 1
           return 0
         })
+        this.temp = this.array;
+
 
       },
       error => {
@@ -186,9 +193,7 @@ export class DashboardComponent {
     });
 
     dialogRefPic.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.data.currentMsg.subscribe(message => this.pic = message)
-      console.log("pic", this.pic);
+      this.data.currentMsg.pipe(takeUntil(this.destroy$)).subscribe(message => this.pic = message)
       if (this.pic == true) {
         this.image2 = localStorage.getItem('imageUrl');
         this.img = environment.apiUrl + this.image2;
@@ -196,7 +201,11 @@ export class DashboardComponent {
 
     });
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }
 

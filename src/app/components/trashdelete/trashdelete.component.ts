@@ -13,7 +13,7 @@ export class TrashdeleteComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<TrashdeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  ngOnInit() {
+  ngOnInit() {  
   }
 
 }

@@ -1,9 +1,11 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { LabeldeleteComponent } from '../labeldelete/labeldelete.component';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 
 @Component({
@@ -11,8 +13,8 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss']
 })
-export class LabelComponent implements OnInit {
-
+export class LabelComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
 
   private token = localStorage.getItem('token');
@@ -34,7 +36,7 @@ export class LabelComponent implements OnInit {
       height: 'fit-content',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
       if (result == true) {
         this.notesService.deleteLabel(id
          ).subscribe(
@@ -82,7 +84,7 @@ export class LabelComponent implements OnInit {
         "label": this.Label.nativeElement.innerHTML,
         "isDeleted": false,
         "userId": this.id
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           LoggerService.log("POST Request is successful ", data);
           this.labelsList();
@@ -109,7 +111,7 @@ export class LabelComponent implements OnInit {
       {
         "label": this.myLabel.nativeElement.innerHTML
       }
-    ).subscribe(
+    ).pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         LoggerService.log("UPDATE Request is successful ", data);
       },
@@ -126,8 +128,9 @@ export class LabelComponent implements OnInit {
 
   labelsList() {
     var array = [];
-    this.notesService.getLabels().subscribe(
+    this.notesService.getLabels().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
+        this.array=[]
         LoggerService.log("Get Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
@@ -141,6 +144,10 @@ export class LabelComponent implements OnInit {
       });
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 }

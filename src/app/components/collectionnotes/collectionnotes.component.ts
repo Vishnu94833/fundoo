@@ -1,17 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Router } from '@angular/router';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.component';
 
 @Component({
   selector: 'app-collectionnotes',
   templateUrl: './collectionnotes.component.html',
   styleUrls: ['./collectionnotes.component.scss']
 })
-export class CollectionnotesComponent implements OnInit {
+export class CollectionnotesComponent implements OnInit,  OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
 
   constructor(public dialog: MatDialog,
@@ -46,6 +50,21 @@ export class CollectionnotesComponent implements OnInit {
     this.addnotes.emit({})
   }
 
+
+
+  // openCollaboratorDialog(): void {
+  //   const dialogRef = this.dialog.open(AddcollaboratorComponent, {
+  //     width: '250px',
+  //     data: {}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+      
+  //   });
+  // }
+
+
   /**
    * @description open dialog box to update notes
    */
@@ -58,7 +77,7 @@ export class CollectionnotesComponent implements OnInit {
     /**
      * @description once dialog box is closed notes will be updated
      */
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
       this.addnotes.emit()
 
     });
@@ -76,7 +95,7 @@ export class CollectionnotesComponent implements OnInit {
         {
           "noteId": noteId,
           "lableId": labelId
-        }).subscribe(result => {
+        }).pipe(takeUntil(this.destroy$)).subscribe(result => {
           this.addnotes.emit({})
         }, error => {
         })
@@ -95,7 +114,7 @@ export class CollectionnotesComponent implements OnInit {
    *@description function to view the notes collection in grid view
    */
   getGrid() {
-    this.dataService.currentGridEvent.subscribe(message => {
+    this.dataService.currentGridEvent.pipe(takeUntil(this.destroy$)).subscribe(message => {
       this.toggle = message;
     })
   }
@@ -105,7 +124,7 @@ export class CollectionnotesComponent implements OnInit {
  */
   reminderList() {
 
-    this.notesService.getReminderNotesList().subscribe(
+    this.notesService.getReminderNotesList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         LoggerService.log("GET Request is successful ", data)
       },
@@ -122,7 +141,7 @@ export class CollectionnotesComponent implements OnInit {
     this.notesService.removeReminderNotes(
       {
         "noteIdList": [id]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           this.addnotes.emit({})
           LoggerService.log("POST Request is successful ", data)
@@ -183,7 +202,11 @@ export class CollectionnotesComponent implements OnInit {
     this.modifiedCheckList = checkList;
     this.updateChecklist(note.id);
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 
 
 }

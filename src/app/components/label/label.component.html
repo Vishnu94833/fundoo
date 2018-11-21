@@ -8,12 +8,12 @@
       placeholder="Create new Label">
     </div>
     <div fxFlex="15">
-      <mat-icon>check</mat-icon>
+      <mat-icon (click)="addLabel()">check</mat-icon>
     </div>
   </div>
   <div fxayout="column" class="labelList">
     <a mat-list-item>
-      <div *ngFor="let labels of data.array">
+      <div *ngFor="let labels of data.array trackBy : val?.id">
 
         <div *ngIf="show !=labels.id">
           <div fxFlex="15">

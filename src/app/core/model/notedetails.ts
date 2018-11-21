@@ -1,3 +1,6 @@
+import { label } from "./labels";
+import { checklist } from "./checklist";
+
 export interface Notedetails {
 
     collaborators: [object]
@@ -19,21 +22,4 @@ export interface Notedetails {
     reminder: [object]
     title: string
     userId: string
-}
-export interface checklist {
-    createdDate: Date
-    id: string
-    isDeleted: false
-    itemName: string
-    modifiedDate: Date
-    notesId: string
-    status: string
-
-}
-export interface label {
-    id: string
-    isDeleted: false
-    label: string
-    userId: string
-
 }

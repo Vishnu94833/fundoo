@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { FormControl } from '@angular/forms';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-remind',
   templateUrl: './remind.component.html',
   styleUrls: ['./remind.component.scss']
 })
-export class RemindComponent implements OnInit {
-
+export class RemindComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   @Input() reminder;
   @Output() reminderEmit = new EventEmitter();
   @Output() dateEmit = new EventEmitter();
@@ -36,7 +38,7 @@ export class RemindComponent implements OnInit {
       "noteIdList": [this.reminder.id],
       "reminder": dateExample
 
-    }).subscribe(
+    }).pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
 
         LoggerService.log("POST Request is successful ", data);
@@ -56,7 +58,7 @@ export class RemindComponent implements OnInit {
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample1
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$)).subscribe(data => {
         LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
@@ -74,7 +76,7 @@ export class RemindComponent implements OnInit {
       {
         "noteIdList": [this.reminder.id],
         "reminder": dateExample2
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$)).subscribe(data => {
         LoggerService.log('POST is successfull ', data);
         this.reminderEmit.emit({
         })
@@ -88,7 +90,7 @@ export class RemindComponent implements OnInit {
 
   reminderList() {
 
-    this.notesService.getReminderNotesList().subscribe(
+    this.notesService.getReminderNotesList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         LoggerService.log("GET Request is successful ", data)
       },
@@ -118,7 +120,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
       }
-      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -128,7 +130,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
       }
-      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -138,7 +140,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
       }
-      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -148,7 +150,7 @@ export class RemindComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
       }
-      this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+      this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
         this.reminderEmit.emit({
         })
@@ -164,7 +166,7 @@ export class RemindComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
         }
-        this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+        this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
           this.reminderEmit.emit({
           })
@@ -174,7 +176,7 @@ export class RemindComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 12, minute, 0, 0)
         }
-        this.notesService.addUpdateReminderNotes(this.body).subscribe((result) => {
+        this.notesService.addUpdateReminderNotes(this.body).pipe(takeUntil(this.destroy$)).subscribe((result) => {
 
           this.reminderEmit.emit({
           })
@@ -183,5 +185,9 @@ export class RemindComponent implements OnInit {
 
     }
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

@@ -1,13 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
-// import { EventEmitter } from 'protractor';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-archives',
   templateUrl: './archives.component.html',
   styleUrls: ['./archives.component.scss']
 })
-export class ArchivesComponent implements OnInit {
+export class ArchivesComponent implements OnInit,  OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   private token = localStorage.getItem('token');
   
   constructor(private notesService: NotesService) { }
@@ -22,7 +25,7 @@ export class ArchivesComponent implements OnInit {
       {
         "isArchived": true,
         "noteIdList": [this.archive.id]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           this.archiveEvent.emit({});
         },
@@ -35,11 +38,16 @@ export class ArchivesComponent implements OnInit {
       {
         "isArchived": false,
         "noteIdList": [this.archive.id]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           this.archiveEvent.emit({});
         },
         error => {
         })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

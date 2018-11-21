@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
 import { DialogData } from '../updatenotes/updatenotes.component';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { TrashdeleteComponent } from '../trashdelete/trashdelete.component';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 
 @Component({
@@ -12,7 +14,8 @@ import { NotesService } from 'src/app/core/services/notes/notes.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private httpservice: HttpService, public dialogRef: MatDialogRef<ToolbarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog,
@@ -28,13 +31,13 @@ export class ToolbarComponent implements OnInit {
       height: '50px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
       if (result == true) {
         this.notesService.deleteForeverNotes(
           {
             "isDeleted": false,
             "noteIdList": [notes]
-          }).subscribe(
+          }).pipe(takeUntil(this.destroy$)).subscribe(
             (data) => {
               this.getTrashList();
               LoggerService.log("POST Request is successful ", data)
@@ -61,7 +64,7 @@ export class ToolbarComponent implements OnInit {
       {
         "isDeleted": false,
         "noteIdList": [notes]
-      }).subscribe(
+      }).pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
           LoggerService.log("POST Request is successful ", data);
           this.getTrashList();
@@ -74,7 +77,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   getTrashList() {
-    this.notesService.trashNotesList().subscribe(
+    this.notesService.trashNotesList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         LoggerService.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['data'].length; i++) {
@@ -88,5 +91,9 @@ export class ToolbarComponent implements OnInit {
       });
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

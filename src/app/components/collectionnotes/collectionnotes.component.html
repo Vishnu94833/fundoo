@@ -13,7 +13,6 @@
           <div [innerHtml]="index.description"></div>
         </mat-card-content>
 
-
         <!--************************** ui view for checklist ***********************-->
         <div *ngFor="let checklist of index.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" (click)=checkBox(checklist,index)></mat-checkbox>
@@ -34,7 +33,7 @@
               <mat-chip-list selected>
                 <mat-chip (click)="goToLabel(items)">
                   <span class="labelOver">{{items.label}}</span>
-                  <mat-icon matChipRemove (click)="removeLabel(items.id, index.id)">
+                  <mat-icon matChipRemove (click)="removeLabel( index.id,items.id)">
                     cancel</mat-icon>
                 </mat-chip>
               </mat-chip-list>
@@ -42,6 +41,7 @@
           </div>
         </div>
 
+        <div class="gapbetween"></div>
         <!--************************ To view reminders in card collection******************** -->
         <div *ngIf="remiderCutOff(index.reminder[0])">
           <div *ngIf="index.reminder.length!=0">
@@ -128,7 +128,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between">
 
           <app-remind (reminderEmit)=new($event) [reminder]="index"></app-remind>
-          <app-collaborator></app-collaborator>
+          <app-collaborator (click)=" openCollaboratorDialog()"></app-collaborator>
           <app-changecolor [color]="index" (colorEvent)=new($event)>
           </app-changecolor>
           <app-addimage></app-addimage>

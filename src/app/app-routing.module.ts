@@ -18,7 +18,8 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
 
 
 const routes: Routes = [
-
+  
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
@@ -52,8 +53,7 @@ const routes: Routes = [
         path: 'labelslist/:labelName', component: LabelslistComponent
       }
     ]
-  },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  }
 
 
 ];

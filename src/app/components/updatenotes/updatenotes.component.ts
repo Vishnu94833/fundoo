@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+
 
 export interface DialogData {
   title: string;
@@ -13,8 +16,8 @@ export interface DialogData {
   templateUrl: './updatenotes.component.html',
   styleUrls: ['./updatenotes.component.scss']
 })
-export class UpdatenotesComponent implements OnInit {
-
+export class UpdatenotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private token = localStorage.getItem('token');
   private modifiedCheckList: any = [];
   private tempArray: any = [];
@@ -37,7 +40,7 @@ export class UpdatenotesComponent implements OnInit {
           'title': document.getElementById('title1').innerHTML,
           'description': document.getElementById('description1').innerHTML
 
-        }).subscribe(
+        }).pipe(takeUntil(this.destroy$)).subscribe(
           (data) => {
             LoggerService.log("Post Request is successful ", data)
             this.dialogRef.close();
@@ -100,7 +103,8 @@ export class UpdatenotesComponent implements OnInit {
    * @description function to remove checklist from update note dialog box
    */
   removeCheckList() {
-    this.notesService.removeChecklist(this.data['id'], this.removedList.id).subscribe((response) => {
+    this.notesService.removeChecklist(this.data['id'], this.removedList.id)
+    .pipe(takeUntil(this.destroy$)).subscribe((response) => {
       for (var i = 0; i < this.tempArray.length; i++) {
         if (this.tempArray[i].id == this.removedList.id) {
           this.tempArray.splice(i, 1)
@@ -131,7 +135,7 @@ export class UpdatenotesComponent implements OnInit {
         "status": this.status
       }
       this.notesService.addCheckList(this.data['id'], this.newData)
-        .subscribe(response => {
+      .pipe(takeUntil(this.destroy$)).subscribe(response => {
           LoggerService.log("", response);
           this.newList = null;
           this.addCheck = false;
@@ -147,7 +151,7 @@ export class UpdatenotesComponent implements OnInit {
       {
         "noteId": this.data.id,
         "lableId": labelId
-      }).subscribe(result => {
+      }).pipe(takeUntil(this.destroy$)).subscribe(result => {
         LoggerService.log("", result);
       }, error => {
 
@@ -162,5 +166,9 @@ export class UpdatenotesComponent implements OnInit {
     }
     this.tempArray = this.data['noteCheckLists']
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

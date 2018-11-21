@@ -75,11 +75,17 @@
 
 
         <div>
-          <br>
-          <mat-card-actions class="example-width2">
-            <button mat-raised-button (click)="sendData()" style="float:right;margin-top: -10%" color="primary">Submit</button>
-          </mat-card-actions>
 
+          <div fxLayout="row" fxLayoutAlign="space-around end">
+
+            <mat-card-actions class="example-width2">
+              <button mat-raised-button (click)="sendData()" style="float:right;margin-top: -10%" color="primary">Submit</button>
+            </mat-card-actions>
+            <mat-card-actions class="example-width2">
+              <button mat-raised-button (click)="backToLogin()" style="float:right;margin-top: -10%" color="primary">Login</button>
+            </mat-card-actions>
+
+          </div>
         </div>
       </mat-card-content>
     </mat-card>

@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { AuthService } from '../../core/services/authgaurd/auth.service';
 import { Notedetails } from 'src/app/core/model/notedetails';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private array: Notedetails[] = [];
   private pinArray: any = [];
   private token = localStorage.getItem('token');
@@ -23,8 +26,7 @@ export class NotesComponent implements OnInit {
   }
 
   cardslist() {
-
-    this.notesService.getNoteList().subscribe(
+    this.notesService.getNoteList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         this.array = [];
         var dataModel: Notedetails[] = data['data']['data'];
@@ -37,14 +39,11 @@ export class NotesComponent implements OnInit {
         }
       },
       error => {
-
       });
-
-
   }
 
   pinnedList() {
-    this.notesService.getNoteList().subscribe(
+    this.notesService.getNoteList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         this.pinArray = [];
         for (var i = data['data'].data.length - 1; i >= 0; i--) {
@@ -69,7 +68,11 @@ export class NotesComponent implements OnInit {
   model(modelList: Notedetails) {
     this.array.splice(0, 0, modelList)
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }
 
 
