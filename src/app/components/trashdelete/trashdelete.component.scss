@@ -1,16 +1,12 @@
-.box 
-{
-width: 500px;
-height: 50px;
-overflow: hidden;
-padding: 10px;
-align-content: center;
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
+.box{
+    @include confirmdelete;
 }
 .accept 
 {
 float: right;
 }
-.buttons 
-{
-padding: 10px;
-}
+

@@ -1,3 +1,7 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .marg
 {
     margin-top: 20%;
@@ -25,18 +29,14 @@
 
 .content
 {
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
-    min-height: 20px;
+    @include content;
 }
 .spac
 {
-margin-right: 30px;
+margin-right: $thirty;
   
 }
 .spec
 {
-    float: right;
+    // float: right;
 }

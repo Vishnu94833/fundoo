@@ -1,21 +1,75 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .collaborator{
-    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-bottom: 1px solid $collaborators;
     font-size: 18px;
     font-weight: 500;
     height: 25px;
     padding: 0 0 10px 0;
-    }
-    .padding{
+}
+.padding{
     padding: 10px;
-    }
-    .names{
-    background-clip: padding-box;
-    border: solid transparent;
-    border-width: 1px 1px 1px 6px;
-    min-height: 28px;
-    padding: 100px 0 0;
-    }
-    .buttons{
+}
+.buttons{
     float: right;
     padding:2%;
-    }
+}
+// .shade{
+//     background-color: $gray;
+// }
+.spactop{
+    margin-top: 20px;
+}
+.collaboratorName{
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 13px;
+    font-family: 'Roboto',arial,sans-serif;
+    color: #202124;
+}
+.collaboratorMail{
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 13px;
+    font-family: 'Roboto',arial,sans-serif;
+    color: #0000008a;
+}
+
+
+.photo
+{
+@include profilephoto();
+}
+.collaboratorpic
+{
+    padding: -25px;
+}
+.adduser
+{
+    margin-top: 30px;
+}
+.profilepic{
+@include profilepic2()
+  }
+
+.profile-pic 
+{
+float: right;
+color: $black;
+text-transform: uppercase;
+
+}
+.searchUsers{
+    // width: 110%;
+    // height: 20%;
+    margin-top: 50px;
+    // outline: none;
+    // border-color: transparent;
+    border: none;
+}
+.gap
+{
+    margin-left: 25px;
+}

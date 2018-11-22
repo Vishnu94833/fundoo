@@ -1,9 +1,13 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .pinned
 {
     margin-left: 9%;
     color: #5f6368;
     letter-spacing: .07272727em;
-    font-family: Roboto,Arial,sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
     font-size: .6875rem;
     font-weight: 500;
 }

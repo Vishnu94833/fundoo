@@ -30,4 +30,7 @@ export class UserService {
     return this.httpservice.logoutPost('/user/logout',{})
   }
 
+  searchUserList(body){
+    return this.httpservice.postDataJsonType('/user/searchUserList',body)
+  }
 }

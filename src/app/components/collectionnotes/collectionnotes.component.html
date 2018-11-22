@@ -128,7 +128,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between">
 
           <app-remind (reminderEmit)=new($event) [reminder]="index"></app-remind>
-          <app-collaborator (click)=" openCollaboratorDialog()"></app-collaborator>
+          <app-collaborator [collaborator]="index"></app-collaborator>
           <app-changecolor [color]="index" (colorEvent)=new($event)>
           </app-changecolor>
           <app-addimage></app-addimage>

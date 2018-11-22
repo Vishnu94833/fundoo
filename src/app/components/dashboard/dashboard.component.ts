@@ -112,7 +112,7 @@ export class DashboardComponent implements OnDestroy {
    */
   labelList() {
 
-    debugger;
+    
     this.notesService.getLabels().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         this.array=[];

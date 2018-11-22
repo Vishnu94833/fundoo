@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.component';
 @Component({
@@ -8,17 +8,17 @@ import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.com
 })
 export class CollaboratorComponent implements OnInit {
 
+  @Input() collaborator;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
 
-
   openCollaboratorDialog(): void {
     const dialogRef = this.dialog.open(AddcollaboratorComponent, {
-      width: '250px',
-      data: {}
+      width: '600px',
+      data: this.collaborator
     });
 
     dialogRef.afterClosed().subscribe(result => {

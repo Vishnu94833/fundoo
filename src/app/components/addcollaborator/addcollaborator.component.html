@@ -1,16 +1,59 @@
 <div class="padding">
+
   <div class="collaborator">
     Collaborators
   </div>
-  <div class="names">
 
-  </div>
-  <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
-    <div>
-      <button mat-button>Cancel</button>
+  <div class="spac"></div>
+  <div>
+    <div fxLayout="column">
+      <div class="spactop" fxLayout="row">
+        <!-- if user has profile pic, Pic will be displayed -->
+        <div *ngIf="image!=''">
+          <div class="profilepic">
+            <img src="{{img}}" class="photo">
+          </div>
+        </div>
+        <!-- if user does not have profile photo,First letter will be displayed -->
+        <div *ngIf="image==''">
+          <button mat-mini-fab color="disabled">
+            {{firstName | slice:0:1}}
+          </button>
+        </div>
+
+        <div fxLayout="column" xLayoutAlign="space-around ">
+          <span class="collaboratorName">{{firstName}} {{lastName}}</span>
+          <span class="collaboratorMail">{{email}}</span>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div class="adduser">
+          <button mat-fab color="disabled">
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </div>
+        <div class="gap">
+          <input  contenteditable="true" placeholder="Person or Email To Share With"
+             [(ngModel)]="model.searchValue" [matMenuTriggerFor]="searchMenu"  class="searchUsers" (keyup)="searchUsers()">
+        </div>
+      <mat-menu #searchMenu="matMenu">
+        <div *ngFor="let seacrhItems of searchArray">
+{{seacrhItems.firstName}} {{seacrhItems.lastName }}  {{seacrhItems.email }}
+         </div>
+      </mat-menu>
+      </div>
     </div>
-    <div>
-      <button mat-button>Save</button>
+  </div>
+
+  <div class="shade">
+    <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
+      <div>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+      <div>
+        <button mat-button (click)="addCollaborators(data.id)">Save</button>
+      </div>
     </div>
   </div>
 </div>

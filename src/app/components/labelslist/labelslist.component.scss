@@ -1,4 +1,8 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .labeltop
 {
-    margin-top: 100px;
+    margin-top: $hundred;
 }

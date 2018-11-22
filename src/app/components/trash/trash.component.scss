@@ -1,24 +1,23 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .expand 
 {
 
-  margin-top: 2%;
- word-wrap: break-word;
+    margin-top: 2%;
+    word-wrap: break-word;
 
 }
 .cardsize
 {
-    margin-top: 20px; 
-    border: 0px solid #dadce0;
-    position: relative;
-    border-radius: 5%;
-    word-wrap: break-word;
+    @include cardsize;
 }
 .trashMargin
 {
-  margin-top: 100px;
+    margin-top: $hundred;
  
 }
 mat-card{
     width: 280px;
-
 }

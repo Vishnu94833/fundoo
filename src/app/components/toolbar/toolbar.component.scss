@@ -1,16 +1,12 @@
- .delete
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
+.delete
 {
     margin-top: 10%;
     float: right;
 }
-.content
-{
-    overflow: hidden;
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
-    min-height: 100px;
-    
+.content{
+    @include content;
 }

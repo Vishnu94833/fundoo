@@ -1,42 +1,36 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
+
 .example-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-    height: 100vh;
-    width: 100%; 
-  
+  @include loginandsignup;
   }
   .shadow {
     font-size: 110%;
   }
   .shadow0 {
-    font-size: 250%;
-    color: rgb(3, 163, 255);
-    text-align: center;
+    @include fundootitle;
+    color: $fundoo-blue;
   }
   .shadow1 {
-    font-size: 250%;
-    color: rgb(250, 2, 2);
-    text-align: center;
+    @include fundootitle;
+    color:$fundoo-red;
   }
   .shadow2 {
-    font-size: 250%;
-    color: rgb(250, 233, 4);
-    text-align: center;
+    @include fundootitle;
+    color: $fundoo-yellow;
   }
   .shadow3{
-    font-size: 250%;
-    color: rgb(3, 163, 255);
-    text-align: center;
-  }.shadow4 {
-    font-size: 250%;
-    color: rgb(43, 248, 2);
-    text-align: center;
+    @include fundootitle;
+    color: $fundoo-blue;
+  }
+  .shadow4 {
+    @include fundootitle;
+    color:$fundoo-green;
   }
   .shadow5 {
-    font-size: 250%;
-    color: rgb(250, 2, 2);
-    text-align: center;
+    @include fundootitle;
+    color: $fundoo-red;
   }
   .example {
     width: 400px;
@@ -57,14 +51,11 @@
     width: 92%;
   
   }
-  // .example-width2 {
-  //   width: 105%;
-  // }
-  
+
   .plan{
     width:110px;
     height: 100px;
-    background-color: rgb(247, 243, 6);
+    background-color: $fundoo-yellow;
     margin-right:5em;
     
   
@@ -72,7 +63,7 @@
   .plan1{
     width: 110px;
     height: 100px;
-    background-color: rgb(94, 223, 20);
+    background-color: $fundoo-green;
     margin-left:2em;
     
     
@@ -80,26 +71,16 @@
 
   .select
   {
-    width: 140px;
-    height: 50%;
-    background-color:   rgb(166, 205, 221);
-    display: flex;
-    flex-direction: row;
-    word-wrap: breakword;
+    @include cardService;
+    background-color:   $selectedService;
 
   }
   .notSelect
   {
-    width: 140px;
-    height: 50%;
-    background-color: rgb(214, 223, 243);
-    display: flex;
-    flex-direction: row;
-    word-wrap: breakword;
-
+    @include cardService;
+    background-color: $notSelectedService;
   }
   .high
-
   {
     height: 220px;
   }

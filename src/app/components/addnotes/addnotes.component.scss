@@ -1,3 +1,6 @@
+@import "../../../scss/variables"; 
+@import "../../../scss/mixins"; 
+@import "../../../scss/spacingVariables.scss";
 
 .list 
 {
@@ -8,15 +11,10 @@
 }
 
 div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
-
     content: attr(data-placeholder);
-
     float: left;
-
     margin-left: 2px;
-
-    color: #b3b3b3;
-
+    color: $whitesmoke;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
@@ -24,13 +22,7 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 
 .content
 {
-
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
-    min-height: 20px;
+    @include content;
 }
 .mat-card
 {

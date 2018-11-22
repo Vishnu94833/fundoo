@@ -88,6 +88,7 @@ export class LabelComponent implements OnInit , OnDestroy {
         (data) => {
           LoggerService.log("POST Request is successful ", data);
           this.labelsList();
+          this.dialogRef.close();
         },
         error => {
           LoggerService.error("Error", error);
@@ -113,6 +114,7 @@ export class LabelComponent implements OnInit , OnDestroy {
       }
     ).pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
+        this.labelList.emit({})
         LoggerService.log("UPDATE Request is successful ", data);
       },
       error => {
