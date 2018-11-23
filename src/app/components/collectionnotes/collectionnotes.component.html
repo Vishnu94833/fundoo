@@ -41,13 +41,14 @@
           </div>
         </div>
 
-
-        <div fxLayout="row wrap"  *ngFor="let collab of index.collaborators">
-          <!-- <button mat-mini-fab>  -->
-            <!-- {{collab}} -->
-          <!-- </button> -->
-         
+        <div fxLayout="row">
+          <div *ngFor="let collab of index.collaborators">
+            <button mat-mini-fab color="disabled">
+              {{collab}}
+            </button>
+          </div>
         </div>
+
 
         <div class="gapbetween"></div>
         <!--************************ To view reminders in card collection******************** -->

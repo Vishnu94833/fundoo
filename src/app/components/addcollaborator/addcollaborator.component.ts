@@ -18,6 +18,9 @@ export class AddcollaboratorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
+    for(let i=0 ;i<this.data['collaborators'].length;i++){
+      this.searchArray.push(this.data['collaborators'][i]);
+      }
   }
 
   private firstName = localStorage.getItem('firstname')
