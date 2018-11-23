@@ -10,31 +10,23 @@
     padding: 0 0 10px 0;
 }
 .padding{
-    padding: 10px;
+    padding: $ten;
 }
 .buttons{
     float: right;
     padding:2%;
 }
-// .shade{
-//     background-color: $gray;
-// }
+
 .spactop{
-    margin-top: 20px;
+    margin-top: $twenty;
 }
 .collaboratorName{
-    margin-left: 30px;
-    font-weight: 700;
-    font-size: 13px;
-    font-family: 'Roboto',arial,sans-serif;
-    color: #202124;
+    @include collab_mail_name;
+    color: $collab_name;
 }
 .collaboratorMail{
-    margin-left: 30px;
-    font-weight: 700;
-    font-size: 13px;
-    font-family: 'Roboto',arial,sans-serif;
-    color: #0000008a;
+    @include collab_mail_name;
+    color: $collab_mail;
 }
 
 
@@ -48,7 +40,7 @@
 }
 .adduser
 {
-    margin-top: 30px;
+    margin-top: $thirty;
 }
 .profilepic{
 @include profilepic2()
@@ -62,14 +54,19 @@ text-transform: uppercase;
 
 }
 .searchUsers{
-    // width: 110%;
-    // height: 20%;
-    margin-top: 50px;
-    // outline: none;
-    // border-color: transparent;
+    width: 110%;
+    height: 20%;
+    margin-top: $fifty;
+    outline: none;
+    border-color: transparent;
     border: none;
 }
 .gap
 {
     margin-left: 25px;
+}
+.searcList{
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    scroll-behavior: none;
 }

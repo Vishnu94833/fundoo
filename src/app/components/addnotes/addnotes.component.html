@@ -84,7 +84,7 @@
         <app-remind (dateEmit)="emitted($event)" [reminder]="index"></app-remind>
       </div>
       <div>
-        <app-collaborator></app-collaborator>
+        <app-collaborator (click)="openCollaboratorDialog()"></app-collaborator>
       </div>
       <div>
         <app-changecolor (colorEmit)=colour($event)></app-changecolor>

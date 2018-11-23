@@ -42,6 +42,7 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
   private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
 
   ngOnInit() {
+
     this.getGrid();
     this.reminderList();
   }

@@ -19,9 +19,9 @@
           <button mat-mini-fab color="disabled">
             {{firstName | slice:0:1}}
           </button>
-        </div>
+        </div>  
 
-        <div fxLayout="column" xLayoutAlign="space-around ">
+        <div fxLayout="column" fxLayoutAlign="space-around ">
           <span class="collaboratorName">{{firstName}} {{lastName}}</span>
           <span class="collaboratorMail">{{email}}</span>
         </div>
@@ -34,14 +34,18 @@
           </button>
         </div>
         <div class="gap">
-          <input  contenteditable="true" placeholder="Person or Email To Share With"
-             [(ngModel)]="model.searchValue" [matMenuTriggerFor]="searchMenu"  class="searchUsers" (keyup)="searchUsers()">
+          <input matInput contenteditable="true" placeholder="Person or Email To Share With" [(ngModel)]="model.searchValue"
+            [matMenuTriggerFor]="searchMenu" class="searchUsers" (keyup)="searchUsers()">
         </div>
-      <mat-menu #searchMenu="matMenu">
-        <div *ngFor="let seacrhItems of searchArray">
-{{seacrhItems.firstName}} {{seacrhItems.lastName }}  {{seacrhItems.email }}
-         </div>
-      </mat-menu>
+        <mat-menu #searchMenu="matMenu">
+          <!-- <div *ngFor="let searchItems of searchArray | slice:0:5" class="searcList"> -->
+
+            <button mat-button *ngFor="let searchItems of searchArray | slice:0:5" (click)="addCollaborators(searchItems)">
+              {{searchItems.firstName}} {{searchItems.lastName }} ({{searchItems.email }})
+            </button>
+
+          <!-- </div> -->
+        </mat-menu>
       </div>
     </div>
   </div>
@@ -52,7 +56,7 @@
         <button mat-button (click)="onNoClick()">Cancel</button>
       </div>
       <div>
-        <button mat-button (click)="addCollaborators(data.id)">Save</button>
+        <button mat-button  (click)="addCollaborators(searchItems)">Save</button>
       </div>
     </div>
   </div>

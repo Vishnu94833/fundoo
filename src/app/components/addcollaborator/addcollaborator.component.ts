@@ -12,61 +12,72 @@ import { NotesService } from 'src/app/core/services/notes/notes.service';
 })
 export class AddcollaboratorComponent implements OnInit {
 
-  constructor(private userService: UserService,private notesService: NotesService, public dialog: MatDialog,
+  constructor(private userService: UserService, private notesService: NotesService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddcollaboratorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
 
-  firstName = localStorage.getItem('firstname')
-  lastName = localStorage.getItem('lastname');
-  email = localStorage.getItem('email')
-  image = localStorage.getItem('imageUrl');
-  id=localStorage.getItem('id')
-  img = environment.apiUrl + this.image;
-  searchValue: any;
-  model: any = {};
+  private firstName = localStorage.getItem('firstname')
+  private lastName = localStorage.getItem('lastname');
+  private email = localStorage.getItem('email')
+  private image = localStorage.getItem('imageUrl');
+  private id = localStorage.getItem('id')
+  private img = environment.apiUrl + this.image;
+  private searchValue: any;
+  private model: any = {};
+  private searchArray: any = [];
+  
+
+  /**
+   * @description opens dialog box of add-collaborator
+   */
   onNoClick(): void {
     this.dialogRef.close();
-
-
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
       // width: '600px',
       data: this.data
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-
     });
-
   }
-private searchArray:any=[];
+
+  /**
+   * @description Function to search user's and collaborate
+   */
   searchUsers() {
     this.userService.searchUserList(
       {
         "searchWord": this.model.searchValue
       }).subscribe(result => {
-        this.searchArray=result['data']['details'];
+        this.searchArray = result['data']['details'];
         console.log("search is successful", result)
       }, error => {
         console.log(error)
       })
   }
-  addCollaborators(id) {
-    this.notesService.addCollaboratorsNotes(id,
-      
-        {
-        email: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        userId: this.id
+
+  /**
+   * @description function to add collaborator
+   * @param id 
+   */
+  addCollaborators(searchItems) {
+    this.notesService.addCollaboratorsNotes(this.data.id,
+
+      {
+        "email": searchItems.email,
+        "firstName": searchItems.firstName,
+        "lastName": searchItems.lastName,
+        "userId": searchItems.userId
       }
-      ).subscribe(result => {
-    console.log("add collaborator is successful", result)
-      }, error => {
-  console.log(error)
-})
+    ).subscribe(result => {
+      console.log("add collaborator is successful", result)
+    }, error => {
+      console.log(error)
+      console.log(this.data.id)
+    })
   }
 }

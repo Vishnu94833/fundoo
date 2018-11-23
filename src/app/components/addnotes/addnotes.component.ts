@@ -3,6 +3,8 @@ import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
+import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-addnotes',
@@ -34,9 +36,21 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   private today = new Date();
   private nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
 
-  constructor(private notesService: NotesService) { }
+  constructor(private notesService: NotesService,public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  openCollaboratorDialog(): void {
+    const dialogRef = this.dialog.open(AddcollaboratorComponent, {
+      width: '600px',
+      // data: this.collaborator
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 
   /**
