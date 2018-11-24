@@ -1,3 +1,17 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> archive.ts 
+*        
+*  Purpose         : To get archived notes 
+* 
+*  Description    
+* 
+*  @file           : archive.ts
+*  @overview       : To get and display archived notes
+*  @module         : archive.ts - This is optional if expeclictly its an npm or local package
+*  @author         : K VISHNU <kuppanvishnu@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
 import { Subject } from 'rxjs';

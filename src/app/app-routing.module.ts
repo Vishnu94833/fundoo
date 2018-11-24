@@ -19,7 +19,7 @@ import { LabelslistComponent } from './components/labelslist/labelslist.componen
 
 const routes: Routes = [
   
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },

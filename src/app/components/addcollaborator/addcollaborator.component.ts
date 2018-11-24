@@ -1,9 +1,24 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> addcollaborator.ts 
+*        
+*  Purpose         : To share notes with different user 
+* 
+*  Description    
+* 
+*  @file           : addcollaborator.ts
+*  @overview       : To display small card & hiddencards & change color when clicked
+*  @module         : notes.ts - This is optional if expeclictly its an npm or local package
+*  @author         : K VISHNU <kuppanvishnu@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogData, UpdatenotesComponent } from '../updatenotes/updatenotes.component';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { NotesService } from 'src/app/core/services/notes/notes.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 @Component({
   selector: 'app-addcollaborator',
@@ -19,7 +34,7 @@ export class AddcollaboratorComponent implements OnInit {
 
   ngOnInit() {
     for(let i=0 ;i<this.data['collaborators'].length;i++){
-      this.searchArray.push(this.data['collaborators'][i]);
+      this.collaborator.push(this.data['collaborators'][i]);
       }
   }
 
@@ -32,7 +47,7 @@ export class AddcollaboratorComponent implements OnInit {
   private searchValue: any;
   private model: any = {};
   private searchArray: any = [];
-  
+  private collaborator: any = [];
 
   /**
    * @description opens dialog box of add-collaborator
@@ -44,7 +59,7 @@ export class AddcollaboratorComponent implements OnInit {
       data: this.data
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      LoggerService.log('The dialog was closed');
     });
   }
 
@@ -57,9 +72,9 @@ export class AddcollaboratorComponent implements OnInit {
         "searchWord": this.model.searchValue
       }).subscribe(result => {
         this.searchArray = result['data']['details'];
-        console.log("search is successful", result)
+        LoggerService.log("search is successful", result)
       }, error => {
-        console.log(error)
+        LoggerService.error(error)
       })
   }
 
@@ -77,10 +92,9 @@ export class AddcollaboratorComponent implements OnInit {
         "userId": searchItems.userId
       }
     ).subscribe(result => {
-      console.log("add collaborator is successful", result)
+      LoggerService.log("add collaborator is successful", result)
     }, error => {
-      console.log(error)
-      console.log(this.data.id)
+      LoggerService.error(error)
     })
   }
 }

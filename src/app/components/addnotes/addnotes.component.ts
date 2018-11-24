@@ -1,3 +1,17 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> addnotes.ts 
+*        
+*  Purpose         : To add notes ,add checklist reminders,labels,change color 
+* 
+*  Description    
+* 
+*  @file           : addnotes.ts
+*  @overview       : To display small card & hiddencards & change color when clicked
+*  @module         : addnotes.ts - This is optional if expeclictly its an npm or local package
+*  @author         : K VISHNU <kuppanvishnu@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { NotesService } from '../../core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';

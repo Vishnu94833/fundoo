@@ -1,3 +1,17 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> collectionnotes.ts 
+*        
+*  Purpose         : To display small card & hiddencards & change color when clicked 
+* 
+*  Description    
+* 
+*  @file           : collectionnotes.ts
+*  @overview       : To display small card & hiddencards & change color when clicked
+*  @module         : collectionnotes.ts - This is optional if expeclictly its an npm or local package
+*  @author         : K VISHNU <kuppanvishnu@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output, EventEmitter,OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdatenotesComponent } from '../updatenotes/updatenotes.component';
