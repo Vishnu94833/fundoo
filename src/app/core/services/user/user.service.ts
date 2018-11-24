@@ -26,8 +26,8 @@ export class UserService {
   getServiceOfUser(){
     return this.httpservice.getConfig('/user/service')
   }
-  logoutPost({}){
-    return this.httpservice.logoutPost('/user/logout',{})
+  logoutPost(body){
+    return this.httpservice.logoutPost('/user/logout',body)
   }
 
   searchUserList(body){

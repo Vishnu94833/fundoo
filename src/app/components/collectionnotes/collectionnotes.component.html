@@ -1,5 +1,5 @@
-<div fxFlex="7" fxFlex.gt-lg="2" fxFlex.gt-md="6" fxFlex.gt-sm="8"></div>
-<div fxFlex.gt-lg="93" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center" fxLayoutWrap fxLayoutGap="2%"
+<div fxFlex="5" fxFlex.gt-lg="10" fxFlex.gt-md="6" fxFlex.gt-sm="8"></div>
+<div fxFlex="90"fxFlex.gt-lg="93" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center" fxLayoutWrap fxLayoutGap="2%"
   fxLayoutAlign="start" class="container card">
   <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
@@ -25,6 +25,16 @@
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" (click)="open(index)">{{checklist.itemName}}</del>
         </div>
 
+        <div fxLayout="row wrap" fxLayoutGap="5px">
+            <div *ngFor="let collab of index.collaborators" >
+              <button mat-mini-fab (click)="openCollaboratorDialog(index)" color="disabled" matTooltip="{{collab.email}}">
+                {{collab.email | slice:0:1 | uppercase}}
+              </button>
+            </div>
+          </div>
+  
+
+         <div class="gapbetween"></div>
 
         <!--************************ to view labels in card collection *******************-->
         <div fxLayout="row wrap" fxLayoutGap="5px">
@@ -41,13 +51,6 @@
           </div>
         </div>
 
-        <!-- <div fxLayout="row">
-          <div *ngFor="let collab of index.collaborators">
-            <button mat-mini-fab color="disabled">
-              {{collab}}
-            </button>
-          </div>
-        </div> -->
 
 
         <div class="gapbetween"></div>
@@ -151,4 +154,4 @@
       </mat-card>
     </div>
   </div>
-  <div fxFlex="5" fxFlex.gt-lg="5" fxFlex.gt-md="6" fxFlex.gt-sm="9"></div>
+  <div fxFlex="6" fxFlex.gt-lg="5" fxFlex.gt-md="6" fxFlex.gt-sm="9"></div>

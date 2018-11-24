@@ -41,13 +41,13 @@ export class HttpService {
     return formBody.join('&');
   }
 
-  logoutPost(url, { }) {
+  logoutPost(url, body) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(this.baseUrl + url, {}, httpOptions);
+    return this.http.post(this.baseUrl + url, body, httpOptions);
   }
 
   /**

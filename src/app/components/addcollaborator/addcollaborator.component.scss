@@ -13,7 +13,7 @@
     padding: $ten;
 }
 .buttons{
-    float: right;
+    // float: right;
     padding:2%;
 }
 
@@ -69,4 +69,18 @@ text-transform: uppercase;
     overflow-y: hidden !important;
     overflow-x: hidden !important;
     scroll-behavior: none;
+}
+.collabUsers{
+    overflow-y: auto;
+}
+.shade{
+    background-color: $gray;
+}
+.imageMargin{
+    margin-top: $ten;
+
+}
+.removeCollab{
+    margin-bottom: 15px;
+    cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.component';
+import { AddnotesComponent } from '../addnotes/addnotes.component';
 @Component({
   selector: 'app-collaborator',
   templateUrl: './collaborator.component.html',

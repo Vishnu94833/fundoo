@@ -35,6 +35,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   @Output() messageModel = new EventEmitter();
   private open = true;
   private open1 = 0;
+  private collaboratorIcon = true;
   private checkArray = [];
   private color: any = "#fafafa";
   private name = [];
@@ -55,14 +56,14 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  openCollaboratorDialog(): void {
+  openCollaboratorDialogAddNotes(): void {
     const dialogRef = this.dialog.open(AddcollaboratorComponent, {
       width: '600px',
       // data: this.collaborator
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      LoggerService.log('The dialog was closed');
       
     });
   }
@@ -72,6 +73,13 @@ export class AddnotesComponent implements OnInit, OnDestroy {
    */
   function() {
     this.open = !this.open;
+  }
+
+    /**
+   * @description Function to open take a note
+   */
+  functionCollaborator() {
+    this.collaboratorIcon = !this.collaboratorIcon;
   }
 
   /**
@@ -202,13 +210,11 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   }
 
   colour(event) {
-    console.log(event);
     this.color = event;
   }
 
   onKeydown(event) {
     if (event.key === "Enter" || event.key === "letters") {
-      console.log(event);
     }
   }
 
@@ -243,7 +249,6 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   enter() {
     this.i++;
     if (this.data != null) {
-      console.log(event, "keydown");
       var obj = {
         "index": this.i,
         "data": this.data
@@ -254,27 +259,22 @@ export class AddnotesComponent implements OnInit, OnDestroy {
     }
   }
   ondelete(deletedObj) {
-    console.log("ondelete function runnig");
     for (var i = 0; i < this.dataarray.length; i++) {
       if (deletedObj.index == this.dataarray[i].index) {
         this.dataarray.splice(i, 1);
         break;
       }
     }
-    console.log(this.dataarray);
   }
 
-  editing(event, edited) {
+  editing(event, renamed) {
 
     if (event.code == ("Enter")) {
-      console.log("enter pressed");
       for (var i = 0; i < this.dataarray.length; i++) {
-        if (edited.index == this.dataarray[i].index) {
-          this.dataarray[i].data == edited.data
+        if (renamed.index == this.dataarray[i].index) {
+          this.dataarray[i].data == renamed.data;
         }
       }
-      console.log(this.dataarray);
-
     }
   }
 

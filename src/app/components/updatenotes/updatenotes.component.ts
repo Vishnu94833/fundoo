@@ -47,7 +47,7 @@ export class UpdatenotesComponent implements OnInit, OnDestroy {
             this.updateEmit.emit({});
           },
           error => {
-            LoggerService.error("Error", error)
+            LoggerService.log("Error", error)
 
           })
       this.dialogRef.close();

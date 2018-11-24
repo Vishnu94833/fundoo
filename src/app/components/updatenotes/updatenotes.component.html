@@ -37,6 +37,14 @@
     </div>
 
 
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+            <div *ngFor="let collab of data.collaborators" >
+              <button mat-mini-fab (click)="openCollaboratorDialog(data)" color="disabled" matTooltip="{{collab.email}}">
+                {{collab.email | slice:0:1 | uppercase}}
+              </button>
+            </div>
+          </div>
+
 
     <div fxLayout="row">
         <div *ngFor="let items of data.noteLabels">
@@ -53,7 +61,7 @@
     <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
         <app-remind></app-remind>
         <app-collaborator></app-collaborator>
-        <app-changecolor [color]="data" (colorEvent)=new($event)></app-changecolor>
+        <app-changecolor [color]="data" ></app-changecolor>
         <app-addimage></app-addimage>
         <mat-icon>archive</mat-icon>
         <app-more [carddel]="data"></app-more>

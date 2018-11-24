@@ -35,6 +35,7 @@ export class AddcollaboratorComponent implements OnInit {
   ngOnInit() {
     for(let i=0 ;i<this.data['collaborators'].length;i++){
       this.collaborator.push(this.data['collaborators'][i]);
+      console.log(this.data['collaborators']['id'])
       }
   }
 
@@ -48,7 +49,7 @@ export class AddcollaboratorComponent implements OnInit {
   private model: any = {};
   private searchArray: any = [];
   private collaborator: any = [];
-
+  private newList:any=[];
   /**
    * @description opens dialog box of add-collaborator
    */
@@ -96,5 +97,23 @@ export class AddcollaboratorComponent implements OnInit {
     }, error => {
       LoggerService.error(error)
     })
+  }
+
+  removeCollaborators(searchItems){
+    this.notesService.removeCollaboratorNotes(this.data.id,searchItems.userId).subscribe(result=>{
+      console.log("collaborator removed successfully",result);
+    })
+  }
+
+
+  enterNewUser(user)
+  {
+    for(let i = 0; i < this.searchArray.length; i++)
+    {
+      if(this.searchArray[i].email == user)
+      {
+        this.newList.push(this.searchArray[i]);
+      }
+    }
   }
 }

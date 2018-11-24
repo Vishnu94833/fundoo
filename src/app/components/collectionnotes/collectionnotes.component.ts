@@ -47,6 +47,7 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
   @Input() cardadded;
   @Input() inputData;
   @Input() notesOption;
+  @Input() collaborator;
   status = 'close';
   @Output() addnotes = new EventEmitter();
   private toggle = false;
@@ -67,17 +68,17 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
 
 
 
-  // openCollaboratorDialog(): void {
-  //   const dialogRef = this.dialog.open(AddcollaboratorComponent, {
-  //     width: '250px',
-  //     data: {}
-  //   });
+  openCollaboratorDialog(index): void {
+    const dialogRef = this.dialog.open(AddcollaboratorComponent, {
+      width: '600px',
+      data:index
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
       
-  //   });
-  // }
+    });
+  }
 
 
   /**

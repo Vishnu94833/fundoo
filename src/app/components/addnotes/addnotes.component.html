@@ -12,7 +12,7 @@
 
   <!--****** creating notes dialog will be opened for editing notes ***********-->
   <mat-card *ngIf="!open" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
-    <mat-icon>pin</mat-icon>
+    <img class="pin" src="../../../assets/images/pin.svg">
 
     <!-- ******************** title goes here...****************************** -->
     <mat-card-title contenteditable="true" id="title" class="content" data-text="Title"></mat-card-title>
@@ -79,28 +79,35 @@
     </div>
 
     <!-- icons  -->
-    <div class="bot" fxLayout.xs="row" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign="space-around center">
-      <div>
+    <div class="bot" fxLayout.xs="row wrap" fxLayout.sm="row wrap" fxLayout.lg="row wrap" fxLayoutAlign="space-between center">
+      <div >
         <app-remind (dateEmit)="emitted($event)" [reminder]="index"></app-remind>
       </div>
-      <div>
-        <app-collaborator (click)="openCollaboratorDialog()"></app-collaborator>
+      <div  (click)="functionCollaborator()">
+        <mat-icon  >person_add</mat-icon>
       </div>
-      <div>
+      <div >
         <app-changecolor (colorEmit)=colour($event)></app-changecolor>
       </div>
-      <div>
+      <!-- <div fxFlex=10>
         <app-addimage></app-addimage>
-      </div>
-      <div>
+      </div> -->
+      <div >
         <mat-icon>archive</mat-icon>
       </div>
-      <div>
+      <div >
         <app-more (labelList)=labelList($event)></app-more>
       </div>
-      <div><span (click)="exit()"> <button mat-button>close</button></span></div>
+      <div ><span (click)="exit()"> <button mat-button>close</button></span></div>
     </div>
   </mat-card>
 
 
 </div>
+
+<!-- 
+<mat-card ng-show="!functionCollaborator()" autofocus [style.backgroundColor]="color" aria-placeholder="Title">
+<div>
+
+</div>
+  </mat-card> -->

@@ -55,6 +55,10 @@ export class NotesService {
   {
     return this.httpservice.postDataJsonType("/notes/"+id+"/AddcollaboratorsNotes",body)
   }
+
+  removeCollaboratorNotes(id,collabId){
+    return this.httpservice.deleteData("/notes/"+id+"/removeCollaboratorsNotes/"+collabId)
+  }
   //*********************Reminders*****************************************/
 
 

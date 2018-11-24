@@ -86,9 +86,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.userService.registerPushToken(body).subscribe(
             data => {
               LoggerService.log("post of pushToken is successful", data)
-            }),
-            error => {
-            }
+            })
           this.router.navigateByUrl('/homepage');
         },
         error => {

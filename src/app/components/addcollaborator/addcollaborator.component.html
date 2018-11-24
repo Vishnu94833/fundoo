@@ -1,3 +1,4 @@
+<!-- ---------------------------- collaborators starts --------------------------------- -->
 <div class="padding">
 
   <div class="collaborator">
@@ -19,21 +20,31 @@
           <button mat-mini-fab color="disabled">
             {{firstName | slice:0:1}}
           </button>
-        </div>  
+        </div>
 
         <div fxLayout="column" fxLayoutAlign="space-around ">
           <span class="collaboratorName">{{firstName}} {{lastName}}</span>
           <span class="collaboratorMail">{{email}}</span>
         </div>
       </div>
+      <br>
 
-      <div fxLayout="row" *ngFor="let data of collaborator">
-        <button mat-mini-fab color="basic" class="profilebutton2 person_button" > {{data.firstName | slice:0:1}}</button>
-        <div class="name_email " fxLayout="column">
-        <span> {{data.firstName | titlecase}}{{data.lastName | titlecase}}</span>
-        <span> {{data.email}}</span>
+      <div fxLayout="column" fxLayoutAlign="space-between  start">
+        <div fxLayout="row" *ngFor="let data of collaborator " class="imageMargin">
+          <div fxFlex="10">
+            <button mat-fab color="basic" class="photo">
+              {{data.firstName | slice:0:1}}
+            </button>
+          </div>
+          <div fxFlex="80" fxLayout="column" fxLayoutAlign="space-around ">
+            <span class="collaboratorName"> {{data.firstName | titlecase}}{{data.lastName | titlecase}}</span>
+            <span class="collaboratorMail"> {{data.email}}</span>
+          </div>
+          <div fxFlex="10">
+          <mat-icon class="removeCollab" (click)="removeCollaborators(data)">close</mat-icon>
         </div>
         </div>
+      </div>
 
       <div fxLayout="row">
         <div class="adduser">
@@ -45,27 +56,31 @@
           <input matInput contenteditable="true" placeholder="Person or Email To Share With" [(ngModel)]="model.searchValue"
             [matMenuTriggerFor]="searchMenu" class="searchUsers" (keyup)="searchUsers()">
         </div>
+
+
         <mat-menu #searchMenu="matMenu">
-          <!-- <div *ngFor="let searchItems of searchArray | slice:0:5" class="searcList"> -->
-
-            <button mat-button *ngFor="let searchItems of searchArray | slice:0:5" (click)="addCollaborators(searchItems)">
-              {{searchItems.firstName}} {{searchItems.lastName }} ({{searchItems.email }})
-            </button>
-
-          <!-- </div> -->
+          <button mat-button *ngFor="let searchItems of searchArray | slice:0:5" (click)="addCollaborators(searchItems)">
+            {{searchItems.firstName}} {{searchItems.lastName }} ({{searchItems.email }})
+          </button>
         </mat-menu>
+
+        <span class="tick" matTooltip="Add Collaborator" *ngIf = "searchValue!=null"><i 
+          class="material-icons" (click) = "enterNewUser(searchValue)">done</i>
+          </span>
+
       </div>
     </div>
   </div>
-
+  <hr>
   <div class="shade">
-    <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="buttons " fxLayout="row" fxLayoutAlign="end center">
       <div>
         <button mat-button (click)="onNoClick()">Cancel</button>
       </div>
       <div>
-        <button mat-button  (click)="addCollaborators(searchItems)">Save</button>
+        <button mat-button (click)="addCollaborators(searchItems)">Save</button>
       </div>
     </div>
   </div>
 </div>
+<!-- -------------------------------- collaborators end --------------------------------- -->
