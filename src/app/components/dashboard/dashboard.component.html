@@ -18,29 +18,35 @@
     <div id="search" fxShow="true" fxHide.xs="true" fxHide.sm="true">
       <input type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" (click)="navigateSearch()"
         (keydown)="down()" placeholder="Search" class="searchbar">
-      <button matTooltip="Refresh" mat-icon-button>
-        <mat-icon>refresh</mat-icon>
-      </button>
+
     </div>
   </div>
 
   <!--********************************* Grid View ***********************************-->
-  <div fxFlex fxLayoutAlign="end">
+  <div fxFlex fxLayoutAlign="end" >
 
-
-    <button mat-icon-button class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-lg fxHide.lt-md fxHide.lt-sm
+    <div class="right1" >
+      <div id="search" *ngIf="searchIcon==1" fxShow="true" fxShow.xs="true" fxShow.sm="true">
+        <input  type="search" [class.has-value]="searchValue" name="search" [(ngModel)]="inputData" 
+          (keydown)="down()" placeholder="Search" class="searchbarIcon">
+        <mat-icon  (click)="searchClose()">close</mat-icon>
+      </div>
+    </div>
+  
+    <button mat-icon-button class="find" fxShow.xs fxHide.sm fxHide.md fxHide.lg fxHide.lt-md fxHide.lt-sm
       fxHide.lt-xl fxHide.gt-lg>
-      <mat-icon>search</mat-icon>
+      <mat-icon (click)="searchClick();navigateSearch()">search</mat-icon>
     </button>
 
 
-    <button matTooltip="Grid View" (click)="gridView()" *ngIf="list == 0" mat-icon-button>
+    <button matTooltip="Grid View"     fxHide.xs fxHide.sm
+     (click)="gridView()" *ngIf="list == 0" mat-icon-button>
       <mat-icon>view_stream</mat-icon>
     </button>
 
 
     <!--*************************** List View ****************************************-->
-    <button matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
+    <button  fxHide.xs fxHide.sm matTooltip="List View" (click)="grid()" *ngIf="list == 1" mat-icon-button>
       <mat-icon>view_module</mat-icon>
     </button>
 
@@ -119,7 +125,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
 
-      <a (click)='changeTitle("Fundoo Notes")' mat-list-item routerLink="/homepage/notes" routerLinkActive="active">
+      <a (click)='changeTitle("Fundoo")' mat-list-item routerLink="/homepage/notes" routerLinkActive="active">
         <img src="../../../assets/images/notes.svg">
         <h4 class="spac1"> Notes</h4>
 

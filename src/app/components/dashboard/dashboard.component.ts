@@ -35,6 +35,7 @@ export class DashboardComponent implements OnDestroy {
   private buttonclick: any = false;
   private title = "Fundoo";
   private model: any = {};
+  private searchIcon;any=0;
   private token = localStorage.getItem('token');
   private userId = localStorage.getItem('userId');
 
@@ -46,6 +47,13 @@ export class DashboardComponent implements OnDestroy {
     private notesService: NotesService, private userService: UserService
   ) { }
 
+
+  searchClick(){
+    this.searchIcon=1;
+  }
+  searchClose(){
+    this.searchIcon=0;
+  }
 
   /**
    * @description function to logout of the fundoo notes homgepage

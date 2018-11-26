@@ -98,3 +98,23 @@
     font-size: 13px;
     font-family: 'Roboto',arial,sans-serif;
 }
+@mixin collaborator() {
+    border-bottom: 1px solid $collaborators;
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+    padding: 0 0 10px 0;
+}
+@mixin searchUserlist() {
+    width: 110%;
+    height: 20%;
+    margin-top: $fifty;
+    outline: none;
+    border-color: transparent;
+    border: none;
+}
+@mixin searchList() {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    scroll-behavior: none;
+}

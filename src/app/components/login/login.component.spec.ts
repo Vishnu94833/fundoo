@@ -32,7 +32,7 @@ describe('LoginComponent', () => {
     expect(component.model.password).toEqual("aa")
     expect(component.model.password).toEqual("aaaaaaaa")
     expect(component.model.password).toEqual("A@aaaaaa")
-
     expect(component.email).toBeTruthy();
   }))
+  
 });

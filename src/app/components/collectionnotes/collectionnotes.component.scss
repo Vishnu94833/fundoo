@@ -10,20 +10,180 @@
     margin-bottom: 10px;
     margin-left: 3px;
 }
+// .grid{
+//     .mat-card{
+//         width: 240px;
+//         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//         }
+        
+//     }
 .grid{
-    .mat-card{
-        width: 240px;
-        // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
+    width: 250px;
+}
+@media only screen and (min-width: 320px) and  (max-width: 370px){
+    .grid{
+        width:340px !important;
+        word-break: break-all;
+        
     }
- 
+}
+@media only screen and (min-width: 371px) and  (max-width: 400px){
+    .grid{
+        width:380px !important;
+        word-break: break-all;
+    }
+}
+@media only screen and (min-width: 401px) and  (max-width: 435px){
+    .grid{
+        width:400px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 436px) and  (max-width: 470px){
+    .grid{
+        width:420px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 471px) and  (max-width: 500px){
+    .grid{
+        width:440px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 501px) and  (max-width: 520px){
+    .grid{
+        width:480px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 521px) and  (max-width: 540px){
+    .grid{
+        width:490px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 541px) and  (max-width: 560px){
+    .grid{
+        width:510px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 561px) and  (max-width: 599px){
+    .grid{
+        width:525px !important;
+        word-break: break-all;
+    }
+} 
+@media only screen and (min-width: 600px) and  (max-width: 1900px){
+    .grid{
+        width:280px !important;
+        word-break: break-all;
+        flex:1 1 100%
+    }
+} 
 .list
 {
     .mat-card
     {
-        width: 700px;
-        // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 500px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
+    }
+    @media only screen and (min-width: 0px) and  (max-width: 360px){
+        mat-card{
+            width:95% !important;
+            word-break: break-all;
+            
+        }
+    }
+    @media only screen and (min-width: 361px) and  (max-width: 375px){
+        mat-card{
+            width:320px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 375px) and  (max-width: 411px){
+        mat-card{
+            width:330px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 412px) and  (max-width: 425px){
+        mat-card{
+            width:335px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 426px) and  (max-width: 440px){
+        mat-card{
+            width:340px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 441px) and  (max-width: 461px){
+        mat-card{
+            width:345px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 462px) and  (max-width: 482px){
+        mat-card{
+            width: 430px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 483px) and  (max-width: 500px){
+        mat-card{
+            width:450px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 501px) and  (max-width: 530px){
+        mat-card{
+            width:360px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 531px) and  (max-width: 550px){
+        mat-card{
+            width:380px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 551px) and  (max-width: 570px){
+        mat-card{
+            width:400px !important;
+            word-break: break-all;
+        }
+    }
+    @media only screen and (min-width: 571px) and  (max-width: 599px){
+        mat-card{
+            width:510px !important;
+            word-break: break-all;
+            
+        }
+    }
+    @media only screen and (min-width: 586px) and  (max-width: 700px){
+        mat-card{
+            // width:480px !important;
+            // word-break: break-all;
+            // padding-left:10px;
+        }
+    }
+    @media only screen and (min-width: 700px) and  (max-width: 850px){
+        mat-card{
+            width:540px !important;
+            word-break: break-all;
+            padding-left:10px;
+        }
+    }
+    @media only screen and (min-width: 700px) and  (max-width: 850px){
+        mat-card{
+            width:700px !important;
+            word-break: break-all;
+            padding-left:10px;
+        }
     }
 }
 .pin
@@ -69,6 +229,8 @@
 .card {
 	background: $whitecolor;
     margin-bottom: 2em;	
+    // width: 100px;
+    margin-right: 10px;
     
 }
 
@@ -98,4 +260,9 @@
 .gapbetween
 {
     margin-top: 5%;
+}
+
+.noteWidth{
+width: 200px;
+background-color: red;
 }

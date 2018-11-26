@@ -12,19 +12,19 @@
         <!-- if user has profile pic, Pic will be displayed -->
         <div *ngIf="image!=''">
           <div class="profilepic">
-            <img src="{{img}}" class="photo">
+            <img src="{{collabPic}}" class="photo">
           </div>
         </div>
         <!-- if user does not have profile photo,First letter will be displayed -->
         <div *ngIf="image==''">
           <button mat-mini-fab color="disabled">
-            {{firstName | slice:0:1}}
+            {{owner.firstName | slice:0:1}}
           </button>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="space-around ">
-          <span class="collaboratorName">{{firstName}} {{lastName}}</span>
-          <span class="collaboratorMail">{{email}}</span>
+          <span class="collaboratorName">{{owner.firstName}} {{owner.lastName}}(Owner)</span>
+          <span class="collaboratorMail">{{owner.email}}</span>
         </div>
       </div>
       <br>
@@ -47,26 +47,27 @@
       </div>
 
       <div fxLayout="row">
-        <div class="adduser">
+        <!-- <div fxLayout="row"> -->
+        <div fxFlex="10" class="adduser">
           <button mat-fab color="disabled">
             <mat-icon>person_add</mat-icon>
           </button>
         </div>
-        <div class="gap">
-          <input matInput contenteditable="true" placeholder="Person or Email To Share With" [(ngModel)]="model.searchValue"
+        <div fxFlex="80" class="gap">
+          <input matInput contenteditable="true" placeholder="Person or Email To Share With" [(ngModel)]="searchValue"
             [matMenuTriggerFor]="searchMenu" class="searchUsers" (keyup)="searchUsers()">
         </div>
-
+        <div fxFlex="10">
+        <mat-icon  class="adduser1" (click)="enterNewUser(searchValue)">done</mat-icon>
+      </div>
 
         <mat-menu #searchMenu="matMenu">
-          <button mat-button *ngFor="let searchItems of searchArray | slice:0:5" (click)="addCollaborators(searchItems)">
+          <button mat-button *ngFor="let searchItems of searchArray | slice:0:5" (click)="addCollaborators(searchItems);select(searchItems.email)">
             {{searchItems.firstName}} {{searchItems.lastName }} ({{searchItems.email }})
           </button>
         </mat-menu>
-
-        <span class="tick" matTooltip="Add Collaborator" *ngIf = "searchValue!=null"><i 
-          class="material-icons" (click) = "enterNewUser(searchValue)">done</i>
-          </span>
+       
+      
 
       </div>
     </div>

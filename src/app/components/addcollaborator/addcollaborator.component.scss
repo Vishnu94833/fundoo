@@ -3,11 +3,7 @@
 @import "../../../scss/spacingVariables.scss";
 
 .collaborator{
-    border-bottom: 1px solid $collaborators;
-    font-size: 18px;
-    font-weight: 500;
-    height: 25px;
-    padding: 0 0 10px 0;
+    @include collaborator;
 }
 .padding{
     padding: $ten;
@@ -28,8 +24,9 @@
     @include collab_mail_name;
     color: $collab_mail;
 }
-
-
+.collabDone{
+padding: 40px;
+}
 .photo
 {
 @include profilephoto();
@@ -41,6 +38,10 @@
 .adduser
 {
     margin-top: $thirty;
+}
+.adduser1
+{
+    margin-top: $fifty;
 }
 .profilepic{
 @include profilepic2()
@@ -54,21 +55,14 @@ text-transform: uppercase;
 
 }
 .searchUsers{
-    width: 110%;
-    height: 20%;
-    margin-top: $fifty;
-    outline: none;
-    border-color: transparent;
-    border: none;
+    @include searchUserlist();
 }
 .gap
 {
     margin-left: 25px;
 }
 .searcList{
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
-    scroll-behavior: none;
+    @include searchList();
 }
 .collabUsers{
     overflow-y: auto;

@@ -26,9 +26,30 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
 }
 .mat-card
 {
-    width: 50%;
+    width: 500px;
     padding: 5px;
     border-radius: 8px;
+
+}
+@media only screen and (min-width: 320px) and  (max-width: 599px){
+    mat-card{
+        width:98% !important;
+
+    }
+}
+
+@media only screen and (min-width: 600px) and  (max-width: 830px){
+    mat-card{
+        width:80% !important;
+
+    }
+}
+@media only screen and (min-width: 831px) and  (max-width: 1024px){
+    mat-card{
+        width:60% !important;
+        // word-break: break-all;
+        // padding-left:10px;
+    }
 }
 .pin
 {
@@ -49,4 +70,84 @@ div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
     flex-wrap: wrap;
     justify-content:left
     
+}
+
+
+// collaborator css****************
+
+.collaborator{
+    @include collaborator;
+}
+.padding{
+    padding: $ten;
+}
+.buttons{
+    // float: right;
+    padding:2%;
+}
+
+.spactop{
+    margin-top: $twenty;
+}
+.collaboratorName{
+    @include collab_mail_name;
+    color: $collab_name;
+}
+.collaboratorMail{
+    @include collab_mail_name;
+    color: $collab_mail;
+}
+.collabDone{
+padding: 40px;
+}
+.photo
+{
+@include profilephoto();
+}
+.collaboratorpic
+{
+    padding: -25px;
+}
+.adduser
+{
+    margin-top: $thirty;
+}
+.adduser1
+{
+    margin-top: $fifty;
+}
+.profilepic{
+@include profilepic2()
+  }
+
+.profile-pic 
+{
+float: right;
+color: $black;
+text-transform: uppercase;
+
+}
+.searchUsers{
+    @include searchUserlist();
+}
+.gap
+{
+    margin-left: 25px;
+}
+.searcList{
+    @include searchList();
+}
+.collabUsers{
+    overflow-y: auto;
+}
+.shade{
+    background-color: $gray;
+}
+.imageMargin{
+    margin-top: $ten;
+
+}
+.removeCollab{
+    margin-bottom: 15px;
+    cursor: pointer;
 }

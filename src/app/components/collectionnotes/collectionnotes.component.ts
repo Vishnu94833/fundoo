@@ -55,6 +55,8 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
   private modifiedCheckList: any = [];
   private today = new Date();
   private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
+  // private owner = this.data['user'];
+  // private collabPic = environment.baseUrl+this.owner.imageUrl;
 
   ngOnInit() {
 
@@ -86,6 +88,8 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
    */
   openDialog(x): void {
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
+      width:"600px",
+      // height:"100px",
       data: x
     });
 

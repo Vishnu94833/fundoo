@@ -32,6 +32,7 @@
 .find
 {
   margin-top: 5%;
+
 }
 .tool{
   background-color:$whitecolor;
@@ -40,29 +41,13 @@
   display: flex;
   box-shadow: 0 1px 1px $gray;
 }
-
 .right {
   float: right
 }
-// .signout
-// {
-//   height: 100px;
-//   width:200px;
-  
-// }
-// .sig
-// {
-// width: 220px;
-// height: 100px;
-// background-color: transparent;
-
-// }
-// .sig
-// {
-// background-color: transparent;
-// padding-top: 20px;
-// padding-bottom: 20px;
-// }
+.right1 {
+  float: left;
+  padding: 10px;
+}
 mat-menu-content:not(:empty) {
   padding-top: -200px;
   padding-bottom: -20000px;
@@ -75,12 +60,10 @@ mat-menu-content:not(:empty) {
 {
  @include searchbar;
 }
-// .userdetails
-// {
-//   margin-left: 10px; 
-//   background-color: #006600; 
-//   color:$whitecolor;
-// }
+.searchbarIcon
+{
+ width:50px;
+}
 .profilepic{
 @include profilepic2()
 }

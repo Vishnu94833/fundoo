@@ -19,6 +19,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { AddcollaboratorComponent } from '../addcollaborator/addcollaborator.component';
 import { MatDialog } from '@angular/material';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-addnotes',
@@ -35,7 +37,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   @Output() messageModel = new EventEmitter();
   private open = true;
   private open1 = 0;
-  private collaboratorIcon = true;
+  private collaboratorIcon :any=0;
   private checkArray = [];
   private color: any = "#fafafa";
   private name = [];
@@ -50,8 +52,14 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   private index = { 'id': '' }
   private today = new Date();
   private nextDay = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1)
+  private firstName = localStorage.getItem('firstname')
+  private lastName = localStorage.getItem('lastname');
+  private email = localStorage.getItem('email')
+  private image = localStorage.getItem('imageUrl');
+  private id = localStorage.getItem('id')
+  private img = environment.apiUrl + this.image;
 
-  constructor(private notesService: NotesService,public dialog: MatDialog) { }
+  constructor(private notesService: NotesService,private userService:UserService,public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -79,7 +87,10 @@ export class AddnotesComponent implements OnInit, OnDestroy {
    * @description Function to open take a note
    */
   functionCollaborator() {
-    this.collaboratorIcon = !this.collaboratorIcon;
+    this.collaboratorIcon = 1;
+  }
+  functionCollaboratorClose(){
+    this.collaboratorIcon = 0;
   }
 
   /**
@@ -124,7 +135,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
           'checklist': '',
           'isPined': 'false',
           'color': this.color,
-          'reminder': this.dateChip
+          'reminder': this.dateChip,
+          'collaberators':JSON.stringify(this.collaborator)
         }
       )
       .pipe(takeUntil(this.destroy$))
@@ -282,6 +294,68 @@ export class AddnotesComponent implements OnInit, OnDestroy {
     this.date = event;
     this.dateArray.push(this.date);
   }
+  private searchValue: any;
+  // private model: any = {};
+  private searchArray: any = [];
+  private collaborator: any = [];
+  private newList:any=[];
+  /**
+   * @description Function to search user's and collaborate
+   */
+  searchUsers() {
+    this.userService.searchUserList(
+      {
+        "searchWord": this.searchValue
+      }).subscribe(result => {
+        this.searchArray = result['data']['details'];
+        LoggerService.log("search is successful", result)
+      }, error => {
+        LoggerService.error(error)
+      })
+  }
+
+  /**
+   * @description function to add collaborator
+   * @param id 
+   */
+  // addCollaborators(searchItems) {
+  //   this.notesService.addCollaboratorsNotes(this.id,
+
+  //     {
+  //       "email": searchItems.email,
+  //       "firstName": searchItems.firstName,
+  //       "lastName": searchItems.lastName,
+  //       "userId": searchItems.userId
+  //     }
+  //   ).subscribe(result => {
+  //     LoggerService.log("add collaborator is successful", result)
+  //   }, error => {
+  //     console.log(error)
+  //   })
+  // }
+
+  removeCollaborators(searchItems){
+    this.notesService.removeCollaboratorNotes(this.id,searchItems.userId).subscribe(result=>{
+      console.log("collaborator removed successfully",result);
+    })
+  }
+
+
+  enterNewUser(user)
+  {
+    for(let i = 0; i < this.searchArray.length; i++)
+    {
+      if(this.searchArray[i].email == user)
+      {
+        this.collaborator.push(this.searchArray[i]);
+      }
+    }
+  }
+
+  select(mail){
+    this.searchValue = mail;
+  }
+
 
   ngOnDestroy() {
     this.destroy$.next(true);

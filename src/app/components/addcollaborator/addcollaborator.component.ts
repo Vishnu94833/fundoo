@@ -44,9 +44,11 @@ export class AddcollaboratorComponent implements OnInit {
   private email = localStorage.getItem('email')
   private image = localStorage.getItem('imageUrl');
   private id = localStorage.getItem('id')
+  private owner = this.data['user'];
+  private collabPic = environment.baseUrl+this.owner.imageUrl;
   private img = environment.apiUrl + this.image;
   private searchValue: any;
-  private model: any = {};
+  // private model: any = {};
   private searchArray: any = [];
   private collaborator: any = [];
   private newList:any=[];
@@ -70,7 +72,7 @@ export class AddcollaboratorComponent implements OnInit {
   searchUsers() {
     this.userService.searchUserList(
       {
-        "searchWord": this.model.searchValue
+        "searchWord": this.searchValue
       }).subscribe(result => {
         this.searchArray = result['data']['details'];
         LoggerService.log("search is successful", result)
@@ -99,9 +101,13 @@ export class AddcollaboratorComponent implements OnInit {
     })
   }
 
+  select(mail){
+    this.searchValue = mail;
+  }
+
   removeCollaborators(searchItems){
     this.notesService.removeCollaboratorNotes(this.data.id,searchItems.userId).subscribe(result=>{
-      console.log("collaborator removed successfully",result);
+      LoggerService.log("collaborator removed successfully",result);
     })
   }
 
@@ -112,7 +118,7 @@ export class AddcollaboratorComponent implements OnInit {
     {
       if(this.searchArray[i].email == user)
       {
-        this.newList.push(this.searchArray[i]);
+        this.collaborator.push(this.searchArray[i]);
       }
     }
   }

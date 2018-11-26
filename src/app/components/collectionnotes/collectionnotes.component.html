@@ -1,10 +1,10 @@
-<div fxFlex="5" fxFlex.gt-lg="10" fxFlex.gt-md="6" fxFlex.gt-sm="8"></div>
-<div fxFlex="90"fxFlex.gt-lg="93" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center" fxLayoutWrap fxLayoutGap="2%"
-  fxLayoutAlign="start" class="container card">
-  <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
+<div fxFlex="10"></div>
+<div  fxFlex fxFlex.gt-lg="90" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center"  fxLayoutGap="2%"
+  fxLayoutAlign="start" class="card">
+  <div  *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <!--******************* prints collection of notes ************************ -->
-      <mat-card class="cardsize" [style.backgroundColor]="index.color">
+      <mat-card  class="cardsize" [style.backgroundColor]="index.color">
         <app-pin class="pin" [pinArr]="index" (pinEmit)="new($event)"></app-pin>
         <mat-card-title (click)="openDialog(index)">
           <div [innerHtml]="index.title"></div>
@@ -154,4 +154,4 @@
       </mat-card>
     </div>
   </div>
-  <div fxFlex="6" fxFlex.gt-lg="5" fxFlex.gt-md="6" fxFlex.gt-sm="9"></div>
+<div fxFlex="20"></div>

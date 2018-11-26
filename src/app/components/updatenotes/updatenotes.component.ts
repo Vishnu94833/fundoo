@@ -57,14 +57,15 @@ export class UpdatenotesComponent implements OnInit, OnDestroy {
         "itemName": this.modifiedCheckList.itemName,
         "status": this.modifiedCheckList.status
       }
-      this.notesService.updateCheckList(this.data['id'], this.modifiedCheckList.id, JSON.stringify(apiData)).subscribe(response => {
+      this.notesService.updateCheckList(this.data['id'], this.modifiedCheckList.id, JSON.stringify(apiData))
+      .subscribe(response => 
+      {
+      },
+      error => {
+        this.dialogRef.close();
       })
-
-
     }
-    error => {
-      this.dialogRef.close();
-    }
+
     this.dialogRef.close();
 
   }
