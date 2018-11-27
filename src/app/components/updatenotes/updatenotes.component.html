@@ -37,7 +37,7 @@
         <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
     </div>
 
-
+  
     <div fxLayout="row wrap" fxLayoutGap="5px">
             <div *ngFor="let collab of data.collaborators" >
               <button mat-mini-fab (click)="openCollaboratorDialog(data)" color="disabled" matTooltip="{{collab.email}}">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="gap"></div>
-    <div  fxLayout="row" fxLayoutAlign="space-between">
+    <div  fxLayout="row wrap" fxLayoutAlign="space-between">
         <app-remind></app-remind>
         <app-collaborator></app-collaborator>
         <app-changecolor [color]="data" ></app-changecolor>

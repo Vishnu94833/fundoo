@@ -127,9 +127,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
     }
     if (this.open1 == 0) {
 
-      this.notesService.addnotes(
-        {
-          'title': document.getElementById('title').innerHTML,
+      let body={
+        'title': document.getElementById('title').innerHTML,
           'description': document.getElementById('description').innerHTML,
           'labelIdList': JSON.stringify(this.rollId),
           'checklist': '',
@@ -137,8 +136,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
           'color': this.color,
           'reminder': this.dateChip,
           'collaberators':JSON.stringify(this.collaborator)
-        }
-      )
+      }
+      this.notesService.addnotes(body)
       .pipe(takeUntil(this.destroy$))
         .subscribe(
           (data) => {
@@ -189,7 +188,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
           'checklist': JSON.stringify(this.dataArrayCheck),
           'isPined': 'false',
           'color': this.color,
-          'reminder': this.dateChip
+          'reminder': this.dateChip,
+          'collaberators':JSON.stringify(this.collaborator)
         })
         .pipe(takeUntil(this.destroy$))
         .subscribe(

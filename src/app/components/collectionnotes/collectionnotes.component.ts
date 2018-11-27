@@ -68,20 +68,16 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
     this.addnotes.emit({})
   }
 
-
-
   openCollaboratorDialog(index): void {
     const dialogRef = this.dialog.open(AddcollaboratorComponent, {
       width: '600px',
       data:index
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       
     });
   }
-
 
   /**
    * @description open dialog box to update notes
@@ -89,17 +85,15 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
   openDialog(x): void {
     const dialogRef = this.dialog.open(UpdatenotesComponent, {
       width:"600px",
-      // height:"100px",
+      height:"fit-content",
       data: x
     });
-
 
     /**
      * @description once dialog box is closed notes will be updated
      */
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
       this.addnotes.emit()
-
     });
   }
 
@@ -109,7 +103,6 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
    * @param noteId 
    */
   removeLabel(noteId, labelId) {
-
     this.notesService.
       removeLabelsFromNotes(noteId, labelId,
         {
@@ -171,7 +164,6 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
         })
   }
 
-
   /**
    * @description function to strike expired reminder
    * @param cuttOff 
@@ -198,11 +190,7 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
     }
     var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
     this.notesService.updateCheckList(id, this.modifiedCheckList.id, JSON.stringify(apiData)).subscribe(response => {
-
-
     })
-
-
   }
 
   /**
@@ -227,6 +215,4 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
-
-
 }
