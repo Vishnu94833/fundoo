@@ -51,6 +51,7 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
   status = 'close';
   @Output() addnotes = new EventEmitter();
   private toggle = false;
+  private questionAsked=0;
   private token = localStorage.getItem('token');
   private modifiedCheckList: any = [];
   private today = new Date();
@@ -64,6 +65,13 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
     this.reminderList();
   }
 
+  questionAsk()
+  {
+    this.questionAsked = 1
+  }
+  questionClose(){
+    this.questionAsked = 0
+  }
   new(event) {
     this.addnotes.emit({})
   }
@@ -210,6 +218,11 @@ export class CollectionnotesComponent implements OnInit,  OnDestroy {
     this.modifiedCheckList = checkList;
     this.updateChecklist(note.id);
   }
+
+  gotoQandA(noteId){
+this.router.navigate(["/homepage/questionanswer/"+noteId])
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

@@ -24,17 +24,15 @@ describe('ResetpasswordComponent', () => {
   });
 
   it('reset password form should be valid', async(()=>{
-
-    expect(component.password).toEqual("aa")
+    expect(component.password).toEqual("aaaaaaaa") 
     expect(component.password).toEqual("A@aaaaaa")
     expect(component.password).toBeTruthy();
-
   }))
 
   it('reset password form should be valid', async(()=>{
-
-    expect(component.password).toEqual("a")
-    expect(component.password).toEqual("A@aaaaa")
+    expect(component.password).toEqual("a") 
+    expect(component.password).toEqual("Aaaaaaa")
     expect(component.password).toBeFalsy();
   }))
+
 });

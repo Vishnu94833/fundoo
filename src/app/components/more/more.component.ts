@@ -4,6 +4,7 @@ import { NotesService } from 'src/app/core/services/notes/notes.service';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,7 @@ export class MoreComponent implements OnInit, OnDestroy {
   private id = localStorage.getItem('userId');
   private search: any;
   private arr: any;
-  constructor( public snackBar: MatSnackBar,
+  constructor(  private router: Router,public snackBar: MatSnackBar,
                 private notesService:NotesService) { }
   @Input() carddel;
   @Output() deleteevent = new EventEmitter();
@@ -86,6 +87,10 @@ export class MoreComponent implements OnInit, OnDestroy {
       error => {
         LoggerService.error("Error", error);
       });
+  }
+
+  goToQa(){
+    this.router.navigate(['homepage/questionanswer/'+ this.carddel.id]);
   }
 
   ngOnDestroy() {

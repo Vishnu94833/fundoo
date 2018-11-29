@@ -314,26 +314,6 @@ export class AddnotesComponent implements OnInit, OnDestroy {
       })
   }
 
-  /**
-   * @description function to add collaborator
-   * @param id 
-   */
-  // addCollaborators(searchItems) {
-  //   this.notesService.addCollaboratorsNotes(this.id,
-
-  //     {
-  //       "email": searchItems.email,
-  //       "firstName": searchItems.firstName,
-  //       "lastName": searchItems.lastName,
-  //       "userId": searchItems.userId
-  //     }
-  //   ).subscribe(result => {
-  //     LoggerService.log("add collaborator is successful", result)
-  //   }, error => {
-  //     console.log(error)
-  //   })
-  // }
-
   removeCollaborators(searchItems){
     this.notesService.removeCollaboratorNotes(this.id,searchItems.userId).subscribe(result=>{
       console.log("collaborator removed successfully",result);

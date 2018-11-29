@@ -6,13 +6,8 @@ import { HttpService } from '../http/http.service';
 })
 export class NotesService {
 
-
-
   constructor(private httpservice: HttpService) { }
- 
- 
- 
- 
+
   // *************** Notes Service *********************************
   
   addnotes(body) {
@@ -76,6 +71,9 @@ export class NotesService {
   removeReminderNotes(body)
   {
     return this.httpservice.postDataJsonType("/notes/removeReminderNotes",body)
+  }
+  getNotesDetail(id){
+    return this.httpservice.getDataJsonType("/notes/getNotesDetail/"+id)
   }
 
  // *************** Labels Service *********************************

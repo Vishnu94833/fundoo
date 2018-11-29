@@ -15,6 +15,7 @@ import { AuthGuard } from './core/services/authgaurd/auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';
+import { QuestionanswerComponent } from './components/questionanswer/questionanswer.component';
 
 
 const routes: Routes = [
@@ -48,9 +49,11 @@ const routes: Routes = [
       {
         path: 'search', component: SearchComponent
       },
-
       {
         path: 'labelslist/:labelName', component: LabelslistComponent
+      },
+      {
+        path: 'questionanswer/:carddel', component: QuestionanswerComponent
       }
     ]
   }

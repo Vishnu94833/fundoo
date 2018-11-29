@@ -1,6 +1,5 @@
 <div class="trashMargin"></div>
 
-
 <div fxLayout='row wrap' fxLayoutGap="10px">
   <mat-card class="expand cardsize" fxFlex=30 *ngFor='let index of array ' [style.backgroundColor]="index.color">
     <div (click)="openDialog(index)">
@@ -48,7 +47,6 @@
         </mat-chip-list>
       </div>
 
-
     </div>
     <mat-card-actions>
       <mat-icon style="cursor: pointer;float:right" matTooltip="More" aria-label="more" [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
@@ -62,8 +60,3 @@
 
   </mat-card>
 </div>
- 
-
-
-
-

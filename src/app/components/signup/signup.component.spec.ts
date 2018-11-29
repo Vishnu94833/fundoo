@@ -40,9 +40,9 @@ describe('SignupComponent', () => {
     expect(component.model.lastname).toEqual("xyz251")
     expect(component.model.firstname).toEqual("AA1234")
     expect(component.model.lastname).toEqual("Gupta1234#$$E")
-    expect (component.model.email).toEqual("aastha&xyz.com")
+    expect(component.model.email).toEqual("aastha&xyz.com")
     expect(component.model.password).toEqual("a")
     expect(component.model.password).toEqual("Aaaaaaaaaa")
     expect(component.model).toBeFalsy();
   }))
-});
+}); 

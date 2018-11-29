@@ -40,10 +40,12 @@ export class ToolbarComponent implements OnInit , OnDestroy {
           }).pipe(takeUntil(this.destroy$)).subscribe(
             (data) => {
               this.getTrashList();
-              LoggerService.log("POST Request is successful ", data)
+              console.log("POST Request is successful ", data)
             },
             error => {
+              console.log(error)
             }
+
           )
       }
     });

@@ -22,5 +22,11 @@ describe('AddcollaboratorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  // it('form should be valid', async(()=>{
+  //   expect(component.email).toEqual("abc@gmail.com")
+  //   expect(component.model.password).toEqual("aa")
+  //   expect(component.model.password).toEqual("aaaaaaaa")
+  //   expect(component.model.password).toEqual("A@aaaaaa")
+  //   expect(component.email).toBeTruthy();
+  // }))
 });

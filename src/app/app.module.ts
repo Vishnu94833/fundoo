@@ -73,7 +73,8 @@ import { AngularFireModule } from '@angular/fire';
 import { InterceptService } from './core/services/interceptor/interceptor.service';
 import { AddcollaboratorComponent } from './components/addcollaborator/addcollaborator.component';
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
-
+import { QuestionanswerComponent } from './components/questionanswer/questionanswer.component';
+import { BarRatingModule } from "ngx-bar-rating";
 
 
 
@@ -110,7 +111,8 @@ import { ErrorsHandler } from './core/services/errorHandler/error-handler';
     LabeldeleteComponent,
     TrashdeleteComponent,
     PinComponent,
-    AddcollaboratorComponent
+    AddcollaboratorComponent,
+    QuestionanswerComponent
   ],
 
 
@@ -149,7 +151,8 @@ import { ErrorsHandler } from './core/services/errorHandler/error-handler';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
-    AngularFireModule
+    AngularFireModule,
+    BarRatingModule
 
   ],
   providers: [{

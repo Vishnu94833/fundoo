@@ -53,7 +53,7 @@ export class TrashComponent implements OnInit , OnDestroy {
               LoggerService.log("POST Request is successful ", data);
             },
             error => {
-              LoggerService.log("Error", error);
+              console.log("Error", error);
             }
           )
       }

@@ -1,10 +1,10 @@
 <div fxFlex="10"></div>
-<div  fxFlex fxFlex.gt-lg="90" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center"  fxLayoutGap="2%"
+<div fxFlex fxFlex.gt-lg="90" fxLayout="row wrap" fxLayout.xs="row wrap" fxLayoutAlign.xs="center" fxLayoutGap="2%"
   fxLayoutAlign="start" class="card">
-  <div  *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
+  <div *ngFor='let index of cardadded | LockFilter:inputData ; trackBy:index?.noteId'>
     <div [ngClass]="{'grid':!toggle,'list':toggle}">
       <!--******************* prints collection of notes ************************ -->
-      <mat-card  class="cardsize" [style.backgroundColor]="index.color">
+      <mat-card class="cardsize" [style.backgroundColor]="index.color">
         <app-pin class="pin" [pinArr]="index" (pinEmit)="new($event)"></app-pin>
         <mat-card-title (click)="openDialog(index)">
           <div [innerHtml]="index.title"></div>
@@ -26,15 +26,15 @@
         </div>
 
         <div fxLayout="row wrap" fxLayoutGap="5px">
-            <div *ngFor="let collab of index.collaborators" >
-              <button mat-mini-fab (click)="openCollaboratorDialog(index)" color="disabled" matTooltip="{{collab.email}}">
-                {{collab.email | slice:0:1 | uppercase}}
-              </button>
-            </div>
+          <div *ngFor="let collab of index.collaborators">
+            <button mat-mini-fab (click)="openCollaboratorDialog(index)" color="disabled" matTooltip="{{collab.email}}">
+              {{collab.email | slice:0:1 | uppercase}}
+            </button>
           </div>
-  
+        </div>
 
-         <div class="gapbetween"></div>
+
+        <div class="gapbetween"></div>
 
         <!--************************ to view labels in card collection *******************-->
         <div fxLayout="row wrap" fxLayoutGap="5px">
@@ -137,7 +137,7 @@
         </div>
 
         <!-- ************************ all icons are displayed here *******************-->
-        <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutAlign="space-between" (click)="questionClose()">
 
           <app-remind (reminderEmit)=new($event) [reminder]="index"></app-remind>
           <app-collaborator (collaboratorEvent)=new($event) [collaborator]="index"></app-collaborator>
@@ -150,8 +150,18 @@
           </app-more>
 
         </div>
+        <hr>
+        <div *ngIf="questionAsked==0">
+          <div (click)="questionAsk()">
+            Question Asked
+          </div>
+          <div *ngIf="index.questionAndAnswerNotes.length!=0">
+            <span (click)="gotoQandA(index.id)"> {{index.questionAndAnswerNotes[0].message}}</span>
 
+          </div>
+        </div>
       </mat-card>
+
     </div>
   </div>
-<div fxFlex="20"></div>
+  <div fxFlex="20"></div>
