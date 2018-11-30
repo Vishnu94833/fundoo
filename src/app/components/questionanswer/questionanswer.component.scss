@@ -37,11 +37,11 @@
 }
 .questionBox{
     height: 100px;
-    width: 800px;
+    width: 700px;
     padding: 100px;
    
 @media only screen and (min-width: 320px) and  (max-width: 599px){
-    questionBox{
+    .questionBox{
         height: 50px;
         width: 400px;
         padding: 50px;
@@ -54,11 +54,16 @@
 }
 
 .scro{
-    scroll-behavior: auto
+    scroll-behavior: auto;
+    overflow-y: auto;
 }
-.notscr{
-    scroll-behavior: auto
-}
+// .notscr{
+//     scroll-behavior: auto
+// }
 .userSpac{
-    margin-left: -330px;
+    margin-left:100px;
+}
+.paddin{
+    // padding: 20px;
+    margin-left: 80px;
 }

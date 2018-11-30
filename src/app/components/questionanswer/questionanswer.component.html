@@ -1,113 +1,124 @@
-<div class="notscr" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
-
-
+<div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
   <div class="questionBox" fxShow.xs="true">
-
     <div fxLayout="row" fxLayoutAlign="space-between end">
       <div [innerHtml]='title'></div>
       <button class="buttonSpace" mat-button routerLink="/homepage/notes">close</button>
     </div>
-
     <div class="gap1"></div>
-
     <div [innerHtml]='description'></div>
-
     <hr>
-
     <div fxLayout="column" fxLayoutAlign="space-between start">
-
       <span>Question Asked</span>
       <div class="gap"></div>
-
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="profilepic">
-          <img src="{{userImage}}" class="photo">
-        </div>
-
-
-          <div fxLayout="row">
-            <div  fxLayout="column">
-            <div class="spac">{{userName}}</div>
+        <button mat-fab color="disabled"> {{userName.user.firstName | slice:0:1}}</button>
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <div class="spac">{{userName.user.email}}</div>
             <b>
-            <div class="spac" [innerHtml]="message"></div></b>
-
-            <div>
-                <div>
-                  <div class="questionSection spac gap">
-                    <input contenteditable="true" class="content" [(ngModel)]="question" placeholder="question to be asked"
-                      (keydown.enter)="questionAnswerPost(question)">
-                  </div>
-                </div>
-              </div>
+              <div *ngIf="messageArray.length!=0" class="spac" [innerHtml]="message"></div>
+            </b>
+            <div class="questionSection spac gap" *ngIf="messageArray.length==0">
+              <input contenteditable="true" class="content" [(ngModel)]="question" placeholder="question to be asked"
+                (keydown.enter)="questionAnswerPost(question)">
+            </div>
+            <div class="questionSection gap" *ngIf="replied==1">
+              <input contenteditable="true" class="content" [(ngModel)]="reply" placeholder="reply to the question"
+                (keydown.enter)="questionAnswerReply(reply)">
+            </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="space-around center">
-            <mat-icon class="spac">reply</mat-icon>
-            <img class="spac" (click)="likedNote()" *ngIf="liked==0" src="../../../assets/images/outline-thumb_up_alt-24px.svg">
-            <img class="spac" (click)="unLikedNote()" *ngIf="liked==1" src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
-            <!-- <span>{{count}}</span> -->
+            <mat-icon class="spac" *ngIf="replied==0" (click)="repliedFunc()">reply</mat-icon>
+            <img class="spac" (click)="likedNote()" src="../../../assets/images/outline-thumb_up_alt-24px.svg">
+            <img class="spac" src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
             <bar-rating class="spac" [(rate)]="rate" [max]="5"></bar-rating>
           </div>
-          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+<!--------------------------------outer loop---------------------------------------------------->
+<div class="scro" *ngFor="let return of messageArray; let i= index">
+  <div *ngIf="i!=0 && parentId==return.parentId" fxLayout="column">
 
+    <div fxLayout="row" >
 
+      <div fxFlex=10 class="profilepic">
+        <img [ngStyle]="{'background-image':'url(' +userImage+return.user.imageUrl+ ')','background-size':'cover'}"
+          class="photo">
       </div>
 
-    </div>
-
-    <br>
-    <!-- <div *ngFor="let returnMessage of replyMessage">
-        <div >{{returnMessage}}</div>
-      </div> -->
-    <div fxLayoutAlign="end">
-      <div>
-
-        <div class="questionSection gap">
+      <div fxLayout="column">
+        <div class="spac">
+          {{return.user.username }}
+          <span class="spac">{{return.createdDate | date:shortTime}}</span>
+        </div>
+        <b>
+          <div class="spac" [innerHtml]="return.message"></div>
+        </b>
+        <div class="questionSection gap" *ngIf="replied==1">
           <input contenteditable="true" class="content" [(ngModel)]="reply" placeholder="reply to the question"
             (keydown.enter)="questionAnswerReply(reply)">
         </div>
-        <!-- <bar-rating (click)="questionAnswerRate()" [(rate)]="rate" [max]="5"></bar-rating> -->
-        <mat-icon (click)="questionAnswerRate()">done</mat-icon>
+      </div>
+
+      <div fxFlex=40 fxLayout="row" fxLayoutAlign="end">
+        <mat-icon class="spac" *ngIf="replied==0" (click)="repliedFunc()">reply</mat-icon>
+        <img class="spac" *ngIf="liked==0" (click)="likedNote(return.id)" src="../../../assets/images/outline-thumb_up_alt-24px.svg">
+        <img class="spac" *ngIf="liked==1" src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
+        <span>{{return.like.length}}</span>
+        <bar-rating *ngIf='return.rate.length!=0' [(rate)]="return.rate[0].rate" (rateChange)="questionAnswerRate(return.id,$event)"
+          [max]="5"></bar-rating>
+        <bar-rating *ngIf='return.rate.length==0' (rateChange)="questionAnswerRate(return.id,$event)" [max]="5"></bar-rating>
       </div>
 
     </div>
 
-  
+    <!---------------------------------------inner loop------------------------------------------------->
+    <div class="paddin" *ngFor="let return1 of messageArray;let j=index">
+      <div *ngIf='return.id==return1.parentId ' style="width: 600px;" fxLayout="row" fxLayoutAlign="end center">
 
-    <div class="scro" *ngFor="let ret of messageArray">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+          <div fxLayout="row">
             <div class="profilepic">
-              <img src="{{userImage}}" class="photo">
+              <img [ngStyle]="{'background-image':'url(' +userImage+return1.user.imageUrl+ ')','background-size':'cover'}"
+                class="photo">
             </div>
-    
-    
-              <div fxLayout="row">
-                <div  fxLayout="column">
-                    <div class="userSpac">
-                        {{userName}}
-                      </div>
-                <b>
-                <div class="userSpac" [innerHtml]="ret.message"></div></b>
-    
-                <div class="questionSection gap">
-                    <input contenteditable="true" class="content" [(ngModel)]="reply" placeholder="reply to the question"
-                      (keydown.enter)="questionAnswerReply(reply)">
-                  </div>
+            
+            <div fxLayout="column">
+              <div >
+                {{return1.user.firstName}}
+                <span >{{return1.createdDate | date:shortTime}}</span>
               </div>
-              <div  fxLayout="row" fxLayoutAlign="space-around center">
-                <mat-icon class="spac">reply</mat-icon>
-                <img class="spac" (click)="likedNote()" *ngIf="liked==0" src="../../../assets/images/outline-thumb_up_alt-24px.svg">
-                <img class="spac" (click)="unLikedNote()" *ngIf="liked==1" src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
-               
-                <bar-rating class="spac" [(rate)]="rate" [max]="5"></bar-rating>
+              <b>
+                <div  [innerHtml]="return1.message"></div>
+              </b>
+              <div class="questionSection gap">
+                <input contenteditable="true" class="content" [(ngModel)]="reply" placeholder="reply to the question"
+                  (keydown.enter)="questionAnswerReply(reply)">
               </div>
-              </div>
-    
-    
+            </div>
           </div>
-        
-      </div>
-    
-    
-  </div>
 
+          <div fxLayout="row" fxLayouAlign="end">
+            <mat-icon >reply</mat-icon>
+            <img  *ngIf="liked==0" (click)="likedNote(return1.id)" src="../../../assets/images/outline-thumb_up_alt-24px.svg">
+            <img  *ngIf="liked==1" src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
+            <span>{{return.like.length}}</span>
+            <bar-rating *ngIf='return1.rate.length!=0' [(rate)]="return1.rate[0].rate" (rateChange)="questionAnswerRate(return1.id,$event)"
+              [max]="5"></bar-rating>
+            <bar-rating *ngIf='return1.rate.length==0' (rateChange)="questionAnswerRate(return1.id,$event)" [max]="5"></bar-rating>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!---------------------------------------------inner loop ends----------------------------- -->
+
+
+  </div>
 </div>
