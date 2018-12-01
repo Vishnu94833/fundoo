@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy ,ViewChild, ElementRef} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { NotesService } from 'src/app/core/services/notes/notes.service';
@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./questionanswer.component.scss']
 })
 export class QuestionanswerComponent implements OnInit, OnDestroy {
+  @ViewChild('reply') private replyDone: ElementRef;
   destroy$: Subject<boolean> = new Subject<boolean>();
   message: any;
   title: any;
@@ -27,9 +28,10 @@ export class QuestionanswerComponent implements OnInit, OnDestroy {
   private questionCheckList: any = []
   private questionAnswer: any = []
   private messageArray: any = []
-  private noteDetails = this.url.split('/');
+  private noteDetails;
   private id = localStorage.getItem('userId')
   private image = localStorage.getItem('imageUrl');
+  private img = environment.apiUrl+this.image;
   private userImage = environment.apiUrl ;
   private email = localStorage.getItem('email');
   private replyMessage: any = [];
@@ -40,10 +42,9 @@ export class QuestionanswerComponent implements OnInit, OnDestroy {
   private parentId;
     private askQuestion;
   ngOnInit() {
-    this.getDetails();
-    // this.questionAnswerReply(this.reply,);
-    console.log(this.id)
-    console.log(this.url)
+    this.noteDetails = this.url.split('/');
+    this.getDetails(this.noteDetails[3]);
+    
   }
 
 repliedFunc(){
@@ -54,45 +55,67 @@ repliedNotFunc(){
   this.replied = 0;
 }
 
-  likedNote(parentId) {
-    this.liked = 0;
+  likedNote(parentId,flag) {
+    // this.liked = 0;
     // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
     this.questionService.likeToQuestion(parentId,
       {
-        "like": true
+        "like": flag
       }
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          this.liked=1;
+          // this.liked=1;
           let count = data['data']['details'].count;
           console.log('liked is successful', data);
+          this.getDetails(this.noteDetails[3])
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         });
 
   }
 
+  public lykC;
+  likeDisplay(ques){
+    this.lykC=0;
+    for (let i = 0; i < ques.like.length;i++){
+      if(ques.like[i].like==true){
+        this.lykC=this.lykC+1;
+      }
+    }
+    return true;
+  }
+
+
+  isliked(ques) {
+    this.liked = 0;
+    for (let i = 0; i < ques['like'].length; i++) {
+      if (ques.like[i].userId == localStorage.getItem('userId') && ques.like[i].like == true) {
+        this.liked = 1;
+        return true;
+      }
+    }
+    return true;
+
+  }
   /**
    * @description Function to get particular note details for question and answer purpose
    */
-  getDetails() {
-    this.notesService.getNotesDetail(this.noteDetails[3])
+  getDetails(noteData) {
+    this.notesService.getNotesDetail(noteData)
       .pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
-          console.log('data', data);
+          this.messageArray=[];
+console.log("note details api");
+
           this.questionArray = data['data']['data'][0]
           this.questionName = data['data']['data'][0]['questionAndAnswerNotes']
-          console.log(this.questionName)
           this.title = this.questionArray.title;
           this.description = data['data']['data'][0].description
           this.messageArray = this.questionArray['questionAndAnswerNotes']
-          // this.userArray = this.questionArray['questionAndAnswerNotes'][0]
             this.userName=this.messageArray[0]
-          console.log(this.userName)
-          console.log(this.messageArray);
           if (this.questionArray['questionAndAnswerNotes'][0] != undefined) {
             this.message = this.questionArray['questionAndAnswerNotes'][0].message;
             this.parentId = this.questionArray['questionAndAnswerNotes'][0].id;
@@ -118,27 +141,30 @@ repliedNotFunc(){
       .subscribe(
         (data) => {
           this.questionAnswer = data['data']['details']
-
-          console.log('data', data);
+          this.getDetails(this.noteDetails[3])
+          // console.log('data', data);
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         });
   }
 
 
-  questionAnswerReply(reply) {
-    let parentId = this.questionArray['questionAndAnswerNotes'][0].id
+  questionAnswerReply(parentId) {
+        // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
     this.questionService.replyToQuestion(
       {
-        "message": reply
+        "message": this.replyDone.nativeElement.innerHTML
       }, parentId
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          this.replyMessage = data['data']['data']['questionAndAnswerNotes']
-        console.log('data', data);
+          this.replied=0;
+          // this.replyMessage = data['data']['data']['questionAndAnswerNotes']
+          console.log('data', data);
+          this.getDetails(this.noteDetails[3])
+        
         },
         error => {
           console.log("Error", error);
@@ -156,10 +182,11 @@ repliedNotFunc(){
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          console.log('rating is successful', data);
+          this.getDetails(this.noteDetails[3])
+          // console.log('rating is successful', data);
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         });
   }
 
@@ -169,10 +196,11 @@ repliedNotFunc(){
     this.questionService.questionAndAnswerNotes(this.noteDetails[3])
       .pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
-          console.log('data', data);
+          this.getDetails(this.noteDetails[3])
+          // console.log('data', data);
         },
         error => {
-          console.log("Error", error);
+          // console.log("Error", error);
         });
   }
 

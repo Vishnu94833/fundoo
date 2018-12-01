@@ -150,16 +150,24 @@
           </app-more>
 
         </div>
+        
+
+<div *ngIf="index.questionAndAnswerNotes.length!=0">
+
         <hr>
         <div *ngIf="questionAsked==0">
           <div (click)="questionAsk()">
             Question Asked
           </div>
-          <div *ngIf="index.questionAndAnswerNotes.length!=0">
+          <div >
             <span (click)="gotoQandA(index.id)"> {{index.questionAndAnswerNotes[0].message}}</span>
 
           </div>
         </div>
+      </div>
+
+
+
       </mat-card>
 
     </div>

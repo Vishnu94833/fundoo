@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { HttpService } from '../../core/services/http/http.service';
 import { LabelComponent } from '../label/label.component';
 import { SearchsharingService } from '../../core/services/dataservice/searchsharing.service';
 import { environment } from '../../../environments/environment';
