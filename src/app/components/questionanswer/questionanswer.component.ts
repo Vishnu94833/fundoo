@@ -116,6 +116,8 @@ console.log("note details api");
           this.description = data['data']['data'][0].description
           this.messageArray = this.questionArray['questionAndAnswerNotes']
             this.userName=this.messageArray[0]
+            console.log(data)
+            console.log(this.userName.id)
           if (this.questionArray['questionAndAnswerNotes'][0] != undefined) {
             this.message = this.questionArray['questionAndAnswerNotes'][0].message;
             this.parentId = this.questionArray['questionAndAnswerNotes'][0].id;
@@ -161,7 +163,6 @@ console.log("note details api");
       .subscribe(
         (data) => {
           this.replied=0;
-          // this.replyMessage = data['data']['data']['questionAndAnswerNotes']
           console.log('data', data);
           this.getDetails(this.noteDetails[3])
         
