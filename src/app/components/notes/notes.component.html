@@ -1,5 +1,6 @@
 <app-addnotes (messageModel)="model($event)">
 </app-addnotes>
+<div *ngIf="show">
 <div class="carddown" *ngIf="pinArray.length !=0">
     <h4 class="pinned">PINNED</h4>
     <div>
@@ -20,3 +21,10 @@
     <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
     </app-collectionnotes>
 </div>
+</div>
+
+<div class="spinner" *ngIf="!show">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>

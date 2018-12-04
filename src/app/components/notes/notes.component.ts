@@ -16,6 +16,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   private pinArray: any = [];
   private token = localStorage.getItem('token');
   private message: boolean;
+  private show=false;
   constructor( private auth: AuthService,
     private notesService: NotesService) { }
 
@@ -37,6 +38,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.array.push(dataModel[i]);
           }
         }
+        this.show=true;
       },
       error => {
       });
@@ -53,6 +55,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.pinArray.push(data['data']['data'][i]);
           }
         }
+        this.show=true;
       },
       error => {
 
