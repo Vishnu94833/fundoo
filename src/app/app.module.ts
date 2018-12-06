@@ -75,7 +75,8 @@ import { AddcollaboratorComponent } from './components/addcollaborator/addcollab
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 import { QuestionanswerComponent } from './components/questionanswer/questionanswer.component';
 import { BarRatingModule } from "ngx-bar-rating";
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ProductcartComponent } from './components/productcart/productcart.component';
 
 
 
@@ -112,7 +113,8 @@ import { BarRatingModule } from "ngx-bar-rating";
     TrashdeleteComponent,
     PinComponent,
     AddcollaboratorComponent,
-    QuestionanswerComponent
+    QuestionanswerComponent,
+    ProductcartComponent
   ],
 
 
@@ -152,7 +154,8 @@ import { BarRatingModule } from "ngx-bar-rating";
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule,
-    BarRatingModule
+    BarRatingModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
 
   ],
   providers: [{

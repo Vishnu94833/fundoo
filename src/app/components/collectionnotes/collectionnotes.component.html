@@ -160,7 +160,7 @@
             Question Asked
           </div>
           <div >
-            <span (click)="gotoQandA(index.id)"> {{index.questionAndAnswerNotes[0].message}}</span>
+            <span (click)="gotoQandA(index.id)" [innerHtml]='index.questionAndAnswerNotes[0].message'></span>
 
           </div>
         </div>

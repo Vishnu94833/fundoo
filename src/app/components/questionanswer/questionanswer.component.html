@@ -37,7 +37,7 @@
 
         </div>
       </div>
-    </div>
+  
         <div fxLayout="row" fxFlex fxLayoutAlign="space-around center">
           <mat-icon class="spac" (click)='questionId = userName.id' (click)="repliedFunc()">reply</mat-icon>
           <div *ngIf="isliked(userName)">
@@ -49,16 +49,18 @@
             [max]="5"></bar-rating>
           <bar-rating *ngIf='userName.rate.length==0' (rateChange)="questionAnswerRate(userName.id,$event)" [max]="5"></bar-rating>
         </div>
-      
-
-      <div class="questionSection spac gap" *ngIf="messageArray.length==0">
-        <div contenteditable="true" class="content" [(ngModel)]="question" data-text="question to be asked"
-          (keydown.enter)="questionAnswerPost(question)"></div>
       </div>
 
-      <div class="questionSection gap" *ngIf="replied==1 && questionId ==  userName.id">
-        <div contenteditable="true" class="content" #reply data-text="reply to the question" (keydown.enter)="questionAnswerReply(userName.id)"></div>
-        <mat-icon (click)="questionAnswerReply(userName.id)">done</mat-icon>
+<div *ngIf="messageArray.length==0">
+      <div [froalaEditor] [(froalaModel)]="editorContent" ></div>
+<mat-icon (click)='questionAnswerPost(question)'>done</mat-icon>
+</div>
+
+      <div class="questionSection gap" *ngIf="replied==1 && questionId ==  userName.id" fxLayout="row">        
+        <div [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+        <!-- <mat-icon (click)="questionAnswerReply(editorContent,userName.id)">done</mat-icon> -->
+        <img src="../../../assets/images/reply.png" height="20px" width="15px" (click)="questionAnswerReply(editorContent,userName.id)" >
+
       </div>
 
    
@@ -70,7 +72,7 @@
   <!------------------------------------------------------------------FIRST LOOP STARTS----------------------------------------------------------------------------->
   <div class="scroll">
     <div *ngFor="let first of messageArray; let i= index" fxLayoutAlign="space-between">
-      <div *ngIf="i!=0 && parentId==first.parentId" fxLayout="column">
+      <div *ngIf="i!=0 && parentId==first.parentId && first.isApproved==true" fxLayout="column">
 
         <div fxLayout="column" fxLayout.xs="column">
 
@@ -117,15 +119,17 @@
 
         </div>
         <div class="questionSection gap" *ngIf="replied==1 && questionId ==  first.id" fxLayout="row">
-          <div contenteditable="true" class="content" #reply data-text="reply to the question" (keydown.enter)="questionAnswerReply(first.id)"></div>
-          <mat-icon (click)="questionAnswerReply(first.id)">done</mat-icon>
+          <div [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+          <!-- <mat-icon (click)="questionAnswerReply(editorContent,first.id)">done</mat-icon> -->
+          <img src="../../../assets/images/reply.png" height="20px" width="15px" (click)="questionAnswerReply(editorContent,first.id)" >
         </div>
 
+        <br>
         <br>
         <!-------------------------------------------------------------------SECOND LOOP STARTS------------------------------------------------------------------------->
 
         <div class="scro" *ngFor="let second of messageArray; let i= index" fxLayoutAlign="space-between">
-          <div *ngIf='first.id==second.parentId ' fxLayout="column" fxLayoutAlign="center center ">
+          <div *ngIf='first.id==second.parentId  && second.isApproved==true' fxLayout="column" fxLayoutAlign="center center ">
 
             <div style="margin-left: 50px" fxLayout="column">
 
@@ -168,16 +172,17 @@
                   <bar-rating *ngIf='second.rate.length==0' (rateChange)="questionAnswerRate(second.id,$event)" [max]="5"></bar-rating>
                 </div>
               </div>
-
+  
             </div>
             <div class="questionSection gap" *ngIf="replied==1 && questionId ==  second.id" fxLayout="row">
-              <div contenteditable="true" class="content" #reply data-text="reply to the question" (keydown.enter)="questionAnswerReply(second.id)"></div>
-              <mat-icon (click)="questionAnswerReply(second.id)">done</mat-icon>
+              <div [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+              <!-- <mat-icon (click)="questionAnswerReply(editorContent,second.id)">done</mat-icon> -->
+              <img src="../../../assets/images/reply.png" style="padding: 25px" height="20px" width="18px" (click)="questionAnswerReply(editorContent,second.id)">
             </div>
             <br>
             <!--------------------------------------------------------------------THIRD LOOP STARTS--------------------------------------------------------------------------->
             <div class="scro" *ngFor="let third of messageArray; let i= index" fxLayoutAlign="space-between">
-              <div *ngIf='second.id==third.parentId ' fxLayout="column" fxLayoutAlign="center center ">
+              <div *ngIf='second.id==third.parentId  && third.isApproved==true' fxLayout="column" fxLayoutAlign="center center ">
 
                 <div style="margin-left: 100px" fxLayout="column">
 

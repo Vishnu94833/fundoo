@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy ,ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { NotesService } from 'src/app/core/services/notes/notes.service';
@@ -18,7 +18,7 @@ export class QuestionanswerComponent implements OnInit, OnDestroy {
   message: any;
   title: any;
   description: any;
-  private userArray: any=[];
+  private userArray: any = [];
   constructor(private notesService: NotesService, private route: Router,
     private questionService: QuestionanswerService) { }
   private url = this.route.url;
@@ -28,36 +28,52 @@ export class QuestionanswerComponent implements OnInit, OnDestroy {
   private questionCheckList: any = []
   private questionAnswer: any = []
   private messageArray: any = []
+  private newQuestion: any = []
   private noteDetails;
   private id = localStorage.getItem('userId')
   private image = localStorage.getItem('imageUrl');
-  private img = environment.apiUrl+this.image;
-  private userImage = environment.apiUrl ;
+  private img = environment.apiUrl + this.image;
+  private userImage = environment.apiUrl;
   private email = localStorage.getItem('email');
   private replyMessage: any = [];
   private userName: any = [];
+  private userName1: any = [];
   private questionName: any = [];
   private liked = 0;
   private replied = 0;
   private parentId;
-    private askQuestion;
+  private askQuestion;
+  public editorContent: string;
+
+  public options: Object = {
+    charCounterCount: true,
+    toolbarButtons:   ['fullscreen', 'bold', 'italic', 'underline', '|','fontSize', 'color', 'inlineClass', 'inlineStyle', 'paragraphStyle', 'lineHeight', '|',
+    'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'emoticons', 'fontAwesome',
+    'specialCharacters', 'selectAll', 'clearFormatting', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['undo', 'redo' , 'bold', 'italic', 'underline']
+  };
+
+
   ngOnInit() {
     this.noteDetails = this.url.split('/');
     this.getDetails(this.noteDetails[3]);
-    
+
   }
 
-repliedFunc(){
-  this.replied = 1;
-}
+  repliedFunc() {
+    this.replied = 1;
+  }
 
-repliedNotFunc(){
-  this.replied = 0;
-}
+  repliedNotFunc() {
+    this.replied = 0;
+  }
 
-  likedNote(parentId,flag) {
-    // this.liked = 0;
-    // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
+  /**
+   * @description function to like and unlike a message or reply
+   * @param parentId 
+   * @param flag 
+   */
+  likedNote(parentId, flag) {
     this.questionService.likeToQuestion(parentId,
       {
         "like": flag
@@ -78,11 +94,11 @@ repliedNotFunc(){
   }
 
   public lykC;
-  likeDisplay(ques){
-    this.lykC=0;
-    for (let i = 0; i < ques.like.length;i++){
-      if(ques.like[i].like==true){
-        this.lykC=this.lykC+1;
+  likeDisplay(ques) {
+    this.lykC = 0;
+    for (let i = 0; i < ques.like.length; i++) {
+      if (ques.like[i].like == true) {
+        this.lykC = this.lykC + 1;
       }
     }
     return true;
@@ -107,23 +123,26 @@ repliedNotFunc(){
     this.notesService.getNotesDetail(noteData)
       .pipe(takeUntil(this.destroy$)).subscribe(
         (data) => {
-          this.messageArray=[];
-console.log("note details api");
+          this.messageArray = [];
+          console.log("note details api");
 
           this.questionArray = data['data']['data'][0]
           this.questionName = data['data']['data'][0]['questionAndAnswerNotes']
           this.title = this.questionArray.title;
           this.description = data['data']['data'][0].description
           this.messageArray = this.questionArray['questionAndAnswerNotes']
-            this.userName=this.messageArray[0]
-            console.log(data)
-            console.log(this.userName.id)
+          this.newQuestion = this.questionArray['questionAndAnswerNotes'][0].message
+          this.userName = this.messageArray[0]
+          // this.userName1 = this.messageArray1[0]['isApproved']
+          // console.log(this.userName1)
+          console.log(data)
+          console.log(this.userName.id)
           if (this.questionArray['questionAndAnswerNotes'][0] != undefined) {
             this.message = this.questionArray['questionAndAnswerNotes'][0].message;
             this.parentId = this.questionArray['questionAndAnswerNotes'][0].id;
           }
         },
-        error => { 
+        error => {
           console.log("Error", error);
         });
   }
@@ -132,17 +151,17 @@ console.log("note details api");
    * @description function to post the question 
    * @param question 
    */
-  questionAnswerPost(question) {
+  questionAnswerPost() {
     this.questionService.addQuestionAndAnswer(
       {
-        "message": question,
+        "message": this.editorContent,
         "notesId": this.noteDetails[3]
       }
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          this.questionAnswer = data['data']['details']
+          this.questionAnswer = data['data']['details'].message
           this.getDetails(this.noteDetails[3])
           // console.log('data', data);
         },
@@ -152,20 +171,21 @@ console.log("note details api");
   }
 
 
-  questionAnswerReply(parentId) {
-        // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
+  questionAnswerReply(reply,parentId) {
+    // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
+    // this.replyDone.nativeElement.innerHTML
     this.questionService.replyToQuestion(
       {
-        "message": this.replyDone.nativeElement.innerHTML
+        "message": reply
       }, parentId
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
-          this.replied=0;
+          this.replied = 0;
           console.log('data', data);
           this.getDetails(this.noteDetails[3])
-        
+
         },
         error => {
           console.log("Error", error);
@@ -173,7 +193,7 @@ console.log("note details api");
   }
 
 
-  questionAnswerRate(parentId,event) {
+  questionAnswerRate(parentId, event) {
     // let parentId = this.questionArray['questionAndAnswerNotes'][0].id
     this.questionService.rateToQuestion(parentId,
       {
