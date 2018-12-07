@@ -1,0 +1,16 @@
+<mat-card style="background-color: #fb0">
+  <span fxLayoutAlign="space-between center">
+  <span>{{data.name | titlecase}} <span >Pack Details</span></span>
+  <span>{{data.price | currency}}</span>
+</span>
+</mat-card>
+<mat-tab-group mat-stretch-tabs >
+    <mat-tab label="First"> Content 1 </mat-tab>
+    <mat-tab label="Second"> Content 2 </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab>
+  </mat-tab-group>
+<!-- <div style="margin-top: 90px"></div> -->
+  <div style="margin-top: 110px" fxLayoutAlign="space-around center">
+    <button mat-raised-button color="primary" (click)="rejectCart()">Remove</button>
+    <button mat-raised-button color="primary" (click)="proceedCheckout()">Proceed to Checkout</button>
+  </div>

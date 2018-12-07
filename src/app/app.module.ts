@@ -1,28 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
-import { 
+import {
   MatSelectModule,
-  MatInputModule, 
-  MatCardModule, 
+  MatInputModule,
+  MatCardModule,
   MatButtonModule,
   MatDividerModule,
-  MatListModule, 
-  MatFormFieldModule, 
+  MatListModule,
+  MatFormFieldModule,
   MatButtonToggleModule,
-  MatRadioModule, 
+  MatRadioModule,
   MatIconModule,
-  MatSnackBarModule, 
+  MatSnackBarModule,
   MatToolbarModule,
-  MatSidenavModule, 
-  MatDialogModule, 
-  MatMenuModule, 
+  MatSidenavModule,
+  MatDialogModule,
+  MatMenuModule,
   MatChipsModule,
-  MatCheckboxModule, 
-  MatDatepickerModule, 
+  MatCheckboxModule,
+  MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
-
+import { MatTabsModule } from '@angular/material/tabs';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,6 +77,10 @@ import { QuestionanswerComponent } from './components/questionanswer/questionans
 import { BarRatingModule } from "ngx-bar-rating";
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ProductcartComponent } from './components/productcart/productcart.component';
+import { ProductconfirmComponent } from './components/productconfirm/productconfirm.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 
 
@@ -114,7 +118,9 @@ import { ProductcartComponent } from './components/productcart/productcart.compo
     PinComponent,
     AddcollaboratorComponent,
     QuestionanswerComponent,
-    ProductcartComponent
+    ProductcartComponent,
+    ProductconfirmComponent,
+    PaymentComponent
   ],
 
 
@@ -155,19 +161,22 @@ import { ProductcartComponent } from './components/productcart/productcart.compo
     AngularFireMessagingModule,
     AngularFireModule,
     BarRatingModule,
-    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+    MatTabsModule,
+    MatSliderModule
+
 
   ],
   providers: [{
     provide: ErrorHandler,
     useClass: ErrorsHandler,
-  },InterceptService, {
+  }, InterceptService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptService,
     multi: true
   },
     HttpService, AuthGuard, AuthService, LoggerService, MessagingService, AsyncPipe],
-  entryComponents: [AddcollaboratorComponent,UpdatenotesComponent, CropimageComponent, ToolbarComponent, LabeldeleteComponent, TrashdeleteComponent],
+  entryComponents: [ProductconfirmComponent, AddcollaboratorComponent, UpdatenotesComponent, CropimageComponent, ToolbarComponent, LabeldeleteComponent, TrashdeleteComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

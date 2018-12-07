@@ -16,13 +16,17 @@ import { LabelComponent } from './components/label/label.component';
 import { SearchComponent } from './components/search/search.component';
 import { LabelslistComponent } from './components/labelslist/labelslist.component';
 import { QuestionanswerComponent } from './components/questionanswer/questionanswer.component';
+import { ProductcartComponent } from './components/productcart/productcart.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 const routes: Routes = [
   
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'productcart', component: ProductcartComponent},
   { path: 'signup', component: SignupComponent },
+  { path: 'payment', component: PaymentComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetpasswordComponent },
 

@@ -69,18 +69,63 @@
     
   }
 
-  .select
-  {
-    @include cardService;
-    background-color:   $selectedService;
+  // .select
+  // {
+  //   @include cardService;
+  //   background-color:   $selectedService;
 
-  }
-  .notSelect
-  {
-    @include cardService;
-    background-color: $notSelectedService;
-  }
-  .high
-  {
-    height: 220px;
-  }
+  // }
+  // .notSelect
+  // {
+  //   @include cardService;
+  //   background-color: $notSelectedService;
+  // }
+  .select
+{
+  height: 200px;
+  width: 180px;
+    background-color:    #fb0;
+
+}
+.notSelect
+{
+  height: 200px;
+  width: 180px;
+    background-color: #5f5f5f;
+}
+.shadow
+{
+height: 200px;
+width: 180px;
+margin-top: 10px;
+
+}
+.break
+{
+word-break: break-word;
+width:100px; 
+height: 100px;
+margin-top: -8%;
+margin-left: -5%;
+}
+.high
+{
+  height: 240px;
+}
+.fontSize{
+  font-size: 10px;
+}
+.fontColor{
+  font-size: 10px;
+  color: #0000ff;
+}
+.currSize{
+  font-size: 12px
+}
+.whiteFont
+{
+// padding: 15px;
+color: white;
+font-weight: bold;
+
+}

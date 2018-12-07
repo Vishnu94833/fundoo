@@ -1,10 +1,11 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
+import { ProductService } from 'src/app/core/services/productcart/product.service';
 
 
 
@@ -21,6 +22,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   private lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]*')]);
   private email = new FormControl('', [Validators.required, Validators.email]);
   private password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9!@*]*')]);
+  private cartId = localStorage.getItem('cartId')
+  private prodId : any = [];
 
   getErrorFirstName() {
     return this.firstname.hasError('required') ? 'Enter firstname' :
@@ -44,7 +47,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
 
-  constructor(private router: Router, private userService: UserService, public snackBar: MatSnackBar) { }
+  constructor(private router: Router, private userService: UserService, public snackBar: MatSnackBar, private productService: ProductService) { }
   records = {};
   advanceVal: any;
   basicVal: any;
@@ -55,6 +58,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   cards = [];
 
   ngOnInit() {
+
     this.records = this.userService.getServiceOfUser().subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {
         data["data"].data[i].select = false;
@@ -63,6 +67,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       var value = data["data"].data.name;
     })
 
+    this.getCartInformation()
   }
 
   model: any = {};
@@ -128,10 +133,26 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   }
 
-  backToLogin(){
+  backToLogin() {
     this.router.navigate(['/login'])
   }
-  
+
+  goToCart() {
+    this.router.navigate(['/productcart'])
+  }
+
+  getCartInformation() {
+    this.productService.getCartDetails(this.cartId).subscribe(
+      data => {
+        console.log(data)
+        this.prodId = data['data'].productId
+        console.log(this.prodId)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
 
   ngOnDestroy() {
     this.destroy$.next(true);

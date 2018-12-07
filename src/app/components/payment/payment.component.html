@@ -1,0 +1,51 @@
+<mat-toolbar style="background-color: #fb0">fundooNotes</mat-toolbar>
+<div class="margin-top">
+  <div fxFlex=10 fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
+  <div fxFlex=80 fxFlex.lg="80" fxFlex.xs="80" fxFlex.sm="80" fxFlex.md="80">
+
+    <div style="margin-top: 20px"></div>
+    <div fxLayout="column" style="background-color: white;width: 1050px;height: 80px">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <mat-chip-list>
+          <mat-chip>fundooNotes</mat-chip>
+        </mat-chip-list>
+      </div>
+
+
+
+    </div>
+    <div fxLayout="row">
+      <div style="background-color: white;width: 800px;height: 200px">
+        <span fxLayout="row">
+        <span>Shopping cart</span>
+        <span style="margin-left: 400px">Price</span>
+        <span style="margin-left: 100px">Validty</span>
+        </span>
+        <hr>
+        <div fxLayout="row">
+          <mat-card style="background-color: darkgray;width: 30px;height: 30px">
+            {{cards.name}}
+          </mat-card>
+          <div style="background-color: white;width: 80px;height: 80px;margin-left: 400px">
+            5 Crores
+          </div>
+
+          <div style="background-color: white;width: 80px;height: 80px;margin-left: 70px">
+            17/08/2050
+            </div>
+          <div>
+            <span>
+
+            </span>
+          </div>
+        </div>
+        <hr>
+
+      </div>
+      <mat-card style="background-color: whitesmoke;width: 250px;height: 50px;margin-top: 25px;margin-left: 30px;display: flex">
+        <button mat-raised-button color="primary">proceed to checkout</button>
+      </mat-card>
+    </div>
+  </div>
+  <div fxFlex=10 fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
+</div>

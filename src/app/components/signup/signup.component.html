@@ -5,16 +5,14 @@
   <div fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" fxflex.lg="70" fxflex.xl="40" fxFlexOrder="3"></div>
   <form>
     <mat-card class="example">
-      <p style="text-align: center">
-        <span class="shadow0">f</span>
-        <span class="shadow1">u</span>
-        <span class="shadow2">n</span>
-        <span class="shadow3">d</span>
-        <span class="shadow4">o</span>
-        <span class="shadow5">o</span>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p>
+        <span style="color: #fb0;font-size: 25px">fundooNotes</span>
       </p>
-      <span class="shadow " style="text-align: center">
-        <h3>Signup</h3>
+      <button mat-raised-button color="dark" (click)="goToCart()">go to cart</button>
+    </div>
+      <span class="shadow ">
+        <p>Create your fundooNotes Account</p>
       </span>
 
       <mat-card-content class="example1">
@@ -61,29 +59,52 @@
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
 
-        <br>
-        <div class="high" fxLayout="row" fxLayoutAlign="space-between">
+        <br><br>
+        <!-- <div class="high" fxLayout="row" fxLayoutAlign="space-between">
           <span *ngFor="let card of cards" flexLayout="word-wrap">
             <mat-card (click)="selectCards(card)" [ngClass]="card.select ? 'select' : 'notSelect'">
-              <h4>{{card.name}}</h4>
-              <p>{{card.description}}</p>
+              <span fxLayout="column" >
+              <span fxFlex=10>{{card.price | currency}}</span>
+              <span fxFlex=10 style="color: blue">{{card.name}}</span>
+              <span fxFlex=10>{{card.description}}</span>
+            </span>
 
             </mat-card>
           </span>
-        </div>
+        </div> -->
 
-
+        <div fxLayout="row" fxLayout.xs="row" fxLayoutGap="30px" fxLayoutAlign="center center">
+            <div *ngFor="let index of cards">
+              <div class="shadow" [ngClass]="prodId==index.id ? 'select' : 'notSelect'">
+                <mat-card   class="break " (click)="selectCards(index)" >
+                  <mat-card-title class="currSize">
+                    {{index.price | currency:usd}}
+                  </mat-card-title >
+                  <mat-card-subtitle>
+                    <p class="fontColor">{{index.name}}
+                  </mat-card-subtitle>
+                  <mat-card-content>
+                    <span class="fontSize">{{index.description}}</span>
+                  </mat-card-content>
+                </mat-card>
+                <div class="whiteFont" *ngIf="prodId==index.id"><h5>SELECTED</h5></div>
+                <div class="whiteFont" *ngIf="prodId!=index.id"> <h5>ADD TO CART</h5></div>
+              </div>
+            </div>
+          </div>
+<br>
 
         <div>
 
           <div fxLayout="row" fxLayoutAlign="space-around end">
 
+              <mat-card-actions class="example-width2">
+                  <a style="text-decoration: none;color: blue" (click)="backToLogin()" style="float:right;margin-top: -10%" >Sign in instead</a>
+                </mat-card-actions>
             <mat-card-actions class="example-width2">
-              <button mat-raised-button (click)="sendData()" style="float:right;margin-top: -10%" color="primary">Submit</button>
+              <button mat-raised-button (click)="sendData()" style="float:right;margin-top: -10%" color="primary">Sign Up</button>
             </mat-card-actions>
-            <mat-card-actions class="example-width2">
-              <button mat-raised-button (click)="backToLogin()" style="float:right;margin-top: -10%" color="primary">Login</button>
-            </mat-card-actions>
+
 
           </div>
         </div>
