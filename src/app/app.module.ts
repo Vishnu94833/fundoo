@@ -80,7 +80,7 @@ import { ProductcartComponent } from './components/productcart/productcart.compo
 import { ProductconfirmComponent } from './components/productconfirm/productconfirm.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 
@@ -163,7 +163,8 @@ import { MatSliderModule } from '@angular/material/slider';
     BarRatingModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
     MatTabsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatStepperModule
 
 
   ],

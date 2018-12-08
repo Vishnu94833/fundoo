@@ -110,11 +110,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
+          console.log(data)
           this.snackBar.open("Registration Successfull", "", {
             duration: 2000
           })
         },
         error => {
+          console.log(error)
           this.snackBar.open("Registration Unsuccessfull", "", {
             duration: 2000
           })

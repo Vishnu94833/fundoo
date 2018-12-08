@@ -11,23 +11,36 @@ export class PaymentComponent implements OnInit {
 
   private records;
   private cards=[];
+  private next;
+  private signin = 0;
+  private cartId = localStorage.getItem('cartId') ;
+  private price;
+  private desc;
 
   constructor(private productService: ProductService, private userService: UserService) { }
 
   ngOnInit() {
-    this.getServices()
+    this. getCartInformation()
   }
 
-  getServices() {
-    this.records = this.userService.getServiceOfUser()
-    .subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.cards.push(data["data"].data[i]);
+  getCartInformation() {
+    this.productService.getCartDetails(this.cartId).subscribe(
+      data => {
+        console.log(data)
+        this.price = data['data']['product'].price
+        this.desc =  data['data']['product'].description
+
+      },
+      error => {
+        console.log(error)
       }
-      console.log(this.cards[0].id)
-      var value = data["data"].data.name;
-    })
+    )
   }
+
+
+  nextStep(){
+   this.signin = 1;
+  }
+
 
 }

@@ -1,51 +1,126 @@
-<mat-toolbar style="background-color: #fb0">fundooNotes</mat-toolbar>
+<mat-toolbar class="toolBar">fundooNotes</mat-toolbar>
 <div class="margin-top">
-  <div fxFlex=10 fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
-  <div fxFlex=80 fxFlex.lg="80" fxFlex.xs="80" fxFlex.sm="80" fxFlex.md="80">
-
+  <div fxFlex=5 fxFlex.lg="5" fxFlex.xs="5" fxFlex.sm="5" fxFlex.md="5"></div>
+  <div fxFlex=90 fxFlex.lg="90" fxFlex.xs="90" fxFlex.sm="90" fxFlex.md="90">
     <div style="margin-top: 20px"></div>
-    <div fxLayout="column" style="background-color: white;width: 1050px;height: 80px">
+    <div fxLayout="column" class="totalWidth">
       <div fxLayout="row" fxLayoutAlign="start start">
         <mat-chip-list>
-          <mat-chip>fundooNotes</mat-chip>
+          <mat-chip class="chip">fundooNotes</mat-chip>
         </mat-chip-list>
-      </div>
+
+        <div class="subTotal">
+
+          <mat-horizontal-stepper style="width: 800px" [linear]="isLinear" #stepper>
+
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Sign in</ng-template>
+                <div fxLayout="row">
+                  <div class="firstpayment">
+                    <span fxLayout="row">
+                      <span>Shopping cart</span>
+                      <span style="margin-left: 215px">Price</span>
+                      <span style="margin-left: 100px">Validty</span>
+                    </span>
+                    <hr>
+                    <div fxLayout="row">
+                      <mat-card class="card1" >
+                        <span >
+                          {{price | currency}}
+                        </span>
+                      </mat-card>
+                      <div class="box0">
+                        {{desc | titlecase}}
+                      </div>
+                      <div class="box1" fxLayoutAlign="center ">
+                        {{price | currency}}
+                      </div>
+
+                      <div class="box2" fxLayoutAlign="center ">
+                        17/08/2050
+                      </div>
+                      <div>
+                        <span>
+
+                        </span>
+                      </div>
+                    </div>
+                    <hr>
+
+                  </div>
+                  <mat-card class="card2">
+                    <button mat-raised-button color="primary">proceed to checkout</button>
+                  </mat-card>
+                </div>
+              </form>
+            </mat-step>
 
 
+            <mat-step [stepControl]="nextStep()">
+              <form [formGroup]="nextStep()">
+                <ng-template matStepLabel>Place your order</ng-template>
+                Review your order.
+                <br><br>
+                <div fxLayout="row">
+                  <mat-card style="width:700px;height: 200px;">
+                    <div fxLayout="row">
+                    <mat-card style="width:50px;height: 50px;background-color: gray">{{price | currency}}</mat-card>
+                    <div class="box0">
+                        {{desc | titlecase}}
+                      </div>
+                  </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div contenteditable="true" style="width:500px;height: 60px;border: 1px solid black">
+                    </div>
+                  </mat-card>
+                  <mat-card style="background-color: whitesmoke;width: 200px;height: 50px;margin-top: 25px;margin-left: 30px;display: flex">
+                    <button mat-raised-button color="primary">proceed to checkout</button>
+                  </mat-card>
+                </div>
+              </form>
+            </mat-step>
 
-    </div>
-    <div fxLayout="row">
-      <div style="background-color: white;width: 800px;height: 200px">
-        <span fxLayout="row">
-        <span>Shopping cart</span>
-        <span style="margin-left: 400px">Price</span>
-        <span style="margin-left: 100px">Validty</span>
-        </span>
-        <hr>
-        <div fxLayout="row">
-          <mat-card style="background-color: darkgray;width: 30px;height: 30px">
-            {{cards.name}}
-          </mat-card>
-          <div style="background-color: white;width: 80px;height: 80px;margin-left: 400px">
-            5 Crores
-          </div>
 
-          <div style="background-color: white;width: 80px;height: 80px;margin-left: 70px">
-            17/08/2050
-            </div>
-          <div>
-            <span>
+            <mat-step>
+              <ng-template matStepLabel>Complete payment</ng-template>
+              <br>
+              Order List
+              <br>
+              <br>
+              <mat-card style="width:700px;height: 100px;">
+                  <div fxLayout="row">
+                      <mat-card class="card1" >
+                        <span >
+                          {{price | currency}}
+                        </span>
+                      </mat-card>
+                      <div class="box0">
+                        {{desc | titlecase}}
+                      </div>
+                      <div class="box1" fxLayoutAlign="center ">
+                        {{price | currency}}
+                      </div>
 
-            </span>
-          </div>
+                      <div class="box2" fxLayoutAlign="center ">
+                        17/08/2050
+                      </div>
+                      <div>
+                        <span>
+
+                        </span>
+                      </div>
+                    </div>
+              </mat-card>
+            </mat-step>
+
+          </mat-horizontal-stepper>
+
         </div>
-        <hr>
-
       </div>
-      <mat-card style="background-color: whitesmoke;width: 250px;height: 50px;margin-top: 25px;margin-left: 30px;display: flex">
-        <button mat-raised-button color="primary">proceed to checkout</button>
-      </mat-card>
     </div>
   </div>
-  <div fxFlex=10 fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
+  <div fxFlex=5 fxFlex.lg="5" fxFlex.xs="5" fxFlex.sm="5" fxFlex.md="5"></div>
 </div>
