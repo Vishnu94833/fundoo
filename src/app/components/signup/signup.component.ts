@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9!@*]*')]);
   private cartId = localStorage.getItem('cartId')
   private prodId : any = [];
+  private getService;
 
   getErrorFirstName() {
     return this.firstname.hasError('required') ? 'Enter firstname' :
@@ -101,7 +102,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         "firstName": this.model.firstname,
         "lastName": this.model.lastname,
         "phoneNumber": this.model.phonenumber,
-        "service": this.service,
+        "service":  this.getService,
         "email": this.model.email,
         "emailVerified": true,
         "password": this.model.password,
@@ -114,6 +115,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.snackBar.open("Registration Successfull", "", {
             duration: 2000
           })
+          this.router.navigate(['/payment'])
         },
         error => {
           console.log(error)
@@ -149,6 +151,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         console.log(data)
         this.prodId = data['data'].productId
         console.log(this.prodId)
+        this.getService =  data['data']['product'].name ;
       },
       error => {
         console.log(error)
@@ -162,6 +165,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  
 }
 
 

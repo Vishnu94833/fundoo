@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
   }
   getErrorEmail() {
     return this.email.hasError('required') ? 'Enter a Valid email  ' :
