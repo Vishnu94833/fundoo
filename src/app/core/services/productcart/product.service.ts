@@ -15,4 +15,13 @@ export class ProductService {
   getCartDetails(cartId){
     return this.httpservice.getDataJsonType("/productcarts/getCartDetails/"+cartId+"")
   }
+
+  myCart(){
+    // this.url = this.URL +"/productcarts/myCart"
+    return this.httpservice.getDataJsonType("/productcarts/myCart")
+  }
+
+  placeOrder(body){
+    return this.httpservice.postDataJsonType("/productcarts/placeOrder",body)
+  }
 }

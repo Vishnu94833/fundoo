@@ -7,6 +7,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { ProductService } from 'src/app/core/services/productcart/product.service';
 
 
 @Component({
@@ -33,13 +34,22 @@ import { MatSnackBar } from '@angular/material';
 
 export class LoginComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
-
+  public cardObj = {};
+  private clicked = false;
+  private records;
+  private cards = [];
+  private service;
+  private cartId = localStorage.getItem('cartId')
+  private prodId: any = [];
+  private getService;
   email = new FormControl('', [Validators.required, Validators.email]);
-  constructor(private userService: UserService,private snackBar:MatSnackBar,
-    private router: Router) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar,
+    private router: Router, private productService: ProductService) { }
   hide = true;
 
   ngOnInit() {
+    this.getServices()
+    this.getCartInformation()
 
   }
   getErrorEmail() {
@@ -64,6 +74,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login({
         "email": this.model.email,
         "password": this.model.password,
+        "cartId": localStorage.getItem("cartId")
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -96,6 +107,62 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       );
 
+  }
+
+
+  getServices() {
+    this.records = this.userService.getServiceOfUser()
+      .subscribe(data => {
+        for (var i = 0; i < data["data"].data.length; i++) {
+          data["data"].data[i].select = false;
+          this.cards.push(data["data"].data[i]);
+        }
+        console.log(this.cards)
+        var value = data["data"].data.name;
+      })
+  }
+
+  selectCards(product) {
+    console.log("selected")
+    this.service = product.name;
+    console.log(this.service)
+    product.select = true;
+    for (var i = 0; i < this.cards.length; i++) {
+      if (product.name == this.cards[i].name) {
+        continue;
+      }
+      this.cards[i].select = false;
+    }
+  }
+
+  getCartInformation() {
+    this.productService.getCartDetails(this.cartId).subscribe(
+      data => {
+        console.log(data)
+        this.prodId = data['data'].productId
+        console.log(this.prodId)
+        this.getService = data['data']['product'].name;
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  cartAdd(cart) {
+    this.productService.addtoCart(
+      {
+        "productId": cart.id
+      }
+    ).subscribe(
+      (data) => {
+        console.log("successfully added to cart", data)
+        localStorage.setItem("cartId", data['data']['details'].id)
+        // this.openDialog(cart);
+      }, error => {
+        console.log("Error ", error)
+      }
+    )
   }
 
   ngOnDestroy() {

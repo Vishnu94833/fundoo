@@ -115,7 +115,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.snackBar.open("Registration Successfull", "", {
             duration: 2000
           })
-          this.router.navigate(['/payment'])
+          this.router.navigate(['/login'])
         },
         error => {
           console.log(error)

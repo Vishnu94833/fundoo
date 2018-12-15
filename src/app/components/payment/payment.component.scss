@@ -1,6 +1,10 @@
 .toolBar{
     background-color: #fb0
 }
+.mat-toolbar.mat-primary {
+    position: fixed;
+    top: 0;
+  }
 .chip{
     
     background-color: #fb0
@@ -34,19 +38,15 @@
 .box0{
     width: 160px;
     height: 80px;
-    // border: 1px solid black;
     margin-left: 15px
 }
 .box1{
     background-color: white;
-    // border: 1px solid black;
-    // width: 80px;
     height: 80px;
     margin-left: 60px;
 }
 .box2{
     background-color: white;
-    // border: 1px solid black;
     width: 100px;
     height: 80px;
     margin-left: 50px
@@ -58,4 +58,52 @@
     margin-top: 25px;
     margin-left: 30px;
     display: flex
+}
+
+table td{
+    padding:1%;
+    
+}
+table {
+  border-collapse: collapse;
+}
+
+// table, th, td {
+//   border: 1px solid black;
+// }
+
+[contenteditable=true]:empty:not(:focus):before{
+    content: attr(placeholder);
+    display: block;
+    opacity:0.5;
+    border:1px solid grey;
+    min-height:50px;
+}
+.mat-icon{
+    opacity:1;
+}
+.cart{
+        margin-top: -9px;
+    margin-left: 62px;
+    z-index: 9;
+    position: absolute;
+}
+.secndPlace{
+     margin-top: -9px;
+    margin-left: 142px;
+    z-index: 9;
+    position: absolute;
+
+}
+.thirdPlace{
+     margin-top: -9px;
+    margin-left: 295px;
+    z-index: 9;
+    position: absolute;
+}
+::ng-deep.mat-progress-bar-fill::after {
+    background-color: grey;
+}
+::ng-deep.mat-progress-bar-buffer {
+    background-color: #DCDCDC;
 }

@@ -9,38 +9,69 @@ import { ProductService } from 'src/app/core/services/productcart/product.servic
 })
 export class PaymentComponent implements OnInit {
 
-  private records;
-  private cards=[];
-  private next;
-  private signin = 0;
-  private cartId = localStorage.getItem('cartId') ;
-  private price;
-  private desc;
+  private cartId = localStorage.getItem('cartId');
+  public flag2 = false;
+  public flag = false;
+  public flag3 = false;
+  public cardObj = {};
+  public emptyCart = false;
+  public value = 25;
+  public address;
+  public addNotGiven = false;
+  public firstCss = true;
+  private details;
+  public forCss;
 
   constructor(private productService: ProductService, private userService: UserService) { }
 
+
   ngOnInit() {
-    this. getCartInformation()
+    this.addNotGiven = false;
+    if (localStorage.getItem("cartId") != null) {
+      this.getCardDetails();
+    }
   }
 
-  getCartInformation() {
-    this.productService.getCartDetails(this.cartId).subscribe(
-      data => {
-        console.log(data)
-        this.price = data['data']['product'].price
-        this.desc =  data['data']['product'].description
+  getCardDetails() {
+    this.productService.myCart()
+      .subscribe((data) => {
 
+        console.log(data['data']); 
+        this.details = data['data'][0].product
+        console.log(this.details)
       },
-      error => {
+      (error) => {
         console.log(error)
       }
-    )
+      );
   }
 
 
-  nextStep(){
-   this.signin = 1;
-  }
+  placeOrder() {
+    if (localStorage.getItem("cartId") == null) {
+      console.log("cartId is not present");
+      return;
+    }
+    if (this.address != undefined) {
+      let reqBody = {
+        "cartId": localStorage.getItem("cartId"),
+        "address": this.address
+      }
+      this.productService.placeOrder(reqBody)
+        .subscribe((data) => {
+          console.log(data);
+          this.value = 100
+          this.flag3 = true; this.flag = false;
+          this.forCss = false
 
+        });
+    }
+    else {
+      console.log("enter address");
+      this.addNotGiven = true
+
+    }
+
+  }
 
 }

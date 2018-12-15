@@ -116,7 +116,7 @@
     </my-slide-panel> -->
 
 
-<div fxLayout="row" fxLayoutAlign="center center" style="padding: 150px">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="space-between" style="padding: 150px">
     <mat-card style="width: 250px;height: 300px;">
         <p>
             <span style="color: #fb0;font-size: 25px">fundooNotes</span>
@@ -163,6 +163,37 @@
             Login
         </button>
     </mat-card>
+    <mat-card style="width: 1000px;height: 350px;">
+        <!-- <div class="margin-top"> -->
+            
+            <div fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
+            <div fxFlex.lg="80" fxFlex.xs="80" fxFlex.sm="80" fxFlex.md="80">
+              <!-- <div class="margins-top"></div> -->
+             
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" fxLayoutAlign="center center" fxLayoutAlign.xs="space-between">
+                <div *ngFor="let product of cards">
+                  <div class="shadow"  [ngClass]="prodId==product.id ? 'select' : 'notSelect'">
+                    <mat-card class="break1" (click)="click()" (click)="selectCards(product)" >
+                      <mat-card-title>
+                        {{product.price | currency:usd}}
+                      </mat-card-title>
+                      <mat-card-subtitle>
+                        <p class="fontColor">{{product.name}}
+                      </mat-card-subtitle>
+                      <mat-card-content>
+                        <li>{{product.description}}</li>
+          
+                      </mat-card-content>
+                    </mat-card>
+                    <div class="whiteFont" *ngIf="prodId==product.id"><h5>SELECTED</h5></div>
+                    <div class="whiteFont" *ngIf="prodId!=product.id"> <h5>ADD TO CART</h5></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
+          <!-- </div> -->
+        </mat-card>
 
 
 </div>

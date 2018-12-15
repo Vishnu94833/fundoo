@@ -208,6 +208,11 @@ export class DashboardComponent implements OnDestroy {
 
     });
   }
+
+  paymentCart(){
+    this.router.navigate(['/payment'])
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

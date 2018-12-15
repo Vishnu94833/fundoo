@@ -81,6 +81,7 @@ import { ProductconfirmComponent } from './components/productconfirm/productconf
 import { PaymentComponent } from './components/payment/payment.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -164,8 +165,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
     MatTabsModule,
     MatSliderModule,
-    MatStepperModule
-
+    MatStepperModule,
+    MatProgressBarModule
 
   ],
   providers: [{
