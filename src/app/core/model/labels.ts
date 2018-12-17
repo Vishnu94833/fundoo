@@ -1,5 +1,5 @@
 
-export interface label {
+export class label {
     id: string
     isDeleted: false
     label: string

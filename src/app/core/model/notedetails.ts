@@ -1,7 +1,7 @@
 import { label } from "./labels";
 import { checklist } from "./checklist";
 
-export interface Notedetails {
+export class Notedetails {
 
     collaborators: [object]
     color: string
@@ -9,9 +9,9 @@ export interface Notedetails {
     description: ""
     id: string
     imageUrl: string
-    isArchived: false
-    isDeleted: false
-    isPined: false
+    isArchived: boolean
+    isDeleted: boolean
+    isPined: boolean
     label: Array<label>
     labelIdList: [object]
     linkUrl: ""

@@ -1,4 +1,4 @@
-export interface checklist {
+export class checklist {
     createdDate: Date
     id: string
     isDeleted: false

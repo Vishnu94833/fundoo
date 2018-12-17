@@ -47,14 +47,14 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.notesService.getNoteList().pipe(takeUntil(this.destroy$)).subscribe(
       (data) => {
         this.pinArray = [];
-        console.log( data['data']['data']);
+        console.log(data['data'].data);
         
-        // var dataModel1: Notedetails[] = data['data']['data']
-        for (var i = data['data']['data'].length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false &&
-          data['data']['data'][i].isArchived == false &&
-          data['data']['data'][i].isPined == true) {            
-            this.pinArray.push(data['data']['data'][i]);
+        var dataModel1: Notedetails[] =data['data'].data;
+        for (var i =dataModel1.length - 1; i >= 0; i--) {
+          if (dataModel1[i].isDeleted == false &&
+            dataModel1[i].isArchived == false &&
+            dataModel1[i].isPined == true) {            
+            this.pinArray.push(dataModel1[i]);
             console.log(this.pinArray);
           }
         }
