@@ -1,30 +1,30 @@
 <app-addnotes (messageModel)="model($event)">
 </app-addnotes>
 <div *ngIf="show">
-<div class="carddown" *ngIf="pinArray.length !=0">
-    <h4 class="pinned">PINNED</h4>
-    <div>
-        <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
-        </app-collectionnotes>
+    <div class="carddown" *ngIf="pinArray.length !=0">
+        <h4 class="pinned">PINNED</h4>
+        <div>
+            <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
+            </app-collectionnotes>
+        </div>
+
+        <h4 class="pinned">OTHERS</h4>
+        <div>
+            <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
+            </app-collectionnotes>
+        </div>
     </div>
 
-    <h4 class="pinned">OTHERS</h4>
-    <div>
+    <div *ngIf="pinArray.length ==0">
+        <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
+        </app-collectionnotes>
         <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
         </app-collectionnotes>
     </div>
 </div>
 
-<div *ngIf="pinArray.length ==0">
-    <app-collectionnotes [cardadded]="pinArray" (addnotes)="receive($event)">
-    </app-collectionnotes>
-    <app-collectionnotes [cardadded]="array" (addnotes)="receive($event)">
-    </app-collectionnotes>
-</div>
-</div>
-
 <div class="spinner" *ngIf="!show">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-      </div>
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
